@@ -9,7 +9,32 @@ export default {
   component: SportCard,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    backgroundColor: { control: 'color' },
+    hazai: {
+      name: 'Hazai csapat/játékos',
+      description: 'Hazai csapat/játékos',
+      control: {
+        type: 'text'
+      },
+      table: {
+        type: {
+          summary: 'The label contents',
+          detail: 'Text displayed by the Badge'
+        }
+      }
+    },
+    vendeg: {
+      name: 'Vendég csapat/játékos',
+      description: 'Vendég csapat/játékos',
+      control: {
+        type: 'text'
+      },
+      table: {
+        type: {
+          summary: 'The label contents',
+          detail: 'Text displayed by the Badge'
+        }
+      }
+    }
   },
 } as ComponentMeta<typeof SportCard>;
 
