@@ -1,13 +1,18 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import React from 'react'
+import { Story, Meta } from '@storybook/react/types-6-0'
+import { SportCard, SportCardProps } from './SportCard'
+import docs from './SportCard.docs.mdx'
 
-import { SportCard } from './SportCard';
-
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'WSeven/SportCard',
+  title: 'Components/SportCard',
   component: SportCard,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+  parameters: {
+    docs: { page: docs },
+    // layout: 'centered', // or 'fullscreen' or 'padded' (default)
+    /* backgrounds: {
+      default: 'white',
+    },*/
+  },
   argTypes: {
     hazai: {
       name: 'Hazai csapat/játékos',
@@ -34,12 +39,24 @@ export default {
           detail: 'Text displayed by the Badge'
         }
       }
+    },
+    daily: {
+      name: 'A nap tippje?',
+      description: 'A napp tippje?',
+      control: {
+        type: 'boolean'
+      },
+      table: {
+        type: {
+          summary: 'The label contents',
+          detail: 'Text displayed by the Badge'
+        }
+      }
     }
   },
-} as ComponentMeta<typeof SportCard>;
+} as Meta
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof SportCard> = (args) => <SportCard {...args} />;
+const Template: Story<SportCardProps> = (args) => <SportCard {...args} />
 
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args

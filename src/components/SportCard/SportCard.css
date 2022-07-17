@@ -9,9 +9,19 @@
   background: linear-gradient(180deg, rgba(0, 0, 18, 0) 0%, rgba(0, 0, 18, 0.8) 100%);
   border-radius: 6px;
   width: 100%;
-  height: 100%;
+  height: 60%;
   z-index: 99;
-  position: relative;
+  position: absolute;
+  bottom: 0px;
+}
+
+.storybook-sportcard--fade-secondary {
+  background: linear-gradient(90deg, rgba(0, 0, 18, 0) 0%, rgba(0, 0, 18, 0.6) 100%);
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  position: absolute;
 }
 
 .storybook-sportcard--small .storybook-sportcard-background {
@@ -21,6 +31,10 @@
   border-radius: 6px;
   position: absolute;
   bottom: 0px;
+}
+
+.storybook-sportcard--large {
+  height: 390px !important;
 }
 
 .storybook-sportcard--large .storybook-sportcard-background {
@@ -34,8 +48,12 @@
 
 .storybook-sportcard-image-holder {
   position: absolute;
-  bottom: -4px;
-  z-index: 1;
+  bottom: 0;
+  z-index: 11;
+}
+
+.storybook-sportcard-image-holder img {
+  max-width: 100%;
 }
 
 .storybook-sportcard--primary .storybook-sportcard-background {
@@ -96,6 +114,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  text-align: left;
 }
 
 .storybook-sportcard-teams-item-logo {
@@ -180,7 +199,7 @@
   position: absolute;
   z-index: 101;
   right: 20px;
-  top: 20px;
+  top: 50px;
   width: 400px;
   justify-content: center;
   display: flex;
@@ -190,6 +209,8 @@
 
 .storybook-sportcard-large-content-event-logo {
   margin-right: 15px;
+  display: flex;
+  justify-content: center;
 }
 
 .storybook-sportcard-large-content-event-datas {
@@ -198,6 +219,7 @@
   justify-content: center;
   color: #ffffff;
   line-height: 24px;
+  margin-top: 20px;
 }
 
 .storybook-sportcard-large-content-event-datas>div:first-child {
@@ -219,6 +241,11 @@
   font-weight: 500;
   color: #ffffff;
   margin-top: 50px;
+}
+
+.storybook-sportcard-large-content-sum>div {
+  display: flex;
+  justify-content: center;
 }
 
 .storybook-sportcard-large-content-teams,
@@ -247,15 +274,18 @@
 .storybook-sportcard-large-teams>div:first-child,
 .storybook-sportcard-players>div:first-child {
   padding-left: 15px;
+  text-align: left;
+}
+
+.storybook-sportcard-large-teams-item {
+  font-size: 20px;
 }
 
 .storybook-sportcard-large-teams-item-logo.first {
   margin-right: 6px;
 }
 
-.storybook-sportcard-large-teams-item-logo {
-  flex: 1;
-}
+.storybook-sportcard-large-teams-item-logo {}
 
 .storybook-sportcard-large-teams-item-logo.second {
   margin-left: 6px;
@@ -314,4 +344,152 @@
 .storybook-sportcard-large-players-item-last-name {
   font-weight: 500;
   font-size: 24px;
+}
+
+.storybook-sportcard-large-daily {
+  position: absolute;
+  right: 0px;
+  z-index: 99;
+  font-size: 12px;
+  font-weight: 600;
+
+  background: linear-gradient(94.15deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.2) 96.87%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 6px;
+
+  color: #ffffff;
+  padding: 5px 15px;
+}
+
+@media only screen and (max-width: 500px) {
+
+  /* small */
+  .storybook-sportcard--fade {
+    height: 35% !important;
+  }
+
+  .storybook-sportcard--small {
+    height: 426px;
+  }
+
+  .storybook-sportcard-event {}
+
+  .storybook-sportcard-event {
+    position: relative;
+    z-index: 101;
+    display: flex;
+    top: 0 !important;
+    right: 0px !important;
+  }
+
+  .storybook-sportcard-sum {
+    position: relative;
+    bottom: 0;
+    right: 0;
+  }
+
+  .storybook-sportcard-subparts {
+    padding-left: 9px;
+    padding-top: 16px;
+  }
+
+  .storybook-sportcard-teams-item-logo>img {
+    max-width: 42px;
+  }
+
+
+  .storybook-sportcard-teams-item,
+  .storybook-sportcard-players-item {
+    flex-direction: column;
+    padding: 0px 20px;
+
+  }
+
+  .storybook-sportcard-teams-item:nth-child(2) .storybook-sportcard-teams-item-name {
+    order: 2;
+    text-align: right;
+  }
+
+  .storybook-sportcard-teams-item:nth-child(2) .storybook-sportcard-teams-item-logo {
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: row;
+  }
+
+
+  .storybook-sportcard-background {
+    min-height: 426px !important;
+  }
+
+}
+
+@media only screen and (max-width: 765px) {
+  .storybook-sportcard--fade {
+    height: 100%;
+    position: absolute !important;
+    bottom: 0px !important;
+  }
+
+  .storybook-sportcard--large .storybook-sportcard-background {
+    min-height: 580px !important;
+  }
+
+  /* large */
+  .storybook-sportcard--large {
+    min-height: 580px !important;
+  }
+
+  .storybook-sportcard-large-content-sum {
+    margin-top: 20px !important;
+  }
+
+  .storybook-sportcard-large-content-event-datas>div:nth-child(2) {
+    height: 20px !important;
+  }
+
+  .storybook-sportcard-large-content {
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    top: 20px;
+    justify-content: flex-start;
+  }
+
+  .storybook-sportcard-large-content-teams,
+  .storybook-sportcard-large-content-players {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-bottom: 50px;
+  }
+
+  .storybook-sportcard-large-teams-item-logo>img {
+    max-width: 42px;
+  }
+
+  .storybook-sportcard-large-teams-item,
+  .storybook-sportcard-large-players-item {
+    flex-direction: column;
+    padding: 0px 20px;
+
+  }
+
+  .storybook-sportcard-large-teams-item:nth-child(2) .storybook-sportcard-large-teams-item-name {
+    order: 2;
+  }
+
+  .storybook-sportcard-large-teams-item:nth-child(2) .storybook-sportcard-large-teams-item-logo {
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .storybook-sportcard-large-daily {
+    position: relative;
+    right: 0px;
+    z-index: 100;
+    padding: 5px 15px;
+    margin: 0px 15px 20px;
+  }
+
 }
