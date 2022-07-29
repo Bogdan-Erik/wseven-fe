@@ -1,0 +1,95 @@
+.wrapper {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  font-family: 'Poppins';
+  @apply  bg-rgba-grey-03 md:bg-transparent;
+}
+
+.primary-wrapper {
+  @apply justify-between;
+  padding: 15px 20px;
+  font-family: 'Poppins';
+}
+
+.secondary-wrapper {
+  height: 60px;
+}
+.header-menu .item {
+  @apply text-light-grey font-medium hover:text-white;
+}
+
+.header menu {
+
+}
+
+.menu-open {
+  @apply block fixed h-full left-0 top-24 text-2xl text-center;
+}
+
+.menu-icon > .icon-x {
+    animation: rotation 0.2s  linear;
+}
+
+.menu-open > div {
+  margin: 10px 0px;
+}
+
+.secondary-menu {
+  @apply flex w-full justify-start h-full items-center md:hidden md:justify-center md:border-r-[1px] md:border-r-rgba-grey-01;
+  width: 320px;
+  height: 100%;
+  align-items: center;
+}
+
+
+.secondary-menu {
+
+}
+
+.secondary-wrapper .menu-bar {
+  @apply hidden md:justify-start md:items-center md:mr-auto md:flex ;	
+
+}
+
+.secondary-wrapper .action-menu-bar {
+  @apply justify-start items-center flex ml-auto md:ml-0;	
+
+}
+
+.secondary-wrapper .action-menu-bar > div {
+  @apply mr-10;	
+
+}
+
+.secondary-wrapper .action-menu-bar > div:last-child {
+  @apply mr-0;	
+}
+
+.secondary-wrapper .menu-bar > div {
+  @apply text-rgba-grey ml-10 flex h-full items-center border-b-2 border-transparent cursor-pointer relative font-medium;	
+}
+
+.secondary-wrapper .menu-bar > div > span {
+  @apply mr-[6px] text-2xl;
+}
+
+.secondary-wrapper .menu-bar > div:hover {
+  @apply text-white;
+}
+
+.secondary-wrapper .menu-bar > div:hover:after {
+  @apply h-[3px] w-full absolute left-0 bottom-0;
+  content: " ";
+  background: linear-gradient(135deg, #22C2CC 19.79%, #C900FF 100%);
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}

@@ -5,7 +5,7 @@ export interface ButtonProps {
   primary?: boolean;
   backgroundColor?: string;
   size?: 'small' | 'medium' | 'large';
-  disabled: boolean,
+  disabled: boolean | null,
   label: string;
   onClick?: () => void;
 }
@@ -14,7 +14,7 @@ export const Button = ({
   primary = false,
   size = 'medium',
   backgroundColor,
-  disabled,
+  disabled = false,
   label,
   ...props
 }: ButtonProps): JSX.Element => {

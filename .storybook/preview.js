@@ -8,4 +8,13 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  backgrounds: {
+    default: 'darkbg',
+    values: [
+      {
+        name: 'darkbg',
+        value: '#000012',
+      },
+    ],
+  },
 }

@@ -10,3 +10,11 @@
     font-family: 'Poppins', system-ui, sans-serif;
   }
 }
+
+.blue-linear-gradient {
+  background: linear-gradient(135deg, rgba(34, 194, 204, 0.5) 5.2%, rgba(201, 0, 255, 0.5) 100%);
+}
+
+.grey-linear-gradient {
+  background: linear-gradient(123.16deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+}
