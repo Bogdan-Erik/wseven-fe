@@ -1,0 +1,29 @@
+.hero-bg {
+  
+  background: url('./../../assets/images/landing/bg.png');
+  @apply bg-cover bg-center mt-[80px];
+  .player {
+    @apply h-[356px] md:max-h-[744px] md:h-[100%];
+  }
+}
+.gradient-cover {
+  background: linear-gradient(180deg, rgb(0 2 8) 0%, rgba(0, 0, 0, 0) 20%)
+}
+
+.text-gradient {
+  background: linear-gradient(90.19deg, #22C2CC,#C900FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 10px;
+}
+
+.left-player {
+  background: url('./../../assets/images/landing/footballer-left-bg.png') no-repeat;
+  @apply bg-contain bg-left;
+}
+
+.right-player {
+  background: url('./../../assets/images/landing/footballer-right-bg.png') no-repeat;
+  @apply bg-contain bg-right;
+
+}

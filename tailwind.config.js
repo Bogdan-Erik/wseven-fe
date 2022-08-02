@@ -43,6 +43,7 @@ module.exports = {
       'rgba-grey-03': 'rgba(0, 0, 18, 0.3)',
       'gradient-blue-start': '#22C2CC',
       'gradient-purple-end': '#C900FF',
+      'whitesmoke': '#d9d9d9'
 
     },
     fontFamily: {
@@ -58,9 +59,11 @@ module.exports = {
       'lg': '1.125rem',
       'xl': '1.25rem',
       '2xl': '1.5rem',
+      '2_5xl': '1.75rem',
       '3xl': '1.875rem',
       '4xl': '2.25rem',
       '5xl': '3rem',
+      '5_2xl': '3.5rem',
       '6xl': '4rem',
       '7xl': '15rem',
     },

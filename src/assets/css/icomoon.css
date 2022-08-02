@@ -25,6 +25,30 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.icon-settings:before {
+  content: "\e912";
+}
+.icon-donut:before {
+  content: "\e90b";
+}
+.icon-sign:before {
+  content: "\e90c";
+}
+.icon-stat-bordered:before {
+  content: "\e90d";
+}
+.icon-military:before {
+  content: "\e90e";
+}
+.icon-calendar:before {
+  content: "\e90f";
+}
+.icon-house:before {
+  content: "\e910";
+}
+.icon-money:before {
+  content: "\e911";
+}
 
 .icon-instagram:before {
   content: "\e909";

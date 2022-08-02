@@ -1,4 +1,4 @@
-.storybook-button {
+.button {
   font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   border: 0;
   border-radius: 5px;
@@ -12,41 +12,41 @@
   letter-spacing: 0.05em;
 }
 
-.storybook-button:disabled {
+.button:disabled {
   opacity: 0.4;
 }
 
-.storybook-button--primary:disabled:hover {
+.button--primary:disabled:hover {
   background: linear-gradient(135deg, #4487CF 0%, #9E43EE 100%);
   cursor: initial;
 }
 
-.storybook-button--primary {
+.button--primary {
   color: white;
-  background: linear-gradient(135deg, #4487CF 0%, #9E43EE 100%);
+  background: linear-gradient(135deg, #4487CF 0%, #9E43EE 100%) !important;
 }
 
-.storybook-button--primary:hover {
+.button--primary:hover {
   background: linear-gradient(135deg, rgba(68, 135, 207, 0.8) 0%, rgba(158, 67, 238, 0.8) 100%);
 }
 
-.storybook-button--secondary {
+.button--secondary {
   color: #333;
   background-color: transparent;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
 }
 
-.storybook-button--small {
+.button--small {
   font-size: 12px;
   padding: 10px 16px;
 }
 
-.storybook-button--medium {
+.button--medium {
   font-size: 14px;
   padding: 11px 20px;
 }
 
-.storybook-button--large {
+.button--large {
   font-size: 14px;
   padding: 9px 30px;
 }

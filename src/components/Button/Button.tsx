@@ -2,32 +2,32 @@ import React from 'react'
 import './Button.css';
 
 export interface ButtonProps {
+  children: JSX.Element[] | JSX.Element | string
   primary?: boolean;
   backgroundColor?: string;
   size?: 'small' | 'medium' | 'large';
-  disabled: boolean | null,
-  label: string;
+  disabled?: boolean,
   onClick?: () => void;
 }
 
 export const Button = ({
+  children,
   primary = false,
   size = 'medium',
   backgroundColor,
   disabled = false,
-  label,
   ...props
 }: ButtonProps): JSX.Element => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+  const mode = primary ? 'button--primary' : 'button--secondary';
   return (
     <button
       disabled={disabled}
       type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
+      className={['button', `button--${size}`, mode].join(' ')}
       style={{ backgroundColor }}
       {...props}
     >
-      {label}
+      {children}
     </button>
   );
 }

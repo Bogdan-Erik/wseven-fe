@@ -4,13 +4,16 @@ import logo from './logo.svg'
 import './App.css'
 import { SportCard } from './components/SportCard';
 import { Routes, Route, Link } from "react-router-dom";
+import Landing from './pages/Landing';
+import PageLayout from './layouts/Landing';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="about" element={<About />} />
-    </Routes>
+    <PageLayout>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+      </Routes >
+    </PageLayout>
   )
 }
 
