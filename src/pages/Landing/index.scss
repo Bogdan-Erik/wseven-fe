@@ -1,7 +1,7 @@
 .hero-bg {
   
   background: url('./../../assets/images/landing/bg.png');
-  @apply bg-cover bg-center mt-[80px];
+  @apply bg-cover bg-center md:mt-[80px];
   .player {
     @apply h-[356px] md:max-h-[744px] md:h-[100%];
   }
@@ -26,4 +26,13 @@
   background: url('./../../assets/images/landing/footballer-right-bg.png') no-repeat;
   @apply bg-contain bg-right;
 
+}
+.functions-section {
+  background: url('./../../assets/images/landing/functions-bg.png') no-repeat;
+  @apply bg-bottom bg-contain lg:bg-right	 lg:bg-cover;
+}
+
+.fans-section {
+  background: url('./../../assets/images/landing/fans-bg.png') no-repeat;
+  @apply bg-cover; 
 }

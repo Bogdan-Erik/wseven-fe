@@ -7,4 +7,6 @@ export { Icons } from './Icons'
 export { IconBadge } from './IconBadge'
 export { Footer } from './Footer'
 export { Icon } from './Icon'
+export { Title } from './Title'
+export { FunctionBox } from './FunctionBox'
 /* -- component: insert above here -- */

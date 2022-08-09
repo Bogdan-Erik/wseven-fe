@@ -25,6 +25,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
+.icon-ticket:before {
+  content: "\e913";
+}
+.icon-coin:before {
+  content: "\e914";
+}
+
 .icon-settings:before {
   content: "\e912";
 }

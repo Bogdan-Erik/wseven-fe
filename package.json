@@ -17,7 +17,8 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
     "react-scroll-rotate": "^0.0.7",
-    "sass": "^1.54.0"
+    "sass": "^1.54.0",
+    "swiper": "^8.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",

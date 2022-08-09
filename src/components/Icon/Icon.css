@@ -1,0 +1,5 @@
+.gradient-icon {
+  background: -webkit-linear-gradient(309deg, #22C2CC 19.79%, #C900FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
