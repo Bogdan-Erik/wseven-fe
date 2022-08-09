@@ -11,6 +11,7 @@ function App() {
   return (
     <PageLayout>
       <Routes>
+        <Route path="/wseven-fe/" element={<Landing />} />
         <Route path="/" element={<Landing />} />
       </Routes >
     </PageLayout>
