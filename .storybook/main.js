@@ -1,7 +1,7 @@
 module.exports = {
   "stories": [
-    "../src/**/*.stories.mdx",
-    "../src/**/*.stories.@(js|jsx|ts|tsx)"
+    "../src/**/**/*.docs.mdx",
+    "../src/**/*.docs.@(js|jsx|ts|tsx)"
   ],
   "addons": [
     "@storybook/addon-links",

@@ -6,6 +6,7 @@ export interface InputProps {
   type: string,
   error: string,
   disabled: boolean,
+  placeholder?: string
 }
 
 export const Input = ({
@@ -13,6 +14,7 @@ export const Input = ({
   type = 'text',
   error = '',
   disabled = false,
+  placeholder,
   ...props
 
 }: InputProps): JSX.Element => {
@@ -20,6 +22,7 @@ export const Input = ({
     <input
       name={name}
       type={type}
+      placeholder={placeholder}
       className={`
           placeholder-light-white
           border-2 border-dark-bg grey-linear-gradient
