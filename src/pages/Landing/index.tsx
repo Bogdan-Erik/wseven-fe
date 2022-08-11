@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Button, IconBadge, Icon, Title, FunctionBox } from '../../components';
+import { Button, IconBadge, Icon, Title, FunctionBox, Input } from '../../components';
 import './index.scss';
 import FootballerOne from './../../assets/images/landing/footballer-left.png';
 import FootballerTwo from './../../assets/images/landing/footballer-right.png';
 import Footballer from './../../assets/images/landing/footballer.png';
+import TennisPlayer from './../../assets/images/landing/tennis_player.png';
 import FootballerBg from './../../assets/images/landing/footballer-bg.png';
 import Circle from './../../assets/images/landing/circle.png';
 import Cross from './../../assets/images/landing/cross.png';
@@ -32,6 +33,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { Label } from '../../components/Label';
 
 export interface PageProps {
 
@@ -226,8 +228,14 @@ export default ({ }: PageProps) => {
       {/* Fans section */}
       <div className="fans-section relative">
         <div className="hidden absolute bottom-0 lg:block">
-          <img src={Fans} className="player object-contain max-w-[850px]" style={{ width: `${width / 2}px` }} />
-          <div className="absolute top-0 z-[-1]">
+          <div className="relative">
+            <div className={`absolute z-[-1] top-[60px] right-[190px] md:top-[80px] md:right-[400px] lg:top-[120px] lg:right-[600px] will-change-transform`}> <ScrollRotate method={"perc"} loops={1} from={0} to={200} animationDuration={0.3}><img src={Circle} className="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})` }} /></ScrollRotate></div>
+            <div className="absolute  z-[-1]  top-[130px] right-[50px] md:top-[290px] md:right-[180px] lg:top-[340px] lg:right-[770px] will-change-auto"  ><ScrollRotate method={"perc"} loops={1} from={0} to={200} animationDuration={0.1}><img src={Cross} className="w-[30px] h-[30px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})`, opacity: ((1 - (opacity * 1.5)) < 0 ? 1 : (1 - (opacity * 1.5))), }} /></ScrollRotate> </div>
+            <div className="absolute  z-[-1] top-[270px] right-[130px] md:top-[590px] md:right-[300px] lg:top-[560px] lg:right-[230px]"  ><ScrollRotate method={"perc"} loops={2} from={300} to={100} animationDuration={0.3}><img src={Cross} className="w-[30px] h-[30px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})` }} /></ScrollRotate> </div>
+
+            <img src={Fans} className="player object-contain max-w-[850px]" style={{ width: `${width / 2}px` }} />
+          </div>
+          <div className="absolute top-[0] z-[-1]">
             <img src={FansBg} className="player object-contain" />
           </div>
         </div>
@@ -260,6 +268,65 @@ export default ({ }: PageProps) => {
         </div>
       </div>
       {/* Fans section */}
+
+      {/* Subscribe section */}
+      <div className="signup-section relative">
+        <div className="hidden absolute lg:block right-[150px]">
+          <div className="relative">
+            <div className="absolute  z-[-1]  top-[130px] right-[50px] md:top-[290px] md:right-[180px] lg:top-[10px] lg:right-[230px] will-change-auto"  ><ScrollRotate method={"perc"} loops={1} from={0} to={200} animationDuration={0.1}><img src={Cross} className="w-[30px] h-[30px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})`, opacity: ((1 - (opacity * 1.5)) < 0 ? 1 : (1 - (opacity * 1.5))), }} /></ScrollRotate> </div>
+            <div className={`absolute z-[-1] top-[60px] right-[190px] md:top-[80px] md:right-[400px] lg:top-[330px] lg:right-[420px] will-change-transform`}> <ScrollRotate method={"perc"} loops={1} from={0} to={200} animationDuration={0.3}><img src={Circle} className="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.1 ? 1.1 : offset)})` }} /></ScrollRotate></div>
+            <div className="absolute  z-[-1] top-[270px] right-[130px] md:top-[590px] md:right-[300px] lg:top-[390px] lg:right-[20px]"  ><ScrollRotate method={"perc"} loops={2} from={300} to={100} animationDuration={0.3}><img src={Cross} className="w-[30px] h-[30px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})` }} /></ScrollRotate> </div>
+
+            <img src={TennisPlayer} className="player object-contain max-w-[850px]" style={{ width: `${width / 2}px`, transform: `translate(${width > 1024 ? (0 + (offset * 50)) : 0}px, 0px)`, transition: 'transform 150ms ease' }} />
+          </div>
+          <div className="absolute top-[-180px] z-[-1]">
+            <img src={FansBg} className="player object-contain" />
+          </div>
+        </div>
+        <div className=" mt-[200px] mx-auto container px-[15px]  pb-[150px]">
+          <div className="flex flex-col lg:flex-row mt-6">
+
+            <div className="flex-1 ">
+
+              <div>
+                <Title
+                  title={(<div className="text-center lg:text-left text-rgba-grey-08"><span className="font-bold text-gradient">Iratkozz fel </span>és csapj le 90%-os early bird kedvezményünkre</div>)}
+                ></Title>
+
+                <div className="mt-[30px] text-center lg:text-left">
+                  Az indulást követő, első hónapra megajándékozunk egy <span className="text-white font-bold">90%-os kupon</span>nal, így minimális költségen próbálhatod ki szolgáltatásunkat.
+                </div>
+                <div className="mt-[30px] text-center lg:text-left">
+                  Továbbá <span className="text-white font-bold">feliratkozásoddal részt veszel egy sorsoláson is</span>, ahol, ha nyersz, az indulás előtt teljesen ingyenesen tesztelheted honlapunkat és applikációnkat. Nincs más dolgod, csak add meg az e-mail címed és értesíteni fogunk a fejleményekről.
+                </div>
+                <div className="mt-[30px] text-center lg:text-left">
+                  A feliratkozás semmilyen kötelezettséggel nem jár és harmadik félnek nem szolgáltatjuk ki az adataidat.
+                </div>
+
+                <div className="mt-[30px] text-center lg:text-left">
+                  <div className="mb-[30px]">
+                    <Label children={'Email cím'} required={false} />
+                    <Input placeholder="Add meg az e-mail címed" name={''} type={''} error={''} disabled={false} />
+                  </div>
+                  <Button size={"large"} primary={true}>Feliratkozom</Button>
+                </div>
+              </div>
+            </div>
+            <div className="flex-1 ">
+              <div className="mt-[62px] relative right-[40px] md:hidden md:mt-[0px]">
+                <img src={TennisPlayer} className="player object-contain max-w-[850px]" />
+                <div className="absolute top-0 z-[-1]">
+                  <img src={FansBg} className="player object-contain" />
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      {/* Subscribe section */}
 
     </div >
   )
