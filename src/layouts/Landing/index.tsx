@@ -11,7 +11,7 @@ export default ({ children }: LayoutProps) => {
   return (
     <>
       <Header variant={'tertiary'} />
-      <div>
+      <div className="overflow-x-hidden">
         {children}
       </div>
       <Footer />
