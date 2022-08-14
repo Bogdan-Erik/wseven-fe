@@ -161,13 +161,13 @@ export default ({ }: PageProps) => {
               },
             }}
           >
-            <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={wta} className="h-fit" width={108} height={47} /></div></SwiperSlide>
-            <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={atp} className="h-fit" width={77} height={43} /></div></SwiperSlide>
-            <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={cl} className="h-fit" width={84} height={80} /></div></SwiperSlide>
-            <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={el} className="h-fit" width={61} height={84} /></div></SwiperSlide>
-            <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={pl} className="h-fit" width={112} height={49} /></div></SwiperSlide>
-            <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={ll} className="h-fit" width={45} height={63} /></div></SwiperSlide>
-            <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={bl} className="h-fit" width={61} height={61} /></div></SwiperSlide>
+            <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={wta} className="h-fit" width={107} height={84} /></div></SwiperSlide>
+            <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={atp} className="h-fit" width={107} height={84} /></div></SwiperSlide>
+            <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={cl} className="h-fit" width={107} height={84} /></div></SwiperSlide>
+            <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={el} className="h-fit" width={107} height={84} /></div></SwiperSlide>
+            <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={pl} className="h-fit" width={107} height={84} /></div></SwiperSlide>
+            <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={ll} className="h-fit" width={107} height={84} /></div></SwiperSlide>
+            <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={bl} className="h-fit" width={107} height={84} /></div></SwiperSlide>
           </Swiper>
         </div>
       </div>
