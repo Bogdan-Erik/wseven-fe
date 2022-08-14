@@ -21,6 +21,8 @@ import pl from './../../assets/images/leagues/pl.png';
 import ll from './../../assets/images/leagues/ll.png';
 import bl from './../../assets/images/leagues/bl.png';
 
+import FunctionsBg from './../../assets/images/landing/functions-bg.png';
+
 import useWindowDimensions from './../../hooks/useWindowDimensions';
 
 import { ScrollRotate } from 'react-scroll-rotate';
@@ -84,8 +86,21 @@ export default ({ }: PageProps) => {
 
           </div>
         </div>
-        <div className="flex flex-col self-center flex-1 order-1 mt-[60px] md:order-2 md:mt-0">
-          <div className="text-2_5xl text-center text-whitesmoke md:text-3xl lg:text-5_2xl lg:leading-[70px] ">Hamarosan megérkezik a <span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">tippek</span> <br /> új generációja!</div>
+        <div className="flex flex-col self-center flex-3 order-1 mt-[60px] md:order-2 md:mt-0">
+          <div className="text-2_5xl text-center text-whitesmoke md:text-3xl lg:text-5_2xl lg:leading-[70px] ">Hamarosan megérkezik a <br />
+
+            <span className="words">
+              <b><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">tippek</span></b>
+              <div><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">tippek</span></div>
+              <div><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">tippek</span></div>
+              <div><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">tippek</span></div>
+              <div><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">tippek</span></div>
+            </span>
+
+
+
+
+            <br /> új generációja!</div>
           <div className="flex-1 mt-[30px] text-center">
             <Button size={"large"} primary={true}>Kérek értesítést</Button>
           </div>
@@ -229,21 +244,26 @@ export default ({ }: PageProps) => {
       <div className="fans-section relative">
         <div className="hidden absolute bottom-0 lg:block">
           <div className="relative">
-            <div className={`absolute z-[-1] top-[60px] right-[190px] md:top-[80px] md:right-[400px] lg:top-[120px] lg:right-[600px] will-change-transform`}> <ScrollRotate method={"perc"} loops={1} from={0} to={200} animationDuration={0.3}><img src={Circle} className="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})` }} /></ScrollRotate></div>
-            <div className="absolute  z-[-1]  top-[130px] right-[50px] md:top-[290px] md:right-[180px] lg:top-[340px] lg:right-[770px] will-change-auto"  ><ScrollRotate method={"perc"} loops={1} from={0} to={200} animationDuration={0.1}><img src={Cross} className="w-[30px] h-[30px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})`, opacity: ((1 - (opacity * 1.5)) < 0 ? 1 : (1 - (opacity * 1.5))), }} /></ScrollRotate> </div>
-            <div className="absolute  z-[-1] top-[270px] right-[130px] md:top-[590px] md:right-[300px] lg:top-[560px] lg:right-[230px]"  ><ScrollRotate method={"perc"} loops={2} from={300} to={100} animationDuration={0.3}><img src={Cross} className="w-[30px] h-[30px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})` }} /></ScrollRotate> </div>
+            <div className={`absolute z-[-1] top-[60px] right-[190px] md:top-[80px] md:right-[400px] lg:top-[90px] lg:right-[540px] will-change-transform`}> <ScrollRotate method={"perc"} loops={1} from={0} to={200} animationDuration={0.3}><img src={Circle} className="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})` }} /></ScrollRotate></div>
+            <div className="absolute  z-[-1]  top-[130px] right-[50px] md:top-[290px] md:right-[180px] lg:top-[280px] lg:right-[640px] will-change-auto"  ><ScrollRotate method={"perc"} loops={1} from={0} to={200} animationDuration={0.1}><img src={Cross} className="w-[30px] h-[30px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})`, opacity: ((1 - (opacity * 1.5)) < 0 ? 1 : (1 - (opacity * 1.5))), }} /></ScrollRotate> </div>
+            <div className="absolute  z-[-1] top-[270px] right-[130px] md:top-[590px] md:right-[300px] lg:top-[470px] lg:right-[190px]"  ><ScrollRotate method={"perc"} loops={2} from={300} to={100} animationDuration={0.3}><img src={Cross} className="w-[30px] h-[30px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})` }} /></ScrollRotate> </div>
 
-            <img src={Fans} className="player object-contain max-w-[850px]" style={{ width: `${width / 2}px` }} />
+            <img src={Fans} className="player object-contain max-w-[720px]" style={{ width: `${width / 2}px` }} />
           </div>
           <div className="absolute top-[0] z-[-1]">
             <img src={FansBg} className="player object-contain" />
           </div>
         </div>
-        <div className=" mt-[200px] mx-auto container px-[15px]  pb-[150px]">
+        <div className=" mt-[200px] mx-auto container px-[15px]  md:pb-[150px]">
           <div className="flex flex-col lg:flex-row mt-6">
             <div className="flex-1 order-2 md:order-1 ">
               <div className="mt-[62px] relative left-[-70px] md:hidden md:mt-[0px]">
                 <img src={Fans} className="player object-contain max-w-[850px]" />
+
+                <div className={`absolute z-[-1] top-[30px] right-[280px] md:top-[80px] md:right-[400px] lg:top-[30px] lg:right-[420px] will-change-transform`}> <ScrollRotate method={"perc"} loops={1} from={0} to={200} animationDuration={0.1}><img src={Circle} className="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})` }} /></ScrollRotate></div>
+                <div className="absolute  z-[-1]  top-[130px] right-[50px] md:top-[290px] md:right-[180px] lg:top-[270px] lg:right-[130px] will-change-auto"  ><ScrollRotate method={"perc"} loops={1} from={0} to={200} animationDuration={0.1}><img src={Cross} className="w-[30px] h-[30px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})`, opacity: ((1 - (opacity * 1.5)) < 0 ? 1 : (1 - (opacity * 1.5))), }} /></ScrollRotate> </div>
+                <div className="absolute  z-[-1] top-[270px] right-[110px] md:top-[590px] md:right-[300px] lg:top-[560px] lg:right-[340px]"  ><ScrollRotate method={"perc"} loops={2} from={300} to={100} animationDuration={0.3}><img src={Cross} className="w-[30px] h-[30px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})` }} /></ScrollRotate> </div>
+
                 <div className="absolute top-0 z-[-1]">
                   <img src={FansBg} className="player object-contain" />
                 </div>
@@ -279,8 +299,8 @@ export default ({ }: PageProps) => {
 
             <img src={TennisPlayer} className="player object-contain max-w-[850px]" style={{ width: `${width / 2}px`, transform: `translate(${width > 1024 ? (0 + (offset * 50)) : 0}px, 0px)`, transition: 'transform 150ms ease' }} />
           </div>
-          <div className="absolute top-[-180px] z-[-1]">
-            <img src={FansBg} className="player object-contain" />
+          <div className="absolute top-[-180px] right-[-100px] z-[-1]">
+            <img src={FootballerBg} className="player object-contain" />
           </div>
         </div>
         <div className=" mt-[200px] mx-auto container px-[15px]  pb-[150px]">
@@ -315,8 +335,12 @@ export default ({ }: PageProps) => {
             <div className="flex-1 ">
               <div className="mt-[62px] relative right-[40px] md:hidden md:mt-[0px]">
                 <img src={TennisPlayer} className="player object-contain max-w-[850px]" />
-                <div className="absolute top-0 z-[-1]">
-                  <img src={FansBg} className="player object-contain" />
+                <div className={`absolute z-[-1] top-[0px] right-[30px] md:top-[80px] md:right-[400px] lg:top-[30px] lg:right-[420px] will-change-transform`}> <ScrollRotate method={"perc"} loops={1} from={0} to={200} animationDuration={0.1}><img src={Cross} className="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})` }} /></ScrollRotate></div>
+                <div className="absolute  z-[-1]  top-[130px] right-[50px] md:top-[290px] md:right-[180px] lg:top-[270px] lg:right-[130px] will-change-auto"  ><ScrollRotate method={"perc"} loops={1} from={0} to={200} animationDuration={0.1}><img src={Cross} className="w-[30px] h-[30px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})`, opacity: ((1 - (opacity * 1.5)) < 0 ? 1 : (1 - (opacity * 1.5))), }} /></ScrollRotate> </div>
+                <div className="absolute  z-[-1] top-[310px] right-[190px] md:top-[590px] md:right-[300px] lg:top-[560px] lg:right-[340px]"  ><ScrollRotate method={"perc"} loops={2} from={300} to={100} animationDuration={0.3}><img src={Circle} className="w-[30px] h-[30px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})` }} /></ScrollRotate> </div>
+
+                <div className="absolute top-0 right-[-40px] z-[-1]">
+                  <img src={FootballerBg} className="player object-contain" />
                 </div>
               </div>
 

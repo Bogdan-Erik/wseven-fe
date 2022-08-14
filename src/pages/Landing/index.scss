@@ -18,26 +18,107 @@
 }
 
 .left-player {
-  background: url('./../../assets/images/landing/footballer-left-bg.png') no-repeat;
+  background: url('./../../assets/images/landing/footballer-left-bg.png?webp') no-repeat;
   @apply bg-contain bg-left;
 }
 
 .right-player {
-  background: url('./../../assets/images/landing/footballer-right-bg.png') no-repeat;
+  background: url('./../../assets/images/landing/footballer-right-bg.png?webp') no-repeat;
   @apply bg-contain bg-right;
 
 }
 .functions-section {
-  background: url('./../../assets/images/landing/functions-bg.png') no-repeat;
+  background: url('./../../assets/images/landing/functions-bg.png?webp') no-repeat;
   @apply bg-bottom bg-contain lg:bg-right	 lg:bg-cover;
 }
 
 .fans-section {
-  background: url('./../../assets/images/landing/fans-bg.png') no-repeat;
+  background: url('./../../assets/images/landing/fans-bg.png?webp') no-repeat;
   @apply bg-cover; 
 }
 
 .signup-section {
  // background: url('./../../assets/images/landing/fans-bg.png') no-repeat;
   @apply bg-cover; 
+}
+
+.words {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  width: 100%;
+  b {
+      visibility: hidden;
+  }
+
+  &::before {
+      content: none !important;
+  }
+
+  div {
+      animation: topToBottom 10s linear infinite 0s;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      
+
+      &:before {
+          content: "";
+          height: 8px;
+          width: 100%;
+          position: absolute;
+          bottom: 7px;
+        
+          z-index: -1;
+      }
+
+      &:nth-child(2) {
+          -webkit-animation-delay: 0s !important;
+          animation-delay: 0s !important;
+      }
+      &:nth-child(3) {
+          -webkit-animation-delay: 2.5s !important;
+          animation-delay: 2.5s !important;
+      }
+      &:nth-child(4) {
+          -webkit-animation-delay: 5s !important;
+          animation-delay: 5s !important;
+      }
+      &:nth-child(5) {
+          -webkit-animation-delay: 7.5s !important;
+          animation-delay: 7.5s !important;
+      }
+  }
+}
+
+
+@-webkit-keyframes topToBottom {
+  0% {
+      opacity: 0;
+  }
+  3% {
+      opacity: 0;
+      transform: translateY(-50px);
+  }
+  6% {
+      opacity: 1;
+      transform: translateY(0px);
+  }
+  25% {
+      opacity: 1;
+      transform: translateY(0px);
+  }
+  28% {
+      opacity: 0;
+      transform: translateY(50px);
+  }
+  80% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 0;
+  }
 }
