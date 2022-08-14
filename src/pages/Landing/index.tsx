@@ -139,7 +139,7 @@ export default ({ }: PageProps) => {
             // install Swiper modules
             modules={[Navigation, Pagination, A11y, Autoplay]}
             slidesPerView={3}
-            spaceBetween={100}
+            spaceBetween={20}
             loop={true}
             autoplay
             onSwiper={(swiper) => console.log(swiper)}
