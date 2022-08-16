@@ -99,10 +99,9 @@ export default ({ }: PageProps) => {
 
                 <span className="words">
                   <b><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">tippek</span></b>
-                  <div><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">tanácsadás</span></div>
                   <div><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">tippek</span></div>
                   <div><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">tanácsadás</span></div>
-                  <div><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">tippek</span></div>
+                  <div><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">elemzés</span></div>
                 </span>
 
 

@@ -64,7 +64,7 @@
   }
 
   div {
-      animation: topToBottom 10s linear infinite 0s;
+      animation: topToBottom 7.5s linear infinite 0s;
       opacity: 0;
       overflow: hidden;
       position: absolute;
@@ -94,10 +94,6 @@
       &:nth-child(4) {
           -webkit-animation-delay: 5s !important;
           animation-delay: 5s !important;
-      }
-      &:nth-child(5) {
-          -webkit-animation-delay: 7.5s !important;
-          animation-delay: 7.5s !important;
       }
   }
 }
