@@ -8,8 +8,9 @@ export interface IconProps {
   isGradient?: boolean
 }
 
-export const Icon = ({ icon, size = 'sm', color = '#ffffff', isGradient }: IconProps): JSX.Element => {
+export const Icon = ({ icon, size = 'text-sm', color = '#ffffff', isGradient }: IconProps): JSX.Element => {
+
   return (
-    <span className={`font-icomoon icon icon-${icon} text-${size} text-[${color}] ${isGradient ? ' gradient-icon' : ''}`} />
+    <span className={`font-icomoon icon icon-${icon} ${size} text-[${color}] ${isGradient ? ' gradient-icon' : ''}`} />
   )
 }

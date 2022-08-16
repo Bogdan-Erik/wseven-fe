@@ -9,7 +9,7 @@ export interface TitleProps {
 export const Title = ({ title, subTitle }: TitleProps): JSX.Element => {
   return (
     <div>
-      <div className="text-2xl md:text-3xl lg:text-[40px] font-medium">
+      <div className="text-2xl md:text-3xl lg:text-[40px] leading-[120%] font-medium">
         {title}
       </div>
       {subTitle && (

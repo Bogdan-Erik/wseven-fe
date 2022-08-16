@@ -6,6 +6,7 @@ export interface ButtonProps {
   primary?: boolean;
   backgroundColor?: string;
   size?: 'small' | 'medium' | 'large';
+  customClasses?: string,
   disabled?: boolean,
   onClick?: () => void;
 }
@@ -16,6 +17,7 @@ export const Button = ({
   size = 'medium',
   backgroundColor,
   disabled = false,
+  customClasses,
   ...props
 }: ButtonProps): JSX.Element => {
   const mode = primary ? 'button--primary' : 'button--secondary';
@@ -23,7 +25,7 @@ export const Button = ({
     <button
       disabled={disabled}
       type="button"
-      className={['button', `button--${size}`, mode].join(' ')}
+      className={['button', `button--${size}`, mode, customClasses].join(' ')}
       style={{ backgroundColor }}
       {...props}
     >
