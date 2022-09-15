@@ -9,4 +9,5 @@ export { Footer } from './Footer'
 export { Icon } from './Icon'
 export { Title } from './Title'
 export { FunctionBox } from './FunctionBox'
+export { Modal } from './Modal'
 /* -- component: insert above here -- */

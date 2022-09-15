@@ -6,14 +6,19 @@ import { SportCard } from './components/SportCard';
 import { Routes, Route, Link } from "react-router-dom";
 import Landing from './pages/Landing';
 import PageLayout from './layouts/Landing';
+import store from './redux/store'
+import { Provider } from 'react-redux'
 
 function App() {
   return (
-    <PageLayout>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-      </Routes >
-    </PageLayout>
+    <Provider store={store}>
+      <PageLayout>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+        </Routes >
+      </PageLayout>
+    </Provider>
+
   )
 }
 

@@ -1,0 +1,14 @@
+.modal-bg {
+  background: url('./../../assets/images/modal_bg.png') no-repeat;
+}
+
+.custom-modal {
+  opacity: 0;
+  transition: all 3000ms ease-in-out;
+}
+
+.custom-modal.open {
+    opacity: 1;
+    transition: all 3000ms ease-in-out;
+
+}

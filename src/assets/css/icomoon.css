@@ -25,7 +25,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.icon-store:before {
+  content: "\e917";
+}
+.icon-error:before {
+  content: "\e916";
+}
+.icon-cross:before {
+  content: "\e915";
+}
 
 .icon-ticket:before {
   content: "\e913";

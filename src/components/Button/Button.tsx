@@ -1,5 +1,6 @@
 import React from 'react'
 import './Button.css';
+import { motion } from 'framer-motion';
 
 export interface ButtonProps {
   children: JSX.Element[] | JSX.Element | string
@@ -8,6 +9,7 @@ export interface ButtonProps {
   size?: 'small' | 'medium' | 'large';
   customClasses?: string,
   disabled?: boolean,
+  type?: 'button' | 'reset' | 'submit' | undefined
   onClick?: () => void;
 }
 
@@ -18,18 +20,22 @@ export const Button = ({
   backgroundColor,
   disabled = false,
   customClasses,
+  type = 'button',
   ...props
 }: ButtonProps): JSX.Element => {
   const mode = primary ? 'button--primary' : 'button--secondary';
   return (
-    <button
+    <motion.button
+      whileHover={{
+        scale: 1.1
+      }}
       disabled={disabled}
-      type="button"
+      type={type}
       className={['button', `button--${size}`, mode, customClasses].join(' ')}
       style={{ backgroundColor }}
       {...props}
     >
       {children}
-    </button>
+    </motion.button>
   );
 }

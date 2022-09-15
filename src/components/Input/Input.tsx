@@ -7,6 +7,8 @@ export interface InputProps {
   error: string,
   disabled: boolean,
   placeholder?: string
+  value?: string,
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export const Input = ({
@@ -15,15 +17,17 @@ export const Input = ({
   error = '',
   disabled = false,
   placeholder,
+  value = '',
   ...props
 
 }: InputProps): JSX.Element => {
   return (
-    <input
-      name={name}
-      type={type}
-      placeholder={placeholder}
-      className={`
+    <div>
+      <input
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        className={`
           placeholder-light-white
           border-2 border-dark-bg grey-linear-gradient
           leading-[18px] px-3.5 py-3 rounded-md outline-none 
@@ -33,8 +37,13 @@ export const Input = ({
           ${error ? ' border-red' : ''}
           ${disabled ? ' opacity-50' : ''}
         `}
-      disabled={disabled}
-      {...props}
-    />
+        disabled={disabled}
+        value={value}
+        {...props}
+
+      />
+      <div className="my-1 text-xs text-red">{error}</div>
+
+    </div>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, IconBadge, Icon, Title, FunctionBox, Input } from '../../components';
+import { Button, IconBadge, Icon, Title, FunctionBox, Input, Modal } from '../../components';
 import './index.scss';
 import FootballerOne from './../../assets/images/landing/footballer-left.png';
 import FootballerTwo from './../../assets/images/landing/footballer-right.png';
@@ -32,13 +32,18 @@ import { ScrollRotate } from 'react-scroll-rotate';
 import { Navigation, Pagination, Autoplay, A11y } from 'swiper';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
+import useModal from './../../hooks/useModal';
 
+import { useSubscribeNewsletterMutation } from './../../redux/subscriptionSlice';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Formik, Form, Field, getIn } from 'formik';
+import * as Yup from 'yup';
 
 export interface PageProps {
 
@@ -66,8 +71,40 @@ export default ({ }: PageProps) => {
 
   ///transform: `scale(${offset < 1 ? 1 : (offset > 2 ? 2 : offset)})`, 
   useEffect(() => { console.log(width) }, [width])
+
+  const { isShowing, toggle } = useModal();
+
+  const [subscribeNewsletter, { isLoading }] = useSubscribeNewsletterMutation()
+
+  const [subscribeResponse, setSubscribeResponse] = useState({})
+  const [emailValue, setEmailValue] = useState('');
+
+  const errorMessages = {
+    'existing_email': 'Ez az email cím már szerepel a feliratkozottak listáján!',
+    'missing_email': 'Nem lett kitöltve az email cím mező!'
+  }
+  const sendSubscription = async (value: { value: string }) => {
+    try {
+      await subscribeNewsletter({ email: value }).unwrap()
+      setSubscribeResponse({
+        type: 'success',
+        message: 'success'
+      })
+    } catch (err) {
+      const { data } = err;
+      setSubscribeResponse({
+        type: 'error',
+        message: data.message
+      })
+    }
+  }
+
+  const newsletterSchema = Yup.object().shape({
+    email: Yup.string().email('Helytelen email formátum!').required('Required'),
+  });
   return (
     <>
+
       <div className="block fixed z-[10] bottom-0 left-0 w-full h-[45px] bg-rgba-grey-dark-08 text-center md:hidden uppercase text-white leading-[44px] tracking-[0.05em] backdrop-blur-[6px] font-bold"><Link activeClass="active" className="subscribe" to="subscribe" spy={true} smooth={true} duration={500} >feliratkozom</Link></div>
       <div className="hero-bg absolute top-[-80px] left-0 w-full h-[2100px] z-[0]"></div>
 
@@ -150,6 +187,7 @@ export default ({ }: PageProps) => {
                 loop={true}
                 autoplay
                 centeredSlides={true}
+                grabCursor={true}
 
                 breakpoints={{
                   640: {
@@ -228,6 +266,12 @@ export default ({ }: PageProps) => {
                     title={'Kreditek'}
                     description={'Profi sportelemzés mindösszesen egy gyors menü áráért? Nálunk nem csak csomagokra tudtok majd előfizetni, hanem akár egy-egy elemzést is könnyen megvásárolhattok.'}
                     icon={'coin'}
+                    customIconSize={"text-[34px]"}
+                  />
+                  <FunctionBox
+                    title={'Piactér'}
+                    description={'Piactér felületünkön beszerezheted majd a legmenőbb w7 cuccokat, nft-ket, sport mistery boxokat.'}
+                    icon={'store'}
                     customIconSize={"text-[34px]"}
                   />
 
@@ -335,13 +379,47 @@ export default ({ }: PageProps) => {
                         A feliratkozás semmilyen kötelezettséggel nem jár és harmadik félnek nem szolgáltatjuk ki az adataidat.
                       </div>
 
-                      <div className="mt-[30px] text-left">
-                        <div className="mb-[30px]">
-                          <Label children={'Email cím'} required={false} />
-                          <Input placeholder="Add meg az e-mail címed" name={''} type={''} error={''} disabled={false} />
-                        </div>
-                        <Button size={"large"} primary={true} customClasses={'w-full md:w-[initial]'}>Feliratkozom</Button>
-                      </div>
+
+                      <Formik
+                        initialValues={{
+                          email: '',
+                        }}
+                        validationSchema={newsletterSchema}
+                        onSubmit={values => {
+                          setSubscribeResponse({});
+                          // same shape as initial values
+                          sendSubscription(values.email);
+                          if (!isLoading) {
+                            toggle()
+                          }
+                        }}
+                      >
+                        {({ values,
+                          handleChange,
+                          errors,
+                          touched,
+                          handleSubmit,
+                          resetForm,
+                          getFieldProps }) => (
+                          <form onSubmit={handleSubmit}>
+                            <div className="mt-[30px] text-left">
+                              <div className="mb-[30px]">
+                                <Label children={'Email cím'} required={false} />
+                                <Input placeholder="Add meg az e-mail címed" name={'email'} type={'email'} value={values.email} onChange={handleChange}
+                                  error={getIn(touched, 'email') &&
+                                    getIn(errors, 'name')} disabled={false} />
+
+
+                                {errors.email && touched.email ? <div className="my-1 text-xs text-red font-bold">{errors.email}</div> : null}
+
+                              </div>
+                              <Button type="submit" size={"large"} primary={true} customClasses={'w-full md:w-[initial]'}>Feliratkozom</Button>
+                            </div>
+                          </form>
+                        )}
+                      </Formik>
+
+
                     </div>
                   </Element>
 
@@ -367,6 +445,72 @@ export default ({ }: PageProps) => {
           {/* Subscribe section */}
         </div >
       </div >
+      <AnimatePresence
+        // Disable any initial animations on children that
+        // are present when the component is first rendered
+        initial={false}
+        // Only render one component at a time.
+        // The exiting component will finish its exit
+        // animation before entering component is rendered
+        exitBeforeEnter={true}
+        // Fires when all exiting nodes have completed animating out
+        onExitComplete={() => null}
+      >
+        {isShowing && (
+          <Modal isShowing={isShowing} hide={toggle} modalClasses=" w-[800px] min-h-[415px] h-auto">
+            {(subscribeResponse && subscribeResponse?.type === 'success') ? (
+              <div className="pt-[65px] px-[70px] text-center">
+                <div className="mb-[25px]">
+                  <motion.div
+                    animate={{
+                      scale: [1, 2, 2, 1, 1],
+                      borderRadius: ["20%", "20%", "50%", "50%", "20%"],
+                    }}
+                  ><Icon size="text-2xl" iconClasses="text-[58px]" isGradient={true} icon="success" />
+                  </motion.div>
+                </div>
+                <div className="text-2xl font-semibold	text-white mb-[15px]">Gratulálunk, sikeres feliratkozás!</div>
+                <div className="text-lg 	text-white mb-[40px]">Most már biztosan megkapod a 90%-os kedvezményünket! Kövess be minket social felületünkön, hogy ingyenes tippeket kaphass indulásunking!
+                </div>
+                <div className="h-[1px] w-full bg-rgba-grey-02 mb-[20px]"></div>
+                <div className="text-md text-rgba-grey-08 mb-[20px]">Kövess minket közösségi oldalainkon is az ingyenes tippekért és információkért!</div>
+                <div className="">
+                  <div className="flex-1 justify-center flex flex-column mt-2 mb-[30px]  md:mt-0 order-1 md:order-2">
+                    <div className="mr-8"><span className={`font-icomoon icon icon-facebook text-[30px]`} /></div>
+                    <div><span className={`font-icomoon icon icon-instagram  text-[30px]`} /></div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="pt-[65px] px-[70px] text-center">
+                <div className="mb-[25px]">
+                  <motion.div
+                    animate={{
+                      scale: [1, 2, 2, 1, 1],
+                      borderRadius: ["20%", "20%", "50%", "50%", "20%"],
+                    }}
+                  ><Icon size="text-2xl" iconClasses="text-[58px]" isGradient={true} icon="error" />
+                  </motion.div>
+                </div>
+                <div className="text-2xl font-semibold	text-white mb-[15px]">Hiba történt a feliratkozás során!</div>
+                <div className="text-lg 	text-white mb-[40px]">
+                  {errorMessages[subscribeResponse?.message]}
+                </div>
+                <div className="h-[1px] w-full bg-rgba-grey-02 mb-[20px]"></div>
+                <div className="text-md text-rgba-grey-08 mb-[20px]">Kövess minket közösségi oldalainkon is az ingyenes tippekért és információkért!</div>
+                <div className="">
+                  <div className="flex-1 justify-center flex flex-column mt-2 mb-[30px] md:mt-0 order-1 md:order-2">
+                    <div className="mr-8"><span className={`font-icomoon icon icon-facebook text-[30px]`} /></div>
+                    <div><span className={`font-icomoon icon icon-instagram  text-[30px]`} /></div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+          </Modal>
+        )}
+      </AnimatePresence>
+
     </>
   )
 }

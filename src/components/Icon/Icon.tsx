@@ -1,16 +1,21 @@
 import React from 'react'
+import { twMerge } from 'tailwind-merge';
 import './Icon.css';
 
 export interface IconProps {
   icon: string
   size?: string
   color?: string
-  isGradient?: boolean
+  isGradient?: boolean,
+  iconClasses?: string,
 }
 
-export const Icon = ({ icon, size = 'text-sm', color = '#ffffff', isGradient }: IconProps): JSX.Element => {
+export const Icon = ({ icon, size = 'text-sm', color = '#ffffff', isGradient, iconClasses }: IconProps): JSX.Element => {
 
+  const iconClass = twMerge(
+    `font-icomoon icon icon-${icon} ${size} text-[${color}] ${isGradient ? ' gradient-icon' : ''}  ${iconClasses}`,
+  )
   return (
-    <span className={`font-icomoon icon icon-${icon} ${size} text-[${color}] ${isGradient ? ' gradient-icon' : ''}`} />
+    <span className={iconClass} />
   )
 }

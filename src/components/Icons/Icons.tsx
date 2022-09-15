@@ -30,6 +30,9 @@ export const Icons = ({ size = 'sm' }: IconsProps): JSX.Element => {
       <IconWrapper icon={'user'} size={size} />
       <IconWrapper icon={'football'} size={size} />
       <IconWrapper icon={'tennis'} size={size} />
+      <IconWrapper icon={'cross'} size={size} />
+      <IconWrapper icon={'error'} size={size} />
+      <IconWrapper icon={'store'} size={size} />
 
     </div>
   )
