@@ -1,6 +1,13 @@
+import React, { useState } from 'react'
 import { motion } from "framer-motion";
 
-const Backdrop = ({ children, onClick }) => {
+export interface BackdropProps {
+  children?: JSX.Element,
+  onClick?: () => void;
+}
+
+
+const Backdrop = ({ children, onClick }: BackdropProps) => {
 
   return (
     <motion.div

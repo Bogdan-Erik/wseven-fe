@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, IconBadge, Icon, Title, FunctionBox, Input, Modal } from '../../components';
 import './index.scss';
+import * as Yup from 'yup';
 import FootballerOne from './../../assets/images/landing/footballer-left.png';
 import FootballerTwo from './../../assets/images/landing/footballer-right.png';
 import Footballer from './../../assets/images/landing/footballer.png';
@@ -43,7 +44,6 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Formik, Form, Field, getIn } from 'formik';
-import * as Yup from 'yup';
 
 export interface PageProps {
 
@@ -76,14 +76,20 @@ export default ({ }: PageProps) => {
 
   const [subscribeNewsletter, { isLoading }] = useSubscribeNewsletterMutation()
 
-  const [subscribeResponse, setSubscribeResponse] = useState({})
+  const [subscribeResponse, setSubscribeResponse] = useState<{
+    type: string | null, message: string | null
+  } | undefined | null>({
+    type: null,
+    message: null
+  });
+
   const [emailValue, setEmailValue] = useState('');
 
   const errorMessages = {
     'existing_email': 'Ez az email cím már szerepel a feliratkozottak listáján!',
     'missing_email': 'Nem lett kitöltve az email cím mező!'
   }
-  const sendSubscription = async (value: { value: string }) => {
+  const sendSubscription = async (value: string) => {
     try {
       await subscribeNewsletter({ email: value }).unwrap()
       setSubscribeResponse({
@@ -91,7 +97,7 @@ export default ({ }: PageProps) => {
         message: 'success'
       })
     } catch (err) {
-      const { data } = err;
+      const { data }: any = err;
       setSubscribeResponse({
         type: 'error',
         message: data.message
@@ -385,10 +391,13 @@ export default ({ }: PageProps) => {
                           email: '',
                         }}
                         validationSchema={newsletterSchema}
-                        onSubmit={values => {
-                          setSubscribeResponse({});
+                        onSubmit={async (values) => {
+                          setSubscribeResponse({
+                            type: null,
+                            message: null,
+                          });
                           // same shape as initial values
-                          sendSubscription(values.email);
+                          await sendSubscription(values.email);
                           if (!isLoading) {
                             toggle()
                           }
@@ -476,8 +485,8 @@ export default ({ }: PageProps) => {
                 <div className="text-md text-rgba-grey-08 mb-[20px]">Kövess minket közösségi oldalainkon is az ingyenes tippekért és információkért!</div>
                 <div className="">
                   <div className="flex-1 justify-center flex flex-column mt-2 mb-[30px]  md:mt-0 order-1 md:order-2">
-                    <div className="mr-8"><span className={`font-icomoon icon icon-facebook text-[30px]`} /></div>
-                    <div><span className={`font-icomoon icon icon-instagram  text-[30px]`} /></div>
+                    <div className="mr-8"><a href="https://www.facebook.com/w7tips/" target={'blank'}><span className={`font-icomoon icon icon-facebook text-[30px]`} /></a></div>
+                    <div><a href="https://www.instagram.com/w7tips_eu/" target={'blank'}><span className={`font-icomoon icon icon-instagram  text-[30px]`} /></a></div>
                   </div>
                 </div>
               </div>
@@ -494,14 +503,14 @@ export default ({ }: PageProps) => {
                 </div>
                 <div className="text-2xl font-semibold	text-white mb-[15px]">Hiba történt a feliratkozás során!</div>
                 <div className="text-lg 	text-white mb-[40px]">
-                  {errorMessages[subscribeResponse?.message]}
+                  {subscribeResponse?.message && errorMessages[subscribeResponse?.message]}
                 </div>
                 <div className="h-[1px] w-full bg-rgba-grey-02 mb-[20px]"></div>
                 <div className="text-md text-rgba-grey-08 mb-[20px]">Kövess minket közösségi oldalainkon is az ingyenes tippekért és információkért!</div>
                 <div className="">
                   <div className="flex-1 justify-center flex flex-column mt-2 mb-[30px] md:mt-0 order-1 md:order-2">
-                    <div className="mr-8"><span className={`font-icomoon icon icon-facebook text-[30px]`} /></div>
-                    <div><span className={`font-icomoon icon icon-instagram  text-[30px]`} /></div>
+                    <div className="mr-8"><a href="https://www.facebook.com/w7tips/" target={'blank'}><span className={`font-icomoon icon icon-facebook text-[30px]`} /></a></div>
+                    <div><a href="https://www.instagram.com/w7tips_eu/" target={'blank'}><span className={`font-icomoon icon icon-instagram  text-[30px]`} /></a></div>
                   </div>
                 </div>
               </div>
