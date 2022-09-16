@@ -98,6 +98,32 @@
   }
 }
 
+@media only screen and (min-width: 1024px) and (max-width: 1300px)  {
+
+  .liga-box {
+    padding-top: 130px;
+  }
+  .coming-text>div {
+    font-size: 40px !important;
+    line-height: 50px !important;
+  }
+  
+}
+
+@media only screen and  (max-width: 1680px)  {
+
+  .macbook-holder {
+    position: initial !important;
+    flex: 1 !important;
+  }
+}
+
+.subscribe-block {
+  background: url('./../../assets/images/landing/sub-top.png?webp') no-repeat;
+  @apply bg-contain bg-top;
+
+}
+
 
 @-webkit-keyframes topToBottom {
   0% {

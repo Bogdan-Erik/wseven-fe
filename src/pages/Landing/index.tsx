@@ -7,6 +7,7 @@ import FootballerTwo from './../../assets/images/landing/footballer-right.png';
 import Footballer from './../../assets/images/landing/footballer.png';
 import TennisPlayer from './../../assets/images/landing/tennis_player.png';
 import FootballerBg from './../../assets/images/landing/footballer-bg.png';
+import SubBg from './../../assets/images/landing/subscribe.png';
 import Circle from './../../assets/images/landing/circle.png';
 import Cross from './../../assets/images/landing/cross.png';
 
@@ -21,6 +22,11 @@ import el from './../../assets/images/leagues/el.png';
 import pl from './../../assets/images/leagues/pl.png';
 import ll from './../../assets/images/leagues/ll.png';
 import bl from './../../assets/images/leagues/bl.png';
+import seriea from './../../assets/images/leagues/seriea.png';
+import ligue1 from './../../assets/images/leagues/ligue1.png';
+import nba from './../../assets/images/leagues/nba.png';
+import nfl from './../../assets/images/leagues/nfl.png';
+import f1 from './../../assets/images/leagues/f1.png';
 
 
 import useWindowDimensions from './../../hooks/useWindowDimensions';
@@ -43,7 +49,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Formik, Form, Field, getIn } from 'formik';
+import { Formik, getIn } from 'formik';
 
 export interface PageProps {
 
@@ -106,7 +112,7 @@ export default ({ }: PageProps) => {
   }
 
   const newsletterSchema = Yup.object().shape({
-    email: Yup.string().email('Helytelen email formátum!').required('Required'),
+    email: Yup.string().email('Helytelen email formátum!').required('Kérlek add meg az e-mail címed!'),
   });
   return (
     <>
@@ -133,11 +139,11 @@ export default ({ }: PageProps) => {
                 <div className="absolute top-[30px] right-[200px] lg:top-[90px] lg:right-[370px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}  ><IconBadge classes={'blur-[1px] backdrop-blur-[2px]'}><Icon icon="military" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
                 <div className="absolute top-[70px] right-[60px] lg:top-[170px] lg:right-[140px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}  ><IconBadge classes={'backdrop-blur-[6px]'} width="w-[64px] lg:w-[84px]" height="h-[64px] lg:h-[84px]"><Icon icon="house" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
                 <div className="absolute top-[170px] right-[10px]  lg:top-[330px] lg:right-[60px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}  ><IconBadge classes={'backdrop-blur-[6px]'} width="w-[64px] lg:w-[84px]" height="h-[64px] lg:h-[84px]"><Icon icon="money" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
-                <div className="absolute top-[290px] right-[90px] lg:top-[560px] lg:right-[180px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}><IconBadge classes={'backdrop-blur-[10px]'} width="w-[64px] lg:w-[84px]" height="h-[64px] lg:h-[84px]"><Icon icon="calendar" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
+                <div className="absolute top-[290px] right-[90px] lg:top-[560px] lg:right-[180px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}><IconBadge classes={'blur-[0.8px] backdrop-blur-[10px]'} width="w-[64px] lg:w-[84px]" height="h-[64px] lg:h-[84px]"><Icon icon="calendar" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
 
               </div>
             </div>
-            <div className="flex flex-col self-center flex-3 order-1 mt-[60px] md:order-2 md:mt-0">
+            <div className="flex flex-col self-center flex-3 order-1 mt-[60px] md:order-2 md:mt-0 relative z-[100] coming-text">
               <div className="text-2_5xl text-center text-whitesmoke md:text-3xl lg:text-5_2xl lg:leading-[70px] ">Hamarosan megérkezik a <br />
 
                 <span className="words">
@@ -152,7 +158,7 @@ export default ({ }: PageProps) => {
 
                 <br /> új generációja!</div>
               <div className="flex-1 mt-[30px] text-center">
-                <Button size={"large"} primary={true}>Kérek értesítést</Button>
+                <Link activeClass="active" className="subscribe" to="subscribe" spy={true} smooth={true} duration={500} ><Button size={"large"} primary={true}>Kérek értesítést</Button></Link>
               </div>
             </div>
             <div className="flex flex-1 order-3 mt-[-470px] justify-end md:mt-0 right-player">
@@ -169,18 +175,19 @@ export default ({ }: PageProps) => {
 
                 <div className="absolute top-[30px] right-[150px] lg:top-[90px] lg:right-[280px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}  ><IconBadge classes={'backdrop-blur-[6px]'} width="w-[64px] lg:w-[84px]" height="h-[64px] lg:h-[84px]"><Icon icon="stat-bordered" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
                 <div className="absolute top-[170px] right-[120px] lg:top-[390px] lg:right-[190px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}  ><IconBadge classes={'blur-[1px] backdrop-blur-[6px]'} width="w-[64px] lg:w-[84px]" height="h-[64px] lg:h-[84px]"><Icon icon="sign" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
-                <div className="absolute top-[230px] right-[10px] lg:top-[460px] lg:right-[40px] will-change-auto  z-[-1]" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}><IconBadge classes={'blur-[2px] backdrop-blur-[10px]'} width="w-[64px] lg:w-[84px]" height="h-[64px] lg:h-[84px]"><Icon icon="donut" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
-                <div className="absolute top-[270px] right-[170px] lg:top-[570px] lg:right-[300px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}><IconBadge classes={'blur-[1px] backdrop-blur-[10px]'} width="w-[64px] lg:w-[84px]" height="h-[64px] lg:h-[84px]"><Icon icon="settings" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
+                <div className="absolute top-[230px] right-[10px] lg:top-[460px] lg:right-[40px] will-change-auto  z-[-1]" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}><IconBadge classes={'blur-[1.2px] backdrop-blur-[10px]'} width="w-[44px] lg:w-[54px]" height="h-[44px] lg:h-[54px]"><Icon icon="donut" size="text-2xl" color={"#ffffff"} /></IconBadge> </div>
+                <div className="absolute top-[270px] right-[170px] lg:top-[570px] lg:right-[300px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}><IconBadge classes={'blur-[1.4px] backdrop-blur-[10px]'} width="w-[64px] lg:w-[74px]" height="h-[64px] lg:h-[74px]"><Icon icon="settings" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
 
               </div>
             </div>
           </div>
-          <div className=" mx-auto container mt-[130px] md:mt-0">
+          <div className=" mx-auto container mt-[130px] md:mt-0 relative z-[100] liga-box">
             <Title
               title={(<div className="text-center text-rgba-grey-08"><span className="font-bold text-white">Ligák</span> amikkel találkozhatsz nálunk</div>)}
+              subTitleClass={'flex justify-center'}
               subTitle={(
-                <div className="text-center">
-                  Az atp és wta tornákkal kiemelten foglalkozunk, így egész évben minden napos fogadási opciókat <br /> kínálunk majd. E mellett nagyobb ligák focimeccsei is terítékünkre kerülnek.
+                <div className="text-center max-w-[1000px]">
+                  Az ATP és a WTA tornákkal kiemelten foglalkozunk, így egész évben minden napos fogadási opciókat kínálunk majd. E mellett a foci, amerikai foci, amerikai kosárlabda és a Forma 1 szerelmesei sem fognak unatkozni nálunk!
                 </div>
               )}
             ></Title>
@@ -217,13 +224,19 @@ export default ({ }: PageProps) => {
                 <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={pl} className="h-fit" width={107} height={84} /></div></SwiperSlide>
                 <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={ll} className="h-fit" width={107} height={84} /></div></SwiperSlide>
                 <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={bl} className="h-fit" width={107} height={84} /></div></SwiperSlide>
+                <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={seriea} className="h-fit" width={107} height={84} /></div></SwiperSlide>
+                <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={ligue1} className="h-fit" width={107} height={84} /></div></SwiperSlide>
+                <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={nba} className="h-fit" width={107} height={84} /></div></SwiperSlide>
+                <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={nfl} className="h-fit" width={107} height={84} /></div></SwiperSlide>
+                <SwiperSlide ><div className="h-[90px] flex flex-col justify-center items-center"><img src={f1} className="h-fit" width={107} height={84} /></div></SwiperSlide>
               </Swiper>
             </div>
           </div>
           <div className=" functions-section">
             <div className=" mt-[200px] mx-auto container px-[15px]">
               <Title
-                title={(<div className="text-center text-rgba-grey-08"><span className="font-bold text-white">Funkciók</span>, amik új szintet nyitnak előtted a <br /> sportfogadásban</div>)}
+                titleClass="flex justify-center"
+                title={(<div className="text-center text-rgba-grey-08 max-w-[1000px] "><span className="font-bold text-white">Funkciók</span>, amik új szintet nyitnak előtted a sportfogadásban</div>)}
               ></Title>
 
               <div className="flex flex-col lg:flex-row mt-6">
@@ -242,7 +255,7 @@ export default ({ }: PageProps) => {
                   />
                   <FunctionBox
                     title={'Fogadási Naptár'}
-                    description={'Tervezd meg napjaid és heteid, tekintsd át könnyen és kényelmesen mikor kezdődnek megfogadott meccseid.'}
+                    description={'Tervezd meg napjaid és heteid, tekintsd át könnyen és kényelmesen mikor kezdődnek megfogadott meccseid és azt is, hogy hol tudod őket élőben nézni.'}
                     icon={'calendar'}
                   />
                   <FunctionBox
@@ -252,8 +265,8 @@ export default ({ }: PageProps) => {
                     customIconSize={"text-4xl"}
                   />
                   <FunctionBox
-                    title={'Challengek'}
-                    description={'Profi csapatunk részletesen elemez minden mérközést és pontosan megfogalmazva láthatod mire és miért fogadunk.'}
+                    title={'Kihívások'}
+                    description={'Kis pénzből egy kisebb vagyon akár 7-10 nap alatt? Igen! Kihívásaink ezt hozzák majd el neked.'}
                     icon={'sign'}
                   />
                   <FunctionBox
@@ -270,13 +283,13 @@ export default ({ }: PageProps) => {
                   />
                   <FunctionBox
                     title={'Kreditek'}
-                    description={'Profi sportelemzés mindösszesen egy gyors menü áráért? Nálunk nem csak csomagokra tudtok majd előfizetni, hanem akár egy-egy elemzést is könnyen megvásárolhattok.'}
+                    description={'Profi sportelemzés mindösszesen egy gyros áráért? Nálunk nem csak csomagokra tudtok majd előfizetni, hanem akár egy-egy elemzést is könnyen megvásárolhattok, vagy benevezhettek kihívásainkra.'}
                     icon={'coin'}
                     customIconSize={"text-[34px]"}
                   />
                   <FunctionBox
                     title={'Piactér'}
-                    description={'Piactér felületünkön beszerezheted majd a legmenőbb w7 cuccokat, nft-ket, sport mistery boxokat.'}
+                    description={'Piactér felületünkön beszerezheted majd a legmenőbb W7 cuccokat, NFT-ket, Sport MysteryBox-okat.'}
                     icon={'store'}
                     customIconSize={"text-[34px]"}
                   />
@@ -331,7 +344,7 @@ export default ({ }: PageProps) => {
                   </div>
 
                 </div>
-                <div className="flex-1 order-1 md:order-2">
+                <div className="flex-2 order-1 md:order-2 md:relative md:pl-[20px] md:right-[-70px] macbook-holder">
                   <div>
                     <img src={Macbook} className="player object-contain" />
                   </div>
@@ -340,7 +353,7 @@ export default ({ }: PageProps) => {
                       title={(<div className="text-center lg:text-left text-rgba-grey-08"><span className="font-bold text-white">Minden platformon</span> maximális élményben lesz részed</div>)}
                     ></Title>
                     <div className="mt-[30px] text-center lg:text-left">
-                      <Button size={"large"} primary={true}>Érdekel</Button>
+                      <Link activeClass="active" className="subscribe" to="subscribe" spy={true} smooth={true} duration={500} ><Button size={"large"} primary={true}>Érdekel</Button></Link>
                     </div>
                   </div>
                 </div>
@@ -351,20 +364,20 @@ export default ({ }: PageProps) => {
           {/* Fans section */}
 
           {/* Subscribe section */}
-          <div className="signup-section relative">
+          <div className="signup-section relative subscribe-block ">
             <div className="hidden absolute lg:block right-[150px]">
-              <div className="relative">
+              <div className="relative top-[200px]">
                 <div className="absolute  z-[-1]  top-[130px] right-[50px] md:top-[290px] md:right-[180px] lg:top-[10px] lg:right-[230px] will-change-auto"  ><ScrollRotate method={"perc"} loops={1} from={0} to={200} animationDuration={0.1}><img src={Cross} className="w-[30px] h-[30px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})`, opacity: ((1 - (opacity * 1.5)) < 0 ? 1 : (1 - (opacity * 1.5))), }} /></ScrollRotate> </div>
                 <div className={`absolute z-[-1] top-[60px] right-[190px] md:top-[80px] md:right-[400px] lg:top-[330px] lg:right-[420px] will-change-transform`}> <ScrollRotate method={"perc"} loops={1} from={0} to={200} animationDuration={0.3}><img src={Circle} className="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.1 ? 1.1 : offset)})` }} /></ScrollRotate></div>
                 <div className="absolute  z-[-1] top-[270px] right-[130px] md:top-[590px] md:right-[300px] lg:top-[390px] lg:right-[20px]"  ><ScrollRotate method={"perc"} loops={2} from={300} to={100} animationDuration={0.3}><img src={Cross} className="w-[30px] h-[30px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})` }} /></ScrollRotate> </div>
 
-                <img src={TennisPlayer} className="player object-contain max-w-[850px]" style={{ width: `${width / 2}px`, transform: `translate(${width > 1024 ? (0 + (offset * 50)) : 0}px, 0px)`, transition: 'transform 150ms ease' }} />
+                <img src={TennisPlayer} className="player object-contain max-w-[850px] relative left-[-90px]" style={{ width: `${width / 2}px`, transform: `translate(${width > 1024 ? (0 + (offset * 50)) : 0}px, 0px)`, transition: 'transform 150ms ease' }} />
               </div>
-              <div className="absolute top-[-180px] right-[-100px] z-[-1]">
-                <img src={FootballerBg} className="player object-contain" />
+              <div className="absolute top-[0px] right-[-150px] z-[-1]">
+                <img src={SubBg} className="player object-contain" />
               </div>
             </div>
-            <div className="mt-[140px] md:mt-[200px] mx-auto container px-[15px]  pb-[150px]">
+            <div className="pt-[140px] md:pt-[200px] mx-auto container px-[15px]  pb-[150px]">
               <div className="flex flex-col lg:flex-row mt-6">
 
                 <div className="flex-1 ">
@@ -422,7 +435,7 @@ export default ({ }: PageProps) => {
                                 {errors.email && touched.email ? <div className="my-1 text-xs text-red font-bold">{errors.email}</div> : null}
 
                               </div>
-                              <Button type="submit" size={"large"} primary={true} customClasses={'w-full md:w-[initial]'}>Feliratkozom</Button>
+                              <Button type="submit" size={"large"} primary={true} isLoading={isLoading} customClasses={'w-full md:w-[initial]'}>Feliratkozom</Button>
                             </div>
                           </form>
                         )}
@@ -435,13 +448,15 @@ export default ({ }: PageProps) => {
                 </div>
                 <div className="flex-1 ">
                   <div className="mt-[62px] relative right-[40px] md:hidden md:mt-[0px]">
-                    <img src={TennisPlayer} className="player object-contain max-w-[850px]" />
+                    <img src={TennisPlayer} className=" object-contain max-w-[850px] h-[296px]" />
                     <div className={`absolute z-[-1] top-[0px] right-[30px] md:top-[80px] md:right-[400px] lg:top-[30px] lg:right-[420px] will-change-transform`}> <ScrollRotate method={"perc"} loops={1} from={0} to={200} animationDuration={0.1}><img src={Cross} className="w-[30px] h-[30px] lg:w-[40px] lg:h-[40px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})` }} /></ScrollRotate></div>
                     <div className="absolute  z-[-1]  top-[130px] right-[50px] md:top-[290px] md:right-[180px] lg:top-[270px] lg:right-[130px] will-change-auto"  ><ScrollRotate method={"perc"} loops={1} from={0} to={200} animationDuration={0.1}><img src={Cross} className="w-[30px] h-[30px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})`, opacity: ((1 - (opacity * 1.5)) < 0 ? 1 : (1 - (opacity * 1.5))), }} /></ScrollRotate> </div>
                     <div className="absolute  z-[-1] top-[310px] right-[190px] md:top-[590px] md:right-[300px] lg:top-[560px] lg:right-[340px]"  ><ScrollRotate method={"perc"} loops={2} from={300} to={100} animationDuration={0.3}><img src={Circle} className="w-[30px] h-[30px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})` }} /></ScrollRotate> </div>
 
                     <div className="absolute top-0 right-[-40px] z-[-1]">
-                      <img src={FootballerBg} className="player object-contain" />
+                      <img src={SubBg} className=" object-contain relative w-[650px] h-[690px] top-[-210px] right-[-80px]" />
+
+
                     </div>
                   </div>
 
