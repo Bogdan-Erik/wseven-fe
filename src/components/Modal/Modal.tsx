@@ -29,7 +29,7 @@ export interface ModalProps {
 export const Modal = ({ children, modalClasses, isShowing, hide }: ModalProps): JSX.Element => {
   const [isVisible, setIsVisible] = useState(true);
   const modalClass = twMerge(
-    `  bg-[#000012] modal-bg rounded-md relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  ${modalClasses}`,
+    `  bg-[#000012] modal-bg rounded-md relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-[100%]  ${modalClasses}`,
   )
 
   return (
