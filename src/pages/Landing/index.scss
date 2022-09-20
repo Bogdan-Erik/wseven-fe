@@ -7,6 +7,27 @@
   }
 }
 
+.header-img {
+  position: absolute;
+  width: 100vw;
+
+
+  span {
+    box-sizing: border-box;
+    display: block;
+    overflow: hidden;
+    width: initial;
+    height: initial;
+    background: none;
+    opacity: 1;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    inset: 0px;
+  }
+}
+
 .hero-bg-secondary {
   
   @apply  md:mt-[80px];

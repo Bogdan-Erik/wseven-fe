@@ -10,6 +10,11 @@ import FootballerBg from './../../assets/images/landing/footballer-bg.png';
 import SubBg from './../../assets/images/landing/subscribe.png';
 import Circle from './../../assets/images/landing/circle.png';
 import Cross from './../../assets/images/landing/cross.png';
+import HeaderCover from './../../assets/images/landing/header.png';
+import smallHeaderCover from './../../assets/images/landing/header.png';
+import mediumHeaderCover from './../../assets/images/landing/header.png';
+import largeHeaderCover from './../../assets/images/landing/header-large.png';
+import smHeaderCover from './../../assets/images/landing/header-sm.png';
 
 import Macbook from './../../assets/images/landing/macbook.png';
 import Fans from './../../assets/images/landing/fans.png';
@@ -48,7 +53,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import { Formik, getIn } from 'formik';
 
 export interface PageProps {
@@ -110,14 +115,18 @@ export default ({ }: PageProps) => {
       })
     }
   }
+  const { scrollYProgress } = useScroll();
 
   const newsletterSchema = Yup.object().shape({
     email: Yup.string().email('Helytelen email formátum!').required('Kérlek add meg az e-mail címed!'),
   });
+
   return (
     <>
 
-      <div className="block fixed z-[10] bottom-0 left-0 w-full h-[45px] bg-rgba-grey-dark-08 text-center md:hidden uppercase text-white leading-[44px] tracking-[0.05em] backdrop-blur-[6px] font-bold"><Link activeClass="active" className="subscribe" to="subscribe" spy={true} smooth={true} duration={500} >feliratkozom</Link></div>
+      <div className="block fixed z-[101] bottom-0 left-0 w-full h-[45px] bg-rgba-grey-dark-08 text-center md:hidden uppercase text-white leading-[44px] tracking-[0.05em] backdrop-blur-[6px] font-bold"><Link activeClass="active" className="subscribe" to="subscribe" spy={true} smooth={true} duration={500} >feliratkozom</Link></div>
+      <motion.div className="hidden md:block" style={{ scale: offsetTransform === 0 ? 1 : offsetTransform, opacity: 2 - offsetTransform }}><span><img srcSet={`${smallHeaderCover} 1080w, ${mediumHeaderCover} 2048w, ${largeHeaderCover} 3840w`} src={smallHeaderCover} className="header-img" /></span></motion.div>
+      <motion.div className="block md:hidden relative bottom-[-300px]" style={{ scale: offsetTransform === 0 ? 1 : offsetTransform, opacity: 2 - offsetTransform }}><span><img src={smHeaderCover} className="header-img" /></span></motion.div>
       <div className="hero-bg absolute top-[-80px] left-0 w-full h-[2100px] z-[0]"></div>
 
       <div className="hero-bg-secondary text-white">
@@ -125,7 +134,7 @@ export default ({ }: PageProps) => {
           <div className="grid md:flex flex-col md:flex-row gradient-cover">
             <div className="flex flex-1 justify-start  order-2 relative mt-[110px] md:mt-0 md:order-1 left-player">
               <div className="relative " >
-                <div className="  will-change-auto" style={{ transform: `scale(${offsetTransform < 1 ? 1 : (offsetTransform > 1.3 ? 1.3 : offsetTransform)})`, transition: 'transform 150ms ease' }}>
+                <div className="  will-change-auto relative z-[100]" style={{ transform: `scale(${offsetTransform < 1 ? 1 : (offsetTransform > 1.3 ? 1.3 : offsetTransform)})`, transition: 'transform 150ms ease' }}>
                   <img src={FootballerOne} className="player" />
 
                 </div>
@@ -136,11 +145,11 @@ export default ({ }: PageProps) => {
                 <div className="absolute top-[250px] right-[190px] lg:top-[520px] lg:right-[390px] will-change-auto rotate-[240deg]"  ><ScrollRotate method={"perc"} loops={1} from={300} to={100} animationDuration={0.3}><img src={Cross} className="w-[30px] h-[30px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})`, opacity: ((1 - (opacity * 1.5)) < 0 ? 1 : (1 - (opacity * 1.5))), }} /></ScrollRotate> </div>
 
 
-                <div className="absolute top-[30px] right-[200px] lg:top-[90px] lg:right-[370px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}  ><IconBadge classes={'blur-[1px] backdrop-blur-[2px]'}><Icon icon="military" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
+                {/*<div className="absolute top-[30px] right-[200px] lg:top-[90px] lg:right-[370px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}  ><IconBadge classes={'blur-[1px] backdrop-blur-[2px]'}><Icon icon="military" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
                 <div className="absolute top-[70px] right-[60px] lg:top-[170px] lg:right-[140px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}  ><IconBadge classes={'backdrop-blur-[6px]'} width="w-[64px] lg:w-[84px]" height="h-[64px] lg:h-[84px]"><Icon icon="house" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
                 <div className="absolute top-[170px] right-[10px]  lg:top-[330px] lg:right-[60px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}  ><IconBadge classes={'backdrop-blur-[6px]'} width="w-[64px] lg:w-[84px]" height="h-[64px] lg:h-[84px]"><Icon icon="money" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
                 <div className="absolute top-[290px] right-[90px] lg:top-[560px] lg:right-[180px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}><IconBadge classes={'blur-[0.8px] backdrop-blur-[10px]'} width="w-[64px] lg:w-[84px]" height="h-[64px] lg:h-[84px]"><Icon icon="calendar" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
-
+  */}
               </div>
             </div>
             <div className="flex flex-col self-center flex-3 order-1 mt-[60px] md:order-2 md:mt-0 relative z-[100] coming-text">
@@ -163,7 +172,7 @@ export default ({ }: PageProps) => {
             </div>
             <div className="flex flex-1 order-3 mt-[-470px] justify-end md:mt-0 right-player">
               <div className="relative " >
-                <div className="  will-change-auto" style={{ transform: `scale(${offsetTransform < 1 ? 1 : (offsetTransform > 1.3 ? 1.3 : offsetTransform)})`, transition: 'transform 150ms ease' }}>
+                <div className="  will-change-auto  relative z-[100]" style={{ transform: `scale(${offsetTransform < 1 ? 1 : (offsetTransform > 1.3 ? 1.3 : offsetTransform)})`, transition: 'transform 150ms ease' }}>
                   <img src={FootballerTwo} className="player" />
 
                 </div>
@@ -173,11 +182,11 @@ export default ({ }: PageProps) => {
                 <div className="absolute top-[140px] right-[140px]  lg:top-[360px] lg:right-[220px] will-change-auto rotate-[240deg]"  ><ScrollRotate method={"perc"} loops={1} from={300} to={100} animationDuration={0.3}><img src={Cross} className="w-[30px] h-[30px] lg:w-[50px] lg:h-[50px]" style={{ transform: `scale(${offset < 1 ? 1 : (offset > 1.3 ? 1.3 : offset)})`, opacity: ((1 - (opacity * 1.5)) < 0 ? 1 : (1 - (opacity * 1.5))), }} /></ScrollRotate> </div>
 
 
-                <div className="absolute top-[30px] right-[150px] lg:top-[90px] lg:right-[280px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}  ><IconBadge classes={'backdrop-blur-[6px]'} width="w-[64px] lg:w-[84px]" height="h-[64px] lg:h-[84px]"><Icon icon="stat-bordered" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
+                {/*<div className="absolute top-[30px] right-[150px] lg:top-[90px] lg:right-[280px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}  ><IconBadge classes={'backdrop-blur-[6px]'} width="w-[64px] lg:w-[84px]" height="h-[64px] lg:h-[84px]"><Icon icon="stat-bordered" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
                 <div className="absolute top-[170px] right-[120px] lg:top-[390px] lg:right-[190px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}  ><IconBadge classes={'blur-[1px] backdrop-blur-[6px]'} width="w-[64px] lg:w-[84px]" height="h-[64px] lg:h-[84px]"><Icon icon="sign" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
                 <div className="absolute top-[230px] right-[10px] lg:top-[460px] lg:right-[40px] will-change-auto  z-[-1]" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}><IconBadge classes={'blur-[1.2px] backdrop-blur-[10px]'} width="w-[44px] lg:w-[54px]" height="h-[44px] lg:h-[54px]"><Icon icon="donut" size="text-2xl" color={"#ffffff"} /></IconBadge> </div>
                 <div className="absolute top-[270px] right-[170px] lg:top-[570px] lg:right-[300px] will-change-auto" style={{ transform: `translateX(${(offset === 0 ? 30 : offset * 30)}px)`, transition: 'all 0.1s' }}><IconBadge classes={'blur-[1.4px] backdrop-blur-[10px]'} width="w-[64px] lg:w-[74px]" height="h-[64px] lg:h-[74px]"><Icon icon="settings" size="text-3xl" color={"#ffffff"} /></IconBadge> </div>
-
+*/}
               </div>
             </div>
           </div>
@@ -328,7 +337,7 @@ export default ({ }: PageProps) => {
                 <img src={FansBg} className="player object-contain" />
               </div>
             </div>
-            <div className="mt-[159px] md:mt-[200px] mx-auto container px-[15px]  md:pb-[150px]">
+            <div className="mt-[50px] md:mt-[200px] mx-auto container px-[15px]  md:pb-[150px]">
               <div className="flex flex-col lg:flex-row mt-6">
                 <div className="flex-1 order-2 md:order-1 ">
                   <div className="mt-[62px] relative left-[-70px] md:hidden md:mt-[0px]">
