@@ -144,20 +144,20 @@
 }
 
 @keyframes anim-1 {
-  0%, 8.3% { top: -50%; opacity: 0; }
-  8.3%,25% { top: 0%; opacity: 1; }
+  0%, 5% { top: -50%; opacity: 0; }
+  5%,25% { top: 0%; opacity: 1; }
   33.33%, 100% { top: 50%; opacity: 0; }
 }
 
 @keyframes anim-2 {
   0%, 33.33% { top: -50%; opacity: 0; }
-  41.63%, 58.29% { top: 0%; opacity: 1; }
+  38.33%, 58.29% { top: 0%; opacity: 1; }
   66.66%, 100% { top: 50%; opacity: 0; }
 }
 
 @keyframes anim-3 {
   0%, 66.66% { top: -50%; opacity: 0; }
-  74.96%, 91.62% { top: 0%; opacity: 1; }
+  71.66%, 91.62% { top: 0%; opacity: 1; }
   100% { top: 50%; opacity: 0; }
 }
 
