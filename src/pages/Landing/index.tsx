@@ -12,7 +12,7 @@ import Circle from './../../assets/images/landing/circle.png';
 import Cross from './../../assets/images/landing/cross.png';
 import HeaderCover from './../../assets/images/landing/header.png';
 import smallHeaderCover from './../../assets/images/landing/header.png';
-import mediumHeaderCover from './../../assets/images/landing/header.png';
+import mediumHeaderCover from './../../assets/images/landing/header-large.png';
 import largeHeaderCover from './../../assets/images/landing/header-large.png';
 import smHeaderCover from './../../assets/images/landing/header-sm.png';
 
@@ -125,7 +125,7 @@ export default ({ }: PageProps) => {
     <>
 
       <div className="block fixed z-[101] bottom-0 left-0 w-full h-[45px] bg-rgba-grey-dark-08 text-center md:hidden uppercase text-white leading-[44px] tracking-[0.05em] backdrop-blur-[6px] font-bold"><Link activeClass="active" className="subscribe" to="subscribe" spy={true} smooth={true} duration={500} >feliratkozom</Link></div>
-      <motion.div className="hidden md:block" style={{ scale: offsetTransform === 0 ? 1 : offsetTransform, opacity: 2 - offsetTransform }}><span><img srcSet={`${smallHeaderCover} 1080w, ${mediumHeaderCover} 2048w, ${largeHeaderCover} 3840w`} src={smallHeaderCover} className="header-img" /></span></motion.div>
+      <motion.div className="hidden md:block" style={{ scale: offsetTransform === 0 ? 1 : offsetTransform, opacity: 2 - offsetTransform }}><span><img srcSet={smallHeaderCover} src={smallHeaderCover} className="header-img" /></span></motion.div>
       <motion.div className="block md:hidden relative bottom-[-300px]" style={{ scale: offsetTransform === 0 ? 1 : offsetTransform, opacity: 2 - offsetTransform }}><span><img src={smHeaderCover} className="header-img" /></span></motion.div>
       <div className="hero-bg absolute top-[-80px] left-0 w-full h-[2100px] z-[0]"></div>
 
@@ -157,9 +157,9 @@ export default ({ }: PageProps) => {
 
                 <span className="words">
                   <b><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">tippek</span></b>
-                  <div><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">tippek</span></div>
-                  <div><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">tanácsadás</span></div>
-                  <div><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">elemzés</span></div>
+                  <div className="item-1"><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">tippek</span></div>
+                  <div className="item-2"><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">tanácsadás</span></div>
+                  <div className="item-3"><span className="font-bold text-white">sportfogadási</span> <span className="font-bold text-gradient">elemzés</span></div>
                 </span>
 
 
@@ -492,7 +492,7 @@ export default ({ }: PageProps) => {
         {isShowing && (
           <Modal isShowing={isShowing} hide={toggle} modalClasses=" w-[800px] min-h-[415px] h-auto">
             {(subscribeResponse && subscribeResponse?.type === 'success') ? (
-              <div className="pt-[65px] px-[70px] text-center">
+              <div className="py-[20px] md:pt-[65px] px-[20px] md:px-[70px] text-center">
                 <div className="mb-[25px]">
                   <motion.div
                     animate={{
@@ -508,7 +508,7 @@ export default ({ }: PageProps) => {
                 <div className="h-[1px] w-full bg-rgba-grey-02 mb-[20px]"></div>
                 <div className="text-md text-rgba-grey-08 mb-[20px]">Kövess minket közösségi oldalainkon is az ingyenes tippekért és információkért!</div>
                 <div className="">
-                  <div className="flex-1 justify-center flex flex-column mt-2 mb-[30px]  md:mt-0 order-1 md:order-2">
+                  <div className="flex-1 justify-center flex flex-column mt-2  md:mt-0 order-1 md:order-2">
                     <div className="mr-8"><a href="https://www.facebook.com/w7tips/" target={'blank'}><span className={`font-icomoon icon icon-facebook text-[30px]`} /></a></div>
                     <div><a href="https://www.instagram.com/w7tips_eu/" target={'blank'}><span className={`font-icomoon icon icon-instagram  text-[30px]`} /></a></div>
                   </div>

@@ -85,9 +85,7 @@
   }
 
   div {
-      animation: topToBottom 7.5s linear infinite 0s;
-      opacity: 0;
-      overflow: hidden;
+      //animation: topToBottom 10s linear infinite 0s;
       position: absolute;
       left: 0;
       top: 0;
@@ -104,19 +102,63 @@
           z-index: -1;
       }
 
+    /* 
       &:nth-child(2) {
-          -webkit-animation-delay: 0s !important;
-          animation-delay: 0s !important;
-      }
-      &:nth-child(3) {
-          -webkit-animation-delay: 2.5s !important;
-          animation-delay: 2.5s !important;
-      }
-      &:nth-child(4) {
-          -webkit-animation-delay: 5s !important;
-          animation-delay: 5s !important;
-      }
+        -webkit-animation-delay: 0s !important;
+        animation-delay: 0s !important;
+    }
+    &:nth-child(3) {
+        -webkit-animation-delay: 3.3s !important;
+        animation-delay: 3.3s !important;
+    }
+    &:nth-child(4) {
+        -webkit-animation-delay: 6.6s !important;
+        animation-delay: 6.6s !important;
+    }*/
   }
+}
+
+
+.item-1, 
+.item-2, 
+.item-3 {
+  position: absolute;
+  margin: 0;
+
+  animation-duration: 6s;
+  
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.item-1{
+  animation-name: anim-1;
+}
+
+.item-2{
+  animation-name: anim-2;
+}
+
+.item-3{
+  animation-name: anim-3;
+}
+
+@keyframes anim-1 {
+  0%, 8.3% { top: -50%; opacity: 0; }
+  8.3%,25% { top: 0%; opacity: 1; }
+  33.33%, 100% { top: 50%; opacity: 0; }
+}
+
+@keyframes anim-2 {
+  0%, 33.33% { top: -50%; opacity: 0; }
+  41.63%, 58.29% { top: 0%; opacity: 1; }
+  66.66%, 100% { top: 50%; opacity: 0; }
+}
+
+@keyframes anim-3 {
+  0%, 66.66% { top: -50%; opacity: 0; }
+  74.96%, 91.62% { top: 0%; opacity: 1; }
+  100% { top: 50%; opacity: 0; }
 }
 
 @media only screen and (min-width: 1024px) and (max-width: 1300px)  {
