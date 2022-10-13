@@ -32,21 +32,25 @@ export const Header = ({ variant = 'primary', user }: HeaderProps): JSX.Element 
           </div>
           {variant === "secondary" && (
             <div className="w-full border-b-2 flex h-full md:border-b-[1px] md:border-b-rgba-grey-01">
-              <div className="text-white  menu-bar">
-                <div>Minden sportág</div>
-                <div><span className="font-icomoon icon icon-football"></span>Foci</div>
-                <div><span className="font-icomoon icon icon-football"></span>Tenisz</div>
-              </div>
-              <div className="text-white flex action-menu-bar">
-                <div className="text-rgba-grey-08 hidden lg:block">2022. július 7. 12:58</div>
-                <div>
-                  <span className="relative inline-block ml-8">
-                    <span className="font-icomoon icon icon-bell text-xl text-rgba-grey-08"></span>
-                    <span className="absolute top-0 right-0 inline-block w-4 h-4 transform translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-gradient-blue-start to-gradient-purple-end rounded-full"></span>
-                  </span>
-
+              <div className="container mx-auto ">
+                <div className="w-full  flex h-full ">
+                <div className="text-white  menu-bar">
+                  <div>Minden sportág</div>
+                  <div><span className="font-icomoon icon icon-football"></span>Foci</div>
+                  <div><span className="font-icomoon icon icon-tennis"></span>Tenisz</div>
                 </div>
-                <div><span className="font-icomoon icon icon-exit text-xl text-rgba-grey-08"></span></div>
+                <div className="text-white flex action-menu-bar">
+                  <div className="text-rgba-grey-08 hidden lg:block">2022. július 7. 12:58</div>
+                  <div>
+                    <span className="relative inline-block ml-8">
+                      <span className="font-icomoon icon icon-bell text-xl text-rgba-grey-08"></span>
+                      <span className="absolute top-0 right-0 inline-block w-4 h-4 transform translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-gradient-blue-start to-gradient-purple-end rounded-full"></span>
+                    </span>
+
+                  </div>
+                  <div><span className="font-icomoon icon icon-exit text-xl text-rgba-grey-08"></span></div>
+                </div>
+                </div>
               </div>
             </div>
           )}
