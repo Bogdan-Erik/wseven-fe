@@ -411,7 +411,7 @@ export default ({ }: PageProps) => {
                         Továbbá <span className="text-white font-bold">feliratkozásoddal részt veszel egy sorsoláson is</span>, ahol, ha nyersz, az indulás előtt teljesen ingyenesen tesztelheted honlapunkat és applikációnkat. Nincs más dolgod, csak add meg az e-mail címed és értesíteni fogunk a fejleményekről.
                       </div>
                       <div className="mt-[30px] text-left text-rgba-grey-08">
-                        A feliratkozás semmilyen kötelezettséggel nem jár és harmadik félnek nem szolgáltatjuk ki az adataidat.
+                        A feliratkozás semmilyen kötelezettséggel nem jár és harmadik félnek nem szolgáltatjuk ki az adataidat. A feliratkozással elfogadod adatvédelmi szabályzatunkat, melyet oldalunk alján elolvashatsz.
                       </div>
 
 
