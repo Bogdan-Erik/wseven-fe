@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, IconBadge, Icon, Title, FunctionBox, Input, Modal } from '../../components';
+import { Button, Icon, Title, FunctionBox, Input, Modal, CookieConsent } from '../../components';
 import './index.scss';
 import * as Yup from 'yup';
 import FootballerOne from './../../assets/images/landing/footballer-left.png';
@@ -10,10 +10,7 @@ import FootballerBg from './../../assets/images/landing/footballer-bg.png';
 import SubBg from './../../assets/images/landing/subscribe.png';
 import Circle from './../../assets/images/landing/circle.png';
 import Cross from './../../assets/images/landing/cross.png';
-import HeaderCover from './../../assets/images/landing/header.png';
 import smallHeaderCover from './../../assets/images/landing/header.png';
-import mediumHeaderCover from './../../assets/images/landing/header-large.png';
-import largeHeaderCover from './../../assets/images/landing/header-large.png';
 import smHeaderCover from './../../assets/images/landing/header-sm.png';
 
 import Macbook from './../../assets/images/landing/macbook.png';
@@ -32,6 +29,9 @@ import ligue1 from './../../assets/images/leagues/ligue1.png';
 import nba from './../../assets/images/leagues/nba.png';
 import nfl from './../../assets/images/leagues/nfl.png';
 import f1 from './../../assets/images/leagues/f1.png';
+
+import iosBtn from './../../assets/images/apple-btn.png';
+import androidBtn from './../../assets/images/google-btn.png';
 
 
 import useWindowDimensions from './../../hooks/useWindowDimensions';
@@ -55,6 +55,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import { Formik, getIn } from 'formik';
+import { useCookies } from 'react-cookie';
 
 export interface PageProps {
 
@@ -62,6 +63,7 @@ export interface PageProps {
 
 export default ({ }: PageProps) => {
   const { height, width } = useWindowDimensions();
+  const [cookies] = useCookies(['cookie_consent']);
 
 
   const [offset, setOffset] = useState(0);
@@ -123,7 +125,6 @@ export default ({ }: PageProps) => {
 
   return (
     <>
-
       <div className="block fixed z-[101] bottom-0 left-0 w-full h-[45px] bg-rgba-grey-dark-08 text-center md:hidden uppercase text-white leading-[44px] tracking-[0.05em] backdrop-blur-[6px] font-bold"><Link activeClass="active" className="subscribe" to="subscribe" spy={true} smooth={true} duration={500} >feliratkozom</Link></div>
       <motion.div className="hidden md:block" style={{ scale: offsetTransform === 0 ? 1 : offsetTransform, opacity: 2 - offsetTransform }}><span><img srcSet={smallHeaderCover} src={smallHeaderCover} className="header-img" /></span></motion.div>
       <motion.div className="block md:hidden relative bottom-[-300px]" style={{ scale: offsetTransform === 0 ? 1 : offsetTransform, opacity: 2 - offsetTransform }}><span><img src={smHeaderCover} className="header-img" /></span></motion.div>
@@ -361,8 +362,14 @@ export default ({ }: PageProps) => {
                     <Title
                       title={(<div className="text-center lg:text-left text-rgba-grey-08"><span className="font-bold text-white">Minden platformon</span> maximális élményben lesz részed</div>)}
                     ></Title>
+                    <div className="mt-[30px] text-lg  lg:text-xl">
+                      Asztali gép vagy mobiltelefon? Szolgáltatásunkat minden készüléken maximálisan kiélvezheted. Használd kényelmesen laptopról, asztali gépről, vagy töltsd le mobil applikációnkat IOS, vagy Android készülékre.
+                    </div>
                     <div className="mt-[30px] text-center lg:text-left">
-                      <Link activeClass="active" className="subscribe" to="subscribe" spy={true} smooth={true} duration={500} ><Button size={"large"} primary={true}>Érdekel</Button></Link>
+                      <div className="flex justify-center md:justify-start">
+                        <div className="mr-[24px]"><img src={iosBtn} /></div>
+                        <div><img src={androidBtn} /></div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -477,6 +484,9 @@ export default ({ }: PageProps) => {
           </div>
           {/* Subscribe section */}
         </div >
+        {!cookies?.cookie_consent && (
+          <CookieConsent />
+        )}
       </div >
       <AnimatePresence
         // Disable any initial animations on children that

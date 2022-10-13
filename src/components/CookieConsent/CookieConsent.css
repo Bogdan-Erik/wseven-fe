@@ -1,0 +1,6 @@
+.cookie-consent {
+  background: linear-gradient(103.48deg, rgba(0, 0, 18, 0.7) 0%, rgba(0, 0, 18, 0.4) 100%);
+  backdrop-filter: blur(15px);
+  border-radius: 6px;
+  border: 1px solid rgb(255 255 255 / 30%);
+}

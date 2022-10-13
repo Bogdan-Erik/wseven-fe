@@ -8,17 +8,19 @@ import Landing from './pages/Landing';
 import PageLayout from './layouts/Landing';
 import store from './redux/store'
 import { Provider } from 'react-redux'
+import { CookiesProvider } from 'react-cookie';
 
 function App() {
   return (
-    <Provider store={store}>
-      <PageLayout>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-        </Routes >
-      </PageLayout>
-    </Provider>
-
+    <CookiesProvider>
+      <Provider store={store}>
+        <PageLayout>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+          </Routes >
+        </PageLayout>
+      </Provider>
+    </CookiesProvider>
   )
 }
 

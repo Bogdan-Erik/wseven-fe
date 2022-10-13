@@ -10,4 +10,5 @@ export { Icon } from './Icon'
 export { Title } from './Title'
 export { FunctionBox } from './FunctionBox'
 export { Modal } from './Modal'
+export { CookieConsent } from './CookieConsent'
 /* -- component: insert above here -- */
