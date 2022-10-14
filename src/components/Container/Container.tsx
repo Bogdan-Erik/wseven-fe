@@ -12,7 +12,7 @@ export const Container = ({
   className,
 }: ContainerProps): JSX.Element => {
   const classes = twMerge(`
-  3xl:px-7.5 py-5 bg-transparent rounded-[0.625rem]
+  3xl:px-7.5 py-5 bg-transparent rounded-[0.625rem] px-[20px] md:px-[40px]
   ${className}
 `)
 
