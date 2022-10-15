@@ -22,7 +22,7 @@ export default ({ children }: LayoutProps) => {
         <div className="hidden md:block w-[200px] lg:w-[320px]">
           <SideMenuBar />
         </div>
-        <main className="relative sm:flex-2 pb-footerHeight flex flex-col sm:w-[300px] px-[5px] sm:px-0 w-full">
+        <main className="relative sm:flex-2 pb-footerHeight flex flex-col sm:w-[300px] sm:px-0 w-full">
           <Header variant={'secondary'} />
           <MobileMenuBar visible={showMenu}  />
           <div>
