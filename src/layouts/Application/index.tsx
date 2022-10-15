@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router';
 import { Button, Footer, MobileMenuBar, SideMenuBar } from '../../components';
 import { Header } from './../../components/Header';
 import './index.scss';
@@ -9,6 +10,8 @@ export interface LayoutProps {
 
 export default ({ children }: LayoutProps) => {
   const [showMenu, setShowMenu] = useState();
+  const location = useLocation();
+
   return (
     <>
       <div className="text-white flex bg">
@@ -19,7 +22,6 @@ export default ({ children }: LayoutProps) => {
           <Header variant={'secondary'} />
           <MobileMenuBar visible={showMenu}  />
           <div>
-            <div className="md:hidden"><Button primary customClasses="w-full" onClick={() => setShowMenu(true)}> Menü mutatása</Button></div>
             {children}
           </div>
         </main>

@@ -1,4 +1,27 @@
 .mobile-menu-bg {
   backdrop-filter: blur(5px);
-border-radius: 10px 10px 0px 0px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.mobile-bottom-menu-bar {
+
+  @apply  md:hidden bg-rgba-grey-dark-08 border-[1px] border-rgba-grey-01 fixed bottom-[0px] left-0 h-[60px] w-full;
+  backdrop-filter: blur(3px);
+}
+
+.mobile-bottom-menu-bar .active {
+  @apply text-white;
+  background: linear-gradient(123.16deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+  backdrop-filter: blur(9.8px);
+}
+
+
+.gradient-icon {
+  background: -webkit-linear-gradient(309deg, #22C2CC 19.79%, #C900FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.mobile-bottom-menu-bar .active span {
+  @apply  gradient-icon;
 }
