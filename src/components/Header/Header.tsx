@@ -25,7 +25,7 @@ export const Header = ({ variant = 'primary', user }: HeaderProps): JSX.Element 
     }
   }, [menuOpen]);
 
-  const headerclass = twMerge(`relative z-[100] ${variant === 'secondary' ? 'bg-rgba-grey-dark-09 md:bg-transparent' : ''}`)
+  const headerclass = twMerge(`relative z-[100] ${variant === 'secondary' ? '' : ''}`)
   return (
     <header className={headerclass}>
       <div className={"wrapper font-poppins" + (variant === "primary" ? ' primary-wrapper' : ' secondary-wrapper bg-transparent')}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './MobileMenuBar.css';
 import { Menu } from './../SideMenuBar/Menu';
 import { twMerge } from 'tailwind-merge';
@@ -46,6 +46,17 @@ const dropIn = {
 export const MobileMenuBar = ({ visible }: MobileMenuBarProps): JSX.Element => {
   const [showMenu, setShowMenu] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    // 👇 add class to body element
+    if (showMenu) {
+      document.getElementsByTagName('header')[0].classList.add('bg-rgba-grey-dark-09');
+
+    } else {
+      document.getElementsByTagName('header')[0].classList.remove('bg-rgba-grey-dark-09');
+
+    }
+  }, [showMenu])
 
   const classNames = twMerge(`
   fixed h-full z-[20] top-[0px] pt-[50px] left-0 w-full px-[30px] md:hidden mobile-menu-b bg-rgba-grey-dark-09 overflow-auto pb-[50px]  ${showMenu ? '' : 'opacity-0'}
