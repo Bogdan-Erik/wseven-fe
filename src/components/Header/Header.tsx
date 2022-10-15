@@ -24,7 +24,7 @@ export const Header = ({ variant = 'primary', user }: HeaderProps): JSX.Element 
     }
   }, [menuOpen]);
   return (
-    <header className="relative z-[1]">
+    <header className="relative z-[100]">
       <div className={"wrapper font-poppins" + (variant === "primary" ? ' primary-wrapper' : ' secondary-wrapper bg-transparent')}>
         <>
           <div className={'' + (variant === "tertiary" ? "flex w-full justify-center" : (variant === 'secondary' ? (" secondary-menu ml-[20px]") : ''))}>

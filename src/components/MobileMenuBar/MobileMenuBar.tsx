@@ -48,7 +48,7 @@ export const MobileMenuBar = ({ visible }: MobileMenuBarProps): JSX.Element => {
   const location = useLocation();
 
   const classNames = twMerge(`
-  fixed h-full z-[20] top-[50px] left-0 w-full px-[30px] md:hidden mobile-menu-b bg-rgba-grey-dark-09  ${showMenu ? '' : 'opacity-0'}
+  fixed h-full z-[20] top-[0px] pt-[50px] left-0 w-full px-[30px] md:hidden mobile-menu-b bg-rgba-grey-dark-09 overflow-auto pb-[50px]  ${showMenu ? '' : 'opacity-0'}
   `)
   return (
     <div>
