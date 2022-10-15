@@ -3,6 +3,7 @@ import './Header.css';
 import logo from './../../assets/images/logo.svg';
 import { Button } from '../Button';
 import autoAnimate from '@formkit/auto-animate'
+import { twMerge } from 'tailwind-merge';
 
 type User = {
   name: string;
@@ -23,15 +24,17 @@ export const Header = ({ variant = 'primary', user }: HeaderProps): JSX.Element 
       // span.className.add;
     }
   }, [menuOpen]);
+
+  const headerclass = twMerge(`relative z-[100] ${variant === 'secondary' ? 'bg-rgba-grey-dark-09 md:bg-transparent' : ''}`)
   return (
-    <header className="relative z-[100]">
+    <header className={headerclass}>
       <div className={"wrapper font-poppins" + (variant === "primary" ? ' primary-wrapper' : ' secondary-wrapper bg-transparent')}>
         <>
           <div className={'' + (variant === "tertiary" ? "flex w-full justify-center" : (variant === 'secondary' ? (" secondary-menu ml-[20px]") : ''))}>
             <img src={logo} style={{ height: '30px' }} />
           </div>
           {variant === "secondary" && (
-            <div className="w-full md:border-b-2 flex h-full md:border-b-[1px] md:border-b-rgba-grey-01 pl-[40px] ">
+            <div className="w-full md:border-b-2 flex h-full md:border-b-[1px] md:border-b-rgba-grey-01 pl-[40px] bg-rgba-grey-dark-03 ">
               <div className="container mx-auto ">
                 <div className="w-full  flex h-full ">
                 <div className="text-white  menu-bar">
