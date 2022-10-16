@@ -11,4 +11,7 @@ export { Title } from './Title'
 export { FunctionBox } from './FunctionBox'
 export { Modal } from './Modal'
 export { CookieConsent } from './CookieConsent'
+export { Container } from './Container'
+export { SideMenuBar } from './SideMenuBar'
+export { MobileMenuBar } from './MobileMenuBar'
 /* -- component: insert above here -- */

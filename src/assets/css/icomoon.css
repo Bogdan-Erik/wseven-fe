@@ -25,6 +25,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.icon-hamburger:before {
+  content: "\e918";
+}
 .icon-store:before {
   content: "\e917";
 }

@@ -67,6 +67,11 @@
   @apply mr-0;	
 }
 
+
+.secondary-wrapper .menu-bar > div:first-child {
+  @apply ml-0;	
+}
+
 .secondary-wrapper .menu-bar > div {
   @apply text-rgba-grey ml-10 flex h-full items-center border-b-2 border-transparent cursor-pointer relative font-medium;	
 }
