@@ -14,4 +14,6 @@ export { CookieConsent } from './CookieConsent'
 export { Container } from './Container'
 export { SideMenuBar } from './SideMenuBar'
 export { MobileMenuBar } from './MobileMenuBar'
+export { StatisticsChart } from './StatisticsChart'
+export { CountdownTimer } from './CountdownTimer'
 /* -- component: insert above here -- */

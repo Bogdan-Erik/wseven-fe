@@ -1,0 +1,60 @@
+@media only screen and (max-width: 1920px) {
+  .analyses-container {
+    max-width: 100% !important;
+  }
+}
+.analyses {
+  .header-bg {
+    background: url('./../../assets/images/analyses/fade.jpg?webp');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: auto;
+    @apply max-h-[650px] w-full;
+
+    .smoke {
+      background: url('./../../assets/images/analyses/smoke.png?webp');
+      background-size: contain;
+      background-repeat: no-repeat;
+      height: auto;
+      @apply h-[643px] w-full overflow-hidden;
+
+      video {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        opacity: 0.2;
+      }
+    }
+
+    .title {
+      @apply text-sm font-semibold;
+    }
+
+    .missing {
+      .missing-item {
+        @apply flex flex-row mb-[10px];
+        .mark {
+        }
+        &:last-child {
+          @apply mb-[0px];
+        }
+        
+      }
+    }
+  }
+
+  .center-content {
+    @apply flex absolute bottom-0 w-full;
+    .left-side {
+      @apply flex-2 justify-end flex opacity-0;
+    }
+    .center-side {
+      @apply flex-1 justify-center flex relative flex-col;
+
+    }
+    .right-side {
+      @apply flex-2 justify-start flex opacity-0;
+
+    }
+  }
+}
