@@ -16,7 +16,7 @@ export const Footer = ({ }: FooterProps): JSX.Element => {
         </div>
         <div className="flex-1 justify-center flex flex-col text-center md:flex-row md:justify-end order-2 md:order-3">
           {/*div className="mb-[10px] md:mr-16 md:mb-[0]">Impresszum</div>*/}
-          <div className="mb-[10px] md:mb-[0]">Adatkezelési tájékoztató</div>
+          <a target="_blank" href='https://w7tips.fra1.digitaloceanspaces.com/docs/adatvedelem.pdf'><div className="mb-[10px] md:mb-[0]">Adatkezelési tájékoztató</div></a>
         </div>
       </div>
     </div>
