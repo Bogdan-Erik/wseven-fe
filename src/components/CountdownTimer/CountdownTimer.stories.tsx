@@ -15,7 +15,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<CountdownTimerProps> = (args) => <CountdownTimer {...args} />
+const Template: Story<CountdownTimerProps> = (args) => <CountdownTimer targetDate={''} {...args} />
 
 export const Standard = Template.bind({})
 Standard.args = {

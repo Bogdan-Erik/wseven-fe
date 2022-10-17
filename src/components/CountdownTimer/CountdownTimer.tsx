@@ -42,9 +42,9 @@ const DateTimeDisplay = ({ value, type, isDanger } : {value: string, type: strin
 };
 
 
-export const CountdownTimer = ({ targetDate }: {targetDate: string}) => {
+export const CountdownTimer = ({ targetDate }: {targetDate: any}) => {
   const [days, hours, minutes, seconds] = useCountdown(targetDate);
-
+// @ts-ignore 
   if (days + hours + minutes + seconds <= 0) {
     return <ExpiredNotice />;
   } else {
