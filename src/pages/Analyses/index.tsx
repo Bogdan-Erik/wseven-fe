@@ -129,29 +129,7 @@ export default ({ }: PageProps) => {
                 </div>
               </div>
             </motion.div>
-            <div className="center-content">
-              {/*<motion.div animate={{ opacity: 1 }} transition={{ delay: 1 }} className="left-side">
-                <img src={'https://w7tips.fra1.digitaloceanspaces.com/images/players/salah.png'} />
-              </motion.div>
-              <motion.div  animate={{ opacity: 1 }} transition={{ delay: 3 }} className="center-side  opacity-0">
-                <div className="flex-1 justify-start self-center">
-                  <img src={"https://w7tips.fra1.digitaloceanspaces.com/images/leagues/cl.png"} />
-                </div>
-                <div className="flex-1 flex flex-col items-center">
-                  <div className="text-sm mb-[10px]">2022. május 28. <strong>21:00</strong></div>
-                  <div className="w-[340px]">
-                    <CountdownTimer targetDate={dateTimeAfterThreeDays} />
-                  </div>
-                </div>
-                <div className="flex-1 flex flex-col items-center justify-end">
-                  <div className="text-[20px] font-[500]">20 °C </div>
-                  <div className="text-sm font-semibold mb-[50px]">Liverpool - Anfield</div>
-                </div>
-              </motion.div>
-              <motion.div animate={{ opacity: 1 }} transition={{ delay: 2 }} className="right-side">
-                <img src={'https://w7tips.fra1.digitaloceanspaces.com/images/players/benzema.png'} />
-              </motion.div>*/}
-            </div>
+
             <motion.div animate={{ opacity: 1 }} transition={{ delay: 2 }} className="sidebar right-side  right-[30px] top-0 opacity-0">
               <div className="holder-space-top holder-space text-right">
                 <span className="title">Forma</span>
@@ -248,7 +226,7 @@ export default ({ }: PageProps) => {
                     <CountdownTimer targetDate={dateTimeAfterThreeDays} />
                   </div>
                 </div>
-               
+
               </motion.div>
             </div>
             <div className="flex h-[100%]">
@@ -284,6 +262,116 @@ export default ({ }: PageProps) => {
             <div className="text-xl md:text-2xl mt-[15px] text-right">Real Madrid</div>
           </div>
         </div>
+
+        <div className="flex xl:hidden w-full   px-[15px]">
+          <motion.div animate={{ opacity: 1 }} transition={{ delay: 0 }} className="sidebar-mobile left-side  left-[30px] top-0 opacity-0 flex-1" >
+            <div className="holder-space-top holder-space">
+              <span className="title">Forma</span>
+              <StatisticsChart datas={homeDatas} />
+
+            </div>
+            <div className="holder-space">
+              <span className="title">Előző meccs</span>
+              <div className="flex mt-[5px]">
+                <div className="mr-[10px]"><img src={'https://w7tips.fra1.digitaloceanspaces.com/images/teams/mu.png'} /></div>
+                <div className="self-center text-xs">Győzelem (2-1)</div>
+              </div>
+            </div>
+            <div className="holder-space">
+              <span className="title">Liga pozíció</span>
+              <div className="flex flex-row  mt-[5px]">
+                <div className="text-[32px] font-semibold mr-[4px]">7.</div>
+                <div className="flex flex-col justify-center">
+                  <div className="text-xs">hely</div>
+                  <div className="text-xs text-rgba-grey">(34 pont)</div>
+                </div>
+              </div>
+            </div>
+            <div className="holder-space">
+              <span className="title">Hiányzók</span>
+              <div className="missing mt-[5px]">
+                <div className="missing-item">
+                  <div className="mr-[8px]"><div className="mark"><img src={'https://w7tips.fra1.digitaloceanspaces.com/images/missing/injured.png'} width="20" height="20" /></div></div>
+                  <div>Roberto Firmino</div>
+                </div>
+                <div className="missing-item">
+                  <div className="mr-[8px]"><div className="mark"><img src={'https://w7tips.fra1.digitaloceanspaces.com/images/missing/injured2.png'} /></div></div>
+                  <div>Virgil van Dijk</div>
+                </div>
+                <div className="missing-item">
+                  <div className="mr-[8px]"><div className="mark"><img src={'https://w7tips.fra1.digitaloceanspaces.com/images/missing/red.png'} /></div></div>
+                  <div>Jordan Henderson</div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div animate={{ opacity: 1 }} transition={{ delay: 0 }} className="sidebar-mobile right-side  right-[30px] top-0 opacity-0 flex-1">
+            <div className="holder-space-top holder-space text-right">
+              <span className="title">Forma</span>
+              <StatisticsChart datas={awayDatas} customHolderClass={'ml-auto'} />
+
+            </div>
+            <div className="holder-space text-right">
+              <span className="title">Előző meccs</span>
+              <div className="flex mt-[5px]">
+                <div className="self-center text-xs ml-auto mr-[10px]">Vereség (1-4)</div>
+                <div className=" flex justify-end"><img src={'https://w7tips.fra1.digitaloceanspaces.com/images/teams/mu.png'} /></div>
+              </div>
+            </div>
+            <div className="holder-space text-right">
+              <span className="title">Liga pozíció</span>
+              <div className="flex flex-row  mt-[5px] justify-end">
+                <div className="text-[32px] font-semibold mr-[4px]">3.</div>
+                <div className="flex flex-col justify-center">
+                  <div className="text-xs text-left">hely</div>
+                  <div className="text-xs text-left text-rgba-grey">(34 pont)</div>
+                </div>
+              </div>
+            </div>
+            <div className="holder-space text-right">
+              <span className="title">Hiányzók</span>
+              <div className="missing mt-[5px]">
+                <div className="missing-item">
+                  <div className="text-end ml-auto mr-[8px]">Eden Hazard</div>
+                  <div><div className="mark"><img src={'https://w7tips.fra1.digitaloceanspaces.com/images/missing/injured.png'} width="20" height="20" /></div></div>
+                </div>
+                <div className="missing-item">
+                  <div className="text-end ml-auto mr-[8px]">Rodrygo Goes</div>
+                  <div className="flex justify-end"><div className="mark"><img src={'https://w7tips.fra1.digitaloceanspaces.com/images/missing/injured2.png'} /></div></div>
+                </div>
+                <div className="missing-item">
+                  <div className="text-end ml-auto mr-[8px]">Lucas Vázquez</div>
+                  <div><div className="mark"><img src={'https://w7tips.fra1.digitaloceanspaces.com/images/missing/red.png'} /></div></div>
+                </div>
+                <div className="missing-item">
+                  <div className="text-end ml-auto mr-[8px]">Nacho Fernández</div>
+                  <div><div className="mark"><img src={'https://w7tips.fra1.digitaloceanspaces.com/images/missing/red.png'} /></div></div>
+                </div>
+                <div className="missing-item">
+                  <div className="text-end ml-auto mr-[8px]">Nacho Fernández</div>
+                  <div><div className="mark"><img src={'https://w7tips.fra1.digitaloceanspaces.com/images/missing/red.png'} /></div></div>
+                </div>
+                <div className="missing-item">
+                  <div className="text-end ml-auto mr-[8px]">Nacho Fernández</div>
+                  <div><div className="mark"><img src={'https://w7tips.fra1.digitaloceanspaces.com/images/missing/red.png'} /></div></div>
+                </div>
+                <div className="missing-item">
+                  <div className="text-end ml-auto mr-[8px]">Nacho Fernández</div>
+                  <div><div className="mark"><img src={'https://w7tips.fra1.digitaloceanspaces.com/images/missing/red.png'} /></div></div>
+                </div>
+              </div>
+            </div>
+
+          </motion.div>
+        </div>
+        <div className="flex xl:hidden ">
+            <div className="flex-1 flex flex-col items-center justify-end">
+              <div className="text-[20px] font-[500]">20 °C </div>
+              <div className="text-sm font-semibold mb-[50px]">Liverpool - Anfield</div>
+            </div>
+        </div>
+        
         <div className="analyses-block">
           <div className="title">Elemzés</div>
           <div className="content text-[16px]">

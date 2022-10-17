@@ -32,19 +32,9 @@
       @apply text-sm font-semibold;
     }
 
-    .missing {
-      .missing-item {
-        @apply flex flex-row mb-[10px];
-        .mark {
-        }
-        &:last-child {
-          @apply mb-[0px];
-        }
-        
-      }
-    }
+   
 
-    .sidebar {
+    .sidebar, .sidebar-mobile {
       flex: 1;
     }
 
@@ -55,8 +45,20 @@
     .mobile-center-content {
       display: none;
     }
+
   }
 
+  .missing {
+    .missing-item {
+      @apply flex flex-row mb-[10px];
+      .mark {
+      }
+      &:last-child {
+        @apply mb-[0px];
+      }
+      
+    }
+  }
   .analyses-block {
     @apply max-w-[1000px] ml-auto mr-auto mt-[60px] px-[15px];
     .title {
