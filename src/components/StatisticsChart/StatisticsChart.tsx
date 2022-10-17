@@ -10,11 +10,12 @@ enum ResultTypes {
 export interface StatisticsChartDatas {
   type: ResultTypes | string,
   score: number,
-  isLast?: boolean
+  isLast?: boolean,
 }
 
 export interface StatisticsChartProps {
-  datas: StatisticsChartDatas[]
+  datas: StatisticsChartDatas[],
+  customHolderClass?: string
 }
 
 
@@ -31,9 +32,10 @@ const Element = ({ type, score, isLast }: StatisticsChartDatas) => {
 }
 
 
-export const StatisticsChart = ({ datas = [] }: StatisticsChartProps): JSX.Element => {
+export const StatisticsChart = ({ datas = [], customHolderClass }: StatisticsChartProps): JSX.Element => {
+  const customClass = twMerge(`w-[138px]  h-[56px] ${customHolderClass ?? ''}`)
   return (
-    <div className="w-auto  h-[56px]">
+    <div className={customClass}>
       <div className="holder h-[28px] flex flex-row justify-center items-center relative border-b-[1px] border-rgba-grey">
         {datas.map((item: StatisticsChartDatas, key: number) => {
           return <Element type={item.type} score={item.score} isLast={key === (datas.length - 1)} />
