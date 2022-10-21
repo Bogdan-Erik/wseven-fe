@@ -153,7 +153,7 @@ export const AnalysesHeader = ({
 
   return (
     <div>
-      <div className="header-bg relative" style={{ background: `url(${background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
+      <div className="header-bg relative" style={{ background: `url(${background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition:'center' }}>
         <div className="smoke relative flex px-[30px] py-[30px]">
           <video src="https://w7tips.fra1.digitaloceanspaces.com/videos/smokebg.mp4" playsInline loop autoPlay muted></video>
           <motion.div animate={{ opacity: 1 }} transition={{ delay: 1}} className="sidebar left-side z-[10]  left-[30px] top-0 opacity-0" >
