@@ -383,7 +383,7 @@ export const AnalysesHeader = ({
                   awayObject?.missings?.map((item: MissingsProps) => (
                     <div className="missing-item">
                       <div className="text-end ml-auto mr-[8px]">{item.name}</div>
-                      <div className="mr-[8px]"><div className="mark"><img src={`https://w7tips.fra1.digitaloceanspaces.com/images/missing/${item.type}.png`} width="20" height="20" /></div></div>
+                      <div><div className="mark"><img src={`https://w7tips.fra1.digitaloceanspaces.com/images/missing/${item.type}.png`} width="20" height="20" /></div></div>
                     </div>
                   ))
                 }
