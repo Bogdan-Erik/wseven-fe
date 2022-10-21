@@ -16,4 +16,8 @@ export { SideMenuBar } from './SideMenuBar'
 export { MobileMenuBar } from './MobileMenuBar'
 export { StatisticsChart } from './StatisticsChart'
 export { CountdownTimer } from './CountdownTimer'
+export { SmallTitle } from './SmallTitle'
+export { BetRow } from './BetComponents/BetRow'
+export { OddsItem } from './BetComponents/OddsItem'
+export { AnalysesHeader} from './BetComponents/AnalysesHeader'
 /* -- component: insert above here -- */

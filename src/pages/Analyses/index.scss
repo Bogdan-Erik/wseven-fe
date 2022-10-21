@@ -5,7 +5,6 @@
 }
 .analyses {
   .header-bg {
-    background: url('./../../assets/images/analyses/fade.jpg?webp');
     background-size: cover;
     background-repeat: no-repeat;
     height: auto;
@@ -59,12 +58,9 @@
       
     }
   }
-  .analyses-block {
+  .analyses-block, .bets-block {
     @apply max-w-[1000px] ml-auto mr-auto mt-[60px] px-[15px];
-    .title {
-      @apply text-xl font-[500] mb-[15px];
-    }
-
+   
     .content {
       p {
         margin-bottom: 30px;
@@ -164,8 +160,21 @@
     .center-content {
       display: none;
     }
+
+    .counter-holder {
+      margin-top: 30px !important;
+    }
+    
     .sidebar {
       visibility: hidden;
+    }
+
+    .show-counter .countdown > p {
+      font-size: 24px !important;
+    }
+
+    .show-counter .countdown-holder {
+      margin-top: -15px;
     }
 
     .mobile-center-content {
