@@ -251,11 +251,23 @@ export default ({ }: PageProps) => {
 
               <div className="flex flex-col lg:flex-row mt-6">
                 <div className="mt-[10px] flex-1 flex flex-col justify-center md:mt-[95px]">
+                <FunctionBox
+                    title={'Ingyenes tippek'}
+                    description={'Előbb összegyűjtenél a Premium csomagunkra ingyenes tippekből, vagy tesztelnéd szolgáltatásunkat? Ilyen tippekkel is bőven ellátunk.'}
+                    icon={'task_alt'}
+                    customIconSize={'text-[36px]'}
+                  />
                   <FunctionBox
                     title={'Részletes elemzések'}
                     description={'Profi csapatunk részletesen elemez minden mérközést és pontosan megfogalmazva láthatod mire és miért fogadunk.'}
                     icon={'stat-bordered'}
                   />
+                  <FunctionBox
+                    title={'Élő / Last minute tippek'}
+                    description={'Tippek az utolsó pillanatban fontos információk, vagy élőben a mutatott játék alapján? Naná, hogy ilyen is lesz nálunk.'}
+                    icon={'timer'}
+                    customIconSize={"text-[40px]"}
+                    />
                   <FunctionBox
                     title={'Statisztika'}
                     description={'Személyre szabott statisztikát vezetünk fogadásaidról.'}
