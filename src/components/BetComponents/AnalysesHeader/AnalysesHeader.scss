@@ -1,0 +1,26 @@
+.bet-row {
+  @apply bg-rgba-grey-007 rounded-[6px] p-[16px];
+
+  &__title {
+    @apply flex;
+  }
+
+  &__content {
+    @apply flex flex-col xl:flex-row w-full text-rgba-grey-06;
+
+    .left-side, .right-side {
+      @apply flex;
+    }
+
+    .right-side {
+      @apply order-1 xl:order-2;
+    }
+
+    .left-side {
+      @apply order-2 xl:order-1;
+    }
+    div {
+    }
+
+  }
+}
