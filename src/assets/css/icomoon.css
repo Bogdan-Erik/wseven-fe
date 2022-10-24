@@ -25,7 +25,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.icon-timer:before {
+  content: "\e91c";
+}
+.icon-task_alt:before {
+  content: "\e91d";
+}
 .icon-full_star:before {
   content: "\e91b";
 }
@@ -35,7 +40,6 @@
 .icon-empty_star:before {
   content: "\e91a";
 }
-
 .icon-hamburger:before {
   content: "\e918";
 }
