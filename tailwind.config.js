@@ -39,6 +39,8 @@ module.exports = {
       'rgba-grey': 'rgba(255, 255, 255, 0.6)',
       'rgba-grey-01': 'rgba(255, 255, 255, 0.1)',
       'rgba-grey-02': 'rgba(255, 255, 255, 0.2)',
+      'rgba-grey-06': 'rgba(255, 255, 255, 0.6)',
+      'rgba-grey-007': 'rgba(255, 255, 255, 0.07)',
       'rgba-grey-08': 'rgba(255, 255, 255, 0.8)',
       'rgba-grey-03': 'rgba(0, 0, 18, 0.3)',
       'rgba-grey-dark-03': 'rgba(0, 0, 18, 0.3)',

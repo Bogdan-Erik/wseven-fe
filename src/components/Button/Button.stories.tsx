@@ -1,7 +1,8 @@
 import React from 'react'
-import { Story, Meta } from '@storybook/react/types-6-0'
+//import { Story, Meta } from '@storybook/react/types-6-0'
 import { Button, ButtonProps } from './Button'
 import docs from './Button.docs.mdx'
+import { Story, ComponentMeta } from '@storybook/react';
 
 export default {
   title: 'Forms/Button',
@@ -13,7 +14,7 @@ export default {
       default: 'white',
     },*/
   },
-} as Meta
+} as  ComponentMeta<typeof Button>;
 
 const Template: Story<ButtonProps> = (args) => <Button {...args} />
 
