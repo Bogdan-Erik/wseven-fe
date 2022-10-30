@@ -22,4 +22,5 @@ export { OddsItem } from './BetComponents/OddsItem'
 export { AnalysesHeader} from './BetComponents/AnalysesHeader'
 export { BankItem } from './BankItem'
 export { TransactionRow } from './TransactionRow'
+export { BlackBox } from './BlackBox'
 /* -- component: insert above here -- */
