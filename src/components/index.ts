@@ -20,4 +20,6 @@ export { SmallTitle } from './SmallTitle'
 export { BetRow } from './BetComponents/BetRow'
 export { OddsItem } from './BetComponents/OddsItem'
 export { AnalysesHeader} from './BetComponents/AnalysesHeader'
+export { BankItem } from './BankItem'
+export { TransactionRow } from './TransactionRow'
 /* -- component: insert above here -- */
