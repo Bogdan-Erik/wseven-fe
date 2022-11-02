@@ -23,4 +23,6 @@ export { AnalysesHeader} from './BetComponents/AnalysesHeader'
 export { BankItem } from './BankItem'
 export { TransactionRow } from './TransactionRow'
 export { BlackBox } from './BlackBox'
+export { PageTitle } from './PageTitle'
+export { SmallItemBox } from './Statistics'
 /* -- component: insert above here -- */
