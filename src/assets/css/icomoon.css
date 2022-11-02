@@ -31,6 +31,28 @@
 .icon-task_alt:before {
   content: "\e91d";
 }
+.icon-schedule:before {
+  content: "\e91e";
+}
+.icon-expand:before {
+  content: "\e91f";
+}
+.icon-download:before {
+  content: "\e920";
+}
+.icon-help:before {
+  content: "\e921";
+}
+.icon-info:before {
+  content: "\e922";
+}
+.icon-arrow_down:before {
+  content: "\e923";
+}
+.icon-arrow_up:before {
+  content: "\e924";
+}
+
 .icon-full_star:before {
   content: "\e91b";
 }
