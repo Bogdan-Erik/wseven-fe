@@ -49,7 +49,7 @@ const colors = [
 const font = new FontFace(
   "icomoon",
   // pass the url to the file in CSS url() notation
-  "url(http://localhost:3001/src/assets/fonts/icomoon/icomoon.woff)"
+  "url(https://dev-beta.w7tips.com/src/assets/fonts/icomoon/icomoon.woff)"
 );
 
 // Add to the document.fonts (FontFaceSet)
