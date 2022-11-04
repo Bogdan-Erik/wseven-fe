@@ -2,7 +2,7 @@
 import { linearGradientDef } from '@nivo/core';
 import { ResponsiveLine } from '@nivo/line'
 import React, { useEffect, useState } from 'react';
-import { BlackBox, Container, Icon, PageTitle } from '../../components';
+import { BlackBox, Container, Icon, MatchItem, PageTitle } from '../../components';
 import { format, parseISO } from 'date-fns'
 import huLocale from 'date-fns/locale/hu';
 import { twMerge } from 'tailwind-merge';
@@ -10,6 +10,8 @@ import { SmallItemBox } from '../../components/Statistics/SmallItemBox';
 import { ResponsiveBar } from '@nivo/bar'
 import * as helpers from 'chart.js/helpers';
 import { Chart } from 'chart.js';
+import './index.scss';
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -18,10 +20,12 @@ import {
   Title,
   Tooltip,
   Legend,
+  ArcElement
 } from 'chart.js';
 
 
-import { Bar } from 'react-chartjs-2';
+import { Bar, Pie } from 'react-chartjs-2';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -29,12 +33,14 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
+  ArcElement
 );
 
 export interface PageProps {
 
 }
-const labels = ['', '', '', '', '', ''];
+const labels = ['LaLiga', 'WTA', 'Champions League', 'Premier League', 'Bundes Liga', 'Serie A'];
+const iconLabels = ['', '', '', '', '', ''];
 const colors = [
   'red',
   'orange',
@@ -83,11 +89,28 @@ function createGradientBorder(ctx: CanvasRenderingContext2D, area: ChartArea) {
   return gradient;
 }
 
+function createGradientRadial(ctx: CanvasRenderingContext2D, area: ChartArea, index) {
+
+
+  const colorStart = index === 1 ? 'rgba(68, 135, 207, 0.5)' : 'rgba(255, 255, 255, 0.2)';
+  const colorMid = index === 1 ? 'rgba(158, 67, 238, 0.5)' : 'rgba(255, 255, 255, 0.2)';
+  const colorEnd = index === 1 ? 'rgba(158, 67, 238, 0.5)' : 'rgba(255, 255, 255, 0.2)';
+
+  const gradient = ctx.createLinearGradient(0, area.bottom, 0, area.top);
+
+  gradient.addColorStop(0, colorEnd);
+  gradient.addColorStop(0.5, colorMid);
+  gradient.addColorStop(1, colorStart);
+
+  return gradient;
+}
+
+
 export const dataSet = {
   labels,
   datasets: [
     {
-      label: 'Dataset 1',
+      label: 'Fogadások',
       data: [22, 20, 17, 13, 9, 5],
       backgroundColor: function (context) {
         const chart = context.chart;
@@ -118,23 +141,8 @@ export const dataSet = {
 
 
 export default ({ }: PageProps) => {
-
-  const parseVirtualBankChart = () => {
-
-  }
-
-  const CustomBarComponent = ({ bar: { x, y, width, height, color } }) => (
-    //<circle cx={x + width / 2} cy={y + height / 2} r={Math.min(width, height) / 2} fill={color} />
-    // <rect x={x} y={y} width={width} height={height} fill={color} rx="6" />
-    <path d={`M${x},${y}
-       v-${height} 
-       q${width / 2}, 0 ${width / 2}, ${width / 2},
-       h${width}
-       q0,${width / 2} -${width / 2}, ${width / 2}
-       v${height} 
-       z
-       `} fill={color} x={x} y={y} />
-  )
+  const { height, width } = useWindowDimensions();
+console.log(width)
 
   const leagueChart = [
     {
@@ -265,15 +273,47 @@ export default ({ }: PageProps) => {
   ]
 
 
+  const pieData = {
+    labels: ['Sikertelen részvétel', 'Sikeres részvétel'],
+    datasets: [
+      {
+        label: '# of Votes',
+        data: [8, 19],
+        backgroundColor: function (context) {
+          const chart = context.chart;
+          const { ctx, chartArea } = chart;
+
+          if (!chartArea) {
+            // This case happens on initial chart load
+            return;
+          }
+          return createGradientRadial(ctx, chartArea, context.dataIndex);
+        },
+        borderColor: function (context) {
+          const chart = context.chart;
+          const { ctx, chartArea } = chart;
+
+          if (!chartArea) {
+            // This case happens on initial chart load
+            return;
+          }
+          return createGradientRadial(ctx, chartArea, context.dataIndex);
+        },
+        borderWidth: 1,
+      },
+    ],
+  };
+
+
   return (
     <>
       <Container className="container 2xl:mx-auto max-w-[100%] 2xl:max-w-screen-2xl 3xl:max-w-screen-3xl mx-auto" padding={true}>
         <PageTitle title="Statisztikák" icon="donut" />
-        <div className="flex gap-[40px] flex-row">
-          <div className="flex-[8]">
+        <div className="grid gap-[40px] grid-cols-1 2xl:grid-cols-12 ">
+          <div className="2xl:col-start-1 2xl:col-span-8 ">
             <BlackBox>
               <div className="text-[16px]"><strong>Virtuális bank</strong>od alakulása az elmúlt 10 napban</div>
-              <div className="h-[400px] w-[100%]">
+              <div className="h-[200px] sm:h-[300px] md:h-[400px] w-[100%]">
                 <ResponsiveLine
                   data={data}
                   enableArea={true}
@@ -289,7 +329,7 @@ export default ({ }: PageProps) => {
                   }}
                   colors="#9c5df299"
 
-                  margin={{ top: 30, right: 30, bottom: 30, left: 100 }}
+                  margin={{ top: 30, right: width < 600 ? 0 : 30, bottom: width < 600 ? 0 : 30, left: width < 600 ? 0 : 100 }}
                   xScale={{ type: 'point' }}
                   yScale={{
                     type: 'linear',
@@ -298,13 +338,13 @@ export default ({ }: PageProps) => {
                   }}
                   axisTop={null}
                   axisRight={null}
-                  axisBottom={{
+                  axisBottom={width < 600 ? null : {
                     tickSize: 5,
                     tickPadding: 15,
                     tickRotation: 0,
                     legendPosition: 'middle'
                   }}
-                  axisLeft={{
+                  axisLeft={width < 600 ? null : {
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
@@ -332,13 +372,13 @@ export default ({ }: PageProps) => {
               </div>
             </BlackBox>
           </div>
-          <div className="flex-[4]">
+          <div className="2xl:col-start-9 2xl:col-span-4 ">
             <BlackBox extraClass="h-full px-0">
               <div className="px-[24px]">
                 <div className="text-[14px] font-[600] text-rgba-grey-06">Aktuális havi profitod/veszteséged</div>
                 <div className="text-white font-[600] text-[40px]">+ 520 400 HUF</div>
               </div>
-              <div className="view-table mt-[8px] max-h-[330px] h-auto overflow-auto px-[24px]">
+              <div className="view-table mt-[8px] max-h-[330px] h-auto overflow-auto px-[24px] scrollable">
                 {profitData?.map((item, key) => {
                   const holderClass = twMerge(`flex flex-row ${key !== profitData.length - 1 ? ' border-rgba-grey-01 border-b-[1px]' : ''} py-[12px]`)
                   return (
@@ -354,87 +394,44 @@ export default ({ }: PageProps) => {
             </BlackBox>
           </div>
         </div>
-        <div className="flex flex-row gap-[40px] my-[40px]">
-          <div className="flex-[2]">
+        <div className="grid gap-[40px] my-[40px] grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 ">
+          <div className="">
             <SmallItemBox value={'72'} title={'megjátszott tipp'} subTitle={'a hónapban'} />
           </div>
-          <div className="flex-[2]">
+          <div className="">
             <SmallItemBox value={'56'} title={'nyertes tipp'} subTitle={'a hónapban'} />
           </div>
-          <div className="flex-[2]">
+          <div className="">
             <SmallItemBox value={'6'} title={'vesztes tipp'} subTitle={'a hónapban'} />
           </div>
-          <div className="flex-[2]">
+          <div className="">
             <SmallItemBox value={'10'} title={'push'} subTitle={'a hónapban'} />
           </div>
-          <div className="flex-[2]">
+          <div className="">
             <SmallItemBox value={'72'} title={'átlag odds'} subTitle={'a hónapban'} />
           </div>
-          <div className="flex-[2]">
+          <div className="">
             <SmallItemBox value={parseInt('17000').toLocaleString('hu-HU')} title={'HUF átlagtét'} subTitle={'a hónapban'} />
           </div>
         </div>
-        <div className="flex flex-col md:flex-row gap-[40px]">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-[40px]">
           <div className="flex-1">
-            <BlackBox>
+            <BlackBox extraClass="h-full">
               <div className="text-[16px] mb-[25px]">Ezekre a ligákra fogadtál</div>
-              <div className="h-[400px] w-auto">
+              <div className="h-[270px] w-auto">
                 <Bar
                   options={{
+                    maintainAspectRatio: false,
                     responsive: true,
                     plugins: {
                       legend: {
                         display: false,
                       },
-                     /* labels: {
-                        render: 'image',
-                        overlap: true,
-                        position: 'outside',
-                        outsidePadding: 4,
-                        fontColor: '#fff',
-                        images: [{
-                          src: 'https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_book_48px-256.png',
-                          height: 25,
-                          width: 25
-                        },
-                        {
-                          src: 'https://cdn3.iconfinder.com/data/icons/glypho-free/64/pen-checkbox-256.png',
-                          height: 25,
-                          width: 25
-                        },
-                        {
-                          src: 'https://cdn1.iconfinder.com/data/icons/jumpicon-basic-ui-glyph-1/32/-_Home-House--256.png',
-                          height: 25,
-                          width: 25
-                        },
-                        {
-                          src: 'https://cdn1.iconfinder.com/data/icons/social-media-vol-3/24/_google_chrome-256.png',
-                          height: 25,
-                          width: 25
-                        },
-                        {
-                          src: 'https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_book_48px-256.png',
-                          height: 25,
-                          width: 25
-                        },
-                        {
-                          src: 'https://cdn3.iconfinder.com/data/icons/glypho-free/64/pen-checkbox-256.png',
-                          height: 25,
-                          width: 25
-                        },
-                        {
-                          src: 'https://cdn1.iconfinder.com/data/icons/jumpicon-basic-ui-glyph-1/32/-_Home-House--256.png',
-                          height: 25,
-                          width: 25
-                        },
-                        {
-                          src: 'https://cdn1.iconfinder.com/data/icons/social-media-vol-3/24/_google_chrome-256.png',
-                          height: 25,
-                          width: 25
-                        },
-                        ]
-                      }*/
+                      tooltip: {
+                        
+                      },
                     },
+
                     scales: {
                       y: {
                         beginAtZero: true,
@@ -451,14 +448,18 @@ export default ({ }: PageProps) => {
                         grid: {
                           color: 'rgba(255, 255, 255, 0.1)',
                           tickColor: '',
-                          tickLength: 20,
                         },
                         ticks: {
                           // font: 'WComic Sans MS"',
-                          color: 'rgba(255, 255, 255, 0.8)',
+                          callback: function(label, index, labels) {
+                            return iconLabels[index];
+                            
+                            // return _label;
+                          },
+                          color: 'rgba(255, 255, 255, 0.6)',
                           font: {
                             family: 'icomoon',
-                            size: 20,
+                            size: width/30 > 30 ? 30 : width/30,
                           }
                         }
                       }
@@ -470,7 +471,65 @@ export default ({ }: PageProps) => {
               </div>
             </BlackBox>
           </div>
-          <div className="flex-1"><BlackBox>sad</BlackBox></div>
+          <div className="flex-1">
+            <BlackBox extraClass="h-full">
+              <div className="flex flex-col h-full md:flex-row xl:flex-row">
+                <div className="flex-1 pt-[24px]">
+                  <div>
+                    <div className="text-rgba-grey-06 font-[600] text-[14px]">Challenge részvétel</div>
+                    <div className="text-white font-[600] text-[24px]">3 részvétel</div>
+                  </div>
+                  <div className="mt-[24px]">
+                    <div className="text-rgba-grey-06 font-[600] text-[14px]">Sikeres challenge</div>
+                    <div className="text-white font-[600] text-[24px]">2 sikeres</div>
+                  </div>
+                  <div className="mt-[24px]">
+                    <div className="text-rgba-grey-06 font-[600] text-[14px]">Challenge profitod</div>
+                    <div className="text-white font-[600] text-[24px]">+ 220 000 HUF</div>
+                  </div>
+                </div>
+                <div className="flex-1  py-[40px] max-h-[300px]">
+                  <Pie
+                    data={pieData}
+                    options={{
+                      maintainAspectRatio: false,
+                      responsive: true,
+                      plugins: {
+                        legend: {
+                          display: false,
+                        },
+                      },
+                    }}
+                  />
+
+                </div>
+              </div>
+            </BlackBox>
+          </div>
+        </div>
+        <div className="mt-[80px] mb-[80px]">
+          <div><PageTitle title='Megjátszott tippjeid' /></div>
+          <div className="mt-[15px] xl:mt-0">
+            <MatchItem balance={'+30 000 HUF'} />
+          </div>
+          <div className="mt-[15px] xl:mt-0">
+            <MatchItem balance={'+30 000 HUF'} isSecondary />
+          </div>
+          <div className="mt-[15px] xl:mt-0">
+            <MatchItem balance={'+30 000 HUF'} />
+          </div>
+          <div className="mt-[15px] xl:mt-0">
+            <MatchItem balance={'+30 000 HUF'} isSecondary/>
+          </div>
+          <div className="mt-[15px] xl:mt-0">
+            <MatchItem balance={'+30 000 HUF'} />
+          </div>
+          <div className="mt-[15px] xl:mt-0">
+            <MatchItem balance={'+30 000 HUF'} isSecondary/>
+          </div>
+          <div className="mt-[15px] xl:mt-0">
+            <MatchItem balance={'+30 000 HUF'} />
+          </div>
         </div>
       </Container>
     </>

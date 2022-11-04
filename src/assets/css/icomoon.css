@@ -25,6 +25,13 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.icon-wta:before {
+  content: "\e926";
+}
+.icon-laliga:before {
+  content: "\e925";
+}
 .icon-timer:before {
   content: "\e91c";
 }

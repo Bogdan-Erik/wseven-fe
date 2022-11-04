@@ -13,7 +13,7 @@ export interface SmallItemBoxProps {
 
 export const SmallItemBox = ({ value, title, subTitle }: SmallItemBoxProps): JSX.Element => {
   return (
-    <BlackBox hoverEffect>
+    <BlackBox hoverEffect extraClass={"h-full"}>
       <div className="text-[48px] font-[600] text-center">{value}</div>
       <div className="font-[600] text-center">{title}</div>
       <div className="text-rgba-grey-06 text-center">{subTitle}</div>

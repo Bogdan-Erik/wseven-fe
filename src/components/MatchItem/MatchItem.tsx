@@ -1,6 +1,7 @@
 import React from 'react'
 import './MatchItem.css';
 import LigaLogo from './../../assets/images/liga_logo.png';
+import { twMerge } from 'tailwind-merge';
 
 export interface MatchItemProps {
   date: string,
@@ -13,6 +14,8 @@ export interface MatchItemProps {
   tippString: string,
   isWinner: boolean,
   winningPrice: string,
+  balance?: string,
+  isSecondary?: boolean,
   onClick?: () => void;
 }
 
@@ -27,10 +30,13 @@ export const MatchItem = ({
   tippString = 'Tipp: Real Madrid győzelem',
   isWinner = true,
   winningPrice = '+10 egység',
+  balance,
+  isSecondary
 }: MatchItemProps): JSX.Element => {
+  const contClass = twMerge(`${isSecondary ? 'bg-rgba-grey-dark-02' : ' bg-eerie-black'} w-full  text-white p-2.5 hidden xl:flex`)
   return (
     <>
-      <div className="w-full bg-eerie-black text-white p-2.5 hidden md:flex">
+      <div className={contClass}>
         <div className="pr-4 flex justify-center flex-col"><img src={LigaLogo} style={{ maxHeight: '42px' }} /></div>
         <div className=" flex flex-col justify-center w-32 md:w-32 ">
           <div className="text-xs  text-white font-semibold">{date}</div>
@@ -51,14 +57,14 @@ export const MatchItem = ({
         </div>
         <div className=" flex flex-col justify-center mx-4">
           <div className="bg-light-green rounded-md px-5 py-[3px] text-xs flex flex-row justify-start items-center">
-            <span className="font-icomoon text-lg text-green icon-success text-sm mr-2"> </span>{isWinner ? 'Nyertes tipp' : 'Vesztes tipp'}: <span className="ml-2 font-semibold">{winningPrice}</span>
+            <span className="font-icomoon text-lg text-green icon-success text-sm mr-2"> </span>{isWinner ? 'Nyertes tipp' : 'Vesztes tipp'}{!balance && (<span className="ml-2 font-semibold">{winningPrice}</span>)}
           </div>
         </div>
-        <div className=" w-10 text-center flex flex-col justify-center text-white"><span className="text-white font-icomoon icon-arrow"> </span></div>
+        <div className="text-center flex flex-col justify-center text-white mr-[20px] ml-[60px]">{!balance ? <span className="text-white font-icomoon icon-arrow"> </span> : <span className="text-[16px] font-[700]">{balance}</span>}</div>
       </div >
 
 
-      <div className="md:hidden">
+      <div className="xl:hidden">
         <div className="w-full grey-linear-gradient rounded-t-md text-white p-2.5 flex flex-col">
           <div className="flex flex-row w-full">
             <div className="flex flex-row w-2/4">
@@ -89,7 +95,7 @@ export const MatchItem = ({
         </div>
         <div className="flex flex-col justify-center">
           <div className={"rounded-b-md text-xs flex flex-row justify-center items-center text-white py-1" + (isWinner ? ' bg-light-green' : ' bg-light-red')}>
-            <span className={"font-icomoon justify-center text-lg icon-success text-sm mr-2" + (isWinner ? ' text-green' : ' text-red')}> </span>{isWinner ? 'Nyertes tipp' : 'Vesztes tipp'}: <span className="ml-2 font-semibold">{winningPrice}</span>
+            <span className={"font-icomoon justify-center text-lg icon-success text-sm mr-2" + (isWinner ? ' text-green' : ' text-red')}> </span>{isWinner ? 'Nyertes tipp' : 'Vesztes tipp'}: <span className="ml-2 font-semibold">{ balance ?? winningPrice}</span>
           </div>
         </div>
       </div>
