@@ -7,11 +7,114 @@ import huLocale from 'date-fns/locale/hu';
 import { twMerge } from 'tailwind-merge';
 import { SmallItemBox } from '../../components/Statistics/SmallItemBox';
 import { ResponsiveBar } from '@nivo/bar'
+import * as helpers from 'chart.js/helpers';
+import { Chart } from 'chart.js';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 
+
+import { Bar } from 'react-chartjs-2';
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+);
 
 export interface PageProps {
 
 }
+const labels = ['', '', '', '', '', ''];
+const colors = [
+  'red',
+  'orange',
+  'yellow',
+  'lime',
+  'green',
+  'teal',
+  'blue',
+  'purple',
+];
+
+const font = new FontFace(
+  "icomoon",
+  // pass the url to the file in CSS url() notation
+  "url(http://localhost:3001/src/assets/fonts/icomoon/icomoon.woff)"
+);
+
+// Add to the document.fonts (FontFaceSet)
+document.fonts.add(font);
+
+function createGradient(ctx: CanvasRenderingContext2D, area: ChartArea) {
+  const colorStart = 'rgba(68, 135, 207, 0.7)';
+  const colorMid = 'rgba(158, 67, 238, 0.7)';
+  const colorEnd = 'rgba(158, 67, 238, 0.7)';
+
+  const gradient = ctx.createLinearGradient(0, area.bottom, 0, area.top);
+
+  gradient.addColorStop(0, colorStart);
+  gradient.addColorStop(0.5, colorMid);
+  gradient.addColorStop(1, colorEnd);
+
+  return gradient;
+}
+
+function createGradientBorder(ctx: CanvasRenderingContext2D, area: ChartArea) {
+  const colorStart = 'rgba(68, 135, 207, 0.5)';
+  const colorMid = 'rgba(158, 67, 238, 0.5)';
+  const colorEnd = 'rgba(158, 67, 238, 0.5)';
+
+  const gradient = ctx.createLinearGradient(0, area.bottom, 0, area.top);
+
+  gradient.addColorStop(0, colorEnd);
+  gradient.addColorStop(0.5, colorMid);
+  gradient.addColorStop(1, colorStart);
+
+  return gradient;
+}
+
+export const dataSet = {
+  labels,
+  datasets: [
+    {
+      label: 'Dataset 1',
+      data: [22, 20, 17, 13, 9, 5],
+      backgroundColor: function (context) {
+        const chart = context.chart;
+        const { ctx, chartArea } = chart;
+
+        if (!chartArea) {
+          // This case happens on initial chart load
+          return;
+        }
+        return createGradient(ctx, chartArea);
+      },
+      borderWidth: 1,
+      borderRadius: 6,
+      barPercentage: 0.5,
+      borderColor: function (context) {
+        const chart = context.chart;
+        const { ctx, chartArea } = chart;
+
+        if (!chartArea) {
+          // This case happens on initial chart load
+          return;
+        }
+        return createGradient(ctx, chartArea);
+      },
+    },
+  ],
+};
+
 
 export default ({ }: PageProps) => {
 
@@ -20,46 +123,46 @@ export default ({ }: PageProps) => {
   }
 
   const CustomBarComponent = ({ bar: { x, y, width, height, color } }) => (
-        //<circle cx={x + width / 2} cy={y + height / 2} r={Math.min(width, height) / 2} fill={color} />
-       // <rect x={x} y={y} width={width} height={height} fill={color} rx="6" />
-       <path d={`M${x},${y}
+    //<circle cx={x + width / 2} cy={y + height / 2} r={Math.min(width, height) / 2} fill={color} />
+    // <rect x={x} y={y} width={width} height={height} fill={color} rx="6" />
+    <path d={`M${x},${y}
        v-${height} 
-       q${width/2}, 0 ${width/2}, ${width/2},
+       q${width / 2}, 0 ${width / 2}, ${width / 2},
        h${width}
-       q0,${width/2} -${width/2}, ${width/2}
+       q0,${width / 2} -${width / 2}, ${width / 2}
        v${height} 
        z
        `} fill={color} x={x} y={y} />
-    )
+  )
 
   const leagueChart = [
     {
-      "country": "LaLiga",
+      "country": "https://w7tips.com/assets/ll.5c9e94f0.png",
       "hot dog": 22,
       "hot dogColor": "hsl(42, 70%, 50%)",
     },
     {
-      "country": "WTA",
+      "country": "https://w7tips.com/assets/wta.2d10be1f.png",
       "hot dog": 20,
       "hot dogColor": "hsl(192, 70%, 50%)",
     },
     {
-      "country": "CL",
+      "country": "https://w7tips.com/assets/cl.768b9360.png",
       "hot dog": 17,
       "hot dogColor": "hsl(197, 70%, 50%)",
     },
     {
-      "country": "PL",
+      "country": "https://w7tips.com/assets/pl.a2c0bea3.png",
       "hot dog": 13,
       "hot dogColor": "hsl(303, 70%, 50%)",
     },
     {
-      "country": "BundesLiga",
+      "country": "https://w7tips.com/assets/bl.6f2b5a25.png",
       "hot dog": 9,
       "hot dogColor": "hsl(247, 70%, 50%)",
     },
     {
-      "country": "Seria A",
+      "country": "https://w7tips.com/assets/seriea.cfcc1f36.png",
       "hot dog": 5,
       "hot dogColor": "hsl(108, 70%, 50%)",
     }
@@ -159,6 +262,8 @@ export default ({ }: PageProps) => {
     },
 
   ]
+
+
   return (
     <>
       <Container className="container 2xl:mx-auto max-w-[100%] 2xl:max-w-screen-2xl 3xl:max-w-screen-3xl mx-auto" padding={true}>
@@ -268,84 +373,99 @@ export default ({ }: PageProps) => {
             <SmallItemBox value={parseInt('17000').toLocaleString('hu-HU')} title={'HUF átlagtét'} subTitle={'a hónapban'} />
           </div>
         </div>
-        <div className="flex gap-[40px]">
+        <div className="flex flex-col md:flex-row gap-[40px]">
           <div className="flex-1">
             <BlackBox>
-            <div className="text-[16px]">Ezekre a ligákra fogadtál</div>
-            <div className="h-[400px] w-[100%]">
-
-              <ResponsiveBar
-                data={leagueChart}
-                keys={[
-                  'hot dog',
-                  'burger',
-                  'sandwich',
-                  'kebab',
-                  'fries',
-                  'donut'
-                ]}
-                indexBy="country"
-                margin={{ top: 30, right: 30, bottom: 30, left: 30 }}
-                padding={0.5}
-                valueScale={{ type: 'linear' }}
-                indexScale={{ type: 'band', round: true }}
-                colors="#9E43EE"
-                theme={{
-                  "textColor": "#cccccc",
-                  "grid": {
-                    "line": {
-                      "stroke": "#ffffff1a",
-                      "strokeWidth": 1
+              <div className="text-[16px] mb-[25px]">Ezekre a ligákra fogadtál</div>
+              <div className="h-[400px] w-auto">
+                <Bar
+                  options={{
+                    responsive: true,
+                    plugins: {
+                      legend: {
+                        display: false,
+                      },
+                     /* labels: {
+                        render: 'image',
+                        overlap: true,
+                        position: 'outside',
+                        outsidePadding: 4,
+                        fontColor: '#fff',
+                        images: [{
+                          src: 'https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_book_48px-256.png',
+                          height: 25,
+                          width: 25
+                        },
+                        {
+                          src: 'https://cdn3.iconfinder.com/data/icons/glypho-free/64/pen-checkbox-256.png',
+                          height: 25,
+                          width: 25
+                        },
+                        {
+                          src: 'https://cdn1.iconfinder.com/data/icons/jumpicon-basic-ui-glyph-1/32/-_Home-House--256.png',
+                          height: 25,
+                          width: 25
+                        },
+                        {
+                          src: 'https://cdn1.iconfinder.com/data/icons/social-media-vol-3/24/_google_chrome-256.png',
+                          height: 25,
+                          width: 25
+                        },
+                        {
+                          src: 'https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_book_48px-256.png',
+                          height: 25,
+                          width: 25
+                        },
+                        {
+                          src: 'https://cdn3.iconfinder.com/data/icons/glypho-free/64/pen-checkbox-256.png',
+                          height: 25,
+                          width: 25
+                        },
+                        {
+                          src: 'https://cdn1.iconfinder.com/data/icons/jumpicon-basic-ui-glyph-1/32/-_Home-House--256.png',
+                          height: 25,
+                          width: 25
+                        },
+                        {
+                          src: 'https://cdn1.iconfinder.com/data/icons/social-media-vol-3/24/_google_chrome-256.png',
+                          height: 25,
+                          width: 25
+                        },
+                        ]
+                      }*/
+                    },
+                    scales: {
+                      y: {
+                        beginAtZero: true,
+                        grid: {
+                          color: 'rgba(255, 255, 255, 0.1)',
+                          tickColor: '',
+                          tickLength: 30,
+                        },
+                        ticks: {
+                          color: 'rgba(255, 255, 255, 0.8)'
+                        }
+                      },
+                      x: {
+                        grid: {
+                          color: 'rgba(255, 255, 255, 0.1)',
+                          tickColor: '',
+                          tickLength: 20,
+                        },
+                        ticks: {
+                          // font: 'WComic Sans MS"',
+                          color: 'rgba(255, 255, 255, 0.8)',
+                          font: {
+                            family: 'icomoon',
+                            size: 40,
+                          }
+                        }
+                      }
                     }
-                  },
-                }}
-               
-                defs={[
-                  linearGradientDef('gradientB', [
-                    { offset: 0, color: 'rgba(158, 67, 238, 0.6)', opacity: 10 },
-                    { offset: 100, color: '#4487CF', opacity: 0},
-                  ]),
-                ]}
-                fill={[{ match: '*', id: 'gradientB' }]}
-                borderRadius={6}
+                  }}
+                  data={dataSet}
+                />
 
-                axisTop={null}
-                axisRight={null}
-                axisBottom={{
-                  tickSize: 5,
-                  tickPadding: 5,
-                  tickRotation: 0,
-                  legend: '',
-                  legendPosition: 'middle',
-                  legendOffset: 32
-                }}
-                axisLeft={{
-                  tickSize: 5,
-                  tickPadding: 5,
-                  tickRotation: 0,
-                  legend: '',
-                  legendPosition: 'middle',
-                  legendOffset: -40
-                }}
-                labelSkipWidth={12}
-                labelSkipHeight={12}
-                labelTextColor={{
-                  from: 'color',
-                  modifiers: [
-                    [
-                      'darker',
-                      1.6
-                    ]
-                  ]
-                }}
-                enableGridX={true}
-
-                role="application"
-                enableLabel={false}
-                ariaLabel="Nivo bar chart demo"
-                barAriaLabel={function (e) { return e.id + ": " + e.formattedValue + " in country: " + e.indexValue }}
-                //barComponent={CustomBarComponent} 
-              />
               </div>
             </BlackBox>
           </div>

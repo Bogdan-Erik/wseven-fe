@@ -21,11 +21,12 @@ import ApplicationLayout from './layouts/Application';
 import store from './redux/store'
 import { Provider } from 'react-redux'
 import { CookiesProvider } from 'react-cookie';
-
+import { ChartProvider } from './providers/ChartProvider'
 
 function App() {
   return (
     <CookiesProvider>
+      <ChartProvider>
       <Provider store={store}>
         <Routes>
           <Route element={<PageLayout><Outlet /></PageLayout>}>
@@ -46,6 +47,7 @@ function App() {
           </Route>
         </Routes >
       </Provider>
+      </ChartProvider>
     </CookiesProvider>
   )
 }
