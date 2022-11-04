@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { linearGradientDef } from '@nivo/core';
 import { ResponsiveLine } from '@nivo/line'
 import React, { useEffect, useState } from 'react';
@@ -457,7 +458,7 @@ export default ({ }: PageProps) => {
                           color: 'rgba(255, 255, 255, 0.8)',
                           font: {
                             family: 'icomoon',
-                            size: 40,
+                            size: 20,
                           }
                         }
                       }
