@@ -25,6 +25,51 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.icon-NBA:before {
+  content: "\e925";
+}
+.icon-NFL:before {
+  content: "\e926";
+}
+.icon-PDC:before {
+  content: "\e927";
+}
+.icon-PL:before {
+  content: "\e928";
+}
+.icon-SA:before {
+  content: "\e929";
+}
+.icon-WTA:before {
+  content: "\e92a";
+}
+.icon-ATP:before {
+  content: "\e92b";
+}
+.icon-BL:before {
+  content: "\e92c";
+}
+.icon-CL:before {
+  content: "\e92d";
+}
+.icon-EL:before {
+  content: "\e92e";
+}
+.icon-F1:before {
+  content: "\e92f";
+}
+.icon-L1:before {
+  content: "\e930";
+}
+.icon-LL:before {
+  content: "\e931";
+}
+.icon-wta:before {
+  content: "\e926";
+}
+.icon-laliga:before {
+  content: "\e925";
+}
 .icon-timer:before {
   content: "\e91c";
 }

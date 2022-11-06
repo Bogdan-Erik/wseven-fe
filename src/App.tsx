@@ -1,3 +1,4 @@
+// @ts-ignore
 import React from 'react';
 import { useState } from 'react'
 import logo from './logo.svg'
@@ -21,7 +22,6 @@ import ApplicationLayout from './layouts/Application';
 import store from './redux/store'
 import { Provider } from 'react-redux'
 import { CookiesProvider } from 'react-cookie';
-
 
 function App() {
   return (
