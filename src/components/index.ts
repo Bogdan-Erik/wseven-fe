@@ -25,4 +25,5 @@ export { TransactionRow } from './TransactionRow'
 export { BlackBox } from './BlackBox'
 export { PageTitle } from './PageTitle'
 export { SmallItemBox } from './Statistics'
+export { ChallengeHeader } from './ChallengeHeader'
 /* -- component: insert above here -- */
