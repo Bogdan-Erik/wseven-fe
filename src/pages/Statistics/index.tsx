@@ -39,8 +39,8 @@ ChartJS.register(
 export interface PageProps {
 
 }
-const labels = ['LaLiga', 'WTA', 'Champions League', 'Premier League', 'Bundes Liga', 'Serie A'];
-const iconLabels = ['', '', '', '', '', ''];
+const labels = ['LaLiga', 'League 1', 'NBA', 'WTA', 'Bundesliga', 'PDC'];
+const iconLabels = ['', '', '', '', '', ''];
 const colors = [
   'red',
   'orange',
@@ -53,9 +53,10 @@ const colors = [
 ];
 
 const font = new FontFace(
-  "icomoon",
+  "league-font",
   // pass the url to the file in CSS url() notation
-  "url(https://dev-beta.w7tips.com/src/assets/fonts/icomoon/icomoon.woff)"
+  // "url(https://dev-beta.w7tips.com/src/assets/fonts/icomoon/icomoon.woff)"
+  "url(https://w7tips.fra1.digitaloceanspaces.com/league-font/icomoon.woff)"
 );
 
 // Add to the document.fonts (FontFaceSet)
@@ -142,7 +143,7 @@ export const dataSet = {
 
 export default ({ }: PageProps) => {
   const { height, width } = useWindowDimensions();
-console.log(width)
+  console.log(width)
 
   const leagueChart = [
     {
@@ -326,6 +327,13 @@ console.log(width)
                         "strokeWidth": 1
                       }
                     },
+                    "tooltip": {
+                      "container": {
+                        "background": "#000000",
+                        "color": "#ffffff",
+                        "fontSize": 12
+                      },
+                    }
                   }}
                   colors="#9c5df299"
 
@@ -360,7 +368,31 @@ console.log(width)
                   pointLabelYOffset={-16}
                   enableCrosshair={false}
                   useMesh={true}
-
+                  enableSlices="x"
+                  sliceTooltip={({ slice }) => {
+                    return (
+                      <div
+                        style={{
+                          background: '#000000',
+                          padding: '4px 8px',
+                          borderRadius: '6px'
+                        }}
+                      >
+                        {slice.points.map(point => (
+                          <div
+                            key={point.id}
+                            style={{
+                              fontSize: '12px'
+                            }}
+                          >
+                            {`${Number(point.data.yFormatted).toLocaleString('hu-HU', {
+                        minimumFractionDigits: 0,
+                      })} HUF`}
+                          </div>
+                        ))}
+                      </div>
+                    )
+                  }}
                   defs={[
                     linearGradientDef('gradientA', [
                       { offset: 0, color: '#9C5DF2', opacity: 60 },
@@ -428,7 +460,7 @@ console.log(width)
                         display: false,
                       },
                       tooltip: {
-                        
+
                       },
                     },
 
@@ -451,15 +483,15 @@ console.log(width)
                         },
                         ticks: {
                           // font: 'WComic Sans MS"',
-                          callback: function(label, index, labels) {
+                          callback: function (label, index, labels) {
                             return iconLabels[index];
-                            
+
                             // return _label;
                           },
                           color: 'rgba(255, 255, 255, 0.6)',
                           font: {
-                            family: 'icomoon',
-                            size: width/30 > 30 ? 30 : width/30,
+                            family: 'league-font',
+                            size: width / 30 > 30 ? 40 : width / 30,
                           }
                         }
                       }
@@ -519,13 +551,13 @@ console.log(width)
             <MatchItem balance={'+30 000 HUF'} />
           </div>
           <div className="mt-[15px] xl:mt-0">
-            <MatchItem balance={'+30 000 HUF'} isSecondary/>
+            <MatchItem balance={'+30 000 HUF'} isSecondary />
           </div>
           <div className="mt-[15px] xl:mt-0">
             <MatchItem balance={'+30 000 HUF'} />
           </div>
           <div className="mt-[15px] xl:mt-0">
-            <MatchItem balance={'+30 000 HUF'} isSecondary/>
+            <MatchItem balance={'+30 000 HUF'} isSecondary />
           </div>
           <div className="mt-[15px] xl:mt-0">
             <MatchItem balance={'+30 000 HUF'} />
