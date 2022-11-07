@@ -144,7 +144,7 @@ export default ({ }: PageProps) => {
   return (
     <Container className="analyses-container container 2xl:mx-auto max-w-[100%] 2xl:max-w-screen-2xl 3xl:max-w-screen-3xl mx-auto" padding={false}>
       <div className="analyses">
-        <AnalysesHeader type={''} background={'https://w7tips.fra1.digitaloceanspaces.com/images/arenas/anfield.jpg'} homeObject={homeObject} awayObject={awayObject} matchLogo={"https://w7tips.fra1.digitaloceanspaces.com/images/leagues/cl.png"} matchDate={{ date: '2022-10-31 20:00:00' }} locationDatas={{
+        <AnalysesHeader type={''} background={'https://w7tips.fra1.digitaloceanspaces.com/images/arenas/anfield.jpg'} homeObject={homeObject} awayObject={awayObject} matchLogo={"https://w7tips.fra1.digitaloceanspaces.com/images/leagues/cl.png"} matchDate={{ date: '2022-12-31 20:00:00' }} locationDatas={{
           weather: '20',
           location: 'Liverpool - Anfield'
         }}

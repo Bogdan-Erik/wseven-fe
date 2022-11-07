@@ -56,6 +56,7 @@ import 'swiper/css/scrollbar';
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import { Formik, getIn } from 'formik';
 import { useCookies } from 'react-cookie';
+import { useLocation, useNavigate} from 'react-router';
 
 export interface PageProps {
 
@@ -65,6 +66,8 @@ export default ({ }: PageProps) => {
   const { height, width } = useWindowDimensions();
   const [cookies] = useCookies(['cookie_consent']);
 
+  const location = useLocation();
+  let navigate = useNavigate();
 
   const [offset, setOffset] = useState(0);
   const [offsetTransform, setOffsetTransform] = useState(0);
@@ -123,6 +126,11 @@ export default ({ }: PageProps) => {
     email: Yup.string().email('Helytelen email formátum!').required('Kérlek add meg az e-mail címed!'),
   });
 
+  useEffect(() => {
+    if (subscribeResponse && subscribeResponse?.type === 'success') {
+      navigate('/subscribe-success');
+    }
+  }, [subscribeResponse])
   return (
     <>
       <div className="block fixed z-[101] bottom-0 left-0 w-full h-[45px] bg-rgba-grey-dark-08 text-center md:hidden uppercase text-white leading-[44px] tracking-[0.05em] backdrop-blur-[6px] font-bold"><Link activeClass="active" className="subscribe" to="subscribe" spy={true} smooth={true} duration={500} >feliratkozom</Link></div>

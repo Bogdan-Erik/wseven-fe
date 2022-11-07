@@ -1,0 +1,30 @@
+.hero-bg {
+  
+  background: url('./../../assets/images/landing/bg.png');
+  @apply bg-cover bg-center md:mt-[80px];
+  .player {
+    @apply h-[356px] md:max-h-[744px] md:h-[100%];
+  }
+}
+
+
+.hero-bg-secondary {
+  margin-top: 0px !important;
+  .sub-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .player {
+    @apply h-[356px] md:max-h-[744px] md:h-[100%];
+  }
+}
+.gradient-cover {
+  //background: linear-gradient(180deg, rgb(0 2 8) 0%, rgba(0, 0, 0, 0) 20%)
+}
+
+.success-bg {
+  background: url('./../../assets/images/landing/success-bg.png');
+  background-position: center;
+  background-repeat: no-repeat;
+}
