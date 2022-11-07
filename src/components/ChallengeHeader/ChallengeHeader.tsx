@@ -1,51 +1,9 @@
 import React from 'react'
-import { Button } from '../';
-import { Icon } from '../Icon';
-import { OddsItem } from '../';
 import './ChallengeHeader.scss';
 import _ from "lodash";
 import { motion } from 'framer-motion';
-import { url } from 'inspector';
-import { format } from 'date-fns';
 import W7Logo from './../../assets/images/logo.png';
 import { ContentPart } from './ContentPart';
-
-export interface ShapeProps {
-  type: string
-  score: number
-}
-
-export interface LastMatchProps {
-  logo: string
-  value: string
-}
-
-export interface RankingProps {
-  place: number
-  points?: number
-}
-
-export interface AgeProps {
-  age: number
-}
-
-export interface HandProps {
-  hand: number
-}
-
-export interface CareerPrizesProps {
-  money: number
-}
-
-export interface MissingsProps {
-  type: number,
-  name: string
-}
-
-export interface LocationDatasProps {
-  weather: string
-  location: string
-}
 
 export interface TennisFieldType {
   image: string
@@ -68,7 +26,7 @@ export interface ChallengeDataProps {
   }
 }
 
-export interface ChallengesHeaderProps {
+export interface ChallengeHeaderProps {
   type: string,
   background: string
   tennisFieldType?: TennisFieldType
@@ -88,7 +46,7 @@ export const ChallengeHeader = ({
   title,
   subTitle,
   date
-}: ChallengesHeaderProps): JSX.Element => {
+}: ChallengeHeaderProps): JSX.Element => {
 
 
   
