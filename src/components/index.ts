@@ -26,4 +26,6 @@ export { BlackBox } from './BlackBox'
 export { PageTitle } from './PageTitle'
 export { SmallItemBox } from './Statistics'
 export { ChallengeHeader } from './ChallengeHeader'
+export { ChallengeItem } from './ChallengeItem'
+export { Badge } from './Badge'
 /* -- component: insert above here -- */

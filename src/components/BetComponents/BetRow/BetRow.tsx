@@ -23,7 +23,7 @@ export const BetRow = ({ odds, title, strength, suggestedBet, players }: BetRowP
       <div className="my-[15px]"><hr className="text-rgba-grey-02" /></div>
       <div className="bet-row__content">
         <div className="left-side  flex-col xl:flex-row   items-center">
-          <div className="flex mr-[30px] mt-[20px] xl:mt-0 xl:mt-[20px]">
+          <div className="flex mr-[30px] mt-[20px] xl:mt-0 ">
             <div>Erősség:</div>
             <div className="ml-[6px]">
               {[...Array(strength)].map(() => {

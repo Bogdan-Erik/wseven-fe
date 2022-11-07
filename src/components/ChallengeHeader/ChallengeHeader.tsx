@@ -41,9 +41,6 @@ export interface MissingsProps {
   type: number,
   name: string
 }
-export interface MatchDateProps {
-  date: string
-}
 
 export interface LocationDatasProps {
   weather: string
@@ -54,30 +51,31 @@ export interface TennisFieldType {
   image: string
 }
 
-export interface ParticipantObjectProps {
-  participantName: string
-  logo: string
-  isFullImageLogo?: boolean
-  playerImage: string
-  shape: ShapeProps[]
-  lastMatch: LastMatchProps
-  ranking: RankingProps
-  missings?: MissingsProps[]
-  ageProps?: AgeProps
-  handProps?: HandProps
-  careerPrizes?: CareerPrizesProps
+export interface ChallengeDataProps {
+  odds: string,
+  matchTitle: string,
+  matchBet: string,
+  challengeContent: string,
+  challengeBar: {
+    currentStatus: string,
+    minValue: string,
+    maxValue: string,
+    barStatus: {
+      fullBar: number,
+      plannedBar: number,
+      currentBar: number
+    }
+  }
 }
 
 export interface ChallengesHeaderProps {
   type: string,
   background: string
-  homeObject: ParticipantObjectProps
-  awayObject: ParticipantObjectProps
-  matchLogo: string
-  matchLogoSecondary?: string
-  matchDate: MatchDateProps
-  locationDatas: LocationDatasProps
   tennisFieldType?: TennisFieldType
+  title: string,
+  subTitle: string,
+  date: string,
+  content: ChallengeDataProps
 }
 
 
@@ -85,34 +83,15 @@ export interface ChallengesHeaderProps {
 export const ChallengeHeader = ({
   type,
   background,
-  homeObject,
-  awayObject,
-  matchLogo,
-  matchLogoSecondary,
-  matchDate,
-  locationDatas,
-  tennisFieldType
+  tennisFieldType,
+  content,
+  title,
+  subTitle,
+  date
 }: ChallengesHeaderProps): JSX.Element => {
-  const THREE_DAYS_IN_MS = new Date(matchDate.date).getTime();
 
-  const dateTimeAfterThreeDays = THREE_DAYS_IN_MS;
 
-  const content = {
-    odds: '1.68',
-    matchTitle: 'Liverpool - Real Madrid',
-    matchBet: 'Real Madrid győzelem',
-    challengeContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
-    challengeBar: {
-      currentStatus: '640 HUF',
-      minValue: '50 HUF',
-      maxValue: '1 500 HUF',
-      barStatus: {
-        fullBar: 1500,
-        plannedBar: 1300,
-        currentBar: 750
-      }
-    }
-  }
+  
   return (
     <div>
       <div className="header-bg relative" style={{ background: `url(${background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
@@ -123,10 +102,10 @@ export const ChallengeHeader = ({
               <div className="self-center mr-[12px]">
                 <img src={W7Logo} />
               </div>
-              <div className="text-[32px] 2xl:text-[48px]"><span className="font-[700] mr-[20px]">Challenge #6</span>   <span className="font-[300]">3. tipp</span></div>
+              <div className="text-[32px] 2xl:text-[48px]"><span className="font-[700] mr-[20px]">{title}</span>   <span className="font-[300]">{subTitle}</span></div>
             </div>
             <div className="flex text-[14px]">
-              <div className="mr-[30px]">Challenge kezdete: <span className="font-[700]">2022. május 25.</span></div>
+              <div className="mr-[30px]">Challenge kezdete: <span className="font-[700]">{date}</span></div>
               <div>Napló</div>
             </div>
             <ContentPart data={content} />
@@ -150,10 +129,10 @@ export const ChallengeHeader = ({
                     <div className="self-center mr-[12px]">
                       <img src={W7Logo} />
                     </div>
-                    <div className="text-[24px]"><span className="font-[700] mr-[20px]">Challenge #6</span>   <span className="font-[300]">3. tipp</span></div>
+                    <div className="text-[24px]"><span className="font-[700] mr-[20px]">{title}</span>   <span className="font-[300]">{subTitle}</span></div>
                   </div>
                   <div className=" text-[14px]">
-                    <div className="mr-[30px]">Challenge kezdete: <span className="font-[700]">2022. május 25.</span></div>
+                    <div className="mr-[30px]">Challenge kezdete: <span className="font-[700]">{date}</span></div>
                     <div>Napló</div>
                   </div>
                 </div>

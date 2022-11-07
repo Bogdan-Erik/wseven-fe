@@ -9,7 +9,7 @@ export interface MatchItemProps {
   home: string,
   away: string,
   winner: string | null,
-  isDailyTipp: boolean | null,
+  isDailyTipp?: boolean | null,
   odds: string,
   tippString: string,
   isWinner: boolean,

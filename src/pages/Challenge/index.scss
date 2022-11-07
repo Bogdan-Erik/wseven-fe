@@ -71,11 +71,6 @@
       }
     }
   }
-  .badge {
-    @apply px-[15px] py-[5px];
-    background: linear-gradient(94.15deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.2) 100%);
-    border-radius: 6px;
-  }
 
   .center-content {
     @apply flex absolute bottom-0 w-full h-full;
