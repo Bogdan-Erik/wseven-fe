@@ -1,0 +1,13 @@
+.badge {
+  @apply rounded-md px-[15px] py-[5px] font-[600] text-[12px];
+  width: fit-content;
+}
+
+.badge-primary {
+  @apply text-white;
+  background: linear-gradient(135deg, rgba(34, 194, 204, 0.5) 5.2%, rgba(201, 0, 255, 0.5) 100%);
+}
+
+.badge-secondary {
+  @apply text-[#9E43EE] bg-white;
+}
