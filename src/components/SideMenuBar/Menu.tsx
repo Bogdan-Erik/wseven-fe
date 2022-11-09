@@ -38,7 +38,7 @@ export const Menu = ({ isMobileMenu = false, setShowMenu }: SideMenuBarProps): J
         <MenuItem icon={'calendar'} text={'Naptár'} isActive={location.pathname === '/calendar'} isMobile={isMobileMenu} link="/calendar" onClick={() => setShowMenu && setShowMenu(false)} />
         <MenuItem icon={'sign'} text={'Challenge'} isActive={location.pathname === '/challenges'} isMobile={isMobileMenu} link="/challenges" onClick={() => setShowMenu && setShowMenu(false)} />
         <MenuItem icon={'donut'} text={'Statisztikák'} isActive={location.pathname === '/statistics'} isMobile={isMobileMenu} link="/statistics" onClick={() => setShowMenu && setShowMenu(false)} />
-        <MenuItem icon={'military'} text={'Jutalmak'} isActive={location.pathname === '/rewards'} isMobile={isMobileMenu} link="/rewards" onClick={() => setShowMenu && setShowMenu(false)} />
+        <MenuItem icon={'timer'} text={'Élő'} isActive={location.pathname === '/live'} isMobile={isMobileMenu} link="/live" onClick={() => setShowMenu && setShowMenu(false)} />
         <MenuItem icon={'money'} text={'Bank'} isActive={location.pathname === '/bank'} isMobile={isMobileMenu} link="/bank" onClick={() => setShowMenu && setShowMenu(false)} />
         <MenuItem icon={'store'} text={'Piactér'} isActive={location.pathname === '/marketplace'} isMobile={isMobileMenu} link="/marketplace" onClick={() => setShowMenu && setShowMenu(false)} />
         <MenuItem icon={'house'} text={'Információk'} isActive={location.pathname === '/informations'} isMobile={isMobileMenu} link="/informations" onClick={() => setShowMenu && setShowMenu(false)} />

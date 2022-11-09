@@ -5,21 +5,58 @@ import { OddsItem } from '../OddsItem';
 import './BetRow.scss';
 import _ from "lodash";
 
+export interface MatchData {
+  liga: string,
+  date: string,
+  time: string,
+  home: string,
+  away: string,
+  highlightedTeam: string,
+}
 export interface BetRowProps {
-  odds: string,
-  title: string,
-  strength: number,
-  suggestedBet: string,
-  players: any[],
+  odds: string
+  title: string
+  strength: number
+  suggestedBet: string
+  players: any[]
+  contentText?: string
+  matchDatas?: MatchData
 }
 
-export const BetRow = ({ odds, title, strength, suggestedBet, players }: BetRowProps): JSX.Element => {
+export const BetRow = ({ odds, title, strength, suggestedBet, players, contentText, matchDatas }: BetRowProps): JSX.Element => {
   return (
     <div className="bet-row">
+       {matchDatas && (
+          <div className="flex xl:hidden mb-[20px] xl:mb-0">
+            <div className="pr-4 flex justify-center flex-col"><img src={matchDatas.liga} style={{ maxHeight: '42px' }} /></div>
+            <div className=" flex flex-col justify-center w-32 md:w-32 ">
+              <div className="text-xs  text-white font-semibold">{matchDatas.date}</div>
+              <div className="text-xs font-normal">{matchDatas.time}</div>
+            </div>
+            <div className="flex flex-col justify-center  w-32 md:w-32">
+              <div className={"text-xs text-white" + (matchDatas.highlightedTeam === 'home' ? ' font-semibold' : ' font-normal')}>{matchDatas.home}</div>
+              <div className={"text-xs text-white " + (matchDatas.highlightedTeam === 'away' ? ' font-semibold' : ' font-normal')}>{matchDatas.away}</div>
+            </div>
+          </div>
+        )}
       <div className="bet-row__title">
+        {matchDatas && (
+          <div className="hidden xl:flex">
+            <div className="pr-4 flex justify-center flex-col"><img src={matchDatas.liga} style={{ maxHeight: '42px' }} /></div>
+            <div className=" flex flex-col justify-center w-32 md:w-32 ">
+              <div className="text-xs  text-white font-semibold">{matchDatas.date}</div>
+              <div className="text-xs font-normal">{matchDatas.time}</div>
+            </div>
+            <div className="flex flex-col justify-center  w-32 md:w-32">
+              <div className={"text-xs text-white" + (matchDatas.highlightedTeam === 'home' ? ' font-semibold' : ' font-normal')}>{matchDatas.home}</div>
+              <div className={"text-xs text-white " + (matchDatas.highlightedTeam === 'away' ? ' font-semibold' : ' font-normal')}>{matchDatas.away}</div>
+            </div>
+          </div>
+        )}
         <div className="self-center"><OddsItem odds={odds} /></div>
         <div className="ml-[15px] flex justify-center flex-col font-[500]">{title}</div>
       </div>
+      {contentText && (<div className="py-[15px] text-[14px]">{contentText}</div>)}
       <div className="my-[15px]"><hr className="text-rgba-grey-02" /></div>
       <div className="bet-row__content">
         <div className="left-side  flex-col xl:flex-row   items-center">

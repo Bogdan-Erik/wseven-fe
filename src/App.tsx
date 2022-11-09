@@ -12,7 +12,7 @@ import Developing from './pages/Developing';
 import Analyses from './pages/Analyses';
 import Calendar from './pages/Calendar';
 import Statistics from './pages/Statistics';
-import Rewards from './pages/Rewards';
+import Live from './pages/Live';
 import Challenge from './pages/Challenge';
 import Bank from './pages/Bank';
 import Marketplace from './pages/Marketplace';
@@ -56,7 +56,7 @@ function App() {
               <Route path="/challenges" element={<Challenge />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/statistics" element={<Statistics />} />
-              <Route path="/rewards" element={<Rewards />} />
+              <Route path="/live" element={<Live />} />
               <Route path="/bank" element={<Bank />} />
               <Route path="/marketplace" element={<Marketplace />} />
               <Route path="/informations" element={<Informations />} />
