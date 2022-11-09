@@ -8,12 +8,14 @@ import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import timeGridPlugin from '@fullcalendar/timegrid';
 import huLocale from '@fullcalendar/core/locales/hu';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 export interface PageProps {
 
 }
 
 export default ({ }: PageProps) => {
+  const { height, width } = useWindowDimensions();
 
   const dataSet = [
     {
@@ -45,6 +47,18 @@ export default ({ }: PageProps) => {
       </div>
     )
   }
+
+  const daysNumber = () => {
+    if (width > 1360) {
+      return 4;
+    } else if (width < 1360 && width > 1023) {
+      return 3;
+    } else if (width < 1023 && width > 768) {
+      return 2;
+    } else {
+      return 1;
+    }
+  }
   return (
     <>
       <Container className="container 2xl:mx-auto max-w-[100%] 2xl:max-w-screen-2xl 3xl:max-w-screen-3xl mx-auto" padding>
@@ -52,7 +66,11 @@ export default ({ }: PageProps) => {
         <FullCalendar
           plugins={[timeGridPlugin]}
           initialView="timeGridFourDay"
-          headerToolbar={false}
+          headerToolbar={{
+            start: false, // will normally be on the left. if RTL, will be on the right
+            center: '',
+            end: 'prev,next' // will normally be on the right. if RTL, will be on the left
+          }}
           locale={huLocale}
           duration={{ days: 4 }}
           timeZone={'local'}
@@ -69,7 +87,7 @@ export default ({ }: PageProps) => {
           views={{
             timeGridFourDay: {
               type: 'timeGrid',
-              duration: { days: 4 }
+              duration: { days: daysNumber() }
             }
           }}
           slotLabelFormat={{
