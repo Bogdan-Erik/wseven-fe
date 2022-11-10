@@ -31,4 +31,5 @@ export { Badge } from './Badge'
 export { FormInput } from './FormInput'
 export { Loader } from './Loader'
 export { ToggleSwitch } from './ToggleSwitch'
+export { InformationItem } from './InformationItem'
 /* -- component: insert above here -- */

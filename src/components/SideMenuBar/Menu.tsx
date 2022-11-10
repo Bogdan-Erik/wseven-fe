@@ -41,7 +41,7 @@ export const Menu = ({ isMobileMenu = false, setShowMenu }: SideMenuBarProps): J
         <MenuItem icon={'timer'} text={'Élő'} isActive={location.pathname === '/live'} isMobile={isMobileMenu} link="/live" onClick={() => setShowMenu && setShowMenu(false)} />
         <MenuItem icon={'money'} text={'Bank'} isActive={location.pathname === '/bank'} isMobile={isMobileMenu} link="/bank" onClick={() => setShowMenu && setShowMenu(false)} />
         <MenuItem icon={'store'} text={'Piactér'} isActive={location.pathname === '/marketplace'} isMobile={isMobileMenu} link="/marketplace" onClick={() => setShowMenu && setShowMenu(false)} />
-        <MenuItem icon={'house'} text={'Információk'} isActive={location.pathname === '/informations'} isMobile={isMobileMenu} link="/informations" onClick={() => setShowMenu && setShowMenu(false)} />
+        <MenuItem icon={'info'} text={'Információk'} isActive={location.pathname === '/informations'} isMobile={isMobileMenu} link="/informations" onClick={() => setShowMenu && setShowMenu(false)} />
         <MenuItem icon={'settings'} text={'Beállítások'} isActive={location.pathname === '/settings'} isMobile={isMobileMenu} link="/settings" onClick={() => setShowMenu && setShowMenu(false)} />
       </div>
 
