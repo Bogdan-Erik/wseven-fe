@@ -1,10 +1,11 @@
 import React from 'react'
+import { twMerge } from 'tailwind-merge';
 import './Input.css';
 
 export interface InputProps {
   name: string,
   type: string,
-  error: string,
+  error?: string | undefined
   disabled: boolean,
   placeholder?: string
   value?: string,
@@ -27,16 +28,16 @@ export const Input = ({
         name={name}
         type={type}
         placeholder={placeholder}
-        className={`
+        className={twMerge(`
           placeholder-light-white
-          border-2 border-dark-bg grey-linear-gradient
+          border-2 border-transparent grey-linear-gradient
           leading-[18px] px-3.5 py-3 rounded-md outline-none 
           text-white
           w-full 
           focus:border-2 focus:border-gray-500  focus:shadow-input focus:border-light-grey
           ${error ? ' border-red' : ''}
           ${disabled ? ' opacity-50' : ''}
-        `}
+        `)}
         disabled={disabled}
         value={value}
         {...props}

@@ -1,7 +1,7 @@
 import React from 'react'
 
 export interface LabelProps {
-  children: string,
+  children?: any,
   required: boolean,
 }
 
