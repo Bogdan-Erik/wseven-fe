@@ -28,4 +28,7 @@ export { SmallItemBox } from './Statistics'
 export { ChallengeHeader } from './ChallengeHeader'
 export { ChallengeItem } from './ChallengeItem'
 export { Badge } from './Badge'
+export { FormInput } from './FormInput'
+export { Loader } from './Loader'
+export { ToggleSwitch } from './ToggleSwitch'
 /* -- component: insert above here -- */
