@@ -32,4 +32,5 @@ export { FormInput } from './FormInput'
 export { Loader } from './Loader'
 export { ToggleSwitch } from './ToggleSwitch'
 export { InformationItem } from './InformationItem'
+export { NewsItem } from './NewsItem'
 /* -- component: insert above here -- */
