@@ -87,7 +87,7 @@ export default ({ }: PageProps) => {
   return (
     <Container className="analyses-container container 2xl:mx-auto max-w-[100%] 2xl:max-w-screen-2xl 3xl:max-w-screen-3xl mx-auto" padding={false}>
       <div className="analyses mt-[50px]">
-        <div className="grid grid-cols-3 gap-[20px]">
+        <div className="grid grid-cols-3 gap-[40px]">
           <div className="col-span-2">
             <SportCard daily={true} colorScheme={"blue"} size={"large"} />
           </div>
