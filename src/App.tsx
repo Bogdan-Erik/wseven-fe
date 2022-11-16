@@ -10,6 +10,7 @@ import LandingSuccess from './pages/LandingSuccess';
 import Dashboard from './pages/Dashboard';
 import Developing from './pages/Developing';
 import Analyses from './pages/Analyses';
+import AnalysesOverview from './pages/AnalysesOverview';
 import Calendar from './pages/Calendar';
 import Statistics from './pages/Statistics';
 import Live from './pages/Live';
@@ -52,6 +53,7 @@ function App() {
             <Route element={<ApplicationLayout><Outlet /></ApplicationLayout>}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/developing" element={<Developing />} />
+              <Route path="/analyses-overview" element={<AnalysesOverview />} />
               <Route path="/analyses" element={<Analyses />} />
               <Route path="/challenges" element={<Challenge />} />
               <Route path="/calendar" element={<Calendar />} />
