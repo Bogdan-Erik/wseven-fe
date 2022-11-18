@@ -24,9 +24,9 @@ export const Footer = ({ socialBar }: FooterProps): JSX.Element => {
         </div>
         <div className="flex-[1] flex justify-center md:justify-end">
           <div className="flex flex-row self-center mt-[65px] md:mt-0 gap-[30px]">
-            <div><span className="font-icomoon icon icon-facebook text-[19px] mr-[10px] relative top-[4px] text-[14px]"></span>Facebook</div>
-            <div><span className="font-icomoon icon icon-instagram text-[19px] mr-[10px] relative top-[4px] text-[14px]"></span>Instagram</div>
-            <div><span className="font-icomoon icon icon-tiktok text-[19px] mr-[10px] relative top-[4px] text-[14px]"></span>TikTok</div>
+            <div><a href="https://www.facebook.com/w7tips/" target={'blank'}><span className="font-icomoon icon icon-facebook text-[19px] mr-[10px] relative top-[4px] text-[14px]"></span>Facebook</a></div>
+            <div><a href="https://www.instagram.com/w7tips_eu/" target={'blank'}><span className="font-icomoon icon icon-instagram text-[19px] mr-[10px] relative top-[4px] text-[14px]"></span>Instagram</a></div>
+            <div><a href="https://www.tiktok.com/@w7tips_eu" target={'blank'}><span className="font-icomoon icon icon-tiktok text-[19px] mr-[10px] relative top-[4px] text-[14px]"></span>TikTok</a></div>
           </div>
         </div>
       </div>
