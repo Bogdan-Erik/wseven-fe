@@ -13,7 +13,7 @@ export default ({ children }: LayoutProps) => {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname !== '/subscribe-success') {
+    if (!['/', '/subscribe-success'].includes(location.pathname)) {
       setSocialBar(true);
     }
   }, [])
