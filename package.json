@@ -13,6 +13,10 @@
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
     "@formkit/auto-animate": "^1.0.0-beta.1",
+    "@fullcalendar/core": "^5.11.3",
+    "@fullcalendar/daygrid": "^5.11.3",
+    "@fullcalendar/react": "^5.11.2",
+    "@fullcalendar/timegrid": "^5.11.3",
     "@mdx-js/mdx": "^2.1.2",
     "@mdx-js/react": "1",
     "@mdx-js/rollup": "^2.1.2",
@@ -50,7 +54,7 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
     "sass": "^1.54.0",
-    "swiper": "^8.3.2",
+    "swiper": "^8.4.4",
     "tailwind-merge": "^1.6.0",
     "yup": "^0.32.11"
   },

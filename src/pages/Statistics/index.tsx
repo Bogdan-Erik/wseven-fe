@@ -143,7 +143,6 @@ export const dataSet = {
 
 export default ({ }: PageProps) => {
   const { height, width } = useWindowDimensions();
-  console.log(width)
 
   const leagueChart = [
     {

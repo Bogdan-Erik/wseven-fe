@@ -1,0 +1,58 @@
+.fc-col-header-cell.fc-day {
+  @apply text-[14px] font-[400] text-rgba-grey-08;
+}
+
+.fc-theme-standard .fc-scrollgrid, .fc-theme-standard td, .fc-theme-standard th {
+  border-color: rgba(0, 0, 0, 0.2) !important;
+}
+.fc-theme-standard td, .fc-theme-standard th {
+  border: 1px solid #00000033 !important;
+  //border: 1px solid #83838333 !important;
+}
+.fc {
+  thead {
+    th {
+    @apply h-[60px] ;
+    .fc-scrollgrid-sync-inner {
+      @apply h-full;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
+  }
+
+
+  tbody {
+    background: linear-gradient(135deg, rgba(34, 194, 204, 0.03) 19.79%, rgba(201, 0, 255, 0.03) 100%);
+  }
+}
+
+.fc-timegrid-slot-label-cushion.fc-scrollgrid-shrink-cushion {
+  @apply text-[14px] font-[400] text-rgba-grey-08;
+}
+
+
+.fc .fc-scrollgrid-section-sticky > * {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+.fc .fc-timegrid-col.fc-day-today {
+  background: initial !important;
+}
+
+.event {
+  box-shadow: none !important;
+}
+.event.football {
+  background: linear-gradient(135deg, rgba(34, 194, 204, 0.7) 19.79%, rgba(201, 0, 255, 0.7) 100%);
+  border-radius: 6px;
+  border: none !important;
+}
+
+.event.tennis {
+  background: linear-gradient(135deg, rgba(204, 255, 2, 0.7) 5.2%, rgba(0, 255, 224, 0.7) 100%);
+  border-radius: 6px;
+  border: none !important;
+}
