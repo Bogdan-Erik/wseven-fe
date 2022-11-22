@@ -85,32 +85,32 @@ export default ({ }: PageProps) => {
     },
   ]
   return (
-    <Container className="analyses-container container 2xl:mx-auto max-w-[100%] 2xl:max-w-screen-2xl 3xl:max-w-screen-3xl mx-auto" padding={false}>
+    <Container className="container 2xl:mx-auto px-[20px] pt-[30px] max-w-[100%] 2xl:max-w-screen-2xl 3xl:max-w-screen-3xl mx-auto" padding={false}>
       <div className="analyses mt-[50px]">
-        <div className="grid grid-cols-3 gap-[40px]">
-          <div className="col-span-2">
-            <SportCard daily={true} colorScheme={"blue"} size={"large"} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-[40px]">
+          <div className="col-span-1 lg:col-span-2 2xl:col-span-2 ">
+            <SportCard daily={true} colorScheme={"blue"} size={"large"} images={['https://w7tips.fra1.digitaloceanspaces.com/images/players/salah.png', 'https://w7tips.fra1.digitaloceanspaces.com/images/players/benzema.png']} sportType={'football'} />
           </div>
           <div>
-            <SportCard daily={true} colorScheme={"blue"} />
+            <SportCard daily={true} colorScheme={"orange"} images={['https://w7tips.fra1.digitaloceanspaces.com/images/players/tennis.png']} sportType={'basketball'} />
           </div>
           <div>
-            <SportCard daily={true} colorScheme={"blue"} />
+            <SportCard daily={true} colorScheme={"blue"} images={['https://w7tips.fra1.digitaloceanspaces.com/images/players/tennis.png']} sportType={'football'} />
           </div>
           <div>
-            <SportCard daily={true} primary={false} colorScheme={"green"} />
+            <SportCard daily={true} primary={false} colorScheme={"green"} images={['https://w7tips.fra1.digitaloceanspaces.com/images/players/tennis.png']} sportType={'tennis'} />
           </div>
           <div>
-            <SportCard daily={true} colorScheme={"yellow"} />
+            <SportCard daily={true} colorScheme={"yellow"} images={['https://w7tips.fra1.digitaloceanspaces.com/images/players/tennis.png']} sportType={'darts'} />
           </div>
           <div>
-            <SportCard daily={true} colorScheme={"orange"} />
+            <SportCard daily={true} colorScheme={"orange"} images={['https://w7tips.fra1.digitaloceanspaces.com/images/players/tennis.png']} sportType={'football'} />
           </div>
           <div>
-            <SportCard daily={true} colorScheme={"purple"} />
+            <SportCard daily={true} colorScheme={"purple"} images={['https://w7tips.fra1.digitaloceanspaces.com/images/players/tennis.png']} sportType={'football'} />
           </div>
           <div>
-            <SportCard daily={true} colorScheme={"red"} />
+            <SportCard daily={true} colorScheme={"red"} images={['https://w7tips.fra1.digitaloceanspaces.com/images/players/tennis.png']} sportType={'football'} />
           </div>
         </div>
         <div className="mt-[80px] mb-[80px]">

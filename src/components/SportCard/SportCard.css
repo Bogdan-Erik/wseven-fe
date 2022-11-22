@@ -4,7 +4,7 @@
 
 .sportcard-background {
   height: 280px;
-  @apply rounded-[6px];
+  @apply rounded-[6px] h-[426px] md:h-[280px];
 }
 
 .sportcard .blue-scheme {
