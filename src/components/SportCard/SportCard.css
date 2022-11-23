@@ -1,11 +1,82 @@
-.storybook-sportcard {
+.sportcard {
+  height: 280px;
+}
+
+.sportcard-background {
+  height: 280px;
+  @apply rounded-[6px] h-[426px] md:h-[280px];
+}
+
+.sportcard-background-large {
+  height: 280px;
+  @apply rounded-[6px] h-full md:h-[280px];
+}
+
+.sportcard .blue-scheme {
+  color: white;
+  background: linear-gradient(135deg, #22C2CC 5.2%, #C900FF 100%);
+}
+
+.sportcard .green-scheme {
+  background: linear-gradient(135deg, #CCFF02 5.2%, #00FFE0 100%);
+}
+
+.sportcard .yellow-scheme {
+  background: linear-gradient(135deg, #d1bc01 5.2%, #0b0812 100%);
+}
+
+.sportcard .orange-scheme {
+  background: linear-gradient(135deg, #cb4122 5.2%, #0b0812 100%);
+}
+
+.sportcard .purple-scheme {
+  background: linear-gradient(135deg, #0395e9 5.2%, #950000 100%);
+}
+
+.sportcard .red-scheme {
+  background: linear-gradient(135deg, #cd0000 5.2%, #0b0812 100%);
+}
+
+.daily-match {
+  background: linear-gradient(94.15deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.2) 96.87%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 6px;
+  @apply text-center py-[5px] mt-[20px] text-[12px] font-[600];
+}
+
+.daily-match-large {
+  background: linear-gradient(94.15deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.2) 96.87%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 6px;
+  @apply text-center py-[5px] px-[15px] text-[12px] font-[600];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.w7-sportcard {
   border-radius: 6px;
   position: relative;
   /* height: 259px */
   font-family: 'Poppins';
 }
 
-.storybook-sportcard--fade {
+.w7-sportcard--fade {
   background: linear-gradient(180deg, rgba(0, 0, 18, 0) 0%, rgba(0, 0, 18, 0.8) 100%);
   border-radius: 6px;
   width: 100%;
@@ -15,7 +86,7 @@
   bottom: 0px;
 }
 
-.storybook-sportcard--fade-secondary {
+.w7-sportcard--fade-secondary {
   background: linear-gradient(90deg, rgba(0, 0, 18, 0) 0%, rgba(0, 0, 18, 0.6) 100%);
   border-radius: 6px;
   width: 100%;
@@ -24,7 +95,7 @@
   position: absolute;
 }
 
-.storybook-sportcard--small .storybook-sportcard-background {
+.w7-sportcard--small .w7-sportcard-background {
   max-width: 480px;
   width: 100%;
   height: 259px;
@@ -33,47 +104,74 @@
   bottom: 0px;
 }
 
-.storybook-sportcard--large {
-  height: 390px !important;
+.w7-sportcard--large {
+  height: 280px;
+    width: 100%;
+  max-width: 100% !important;
 }
 
-.storybook-sportcard--large .storybook-sportcard-background {
-  max-width: 848px;
+.w7-sportcard--large .w7-sportcard-background {
+  max-width: 100%;
   width: 100%;
-  height: 360px;
+  height: 280px;
   border-radius: 6px;
   position: absolute;
   bottom: 0px;
 }
 
-.storybook-sportcard-image-holder {
+.w7-sportcard-image-holder {
   position: absolute;
   bottom: 0;
   z-index: 11;
 }
 
-.storybook-sportcard-image-holder img {
+.w7-sportcard-image-holder img {
   max-width: 100%;
 }
-
-.storybook-sportcard--primary .storybook-sportcard-background {
+/*
+.w7-sportcard--primary .w7-sportcard-background {
   color: white;
   background: linear-gradient(135deg, #22C2CC 5.2%, #C900FF 100%);
 }
 
-.storybook-sportcard--secondary .storybook-sportcard-background {
+.w7-sportcard--secondary .w7-sportcard-background {
+  background: linear-gradient(135deg, #CCFF02 5.2%, #00FFE0 100%);
+}
+*/
+.w7-sportcard .blue-scheme {
+  color: white;
+  background: linear-gradient(135deg, #22C2CC 5.2%, #C900FF 100%);
+}
+
+.w7-sportcard .green-scheme {
   background: linear-gradient(135deg, #CCFF02 5.2%, #00FFE0 100%);
 }
 
-.storybook-sportcard--small {
+.w7-sportcard .yellow-scheme {
+  background: linear-gradient(135deg, #d1bc01 5.2%, #0b0812 100%);
+}
+
+.w7-sportcard .orange-scheme {
+  background: linear-gradient(135deg, #cb4122 5.2%, #0b0812 100%);
+}
+
+.w7-sportcard .purple-scheme {
+  background: linear-gradient(135deg, #0395e9 5.2%, #3b142a 100%);
+}
+
+.w7-sportcard .red-scheme {
+  background: linear-gradient(135deg, #cd0000 5.2%, #0b0812 100%);
+}
+
+.w7-sportcard--small {
   max-width: 480px;
   width: 100%;
   height: 280px;
 
 }
 
-.storybook-sportcard-teams,
-.storybook-sportcard-players {
+.w7-sportcard-teams,
+.w7-sportcard-players {
   position: absolute;
   bottom: 20px;
   width: 100%;
@@ -82,54 +180,54 @@
   color: #ffffff;
 }
 
-.storybook-sportcard-teams>div {
+.w7-sportcard-teams>div {
   flex: 1;
 }
 
-.storybook-sportcard-teams>div:nth-child(2),
-.storybook-sportcard-players>div:nth-child(2) {
+.w7-sportcard-teams>div:nth-child(2),
+.w7-sportcard-players>div:nth-child(2) {
   justify-content: end;
   padding-right: 15px;
 }
 
-.storybook-sportcard-teams>div:first-child,
-.storybook-sportcard-players>div:first-child {
+.w7-sportcard-teams>div:first-child,
+.w7-sportcard-players>div:first-child {
   padding-left: 15px;
 }
 
-.storybook-sportcard-teams-item-logo.first {
+.w7-sportcard-teams-item-logo.first {
   margin-right: 6px;
 }
 
-.storybook-sportcard-teams-item-logo.second {
+.w7-sportcard-teams-item-logo.second {
   margin-left: 6px;
 }
 
-.storybook-sportcard-teams-item,
-.storybook-sportcard-players-item {
+.w7-sportcard-teams-item,
+.w7-sportcard-players-item {
   display: flex;
 }
 
-.storybook-sportcard-teams-item-name {
+.w7-sportcard-teams-item-name {
   display: flex;
   justify-content: center;
   flex-direction: column;
   text-align: left;
 }
 
-.storybook-sportcard-teams-item-logo {
+.w7-sportcard-teams-item-logo {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 
-.storybook-sportcard--large {
-  max-width: 848px;
+.w7-sportcard--large {
+  max-width: 100%;
   width: 100%;
-  height: 360px;
+  height: 280px;
 }
 
-.storybook-sportcard-event {
+.w7-sportcard-event {
   position: absolute;
   z-index: 101;
   display: flex;
@@ -137,11 +235,11 @@
   right: 20px;
 }
 
-.storybook-sportcard-event-logo {
+.w7-sportcard-event-logo {
   margin-right: 15px;
 }
 
-.storybook-sportcard-event-datas {
+.w7-sportcard-event-datas {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -149,17 +247,17 @@
   line-height: 25px;
 }
 
-.storybook-sportcard-event-datas>div:first-child {
+.w7-sportcard-event-datas>div:first-child {
   font-weight: 600;
   font-size: 16px;
 }
 
-.storybook-sportcard-event-datas>div:nth-child(2) {
+.w7-sportcard-event-datas>div:nth-child(2) {
   font-weight: 300;
   font-size: 20px;
 }
 
-.storybook-sportcard-sum {
+.w7-sportcard-sum {
   position: absolute;
   z-index: 101;
   display: flex;
@@ -171,31 +269,31 @@
   color: #ffffff;
 }
 
-.storybook-sportcard-players-item {
+.w7-sportcard-players-item {
   flex: 1;
   flex-direction: column;
 }
 
-.storybook-sportcard-players-item:nth-child(2) {
+.w7-sportcard-players-item:nth-child(2) {
   text-align: right;
 }
 
-.storybook-sportcard-players-item {
+.w7-sportcard-players-item {
   line-height: 22px;
 }
 
-.storybook-sportcard-players-item-first-name {
+.w7-sportcard-players-item-first-name {
   font-weight: 300;
   font-size: 14px;
 }
 
-.storybook-sportcard-players-item-last-name {
+.w7-sportcard-players-item-last-name {
   font-weight: 500;
   font-size: 24px;
 }
 
 /* Large cards */
-.storybook-sportcard-large-content {
+.w7-sportcard-large-content {
   position: absolute;
   z-index: 101;
   right: 20px;
@@ -207,13 +305,13 @@
   flex-direction: column;
 }
 
-.storybook-sportcard-large-content-event-logo {
+.w7-sportcard-large-content-event-logo {
   margin-right: 15px;
   display: flex;
   justify-content: center;
 }
 
-.storybook-sportcard-large-content-event-datas {
+.w7-sportcard-large-content-event-datas {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -222,17 +320,17 @@
   margin-top: 20px;
 }
 
-.storybook-sportcard-large-content-event-datas>div:first-child {
+.w7-sportcard-large-content-event-datas>div:first-child {
   font-weight: 600;
   font-size: 16px;
 }
 
-.storybook-sportcard-large-content-event-datas>div:nth-child(2) {
+.w7-sportcard-large-content-event-datas>div:nth-child(2) {
   font-weight: 300;
   font-size: 24px;
 }
 
-.storybook-sportcard-large-content-sum {
+.w7-sportcard-large-content-sum {
   display: flex;
   flex-direction: column;
   bottom: 100px;
@@ -243,13 +341,13 @@
   margin-top: 50px;
 }
 
-.storybook-sportcard-large-content-sum>div {
+.w7-sportcard-large-content-sum>div {
   display: flex;
   justify-content: center;
 }
 
-.storybook-sportcard-large-content-teams,
-.storybook-sportcard-large-content-players {
+.w7-sportcard-large-content-teams,
+.w7-sportcard-large-content-players {
   width: 100%;
   display: flex;
   z-index: 100;
@@ -257,96 +355,96 @@
   margin-top: 70px;
 }
 
-.storybook-sportcard-large-content-players {
+.w7-sportcard-large-content-players {
   margin-top: 50px;
 }
 
-.storybook-sportcard-large-teams>div {
+.w7-sportcard-large-teams>div {
   flex: 1;
 }
 
-.storybook-sportcard-large-teams>div:nth-child(2),
-.storybook-sportcard-players>div:nth-child(2) {
+.w7-sportcard-large-teams>div:nth-child(2),
+.w7-sportcard-players>div:nth-child(2) {
   justify-content: end;
   padding-right: 15px;
 }
 
-.storybook-sportcard-large-teams>div:first-child,
-.storybook-sportcard-players>div:first-child {
+.w7-sportcard-large-teams>div:first-child,
+.w7-sportcard-players>div:first-child {
   padding-left: 15px;
   text-align: left;
 }
 
-.storybook-sportcard-large-teams-item {
+.w7-sportcard-large-teams-item {
   font-size: 20px;
 }
 
-.storybook-sportcard-large-teams-item-logo.first {
+.w7-sportcard-large-teams-item-logo.first {
   margin-right: 6px;
 }
 
-.storybook-sportcard-large-teams-item-logo {}
+.w7-sportcard-large-teams-item-logo {}
 
-.storybook-sportcard-large-teams-item-logo.second {
+.w7-sportcard-large-teams-item-logo.second {
   margin-left: 6px;
 }
 
-.storybook-sportcard-large-teams-item,
-.storybook-sportcard-large-players-item {
+.w7-sportcard-large-teams-item,
+.w7-sportcard-large-players-item {
   display: flex;
   flex: 1;
 }
 
-.storybook-sportcard-large-players-item {
+.w7-sportcard-large-players-item {
   text-align: left;
 }
 
-.storybook-sportcard-large-teams-item-name {
+.w7-sportcard-large-teams-item-name {
   display: flex;
   justify-content: center;
   flex-direction: column;
   flex: 10;
 }
 
-.storybook-sportcard-large-teams-item-name.first {
+.w7-sportcard-large-teams-item-name.first {
   text-align: left;
 }
 
-.storybook-sportcard-large-teams-item-name.second {
+.w7-sportcard-large-teams-item-name.second {
   text-align: right;
 }
 
 
-.storybook-sportcard-large-teams-item-logo {
+.w7-sportcard-large-teams-item-logo {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 
-.storybook-sportcard-large-players-item {
+.w7-sportcard-large-players-item {
   flex: 1;
   flex-direction: column;
 }
 
-.storybook-sportcard-large-players-item:nth-child(2) {
+.w7-sportcard-large-players-item:nth-child(2) {
   text-align: right;
 }
 
-.storybook-sportcard-large-players-item {
+.w7-sportcard-large-players-item {
   line-height: 22px;
 }
 
-.storybook-sportcard-large-players-item-first-name {
+.w7-sportcard-large-players-item-first-name {
   font-weight: 300;
   font-size: 14px;
 }
 
-.storybook-sportcard-large-players-item-last-name {
+.w7-sportcard-large-players-item-last-name {
   font-weight: 500;
   font-size: 24px;
 }
 
-.storybook-sportcard-large-daily {
+.w7-sportcard-large-daily {
   position: absolute;
   right: 0px;
   z-index: 99;
@@ -363,17 +461,17 @@
 @media only screen and (max-width: 500px) {
 
   /* small */
-  .storybook-sportcard--fade {
+  .w7-sportcard--fade {
     height: 35% !important;
   }
 
-  .storybook-sportcard--small {
+  .w7-sportcard--small {
     height: 426px;
   }
 
-  .storybook-sportcard-event {}
+  .w7-sportcard-event {}
 
-  .storybook-sportcard-event {
+  .w7-sportcard-event {
     position: relative;
     z-index: 101;
     display: flex;
@@ -381,72 +479,72 @@
     right: 0px !important;
   }
 
-  .storybook-sportcard-sum {
+  .w7-sportcard-sum {
     position: relative;
     bottom: 0;
     right: 0;
   }
 
-  .storybook-sportcard-subparts {
+  .w7-sportcard-subparts {
     padding-left: 9px;
     padding-top: 16px;
   }
 
-  .storybook-sportcard-teams-item-logo>img {
+  .w7-sportcard-teams-item-logo>img {
     max-width: 42px;
   }
 
 
-  .storybook-sportcard-teams-item,
-  .storybook-sportcard-players-item {
+  .w7-sportcard-teams-item,
+  .w7-sportcard-players-item {
     flex-direction: column;
     padding: 0px 20px;
 
   }
 
-  .storybook-sportcard-teams-item:nth-child(2) .storybook-sportcard-teams-item-name {
+  .w7-sportcard-teams-item:nth-child(2) .w7-sportcard-teams-item-name {
     order: 2;
     text-align: right;
   }
 
-  .storybook-sportcard-teams-item:nth-child(2) .storybook-sportcard-teams-item-logo {
+  .w7-sportcard-teams-item:nth-child(2) .w7-sportcard-teams-item-logo {
     justify-content: flex-end;
     display: flex;
     flex-direction: row;
   }
 
 
-  .storybook-sportcard-background {
+  .w7-sportcard-background {
     min-height: 426px !important;
   }
 
 }
 
 @media only screen and (max-width: 765px) {
-  .storybook-sportcard--fade {
+  .w7-sportcard--fade {
     height: 100%;
     position: absolute !important;
     bottom: 0px !important;
   }
 
-  .storybook-sportcard--large .storybook-sportcard-background {
+  .w7-sportcard--large .w7-sportcard-background {
     min-height: 580px !important;
   }
 
   /* large */
-  .storybook-sportcard--large {
+  .w7-sportcard--large {
     min-height: 580px !important;
   }
 
-  .storybook-sportcard-large-content-sum {
+  .w7-sportcard-large-content-sum {
     margin-top: 20px !important;
   }
 
-  .storybook-sportcard-large-content-event-datas>div:nth-child(2) {
+  .w7-sportcard-large-content-event-datas>div:nth-child(2) {
     height: 20px !important;
   }
 
-  .storybook-sportcard-large-content {
+  .w7-sportcard-large-content {
     height: 100%;
     width: 100%;
     left: 0px;
@@ -454,8 +552,8 @@
     justify-content: flex-start;
   }
 
-  .storybook-sportcard-large-content-teams,
-  .storybook-sportcard-large-content-players {
+  .w7-sportcard-large-content-teams,
+  .w7-sportcard-large-content-players {
     flex: 1;
     display: flex;
     justify-content: flex-end;
@@ -463,28 +561,28 @@
     margin-bottom: 50px;
   }
 
-  .storybook-sportcard-large-teams-item-logo>img {
+  .w7-sportcard-large-teams-item-logo>img {
     max-width: 42px;
   }
 
-  .storybook-sportcard-large-teams-item,
-  .storybook-sportcard-large-players-item {
+  .w7-sportcard-large-teams-item,
+  .w7-sportcard-large-players-item {
     flex-direction: column;
     padding: 0px 20px;
 
   }
 
-  .storybook-sportcard-large-teams-item:nth-child(2) .storybook-sportcard-large-teams-item-name {
+  .w7-sportcard-large-teams-item:nth-child(2) .w7-sportcard-large-teams-item-name {
     order: 2;
   }
 
-  .storybook-sportcard-large-teams-item:nth-child(2) .storybook-sportcard-large-teams-item-logo {
+  .w7-sportcard-large-teams-item:nth-child(2) .w7-sportcard-large-teams-item-logo {
     justify-content: flex-end;
     display: flex;
     flex-direction: row;
   }
 
-  .storybook-sportcard-large-daily {
+  .w7-sportcard-large-daily {
     position: relative;
     right: 0px;
     z-index: 100;

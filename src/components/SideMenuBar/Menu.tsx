@@ -34,7 +34,7 @@ export const Menu = ({ isMobileMenu = false, setShowMenu }: SideMenuBarProps): J
     <div>
       <div className={holderClass}>
         <MenuItem icon={'house'} text={'Vezérlőpult'} isActive={location.pathname === '/dashboard'} isMobile={isMobileMenu} link="/dashboard" onClick={() => setShowMenu && setShowMenu(false)} />
-        <MenuItem icon={'stat-bordered'} text={'Elemzések'} isActive={location.pathname === '/analyses'} isMobile={isMobileMenu} link="/analyses" onClick={() => setShowMenu && setShowMenu(false)} />
+        <MenuItem icon={'stat-bordered'} text={'Elemzések'} isActive={location.pathname === '/analyses-overview'} isMobile={isMobileMenu} link="/analyses-overview" onClick={() => setShowMenu && setShowMenu(false)} />
         <MenuItem icon={'calendar'} text={'Naptár'} isActive={location.pathname === '/calendar'} isMobile={isMobileMenu} link="/calendar" onClick={() => setShowMenu && setShowMenu(false)} />
         <MenuItem icon={'sign'} text={'Challenge'} isActive={location.pathname === '/challenges'} isMobile={isMobileMenu} link="/challenges" onClick={() => setShowMenu && setShowMenu(false)} />
         <MenuItem icon={'donut'} text={'Statisztikák'} isActive={location.pathname === '/statistics'} isMobile={isMobileMenu} link="/statistics" onClick={() => setShowMenu && setShowMenu(false)} />
