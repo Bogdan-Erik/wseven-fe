@@ -37,9 +37,17 @@
   background: linear-gradient(135deg, #cd0000 5.2%, #0b0812 100%);
 }
 
+.daily-match {
+  background: linear-gradient(94.15deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.2) 96.87%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 6px;
+  @apply text-center py-[5px] mt-[20px] text-[12px] font-[600];
+}
 
-
-
+.daily-match-large {
+  background: linear-gradient(94.15deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.2) 96.87%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 6px;
+  @apply text-center py-[5px] px-[15px] text-[12px] font-[600];
+}
 
 
 
