@@ -23,18 +23,63 @@ export interface SportCardProps {
   onClick?: () => void;
 }
 
-const LargeTeamsBar = () => {
+const LargeTeamsBar = (type: any) => {
+  const convertType = (['football', 'nfl', 'basketball'].includes(type)) ? 'teamSport' : ((type === 'f1') ? 'other' : 'individualSport')
+
+  const variants = {
+    teamSport: () => (
+      <>
+        <div className="hidden md:flex mt-[40px]">
+          <div className="home-team flex self-center mr-auto">
+            <div className="mr-[10px]"><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/real.png" className="w-[42px]" /></div>
+            <div className="text-[14px] lg:text-[20px] font-[500] self-center">Real Madrid</div>
+          </div>
+          <div className="away-team flex self-center">
+            <div className="text-[14px] lg:text-[20px] font-[500] self-center">Liverpool</div>
+            <div className='ml-[10px]'><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/liverpool.png" className="w-[42px]" /></div>
+          </div>
+        </div>
+        <div className='flex md:hidden relative z-[10]'>{smallTeamsBar(type)}</div>
+      </>
+    ),
+    individualSport: () => (
+      <>
+        <div className="hidden md:flex mt-[40px]">
+          <div className="home-team flex self-center mr-auto">
+            <div className="mr-[10px]"><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/real.png" className="w-[42px]" /></div>
+            <div className="text-[14px] lg:text-[20px] font-[500] self-center">Real Madrid</div>
+          </div>
+          <div className="away-team flex self-center">
+            <div className="text-[14px] lg:text-[20px] font-[500] self-center">Liverpool</div>
+            <div className='ml-[10px]'><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/liverpool.png" className="w-[42px]" /></div>
+          </div>
+        </div>
+        <div className='flex md:hidden relative z-[10]'>{smallTeamsBar(type)}</div>
+      </>
+    ),
+    other: () => (
+      <>
+        <div className="hidden md:flex mt-[40px]">
+          <div className="home-team flex self-center mr-auto">
+            <div className="mr-[10px]"><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/real.png" className="w-[42px]" /></div>
+            <div className="text-[14px] lg:text-[20px] font-[500] self-center">Real Madrid</div>
+          </div>
+          <div className="away-team flex self-center">
+            <div className="text-[14px] lg:text-[20px] font-[500] self-center">Liverpool</div>
+            <div className='ml-[10px]'><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/liverpool.png" className="w-[42px]" /></div>
+          </div>
+        </div>
+        <div className='flex md:hidden relative z-[10]'>{smallTeamsBar(type)}</div>
+      </>
+    )
+  }
+  console.log(convertType)
+  return variants[convertType]();
+
   return (
-    <div className="flex mt-[40px]">
-      <div className="home-team flex self-center mr-auto">
-        <div className="mr-[10px]"><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/real.png" className="w-[42px]" /></div>
-        <div className="text-[14px] lg:text-[20px] font-[500] self-center">Real Madrid</div>
-      </div>
-      <div className="away-team flex self-center">
-        <div className="text-[14px] lg:text-[20px] font-[500] self-center">Liverpool</div>
-        <div className='ml-[10px]'><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/liverpool.png" className="w-[42px]" /></div>
-      </div>
-    </div>
+    <>
+
+    </>
   );
 }
 
@@ -79,7 +124,6 @@ const smallTeamsBar = (type: any) => {
       </div>
     )
   }
-  console.log(convertType)
   return variants[convertType]();
 }
 
@@ -98,8 +142,8 @@ export const SportCard = ({
 
   const mode = primary ? 'w7-sportcard--primary' : 'w7-sportcard--secondary';
   return (
-    <div className={twMerge(`sportcard sportcard-${size} relative overflow-hidden h-[426px] md:h-[296px]`)}>
-      <div className={twMerge(`sportcard-background ${colorScheme}-scheme md:mt-[16px]`)}>
+    <div className={twMerge(`sportcard sportcard-${size} relative overflow-hidden ${size === 'small' ? 'h-[426px]' : 'h-full'} md:h-[296px]`)}>
+      <div className={twMerge(`${size === 'small' ? 'sportcard-background' : 'sportcard-background-large'} ${colorScheme}-scheme md:mt-[16px]`)}>
         <div className={twMerge(`flex relative z-[2] flex-col md:flex-row ${size === 'small' ? ' md:h-full' : ''}`)}>
           <div className="flex-1 relative overflow-hidden flex md:top-[-16px] md:mb-[-16px] order-2 md:order-1">
             {
@@ -142,12 +186,18 @@ export const SportCard = ({
             {/* Played */}
 
             {/* match teams */}
-            {size === 'large' && (<LargeTeamsBar />)}
+            <div className="hidden md:block">
+              {size === 'large' && LargeTeamsBar(sportType)}
+            </div>
             {/* match teams */}
           </div>
         </div>
       </div>
       {size === 'small' && (<div className='relative z-[10]'>{smallTeamsBar(sportType)}</div>)}
+      <div className="block md:hidden">
+        {size === 'large' && LargeTeamsBar(sportType)}
+      </div>
+
       <div className="h-[100px] w-full absolute bottom-0 left-0 z-[1] bg-gradient-to-t from-black/50 bottom-[-16px]"></div>
 
       <div className="h-full w-full absolute bottom-0 left-0 z-[1] bg-gradient-to-t from-black/50 md:bottom-[-16px]"></div>

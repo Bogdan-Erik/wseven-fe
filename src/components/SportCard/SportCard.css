@@ -7,6 +7,11 @@
   @apply rounded-[6px] h-[426px] md:h-[280px];
 }
 
+.sportcard-background-large {
+  height: 280px;
+  @apply rounded-[6px] h-full md:h-[280px];
+}
+
 .sportcard .blue-scheme {
   color: white;
   background: linear-gradient(135deg, #22C2CC 5.2%, #C900FF 100%);
