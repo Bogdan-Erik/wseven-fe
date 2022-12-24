@@ -53,6 +53,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
+    "reduxjs-toolkit-persist": "^7.2.1",
     "sass": "^1.54.0",
     "swiper": "^8.4.4",
     "tailwind-merge": "^1.6.0",

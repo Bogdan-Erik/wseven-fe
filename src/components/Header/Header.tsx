@@ -4,6 +4,10 @@ import logo from './../../assets/images/logo.svg';
 import { Button } from '../Button';
 import autoAnimate from '@formkit/auto-animate'
 import { twMerge } from 'tailwind-merge';
+import { reset } from '../../redux/authSlice';
+import { useAppDispatch } from '../../redux/store';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 type User = {
   name: string;
@@ -17,7 +21,8 @@ export interface HeaderProps {
 export const Header = ({ variant = 'primary', user }: HeaderProps): JSX.Element => {
   const [menuOpen, setMenuOpen] = useState(false);
   const ref = useRef(null);
-
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     if (menuOpen) {
       // const span = ref.current; // corresponding DOM node
@@ -52,7 +57,10 @@ export const Header = ({ variant = 'primary', user }: HeaderProps): JSX.Element 
 
                   </div>
                     <div>
-                      <div className="hidden md:block"><span className="font-icomoon icon icon-exit text-xl text-rgba-grey-08"></span></div>
+                      <div className="hidden md:block"><span onClick={() => {
+                        dispatch(reset());
+                        navigate('/login');
+                      }} className="font-icomoon icon icon-exit text-xl text-rgba-grey-08 cursor-pointer"></span></div>
                       <div className="block md:hidden"><img src={'https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png'} className="rounded-full w-[40px] h-[42px]" /></div>
 
                     </div>
@@ -77,10 +85,10 @@ export const Header = ({ variant = 'primary', user }: HeaderProps): JSX.Element 
                       <a href="#" className="item">Főoldal</a>
                     </div>
                     <div className="px-5 text-light-grey font-medium hover:text-white">
-                      <a href="#" className="item">Regisztráció</a>
+                      <Link to={'/register'} className="item">Regisztráció</Link>
                     </div>
                     <div className="px-5 text-light-grey font-medium hover:text-white">
-                      <a href="#" className="item">Bejelentkezés</a>
+                    <Link to={'/login'} className="item">Bejelentkezés</Link>
                     </div>
                   </div>
                   <div className="menu-icon"><span className={"flex md:hidden font-icomoon  text-light-grey text-3xl " + (!menuOpen ? 'icon-user' : 'icon-x')} onClick={() => setMenuOpen(!menuOpen)}></span></div>
