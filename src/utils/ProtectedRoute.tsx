@@ -34,7 +34,6 @@ const ProtectedRoute = (props: any) => {
     const currentTimestamp = Date.now();
 
     const diff = expirationDate.getTime() - currentTimestamp;
-    console.log(diff);
     if ((!accessToken || accessToken === 'undefined') || diff < 0) {
       store.dispatch(reset());
 

@@ -9,6 +9,8 @@ import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import timeGridPlugin from '@fullcalendar/timegrid';
 import huLocale from '@fullcalendar/core/locales/hu';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
+import { useLazyGetMatchesByDateQuery } from '../../redux/MatchSlice';
+import moment from 'moment';
 
 export interface PageProps {
 
@@ -16,6 +18,10 @@ export interface PageProps {
 
 export default ({ }: PageProps) => {
   const { height, width } = useWindowDimensions();
+
+  const [trigger, result] = useLazyGetMatchesByDateQuery()
+  console.log(result.isLoading)
+  //const { isLoading } = useGetMatchesQuery();
 
   const dataSet = [
     {
@@ -63,8 +69,15 @@ export default ({ }: PageProps) => {
     <>
       <Container className="container 2xl:mx-auto max-w-[100%] 2xl:max-w-screen-2xl 3xl:max-w-screen-3xl mx-auto" padding>
         <PageTitle title="Naptár" icon="calendar" />
+        <div className='relative'>
         <FullCalendar
           plugins={[timeGridPlugin]}
+         
+          datesSet={(dateInfo) => {
+            trigger({ dateFrom: moment(dateInfo.start).format('YYYY-MM-DD hh:mm:SS'), dateEnd: moment(dateInfo.end).format('YYYY-MM-DD hh:mm:SS') })
+            console.log(dateInfo.start) //start of the range the calendar date
+            console.log(dateInfo.end) //end of the range the calendar date
+        }}
           initialView="timeGridFourDay"
           headerToolbar={{
             start: false, // will normally be on the left. if RTL, will be on the right
@@ -77,7 +90,7 @@ export default ({ }: PageProps) => {
           allDaySlot={false}
           slotEventOverlap={false}
           dayHeaderContent={function (arg) {
-            console.log(arg);
+            //console.log(arg);
             const text = arg.text.split(' ');
             return (
               <><span>{text[0] + ' ' + text[1]}</span> <span className="font-[400] text-white">{text[2]}</span></>
@@ -102,6 +115,7 @@ export default ({ }: PageProps) => {
           eventContent={renderEventContent}
 
         />
+        </div>
       </Container>
     </>
   )

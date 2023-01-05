@@ -9,7 +9,7 @@ export const LOADING_STATE = {
 }
 
 export interface AuthSliceState {
-  accessToken: string
+  accessToken: any | string
   refreshToken: string
   userId: string
   status: 'idle' | 'pending' | 'fulfilled'

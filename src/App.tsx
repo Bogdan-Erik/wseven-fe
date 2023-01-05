@@ -32,7 +32,13 @@ import ProtectedRoute from './utils/ProtectedRoute';
 import LoginPage from './pages/Auth/Login';
 import { setAuthToken } from './redux/authSlice';
 
+import moment from 'moment';
+
+import 'moment/locale/hu'  // without this line it didn't work
+
 const App = () => {
+  moment.locale('hu') // can pass in 'en', 'fr', or 'es'
+
   const token = store.getState().auth.accessToken
   const workerRef = useRef<SharedWorker>()
   const navigate = useNavigate();

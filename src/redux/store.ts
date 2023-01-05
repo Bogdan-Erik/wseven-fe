@@ -10,8 +10,10 @@ import storage from 'redux-persist/lib/storage'
 import storageSession from 'reduxjs-toolkit-persist/lib/storage/session'
 import { useDispatch } from 'react-redux'
 import { apiSlice } from './apiSlice'
+import { hasuraApiSlice } from './hasuraApiSlice'
 import { fetchApiSlice } from './fetchApiSlice'
 import { setupListeners } from '@reduxjs/toolkit/query'
+import matchSlice, { matchApiSlice } from './MatchSlice';
 /* -- reduxSliceImport: insert above here -- */
 
 
@@ -29,9 +31,13 @@ const requirementPersistConfig = {
 
 const rootReducer = combineReducers({
   auth: authSlice,
+  match: matchSlice,
   /* -- reduxSlice: insert above here -- */
   [fetchApiSlice.reducerPath]: fetchApiSlice.reducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
+  [hasuraApiSlice.reducerPath]: hasuraApiSlice.reducer,
+  [matchApiSlice.reducerPath]: matchApiSlice.reducer,
+
   /* -- reduxApiSliceReducerPath: insert above here -- */
 })
 
@@ -43,6 +49,8 @@ const store = configureStore({
     getDefaultMiddleware().concat([
       fetchApiSlice.middleware,
       apiSlice.middleware,
+      hasuraApiSlice.middleware,
+      matchApiSlice.middleware
       /* -- reduxApiSliceMiddleware: insert above here -- */
     ]),
   preloadedState: {

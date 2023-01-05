@@ -9,7 +9,8 @@ import LigaLogo from './../../assets/images/liga_logo.png';
 import Group from './../../assets/images/group.png';
 import { twMerge } from 'tailwind-merge';
 import _ from 'lodash';
-import { string } from 'yup';
+import { hu } from 'date-fns/locale'
+import { format, parseISO } from 'date-fns'
 
 export interface SportCardProps {
   primary?: boolean;
@@ -21,9 +22,10 @@ export interface SportCardProps {
   images: string[]
   colorScheme?: 'blue' | 'orange' | 'green' | 'yellow' | 'red' | 'purple',
   onClick?: () => void;
+  date?: string
 }
 
-const LargeTeamsBar = (type: any) => {
+const LargeTeamsBar = (type: any, hazai: any, vendeg: any) => {
   const convertType = (['football', 'nfl', 'basketball'].includes(type)) ? 'teamSport' : ((type === 'f1') ? 'other' : 'individualSport')
 
   const variants = {
@@ -31,15 +33,15 @@ const LargeTeamsBar = (type: any) => {
       <>
         <div className="hidden md:flex mt-[40px]">
           <div className="home-team flex flex-col md:flex-row self-center mr-auto">
-            <div className="mr-[10px]"><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/real.png" className="w-[42px]" /></div>
-            <div className="text-[14px] lg:text-[20px] font-[500] self-center">Real Madrid</div>
+            <div className="mr-[10px]"><img src={hazai.logo} className="w-[42px]" /></div>
+            <div className="text-[14px] lg:text-[20px] font-[500] self-center">{hazai.name}</div>
           </div>
           <div className="away-team flex self-center">
-            <div className="text-[14px] lg:text-[20px] font-[500] self-center">Liverpool</div>
-            <div className='ml-[10px]'><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/liverpool.png" className="w-[42px]" /></div>
+            <div className="text-[14px] lg:text-[20px] font-[500] self-center">{vendeg.name}</div>
+            <div className='ml-[10px]'><img src={vendeg.logo} className="w-[42px]" /></div>
           </div>
         </div>
-        <div className='flex md:hidden relative z-[11]'>{smallTeamsBar(type)}</div>
+        <div className='flex md:hidden relative z-[11]'>{smallTeamsBar(type, hazai, vendeg)}</div>
       </>
     ),
     individualSport: () => (
@@ -54,7 +56,7 @@ const LargeTeamsBar = (type: any) => {
             <div className='ml-[10px]'><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/liverpool.png" className="w-[42px]" /></div>
           </div>
         </div>
-        <div className='flex md:hidden relative z-[11]'>{smallTeamsBar(type)}</div>
+        <div className='flex md:hidden relative z-[11]'>{smallTeamsBar(type, hazai, vendeg)}</div>
       </>
     ),
     other: () => (
@@ -69,7 +71,7 @@ const LargeTeamsBar = (type: any) => {
             <div className='ml-[10px]'><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/liverpool.png" className="w-[42px]" /></div>
           </div>
         </div>
-        <div className='flex md:hidden relative z-[11]'>{smallTeamsBar(type)}</div>
+        <div className='flex md:hidden relative z-[11]'>{smallTeamsBar(type, hazai, vendeg)}</div>
       </>
     )
   }
@@ -83,43 +85,43 @@ const LargeTeamsBar = (type: any) => {
   );
 }
 
-const smallTeamsBar = (type: any) => {
+const smallTeamsBar = (type: any, hazai: any, vendeg: any) => {
 
   const convertType = (['football', 'nfl', 'basketball'].includes(type)) ? 'teamSport' : ((type === 'f1') ? 'other' : 'individualSport')
   const variants = {
     teamSport: () => (
       <div className="flex mt-[30px] absolute z-[11] w-full px-[16px] bottom-[16px]">
           <div className="home-team flex flex-col md:flex-row self-center mr-auto">
-          <div className="mr-[10px]"><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/real.png" className="w-[42px]" /></div>
-          <div className="text-[12px] md:text-[16px] font-[500] self-center">Real Madrid</div>
+          <div className="mr-[10px]"><img src={hazai.logo} className="w-[42px]" /></div>
+          <div className="text-[12px] md:text-[16px] font-[500] self-center">{hazai.name}</div>
         </div>
         <div className="away-team flex flex-col md:flex-row self-center gap-[5px] md:gap-0 ">
-          <div className="text-[12px] md:text-[16px] font-[500] self-center order-2 md:order-1">Liverpool</div>
-          <div className='ml-[10px] order-1 md:order-2'><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/liverpool.png" className="w-[42px]" /></div>
+          <div className="text-[12px] md:text-[16px] font-[500] self-center order-2 md:order-1">{vendeg.name}</div>
+          <div className='ml-[10px] order-1 md:order-2'><img src={vendeg.logo} className="w-[42px]" /></div>
         </div>
       </div>
     ),
     individualSport: () => (
       <div className="flex mt-[30px] absolute z-[11] w-full px-[16px] bottom-[16px]">
         <div className="home-team flex flex-col self-center mr-auto">
-          <div className="text-[14px] font-[500] leading-[8px]">Rafael</div>
-          <div className="text-[24px] font-[500]">Nadal</div>
+          <div className="text-[14px] font-[500] leading-[8px]">{hazai.first_name}</div>
+          <div className="text-[24px] font-[500]">{hazai.last_name}</div>
         </div>
         <div className="away-team flex flex-col self-center">
-          <div className="text-[14px] text-right leading-[8px]	">Novak</div>
-          <div className="text-[24px] font-[500]">Djokovic</div>
+          <div className="text-[14px] text-right leading-[8px]	">{vendeg.first_name}</div>
+          <div className="text-[24px] font-[500]">{vendeg.last_name}</div>
         </div>
       </div>
     ),
     other: () => (
       <div className="flex mt-[30px] absolute z-[11] w-full px-[16px] bottom-[16px]">
         <div className="home-team flex flex-col self-center mr-auto">
-          <div className="mr-[10px]"><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/real.png" className="w-[42px]" /></div>
-          <div className="text-[16px] font-[500] self-center">Real Madrid</div>
+          <div className="mr-[10px]"><img src={hazai.logo} className="w-[42px]" /></div>
+          <div className="text-[16px] font-[500] self-center">{hazai.name}</div>
         </div>
         <div className="away-team flex  flex-col self-center">
-          <div className="text-[16px] font-[500] self-center">Liverpool</div>
-          <div className='ml-[10px]'><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/liverpool.png" className="w-[42px]" /></div>
+          <div className="text-[16px] font-[500] self-center">{vendeg.name}</div>
+          <div className='ml-[10px]'><img src={vendeg.logo} className="w-[42px]" /></div>
         </div>
       </div>
     )
@@ -136,6 +138,7 @@ export const SportCard = ({
   images,
   daily = false,
   colorScheme,
+  date = '2022-06-01 20:00',
   ...props
 }: SportCardProps) => {
   const players = [{ image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }, { image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }, { image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }, { image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }, { image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }];
@@ -154,7 +157,7 @@ export const SportCard = ({
                 </>
               ) : (
                 <>
-                  <div className='self-end relative z-[10] md:z-[2]'><img src="https://w7tips.fra1.digitaloceanspaces.com/images/mock-images/tennis.png" className="w-[195px]" /></div>
+                  <div className='self-end relative z-[10] md:z-[2]'><img src={images[0]} className="w-[195px]" /></div>
                 </>
               )
             }
@@ -166,8 +169,8 @@ export const SportCard = ({
             <div className={twMerge(`info-block flex ${size === 'large' ? 'flex-col md:flex-row' : ''} mt-[25px]`)}>
               <div className={twMerge(`mr-[11px] ${size === 'large' ? 'self-center md:self-start md:mr-[11px]' : ''}`)}><img src="https://w7tips.fra1.digitaloceanspaces.com/ll.png" /></div>
               <div className="date-holder self-center">
-                <div className='text-white text-[16px] font-[600]'>2022. szeptember 30.</div>
-                <div className={twMerge(`text-[20px] text-rgba-grey-08 ${size === 'large' ? 'text-center md:text-left' : ''}`)}>20:30</div>
+                <div className='text-white text-[16px] font-[600]'>{format(parseISO(date), 'yyyy. MMMM dd.',  {locale: hu})}</div>
+                <div className={twMerge(`text-[20px] text-rgba-grey-08 ${size === 'large' ? 'text-center md:text-left' : ''}`)}>{format(parseISO(date), 'HH:mm',  {locale: hu})}</div>
               </div>
             </div>
             {/* Info block */}
@@ -189,15 +192,15 @@ export const SportCard = ({
 
             {/* match teams */}
             <div className="hidden md:block">
-              {size === 'large' && LargeTeamsBar(sportType)}
+              {size === 'large' && LargeTeamsBar(sportType, hazai, vendeg)}
             </div>
             {/* match teams */}
           </div>
         </div>
       </div>
-      {size === 'small' && (<div className='relative z-[11]'>{smallTeamsBar(sportType)}</div>)}
+      {size === 'small' && (<div className='relative z-[11]'>{smallTeamsBar(sportType, hazai, vendeg)}</div>)}
       <div className="block md:hidden">
-        {size === 'large' && LargeTeamsBar(sportType)}
+        {size === 'large' && LargeTeamsBar(sportType, hazai, vendeg)}
       </div>
 
       <div className="h-[100px] w-full absolute bottom-0 left-0 z-[1] bg-gradient-to-t from-black/50 bottom-[-16px]"></div>
