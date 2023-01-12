@@ -73,7 +73,7 @@ export const matchSlice = createSlice({
                 : {
                   first_name: item.homePlayer.first_name,
                   last_name: item.homePlayer.last_name,
-                  image: item.homePLayer.image,
+                  image: item.homePlayer.image,
                 },
               away: item.awayTeam ? {
                 name: item.awayTeam.name,
@@ -87,7 +87,10 @@ export const matchSlice = createSlice({
               colorScheme: 'blue',
               size: 'small', //Ha daily
               sportType: 'football',
-              image: item.image
+              sport: item.sport,
+              image: (!item?.image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.image : item.image) ,
+              homeImage: (!item?.home_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.home_image : item.home_image) ,
+              awayImage: (!item?.away_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.away_image : item.away_image) ,
             }
           })
 
@@ -144,12 +147,19 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
       query: () => ({
         body: gql`
           query {
-            matches(where: { type: {_eq: 1}}) {
+            matches {
               id
               date_start
               date_end
               type
-              image
+              match_cover
+              home_image
+              away_image
+              sport {
+                id
+                color
+                name
+              }
               homeTeam {
                 id
                 name

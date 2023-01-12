@@ -75,7 +75,6 @@ const LargeTeamsBar = (type: any, hazai: any, vendeg: any) => {
       </>
     )
   }
-  console.log(convertType)
   return variants[convertType]();
 
   return (
@@ -141,6 +140,7 @@ export const SportCard = ({
   date = '2022-06-01 20:00',
   ...props
 }: SportCardProps) => {
+  console.log(sportType);
   const players = [{ image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }, { image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }, { image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }, { image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }, { image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }];
 
   const mode = primary ? 'w7-sportcard--primary' : 'w7-sportcard--secondary';
@@ -179,7 +179,7 @@ export const SportCard = ({
               <div className={twMerge(`flex min-w-[130px] order-1 xl:order-2 ${size === 'large' ? 'place-content-center md:place-content-start' : 'place-content-start'} mb-[10px] xl:mb-0`)}>
                 <>
                   {_.sampleSize(players, 4).map((item, key) => {
-                    return <div className="relative" style={{ left: -(key * 10) }} ><img src={item.image} className="rounded-full w-[26px] h-[26px] border-[1px] border-white" /></div>
+                    return <div className="relative" style={{ left: -(key * 10) }} ><img src={players[0].image} className="rounded-full w-[26px] h-[26px] border-[1px] border-white" /></div>
                   })}
                   {players.length > 4 && (
                     <div className="relative left-[-40px]"><div className="more rounded-full w-[26px] h-[26px] border-[2px] border-white text-[11px] bg-black text-white flex flex-col justify-center text-center font-[600]">+8</div></div>

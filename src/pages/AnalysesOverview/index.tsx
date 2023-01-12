@@ -99,7 +99,7 @@ export default ({ }: PageProps) => {
              </div>*/}
             {activeMatches?.map(item => {
               return (<div>
-                <SportCard hazai={item.home} vendeg={item.away}  images={[item.image]} size={item.size} date={item.dateStart} daily={false} colorScheme={item.colorScheme}  sportType={item.sportType} />
+                <SportCard hazai={item.home} vendeg={item.away}  images={[item.homeImage]} size={item.size} date={item.dateStart} daily={false} colorScheme={item.sport.color ?? 'blue'}  sportType={item?.sport?.name.toLowerCase() ?? 'football'} />
               </div>)
             })}
 
