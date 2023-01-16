@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { gql } from 'graphql-request'
+import moment from 'moment'
 import { hasuraApiSlice } from './hasuraApiSlice'
 import store, { RootState } from './store'
 
@@ -37,11 +38,13 @@ export interface MatchObject {
 export interface MatchSlice {
   matches: any
   activeMatches: any
+  filteredTips: any
 }
 
 export const initialState: MatchSlice = {
   matches: [],
   activeMatches: [],
+  filteredTips: [],
 }
 
 export const matchSlice = createSlice({
@@ -60,6 +63,28 @@ export const matchSlice = createSlice({
         console.log(action.payload)
       },
     ),
+      builder.addMatcher(
+        matchApiSlice.endpoints.getTipsByDateRange.matchFulfilled,
+        (state, action) => {
+          console.log(action.payload)
+
+
+          const tips = action.payload.map((item: any) => {
+            return {
+              date: moment(item.analyasis.match.date_start).format('YYYY. MMMM DD'),
+              time: moment(item.analyasis.match.date_start).format('HH:mm'),
+              home: item.analyasis.match.homePlayer ? item.analyasis.match.homePlayer.first_name + ' ' + item.analyasis.match.homePlayer.last_name : item.analyasis.match.homeTeam.name,
+              away: item.analyasis.match.awayPlayer ? item.analyasis.match.awayPlayer.first_name + ' ' + item.analyasis.match.awayPlayer.last_name : item.analyasis.match.awayTeam.name,
+              winner: 'home',
+              odds: item.odds,
+              tippString: item.name,
+              isWinner: true,
+            }
+          })
+
+          state.filteredTips = tips;
+        },
+      ),
       builder.addMatcher(
         matchApiSlice.endpoints.getActiveMatches.matchFulfilled,
         (state, action) => {
@@ -85,12 +110,13 @@ export const matchSlice = createSlice({
               },
               dateStart: item.date_start,
               colorScheme: 'blue',
-              size: 'small', //Ha daily
+              size: item.is_daily ? 'large' : 'small', //Ha daily
               sportType: 'football',
               sport: item.sport,
-              image: (!item?.image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.image : item.image) ,
-              homeImage: (!item?.home_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.home_image : item.home_image) ,
-              awayImage: (!item?.away_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.away_image : item.away_image) ,
+              isDaily: item.is_daily,
+              image: (!item?.image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.image : item.image),
+              homeImage: (!item?.home_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.home_image : item.home_image),
+              awayImage: (!item?.away_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.away_image : item.away_image),
             }
           })
 
@@ -110,6 +136,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
               id
               date_start
               date_end
+              is_daily
               homeTeam {
                 id
                 name
@@ -147,13 +174,14 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
       query: () => ({
         body: gql`
           query {
-            matches {
+            matches(order_by: {is_daily: desc, date_start: asc}) {
               id
               date_start
               date_end
               type
               match_cover
               home_image
+              is_daily
               away_image
               sport {
                 id
@@ -194,12 +222,52 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
       }),
       transformResponse: (response) => response.matches,
     }),
+    getTipsByDateRange: builder.query<any, any>({
+      query: (arg) => ({
+        body: gql`
+        query getTipsByDateRange($dateFrom: timestamp!, $dateTo: timestamp!) {
+          tips(where: {analyasis: {match: {_and: {date_start: {_gte: $dateFrom}, date_end: {_lte: $dateTo}}}}}) {
+            id
+            name
+            odds
+            rating
+            analyasis {
+              match {
+                date_start
+                homePlayer {
+                  first_name
+                  last_name
+                }
+                homeTeam {
+                  name
+                }
+                awayPlayer {
+                  first_name
+                  last_name
+                }
+                awayTeam {
+                  name
+                }
+              }
+            }
+          }
+        }        
+        `,
+        variables: {
+          dateFrom: arg.dateFrom,
+          dateTo: arg.dateTo,
+        },
+        token: store.getState().auth.accessToken,
+      }),
+      transformResponse: (response) => response.tips,
+    }),
   }),
 })
 
 export const {
   useLazyGetMatchesByDateQuery,
   useGetActiveMatchesQuery,
+  useLazyGetTipsByDateRangeQuery,
 } = matchApiSlice
 
 export const { setActiveMatches } = matchSlice.actions

@@ -48,12 +48,16 @@ const LargeTeamsBar = (type: any, hazai: any, vendeg: any) => {
       <>
         <div className="hidden md:flex mt-[40px]">
           <div className="home-team flex self-center mr-auto">
-            <div className="mr-[10px]"><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/real.png" className="w-[42px]" /></div>
-            <div className="text-[14px] lg:text-[20px] font-[500] self-center">Real Madrid</div>
+            <div className="text-[14px] lg:text-[20px] font-[500] self-center">
+              <div className="text-[14px] font-[500] leading-[8px]">{hazai.first_name}</div>
+              <div className="text-[24px] font-[500]">{hazai.last_name}</div>
+            </div>
           </div>
           <div className="away-team flex self-center">
-            <div className="text-[14px] lg:text-[20px] font-[500] self-center">Liverpool</div>
-            <div className='ml-[10px]'><img src="https://w7tips.fra1.digitaloceanspaces.com/images/teams/liverpool.png" className="w-[42px]" /></div>
+            <div className="text-[14px] lg:text-[20px] font-[500] self-center">
+              <div className="text-[14px] text-right leading-[8px]	">{vendeg.first_name}</div>
+              <div className="text-[24px] font-[500]">{vendeg.last_name}</div>
+            </div>
           </div>
         </div>
         <div className='flex md:hidden relative z-[11]'>{smallTeamsBar(type, hazai, vendeg)}</div>
@@ -90,7 +94,7 @@ const smallTeamsBar = (type: any, hazai: any, vendeg: any) => {
   const variants = {
     teamSport: () => (
       <div className="flex mt-[30px] absolute z-[11] w-full px-[16px] bottom-[16px]">
-          <div className="home-team flex flex-col md:flex-row self-center mr-auto">
+        <div className="home-team flex flex-col md:flex-row self-center mr-auto">
           <div className="mr-[10px]"><img src={hazai.logo} className="w-[42px]" /></div>
           <div className="text-[12px] md:text-[16px] font-[500] self-center">{hazai.name}</div>
         </div>
@@ -152,8 +156,8 @@ export const SportCard = ({
             {
               size === 'large' ? (
                 <>
-                  <div className='flex-1 flex justify-end relative z-[10]'><img src={images[0]} className=" w-[199px]" /></div>
-                  <div className='flex-1 flex justify-start  z-[10]' ><img src={images[1]} className=" w-[199px]" /></div>
+                  <div className='flex-1 flex justify-center relative z-[10]'><img src={images[0]} className=" w-[199px]" /></div>
+                  {/*<div className='flex-1 flex justify-start  z-[10]' ><img src={images[1]} className=" w-[199px]" /></div>*/}
                 </>
               ) : (
                 <>
@@ -169,8 +173,8 @@ export const SportCard = ({
             <div className={twMerge(`info-block flex ${size === 'large' ? 'flex-col md:flex-row' : ''} mt-[25px]`)}>
               <div className={twMerge(`mr-[11px] ${size === 'large' ? 'self-center md:self-start md:mr-[11px]' : ''}`)}><img src="https://w7tips.fra1.digitaloceanspaces.com/ll.png" /></div>
               <div className="date-holder self-center">
-                <div className='text-white text-[16px] font-[600]'>{format(parseISO(date), 'yyyy. MMMM dd.',  {locale: hu})}</div>
-                <div className={twMerge(`text-[20px] text-rgba-grey-08 ${size === 'large' ? 'text-center md:text-left' : ''}`)}>{format(parseISO(date), 'HH:mm',  {locale: hu})}</div>
+                <div className='text-white text-[16px] font-[600]'>{format(parseISO(date), 'yyyy. MMMM dd.', { locale: hu })}</div>
+                <div className={twMerge(`text-[20px] text-rgba-grey-08 ${size === 'large' ? 'text-center md:text-left' : ''}`)}>{format(parseISO(date), 'HH:mm', { locale: hu })}</div>
               </div>
             </div>
             {/* Info block */}

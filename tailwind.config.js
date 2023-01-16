@@ -1,8 +1,12 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors')
+
 module.exports = {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
+    "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
   ],
   theme: {
     extend: {
@@ -50,7 +54,13 @@ module.exports = {
       'rgba-transparent-02': 'rgba(0, 0, 0, 0.1)',
       'gradient-blue-start': '#22C2CC',
       'gradient-purple-end': '#C900FF',
-      'whitesmoke': '#d9d9d9'
+      'whitesmoke': '#d9d9d9',
+      stone: colors.warmGray,
+      sky: colors.lightBlue,
+      neutral: colors.trueGray,
+      gray: colors.coolGray,
+      slate: colors.blueGray,
+      violet: colors.violet
 
     },
     fontFamily: {
@@ -86,5 +96,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }

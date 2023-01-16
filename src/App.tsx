@@ -32,6 +32,11 @@ import ProtectedRoute from './utils/ProtectedRoute';
 import LoginPage from './pages/Auth/Login';
 import { setAuthToken } from './redux/authSlice';
 
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 import moment from 'moment';
 
 import 'moment/locale/hu'  // without this line it didn't work

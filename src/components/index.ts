@@ -33,4 +33,5 @@ export { Loader } from './Loader'
 export { ToggleSwitch } from './ToggleSwitch'
 export { InformationItem } from './InformationItem'
 export { NewsItem } from './NewsItem'
+export { DataPaginator } from './DataPaginator'
 /* -- component: insert above here -- */
