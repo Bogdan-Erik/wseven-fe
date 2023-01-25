@@ -90,6 +90,7 @@ export const matchSlice = createSlice({
         (state, action) => {
           const matches = action.payload?.map(item => {
             return {
+              id: item.id,
               home: item.homeTeam ?
                 {
                   name: item.homeTeam.name,
@@ -114,6 +115,7 @@ export const matchSlice = createSlice({
               sportType: 'football',
               sport: item.sport,
               isDaily: item.is_daily,
+              location: item.location,
               image: (!item?.image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.image : item.image),
               homeImage: (!item?.home_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.home_image : item.home_image),
               awayImage: (!item?.away_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.away_image : item.away_image),
@@ -261,6 +263,117 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
       }),
       transformResponse: (response) => response.tips,
     }),
+    getMatch: builder.query<any, any>({
+      query: (arg) => ({
+        body: gql`
+        query getMatch($matchId: uuid!) {
+           matches_by_pk(id: $matchId) {
+            id
+            date_start
+            date_end
+            type
+            match_cover
+            home_image
+            is_daily
+            away_image
+            location
+            weather {
+              name
+            }
+            sport {
+              id
+              color
+              name
+            }
+            homeTeam {
+              id
+              name
+              logo
+            }
+            awayTeam {
+              id
+              name
+              logo
+            }
+            homePlayer {
+              id
+              first_name
+              last_name
+              image
+            }
+            awayPlayer {
+              id
+              first_name
+              last_name
+              image
+            }
+            league {
+              id
+              image
+              name
+            }
+            analyses {
+              id
+              analyses
+              tips {
+                id
+                name
+                odds
+                rating
+                tet
+              }
+            }
+            match_datas {
+              key
+              side
+              value
+            }
+            }
+        }        
+        `,
+        variables: {
+          matchId: arg.id,
+        },
+        token: store.getState().auth.accessToken,
+      }),
+      transformResponse: (response) => {
+        const item = response.matches_by_pk;
+        return {
+          id: item.id,
+          home: item.homeTeam ?
+            {
+              name: item.homeTeam.name,
+              logo: item.homeTeam.logo ?? 'https://w7tips.fra1.digitaloceanspaces.com/images/teams/real.png'
+            }
+            : {
+              first_name: item.homePlayer.first_name,
+              last_name: item.homePlayer.last_name,
+              image: item.homePlayer.image,
+            },
+          away: item.awayTeam ? {
+            name: item.awayTeam.name,
+            logo: item.awayTeam.logo ?? 'https://w7tips.fra1.digitaloceanspaces.com/images/teams/liverpool.png'
+          } : {
+            first_name: item.awayPlayer.first_name,
+            last_name: item.awayPlayer.last_name,
+            image: item.awayPlayer.image,
+          },
+          dateStart: item.date_start,
+          colorScheme: 'blue',
+          size: item.is_daily ? 'large' : 'small', //Ha daily
+          sportType: 'football',
+          sport: item.sport,
+          isDaily: item.is_daily,
+          location: item.location,
+          weather: item.weather,
+          analyses: item.analyses?.[0],
+          image: (!item?.image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.match_cover : item.match_cover),
+          homeImage: (!item?.home_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.home_image : item.home_image),
+          awayImage: (!item?.away_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.away_image : item.away_image),
+          matchDatas: item.match_datas,
+        }
+      },
+    }),
   }),
 })
 
@@ -268,6 +381,7 @@ export const {
   useLazyGetMatchesByDateQuery,
   useGetActiveMatchesQuery,
   useLazyGetTipsByDateRangeQuery,
+  useGetMatchQuery,
 } = matchApiSlice
 
 export const { setActiveMatches } = matchSlice.actions

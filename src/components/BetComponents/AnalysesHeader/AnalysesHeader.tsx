@@ -4,7 +4,7 @@ import { Icon } from '../../Icon';
 import { OddsItem } from '../OddsItem';
 import './AnalysesHeader.scss';
 import _ from "lodash";
-import { BetRow, Container, CountdownTimer, SmallTitle, StatisticsChart } from '../../';
+import { BetRow, Container, CountdownTimer, SmallTitle, StatisticsChart, Statistics, LastMatch, LeaguePosition, Missings } from '../../';
 import { motion } from 'framer-motion';
 import { url } from 'inspector';
 import { format } from 'date-fns';
@@ -20,8 +20,9 @@ export interface LastMatchProps {
 }
 
 export interface RankingProps {
-  place: number
-  points?: number
+  ranking_title: string
+  place: number | string
+  points?: number | string
 }
 
 export interface AgeProps {
@@ -76,65 +77,10 @@ export interface AnalysesHeaderProps {
   matchLogoSecondary?: string
   matchDate: MatchDateProps
   locationDatas: LocationDatasProps
-  tennisFieldType?: TennisFieldType
+  tennisFieldType?: TennisFieldType,
+  isDaily?: boolean
+  sport?: any
 }
-
-const homeDatas = [
-  {
-    type: 'win',
-    score: 2
-  },
-  {
-    type: 'win',
-    score: 3
-  },
-  {
-    type: 'loose',
-    score: 3
-  },
-  {
-    type: 'win',
-    score: 2
-  },
-  {
-    type: 'draw',
-    score: 0
-  },
-  {
-    type: 'win',
-    score: 2
-  },
-];
-
-const awayDatas = [
-  {
-    type: 'draw',
-    score: 0
-  },
-  {
-    type: 'draw',
-    score: 0
-  },
-  {
-    type: 'loose',
-    score: 2
-  },
-  {
-    type: 'loose',
-    score: 1
-  },
-  {
-    type: 'win',
-    score: 3
-  },
-  {
-    type: 'win',
-    score: 2
-  },
-];
-
-
-
 
 export const AnalysesHeader = ({
   type,
@@ -145,97 +91,61 @@ export const AnalysesHeader = ({
   matchLogoSecondary,
   matchDate,
   locationDatas,
-  tennisFieldType
+  tennisFieldType,
+  isDaily,
+  sport
 }: AnalysesHeaderProps): JSX.Element => {
   const THREE_DAYS_IN_MS = new Date(matchDate.date).getTime();
 
   const dateTimeAfterThreeDays = THREE_DAYS_IN_MS;
 
+  const colorScheme = sport.color;
   return (
     <div>
-      <div className="header-bg relative" style={{ background: `url(${background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition:'center' }}>
+      <div className="header-bg relative" style={{ background: `url(${background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
+        <div className={`${colorScheme}-scheme bg-opacity-75 relative`}>
         <div className="smoke relative flex px-[30px] py-[30px]">
           <video src="https://w7tips.fra1.digitaloceanspaces.com/videos/smokebg.mp4" playsInline loop autoPlay muted></video>
-          <motion.div animate={{ opacity: 1 }} transition={{ delay: 1}} className="sidebar left-side z-[10]  left-[30px] top-0 opacity-0" >
-            <div className="holder-space-top holder-space">
-              <span className="title">Forma</span>
-              <StatisticsChart datas={homeObject.shape} />
+          <motion.div animate={{ opacity: 1 }} transition={{ delay: 1 }} className="sidebar left-side z-[10]  left-[30px] top-0 opacity-0" >
 
-            </div>
-            <div className="holder-space">
-              <span className="title">Előző meccs</span>
-              <div className="flex mt-[5px]">
-                <div className="mr-[10px]"><img src={homeObject.lastMatch.logo} /></div>
-                <div className="self-center text-xs">{homeObject.lastMatch.value}</div>
-              </div>
-            </div>
-            <div className="holder-space">
-              <span className="title">Liga pozíció</span>
-              <div className="flex flex-row  mt-[5px]">
-                <div className="text-[32px] font-semibold mr-[4px]">{homeObject.ranking.place}.</div>
-                <div className="flex flex-col justify-center">
-                  <div className="text-xs">hely</div>
-                  <div className="text-xs text-rgba-grey">({homeObject.ranking?.points ?? 0} pont)</div>
-                </div>
-              </div>
-            </div>
-            <div className="holder-space">
-              <span className="title">Hiányzók</span>
-              <div className="missing mt-[5px]">
-                <>
-                  {
-                    homeObject?.missings?.map((item: MissingsProps) => (
-                      <div className="missing-item">
-                        <div className="mr-[8px]"><div className="mark"><img src={`https://w7tips.fra1.digitaloceanspaces.com/images/missing/${item.type}.png`} width="20" height="20" /></div></div>
-                        <div>{item.name}</div>
-                      </div>
-                    ))
-                  }
-                </>
-              </div>
-            </div>
+            {homeObject?.shape && (
+              <Statistics datas={homeObject.shape} position={'left'} />
+            )}
+
+            {homeObject?.lastMatch && (
+              <LastMatch data={homeObject.lastMatch} position={'left'} />
+            )}
+
+
+            {homeObject?.ranking && (
+              <LeaguePosition data={homeObject.ranking} position={'left'} />
+            )}
+
+            {homeObject?.missings && (
+              <Missings data={homeObject.missings} position={'left'} />
+            )}
+
           </motion.div>
 
           <motion.div animate={{ opacity: 1 }} transition={{ delay: 1 }} className="sidebar right-side z-[10] right-[30px] top-0 opacity-0">
-            <div className="holder-space-top holder-space text-right">
-              <span className="title">Forma</span>
-              <StatisticsChart datas={awayObject.shape} customHolderClass={'ml-auto'} />
+            {awayObject.shape && (
+              <Statistics datas={awayObject.shape} position={'right'} />
+            )}
 
-            </div>
-            <div className="holder-space text-right">
-              <span className="title">Előző meccs</span>
-              <div className="flex mt-[5px]">
-                <div className="self-center text-xs ml-auto mr-[10px]">{awayObject.lastMatch.value}</div>
-                <div className=" flex justify-end"><img src={awayObject.lastMatch.logo} /></div>
-              </div>
-            </div>
-            <div className="holder-space text-right">
-              <span className="title">Liga pozíció</span>
-              <div className="flex flex-row  mt-[5px] justify-end">
-                <div className="text-[32px] font-semibold mr-[4px]">{awayObject.ranking.place}.</div>
-                <div className="flex flex-col justify-center">
-                  <div className="text-xs text-left">hely</div>
-                  <div className="text-xs text-left text-rgba-grey">({awayObject.ranking?.points ?? 0} pont)</div>
-                </div>
-              </div>
-            </div>
-            <div className="holder-space text-right">
-              <span className="title">Hiányzók</span>
-              <div className="missing mt-[5px]">
-                <>
-                  {
-                    homeObject?.missings?.map((item: MissingsProps) => (
-                      <div className="missing-item">
-                        <div className="text-end ml-auto mr-[8px]">{item.name}</div>
-                        <div><div className="mark"><img src={`https://w7tips.fra1.digitaloceanspaces.com/images/missing/${item.type}.png`} width="20" height="20" /></div></div>
-                      </div>
-                    ))
-                  }
-                </>
-              </div>
-            </div>
+            {awayObject?.lastMatch && (
+              <LastMatch data={awayObject.lastMatch} position={'right'} />
+            )}
+
+            {awayObject?.ranking && (
+              <LeaguePosition data={awayObject.ranking} position={'right'} />
+            )}
+
+            {awayObject?.missings && (
+              <Missings data={awayObject.missings} position={'right'} />
+            )}
           </motion.div>
 
+        </div>
         </div>
         <div className="absolute center-content">
           <motion.div animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="left-side">
@@ -252,7 +162,7 @@ export const AnalysesHeader = ({
               </div>
             </div>
             <div className="flex-1 flex flex-col items-center justify-end">
-              <div className="text-[20px] font-[500]">{locationDatas.weather} °C </div>
+              <div className="text-[20px] font-[500]">{locationDatas.weather}</div>
               <div className="text-sm font-semibold mb-[50px]">{locationDatas.location}</div>
             </div>
           </motion.div>
@@ -298,9 +208,12 @@ export const AnalysesHeader = ({
           </div>
           <div className="text-xl md:text-2xl mt-[15px] text-left">{homeObject.participantName}</div>
         </div>
-        <div className="hidden text-center md:flex flex-col justify-end">
-          <span className="badge">A nap tippje</span>
-        </div>
+        {isDaily && (
+          <div className="hidden text-center md:flex flex-col justify-end">
+            <span className="badge">A nap tippje</span>
+          </div>
+        )}
+
         <div className="flex-1 text-center">
           <div className="flex justify-end">
             <div className="bg-rgba-grey-08 backdrop-blur-[5px] h-[59px] w-[59px] rounded-full flex justify-center">
@@ -313,89 +226,47 @@ export const AnalysesHeader = ({
 
       <div className="flex xl:hidden w-full   px-[15px]">
         <motion.div animate={{ opacity: 1 }} transition={{ delay: 0 }} className="sidebar-mobile left-side  left-[30px] top-0 opacity-0 flex-1" >
-          <div className="holder-space-top holder-space">
-            <span className="title">Forma</span>
-            <StatisticsChart datas={homeObject.shape} />
 
-          </div>
-          <div className="holder-space">
-            <span className="title">Előző meccs</span>
-            <div className="flex mt-[5px]">
-              <div className="mr-[10px]"><img src={homeObject.lastMatch.logo} /></div>
-              <div className="self-center text-xs">{homeObject.lastMatch.value}</div>
-            </div>
-          </div>
-          <div className="holder-space">
-            <span className="title">Liga pozíció</span>
-            <div className="flex flex-row  mt-[5px]">
-              <div className="text-[32px] font-semibold mr-[4px]">{homeObject.ranking.place}.</div>
-              <div className="flex flex-col justify-center">
-                <div className="text-xs">hely</div>
-                <div className="text-xs text-rgba-grey">({homeObject.ranking?.points} pont)</div>
-              </div>
-            </div>
-          </div>
-          <div className="holder-space">
-            <span className="title">Hiányzók</span>
-            <div className="missing mt-[5px]">
-              <>
-                {
-                  homeObject?.missings?.map((item: MissingsProps) => (
-                    <div className="missing-item">
-                      <div className="mr-[8px]"><div className="mark"><img src={`https://w7tips.fra1.digitaloceanspaces.com/images/missing/${item.type}.png`} width="20" height="20" /></div></div>
-                      <div>{item.name}</div>
-                    </div>
-                  ))
-                }
-              </>
-            </div>
-          </div>
+          {homeObject?.shape && (
+            <Statistics datas={homeObject.shape} position={'left'} />
+          )}
+
+          {homeObject?.lastMatch && (
+            <LastMatch data={homeObject.lastMatch} position={'left'} />
+          )}
+
+          {homeObject.ranking && (
+            <LeaguePosition data={homeObject.ranking} position={'left'} />
+          )}
+
+
+          {homeObject?.missings && (
+            <Missings data={homeObject.missings} position={'left'} />
+          )}
         </motion.div>
 
         <motion.div animate={{ opacity: 1 }} transition={{ delay: 0 }} className="sidebar-mobile right-side  right-[30px] top-0 opacity-0 flex-1">
-          <div className="holder-space-top holder-space text-right">
-            <span className="title">Forma</span>
-            <StatisticsChart datas={awayObject.shape} customHolderClass={'ml-auto'} />
+          {awayObject.shape && (
+            <Statistics datas={awayObject.shape} position={'right'} />
+          )}
 
-          </div>
-          <div className="holder-space text-right">
-            <span className="title">Előző meccs</span>
-            <div className="flex mt-[5px]">
-              <div className="self-center text-xs ml-auto mr-[10px]">{awayObject.lastMatch.value}</div>
-              <div className=" flex justify-end"><img src={awayObject.lastMatch.logo} /></div>
-            </div>
-          </div>
-          <div className="holder-space text-right">
-            <span className="title">Liga pozíció</span>
-            <div className="flex flex-row  mt-[5px] justify-end">
-              <div className="text-[32px] font-semibold mr-[4px]">{awayObject.ranking.place}.</div>
-              <div className="flex flex-col justify-center">
-                <div className="text-xs text-left">hely</div>
-                <div className="text-xs text-left text-rgba-grey">({awayObject.ranking?.points} pont)</div>
-              </div>
-            </div>
-          </div>
-          <div className="holder-space text-right">
-            <span className="title">Hiányzók</span>
-            <div className="missing mt-[5px]">
-            <>
-                {
-                  awayObject?.missings?.map((item: MissingsProps) => (
-                    <div className="missing-item">
-                      <div className="text-end ml-auto mr-[8px]">{item.name}</div>
-                      <div><div className="mark"><img src={`https://w7tips.fra1.digitaloceanspaces.com/images/missing/${item.type}.png`} width="20" height="20" /></div></div>
-                    </div>
-                  ))
-                }
-              </>
-            </div>
-          </div>
+          {awayObject?.lastMatch && (
+            <LastMatch data={awayObject.lastMatch} position={'right'} />
+          )}
+
+          {awayObject.ranking && (
+            <LeaguePosition data={awayObject.ranking} position={'right'} />
+          )}
+
+          {awayObject?.missings && (
+            <Missings data={awayObject.missings} position={'right'} />
+          )}
 
         </motion.div>
       </div>
       <div className="flex xl:hidden ">
         <div className="flex-1 flex flex-col items-center justify-end">
-          <div className="text-[20px] font-[500]">{locationDatas.weather} °C </div>
+          <div className="text-[20px] font-[500]">{locationDatas.weather}</div>
           <div className="text-sm font-semibold mb-[50px]">{locationDatas.location}</div>
         </div>
       </div>

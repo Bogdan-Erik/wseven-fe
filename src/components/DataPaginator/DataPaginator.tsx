@@ -6,9 +6,10 @@ export interface DataPaginatorProps {
   datas: any[]
   Component: any,
   additionalComponentProps?: any,
+  NoResultComponent?: any
 }
 
-export const DataPaginator = ({ datas, Component, additionalComponentProps = {} }: DataPaginatorProps): JSX.Element => {
+export const DataPaginator = ({ datas, Component, NoResultComponent, additionalComponentProps = {} }: DataPaginatorProps): JSX.Element => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [filteredDatas, setFilteredDatas] = useState<any>([]);
@@ -53,31 +54,35 @@ export const DataPaginator = ({ datas, Component, additionalComponentProps = {} 
             </div>
           )
         })}
+        {filteredDatas.length === 0 && (<NoResultComponent />)}
       </div>
-      <div>
-        <TablePagination
-          component="div"
-          count={datas.length}
-          page={page}
-          onPageChange={handleChangePage}
-          rowsPerPage={rowsPerPage}
-          rowsPerPageOptions={[10, 25, 50, 100]}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          labelDisplayedRows={function defaultLabelDisplayedRows({ from, to, count }) {
-            return `${from}–${to} / ${count !== -1 ? count : `more than ${to}`}`;
-          }}
-          sx={{
-            color: 'white',
-            ' .Mui-disabled': {
-              color: "grey !important",
-            },
-            ' .MuiTablePagination-selectIcon': {
-              color: "white",
-            }
-          }}
-          labelRowsPerPage={'Találat per oldal'}
-        />
-      </div>
+      {filteredDatas.length > 0 && (
+        <div>
+          <TablePagination
+            component="div"
+            count={datas.length}
+            page={page}
+            onPageChange={handleChangePage}
+            rowsPerPage={rowsPerPage}
+            rowsPerPageOptions={[10, 25, 50, 100]}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            labelDisplayedRows={function defaultLabelDisplayedRows({ from, to, count }) {
+              return `${from}–${to} / ${count !== -1 ? count : `more than ${to}`}`;
+            }}
+            sx={{
+              color: 'white',
+              ' .Mui-disabled': {
+                color: "grey !important",
+              },
+              ' .MuiTablePagination-selectIcon': {
+                color: "white",
+              }
+            }}
+            labelRowsPerPage={'Találat per oldal'}
+          />
+        </div>
+      )}
+
     </>
   )
 }

@@ -131,6 +131,7 @@ const App = () => {
             )}
 
           </Helmet>
+          {import.meta.env.VITE_ENV === 'dev' && (<div className="absolute right-[-50px] z-[1000] top-[40px] bg-yellow px-[50px] py-[5px] font-[600] rotate-45">DEVELOPMENT</div>)}
           <Provider store={store}>
             <Routes>
 
@@ -145,7 +146,7 @@ const App = () => {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/developing" element={<Developing />} />
                 <Route path="/analyses-overview" element={<AnalysesOverview />} />
-                <Route path="/analyses" element={<Analyses />} />
+                <Route path="/analyses/:id" element={<Analyses />} />
                 <Route path="/challenges" element={<Challenge />} />
                 <Route path="/calendar" element={<Calendar />} />
                 <Route path="/statistics" element={<Statistics />} />

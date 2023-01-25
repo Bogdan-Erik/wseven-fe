@@ -11,6 +11,7 @@ import { twMerge } from 'tailwind-merge';
 import _ from 'lodash';
 import { hu } from 'date-fns/locale'
 import { format, parseISO } from 'date-fns'
+import { motion } from "framer-motion"
 
 export interface SportCardProps {
   primary?: boolean;
@@ -149,7 +150,9 @@ export const SportCard = ({
 
   const mode = primary ? 'w7-sportcard--primary' : 'w7-sportcard--secondary';
   return (
-    <div className={twMerge(`sportcard sportcard-${size} relative overflow-hidden ${size === 'small' ? 'h-[426px]' : 'h-full'} md:h-[296px]`)}>
+    <motion.div whileHover={{
+      scale: 1.05,
+    }}  whileTap={{ scale: 0.95 }} className={twMerge(`sportcard sportcard-${size} relative overflow-hidden ${size === 'small' ? 'h-[426px]' : 'h-full'} md:h-[296px]`)}>
       <div className={twMerge(`${size === 'small' ? 'sportcard-background' : 'sportcard-background-large'} ${colorScheme}-scheme md:mt-[16px]`)}>
         <div className={twMerge(`flex relative flex-col md:flex-row ${size === 'small' ? ' md:h-full' : ''}`)}>
           <div className="flex-1 relative overflow-hidden flex md:top-[-16px] md:mb-[-16px] order-2 md:order-1">
@@ -157,7 +160,7 @@ export const SportCard = ({
               size === 'large' ? (
                 <>
                   <div className='flex-1 flex justify-center relative z-[10]'><img src={images[0]} className=" w-[199px]" /></div>
-                  {/*<div className='flex-1 flex justify-start  z-[10]' ><img src={images[1]} className=" w-[199px]" /></div>*/}
+                  <div className='flex-1 flex justify-start  z-[10]' ><img src={images[1]} className=" w-[199px]" /></div>
                 </>
               ) : (
                 <>
@@ -211,7 +214,7 @@ export const SportCard = ({
       <div className=" mobile-shadow"></div>
       <div className="mobile-shadow h-full w-full absolute bottom-0 left-0 z-[1] bg-gradient-to-t from-black/50 md:bottom-[-16px]"></div>
       <div className="h-full w-full absolute bottom-0 left-0 z-[1] bg-gradient-to-l from-black/50 md:bottom-[-16px]"></div>
-    </div>
+    </motion.div>
 
     /*<div className={['w7-sportcard', `w7-sportcard--${size}`, mode].join(' ')}>
       <div className={'w7-sportcard-image-holder'}>

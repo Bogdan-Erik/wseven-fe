@@ -34,4 +34,8 @@ export { ToggleSwitch } from './ToggleSwitch'
 export { InformationItem } from './InformationItem'
 export { NewsItem } from './NewsItem'
 export { DataPaginator } from './DataPaginator'
+export { Statistics } from './MatchComponents/Statistics/Statistics';
+export { LastMatch } from './MatchComponents/LastMatch/LastMatch';
+export { LeaguePosition } from './MatchComponents/LeaguePosition/LeaguePosition';
+export { Missings } from './MatchComponents/Missings/Missings';
 /* -- component: insert above here -- */
