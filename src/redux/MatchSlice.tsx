@@ -366,7 +366,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
           isDaily: item.is_daily,
           location: item.location,
           weather: item.weather,
-          analyses: item.analyses?.[0],
+          analyses: item.analyses.length > 0 ? item.analyses?.[0] : [],
           image: (!item?.image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.match_cover : item.match_cover),
           homeImage: (!item?.home_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.home_image : item.home_image),
           awayImage: (!item?.away_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.away_image : item.away_image),

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { AnalysesHeader, BetRow, Container, CountdownTimer, SmallTitle, StatisticsChart } from '../../components';
+import { AnalysesHeader, BetRow, Container, CountdownTimer, IconBadge, Icon, SmallTitle, StatisticsChart, Button } from '../../components';
 import './index.scss';
 import { motion } from 'framer-motion';
 import { useParams } from 'react-router-dom';
@@ -55,24 +55,73 @@ export default ({ }: PageProps) => {
             location: data.location
           }}
           />
-          <div className="analyses-block">
-            <SmallTitle>Elemzés</SmallTitle>
-            <div className="content text-[16px]" dangerouslySetInnerHTML={{ __html: data?.analyses?.analyses }}>
+
+
+          <div className='relative py-[20px]'>
+            {data?.analyses?.length === 0 && (<div className="absolute top-0 left-0 w-full h-full backdrop-blur-md	bg-gradient-to-b from-transparent to-[#020315]"></div>)}
+            {data?.analyses?.length === 0 && (<div className="absolute pt-[40px] flex flex-col items-center analyses-block top-0 left-0 w-full h-full">
+              <div>
+                <IconBadge classes={''}><Icon icon="info" size="text-3xl" isGradient/></IconBadge>
+              </div>
+              <div className="text-[24px] font-[600] text-center mt-[24px]">
+                Ezt az elemzést kizárólag premium csomagunkkal vagy<br />
+                5 kreditért cserébe tekintheted meg.
+              </div>
+              <div className='flex mt-[24px] gap-[30px]'>
+                <div>
+                  <Button primary size='small'>
+                  <><Icon icon="success" iconClasses='mr-[5px] relative top-[1px]' size="text-sm"></Icon> Prémium előfizetés</></Button>
+                </div>
+                <div>
+                <Button size='small' customClasses={'text-white  bg-gradient-to-r from-rgba-grey-02 to-rgba-grey-01'}>
+                  <><Icon icon="coin" iconClasses='mr-[5px] relative top-[1px]' size="text-sm"></Icon> 5 tokenért megveszem</></Button>
+                </div>
+              </div>
+            </div>)}
+            <div className="analyses-block mb-[15px]">
+              <SmallTitle>Elemzés</SmallTitle>
+              <div className="content text-[16px]" dangerouslySetInnerHTML={{ __html: data?.analyses?.analyses }}>
+              </div>
             </div>
 
-          </div>
-
-          <div className="bets-block mb-[80px]">
-            <SmallTitle>Tippek</SmallTitle>
-            {data?.analyses?.tips.map((item: any) => {
-              return (
-                <div className="mb-[15px]">
-                  <BetRow odds={item.odds} title={item.name} strength={item.rating} suggestedBet={(item.tet * 1000 + ' Ft').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} players={[]} />
+            {data?.analyses?.length === 0 && (
+              <div className="analyses-block text-[16px]  mb-[60px]">
+                <p className="mb-[10px]">Örülünk, hogy eggyel okosabb vagy mint az átlag, de akkor tudhatod hogy mi sem ma jöttünk le a falvédőről. Ha szeretnél pénzt keresni ne a kiskapukat keresd, hanem fizess elő Premium szolgáltatásunkra.</p>
+                <p className="mb-[10px]">
+                  Te is tudod, hogy ezt a rész ki kell töltenünk valami szöveggel szóval olvasd el az egri csillagok bekezdését
+                </p>
+                <div className="mb-[10px]">
+                  <p>A patakban két gyermek fürdik: egy fiú meg egy leány. Nem illik tán, hogy együtt fürödnek, de ők ezt nem tudják: a fiú alig hétesztendős, a leány két évvel fiatalabb.</p>
+                  <p>Az erdőben jártak, patakra találtak. A nap tüzesen sütött. A víz tetszett nekik.</p>
+                  <p>Először csak a lábukat mártogatták bele, azután beleereszkedtek térdig. Gergelynek megvizesedett a gatyácskája, hát ledobta. Aztán az ingét is ledobta. Egyszer csak ott lubickol meztelenen mind a kettő.</p>
+                  <p>Fürödhetnek: nem látja ott őket senki. A pécsi út jó messze van oda, s az erdő végtelen. Ha valaki meglátná őket, lenne is nemulass! Mert a fiúcska csak hagyján - az nem úrfi; de a leányka az a tekintetes Cecey Péter úr leánykája - kisasszony -, és úgy illant el hazulról, hogy senki se látta.</p>
+                  <p>Még így csupaszon is látszik rajta, hogy úrileány: kövér, mint a galamb, és fehér, mint a tej. Ahogy ugrándozik a vízben, a két kis szöszke hajfonat ide-oda röppen a hátán.</p>
+                  <p>- Derdő - mondja a fiúnak -, uttyunk.</p>
+                  <p>A Gergőnek nevezett, soványka, barna fiú háttal fordul. A leányka belekapaszkodik a nyakába. Gergő megindul a part felé, a leányka meg a víz színén lebeg és rugódozik.</p>
+                  <p>Azonban hogy a parthoz érnek, Gergő belefogódzik a kákabokor zöld üstökébe, és aggodalmasan néz körül.</p>
+                  <p>- Jaj, a szürke!</p>
+                  <p>Kilép a vízből, és ide-oda futkos, vizsgálódik a fák között.</p>
+                  <p>- Várjon, Vicuska - kiáltja a leánynak -, várjon, mindjárt jövök!</p>
+                  <p>S azon meztelenen elnyargal.</p>
                 </div>
-              )
-            })}
+              </div>
+            )}
 
+
+
+            <div className="bets-block mb-[80px]">
+              <SmallTitle>Tippek</SmallTitle>
+              {data?.analyses.length > 0 && data?.analyses?.tips.map((item: any) => {
+                return (
+                  <div className="mb-[15px]">
+                    <BetRow odds={item.odds} title={item.name} strength={item.rating} suggestedBet={(item.tet * 1000 + ' Ft').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} players={[]} />
+                  </div>
+                )
+              })}
+
+            </div>
           </div>
+
         </div>
       )}
 
