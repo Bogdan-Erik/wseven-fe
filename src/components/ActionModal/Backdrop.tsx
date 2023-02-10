@@ -12,11 +12,7 @@ const Backdrop = ({ children, onClick }: BackdropProps) => {
   return (
     <motion.div
       onClick={onClick}
-      className="bg-gradient-to-r from-gradient-1 to-gradient-2  w-full h-full fixed top-0 left-0 z-[1000] text-white"
-      transition={{ duration:0.5 }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      className="backdrop-blur-lg bg-black/30 w-full h-full fixed top-0 left-0 z-10 text-white"
     >
       {children}
     </motion.div>

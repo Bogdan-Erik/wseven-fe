@@ -80,6 +80,7 @@ export interface AnalysesHeaderProps {
   tennisFieldType?: TennisFieldType,
   isDaily?: boolean
   sport?: any
+  showDatas: boolean
 }
 
 export const AnalysesHeader = ({
@@ -93,7 +94,8 @@ export const AnalysesHeader = ({
   locationDatas,
   tennisFieldType,
   isDaily,
-  sport
+  sport,
+  showDatas
 }: AnalysesHeaderProps): JSX.Element => {
   const THREE_DAYS_IN_MS = new Date(matchDate.date).getTime();
 
@@ -102,50 +104,50 @@ export const AnalysesHeader = ({
   const colorScheme = sport.color;
   return (
     <div>
-      <div className="header-bg relative" style={{ background: `url(${background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
-        <div className={`${colorScheme}-scheme bg-opacity-75 relative`}>
-        <div className="smoke relative flex px-[30px] py-[30px]">
-          <video src="https://w7tips.fra1.digitaloceanspaces.com/videos/smokebg.mp4" playsInline loop autoPlay muted></video>
-          <motion.div animate={{ opacity: 1 }} transition={{ delay: 1 }} className="sidebar left-side z-[10]  left-[30px] top-0 opacity-0" >
+      <div className="header-bg relative min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]" style={{ background: `url(${background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
+        <div className={`${colorScheme}-scheme bg-opacity-75 relative min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]`}>
+          <div className="smoke relative flex px-[30px] py-[30px] min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]">
+            <video src="https://w7tips.fra1.digitaloceanspaces.com/videos/smokebg.mp4" playsInline loop autoPlay muted></video>
+            <motion.div animate={{ opacity: 1 }} transition={{ delay: 1 }} className="sidebar left-side z-[10]  left-[30px] top-0 opacity-0" >
 
-            {homeObject?.shape && (
-              <Statistics datas={homeObject.shape} position={'left'} />
-            )}
+              {(homeObject?.shape && showDatas) && (
+                <Statistics datas={homeObject.shape} position={'left'} />
+              )}
 
-            {homeObject?.lastMatch && (
-              <LastMatch data={homeObject.lastMatch} position={'left'} />
-            )}
+              {(homeObject?.lastMatch && showDatas) && (
+                <LastMatch data={homeObject.lastMatch} position={'left'} />
+              )}
 
 
-            {homeObject?.ranking && (
-              <LeaguePosition data={homeObject.ranking} position={'left'} />
-            )}
+              {(homeObject?.ranking && showDatas) && (
+                <LeaguePosition data={homeObject.ranking} position={'left'} />
+              )}
 
-            {homeObject?.missings && (
-              <Missings data={homeObject.missings} position={'left'} />
-            )}
+              {(homeObject?.missings && showDatas) && (
+                <Missings data={homeObject.missings} position={'left'} />
+              )}
 
-          </motion.div>
+            </motion.div>
 
-          <motion.div animate={{ opacity: 1 }} transition={{ delay: 1 }} className="sidebar right-side z-[10] right-[30px] top-0 opacity-0">
-            {awayObject.shape && (
-              <Statistics datas={awayObject.shape} position={'right'} />
-            )}
+            <motion.div animate={{ opacity: 1 }} transition={{ delay: 1 }} className="sidebar right-side z-[10] right-[30px] top-0 opacity-0">
+              {(awayObject.shape && showDatas) && (
+                <Statistics datas={awayObject.shape} position={'right'} />
+              )}
 
-            {awayObject?.lastMatch && (
-              <LastMatch data={awayObject.lastMatch} position={'right'} />
-            )}
+              {(awayObject?.lastMatch && showDatas) && (
+                <LastMatch data={awayObject.lastMatch} position={'right'} />
+              )}
 
-            {awayObject?.ranking && (
-              <LeaguePosition data={awayObject.ranking} position={'right'} />
-            )}
+              {(awayObject?.ranking && showDatas) && (
+                <LeaguePosition data={awayObject.ranking} position={'right'} />
+              )}
 
-            {awayObject?.missings && (
-              <Missings data={awayObject.missings} position={'right'} />
-            )}
-          </motion.div>
+              {(awayObject?.missings && showDatas) && (
+                <Missings data={awayObject.missings} position={'right'} />
+              )}
+            </motion.div>
 
-        </div>
+          </div>
         </div>
         <div className="absolute center-content">
           <motion.div animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="left-side">
@@ -224,45 +226,51 @@ export const AnalysesHeader = ({
         </div>
       </div>
 
+
       <div className="flex xl:hidden w-full   px-[15px]">
-        <motion.div animate={{ opacity: 1 }} transition={{ delay: 0 }} className="sidebar-mobile left-side  left-[30px] top-0 opacity-0 flex-1" >
+        {showDatas && (
+          <>
+            <motion.div animate={{ opacity: 1 }} transition={{ delay: 0 }} className="sidebar-mobile left-side  left-[30px] top-0 opacity-0 flex-1" >
 
-          {homeObject?.shape && (
-            <Statistics datas={homeObject.shape} position={'left'} />
-          )}
+              {homeObject?.shape && (
+                <Statistics datas={homeObject.shape} position={'left'} />
+              )}
 
-          {homeObject?.lastMatch && (
-            <LastMatch data={homeObject.lastMatch} position={'left'} />
-          )}
+              {homeObject?.lastMatch && (
+                <LastMatch data={homeObject.lastMatch} position={'left'} />
+              )}
 
-          {homeObject.ranking && (
-            <LeaguePosition data={homeObject.ranking} position={'left'} />
-          )}
+              {homeObject.ranking && (
+                <LeaguePosition data={homeObject.ranking} position={'left'} />
+              )}
 
 
-          {homeObject?.missings && (
-            <Missings data={homeObject.missings} position={'left'} />
-          )}
-        </motion.div>
+              {homeObject?.missings && (
+                <Missings data={homeObject.missings} position={'left'} />
+              )}
+            </motion.div>
 
-        <motion.div animate={{ opacity: 1 }} transition={{ delay: 0 }} className="sidebar-mobile right-side  right-[30px] top-0 opacity-0 flex-1">
-          {awayObject.shape && (
-            <Statistics datas={awayObject.shape} position={'right'} />
-          )}
+            <motion.div animate={{ opacity: 1 }} transition={{ delay: 0 }} className="sidebar-mobile right-side  right-[30px] top-0 opacity-0 flex-1">
+              {awayObject.shape && (
+                <Statistics datas={awayObject.shape} position={'right'} />
+              )}
 
-          {awayObject?.lastMatch && (
-            <LastMatch data={awayObject.lastMatch} position={'right'} />
-          )}
+              {awayObject?.lastMatch && (
+                <LastMatch data={awayObject.lastMatch} position={'right'} />
+              )}
 
-          {awayObject.ranking && (
-            <LeaguePosition data={awayObject.ranking} position={'right'} />
-          )}
+              {awayObject.ranking && (
+                <LeaguePosition data={awayObject.ranking} position={'right'} />
+              )}
 
-          {awayObject?.missings && (
-            <Missings data={awayObject.missings} position={'right'} />
-          )}
+              {awayObject?.missings && (
+                <Missings data={awayObject.missings} position={'right'} />
+              )}
 
-        </motion.div>
+            </motion.div>
+          </>
+        )}
+
       </div>
       <div className="flex xl:hidden ">
         <div className="flex-1 flex flex-col items-center justify-end">

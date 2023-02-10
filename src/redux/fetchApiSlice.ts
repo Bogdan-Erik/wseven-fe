@@ -16,13 +16,15 @@ type TokenResponse = {
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${import.meta.env.VITE_BASE_URL}`,
-  credentials: 'include',
+  //credentials: 'include',
   prepareHeaders: (headers, api) => {
     const state: RootState = api.getState() as RootState
     const token = state.auth?.accessToken || null
     if (token) {
       headers.set('authorization', `Bearer ${token}`)
     }
+    headers.set('Accept', 'application/json');
+
     return headers
   },
 })
@@ -38,8 +40,8 @@ const baseQueryWithReauth: BaseQueryFn<
     const state: RootState = api.getState() as RootState
     const response = await baseQuery(
       {
-        url: '/v1-auth-token',
-        method: 'post',
+        url: '/auth-token',
+        method: 'POST',
         body: {
           userId: state.auth.userId,
         },

@@ -33,7 +33,7 @@ export const Button = ({
   return (
     <motion.button
       whileHover={{
-        scale: (!isLoading || disabled) ? 1.1 : 1
+        scale: (!isLoading && !disabled) ? 1.05 : 1
       }}
       disabled={disabled || isLoading}
       type={type}

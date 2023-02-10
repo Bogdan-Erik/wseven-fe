@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Container, FormInput } from '../../../components';
 import Hand from './../../../assets/images/auth/hand.png'
-import { useFormik } from 'formik';
+import { Formik, useFormik } from 'formik';
 import { LoginDataSchema } from './../../../utils/validationUtils'
 import { useLoginMutation } from './../../../redux/api/authApiSlice'
 import { setCredentials } from './../../../redux/authSlice';
@@ -59,40 +59,81 @@ export default ({ }: PageProps) => {
               <div className="text-[16px] text-rgba-grey-08 font-[500] mt-[20px]">Jelentkezz be a legfrissebb elemzések és tippek megtekintéséhez! Még nincs fiókod? </div>
               <div className="py-[40px] border-b-[1px] border-b-rgba-grey-02">Social </div>
               <div>
-                <form onSubmit={formik.handleSubmit}>
-                  <div>
-                    <FormInput
-                      name="email"
-                      type="email"
-                      label="E-mail cím"
-                      placeholder="Add meg az e-mail címed"
-                      className="my-5 grow"
-                      onChange={formik.handleChange}
-                      value={formik.values.email}
-                      error={
-                        errors.email && touched.email ? errors.email : undefined
+                <Formik
+                  initialValues={
+                    {
+                      email: '',
+                      password: '',
+                    }
+                  }
+                  validationSchema={LoginDataSchema}
+                  onSubmit={async ({ email, password }) => {
+                    try {
+                      const { data: userData } = await login({ email, password }).unwrap()
+                      dispatch(setCredentials({ ...userData, userId: userData.customer.id }))
+                      return navigate('/dashboard');
+                    } catch (err) {
+                      if (!(err as LoginError)?.status) {
+                        setErrorMessage('No Server Response')
+                      } else {
+                        setErrorMessage((err as LoginError).data?.message)
                       }
-                    />
-                  </div>
-                  <div className="col-span-2">
-                    <FormInput
-                      name="password"
-                      label="Jelszó"
-                      type="password"
-                      placeholder="Add meg a jelszavad"
-                      className=" grow"
-                      onChange={formik.handleChange}
-                      value={formik.values.password}
-                      error={
-                        errors.password && touched.password ? errors.password : undefined
-                      }
-                    />
-                  </div>
-                  {isError ? <div className="mb-6 text-red">{errorMessage}</div> : null}
-                  <div className="mt-[40px]">
-                    <Button type="submit" primary customClasses="w-full" isLoading={isLoading}>Bejelentkezés</Button>
-                  </div>
-                </form>
+                    }
+                  }}
+                >
+                  {(formik) => {
+                    const {
+                      values,
+                      handleChange,
+                      errors,
+                      touched,
+                      handleSubmit,
+                      resetForm,
+                      getFieldProps,
+                      isValid,
+                      dirty,
+                      setFieldValue,
+                    } = formik
+
+                    return (
+                      <form onSubmit={handleSubmit}>
+                        <div>
+                          <FormInput
+                            name="email"
+                            type="email"
+                            label="E-mail cím"
+                            placeholder="Add meg az e-mail címed"
+                            className="my-5 grow"
+                            onChange={formik.handleChange}
+                            value={formik.values.email}
+                            error={
+                              errors.email && touched.email ? errors.email : undefined
+                            }
+                          />
+                        </div>
+                        <div className="col-span-2">
+                          <FormInput
+                            name="password"
+                            label="Jelszó"
+                            type="password"
+                            placeholder="Add meg a jelszavad"
+                            className=" grow"
+                            onChange={formik.handleChange}
+                            value={formik.values.password}
+                            error={
+                              errors.password && touched.password ? errors.password : undefined
+                            }
+                          />
+                        </div>
+                        {isError ? <div className="mb-6 text-red">{errorMessage}</div> : null}
+                        <div className="mt-[40px]">
+                          <Button type="submit" primary customClasses="w-full" isLoading={isLoading}>Bejelentkezés</Button>
+                        </div>
+                      </form>
+                    )
+                  }}
+
+                </Formik>
               </div>
             </div>
           </div>

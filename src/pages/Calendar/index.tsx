@@ -11,6 +11,8 @@ import huLocale from '@fullcalendar/core/locales/hu';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { useLazyGetMatchesByDateQuery } from '../../redux/MatchSlice';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 export interface PageProps {
 
@@ -21,6 +23,8 @@ export default ({ }: PageProps) => {
 
   const [trigger, result] = useLazyGetMatchesByDateQuery()
   console.log(result.isLoading)
+  const {calendar} = useSelector((state: RootState) => state.match)
+
   //const { isLoading } = useGetMatchesQuery();
 
   const dataSet = [
@@ -41,6 +45,10 @@ export default ({ }: PageProps) => {
     { title: 'Liverpool - Real Madrid', start: '2022-11-12 13:00:00', end: '2022-11-12 14:30:00', className: ["event", "football"] },
 
   ];
+
+  const convertDataset = () => {
+    
+  }
 
   const renderEventContent = (eventInfo: any) => {
     return (
@@ -111,7 +119,7 @@ export default ({ }: PageProps) => {
           }}
           dayHeaderFormat={{ weekday: 'long', month: 'long', day: 'numeric', omitCommas: true }}
           scrollTime={'05:00:00'}
-          events={dataSet}
+          events={calendar}
           eventContent={renderEventContent}
 
         />

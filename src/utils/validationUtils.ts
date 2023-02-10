@@ -42,3 +42,7 @@ export const LoginDataSchema = Yup.object().shape({
   password: Yup.string().required(EMPTY_PASSWORD_ERROR)
 })
 
+export const BetSchema = Yup.object().shape({
+  odds: Yup.number().required(EMPTY_ERROR),
+  bet: Yup.number().required(EMPTY_ERROR)
+})

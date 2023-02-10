@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './SideMenuBar.css';
 import { Icon } from '../Icon';
 import { twMerge } from 'tailwind-merge';
@@ -26,6 +26,7 @@ const MenuItem = ({ isActive, icon, text, link, isMobile, onClick }: { isActive?
 
 export const Menu = ({ isMobileMenu = false, setShowMenu }: SideMenuBarProps): JSX.Element => {
   const location = useLocation();
+
 
   const holderClass = twMerge(`
   grid grid-cols-2 gap-2 justify-center mt-[30px] px-[5px] lg-gap-5 lg:px-[25px] mb-[30px] ${isMobileMenu ? 'grid-cols-2 sm:grid-cols-3 sm:gap-4  place-items-center ' : ''}

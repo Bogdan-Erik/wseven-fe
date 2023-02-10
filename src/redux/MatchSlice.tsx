@@ -3,6 +3,7 @@ import { gql } from 'graphql-request'
 import moment from 'moment'
 import { hasuraApiSlice } from './hasuraApiSlice'
 import store, { RootState } from './store'
+import NameGetter from './../utils/NameGetter';
 
 export interface Datas {
   id: string
@@ -39,12 +40,14 @@ export interface MatchSlice {
   matches: any
   activeMatches: any
   filteredTips: any
+  calendar: any
 }
 
 export const initialState: MatchSlice = {
   matches: [],
   activeMatches: [],
   filteredTips: [],
+  calendar: [],
 }
 
 export const matchSlice = createSlice({
@@ -60,7 +63,16 @@ export const matchSlice = createSlice({
     builder.addMatcher(
       matchApiSlice.endpoints.getMatchesByDate.matchFulfilled,
       (state, action) => {
-        console.log(action.payload)
+        console.log(action.payload.matches)
+        state.calendar = action.payload?.matches.map((item: any) => {
+          
+          return {
+            title: NameGetter(item, 'home') + ' - ' + NameGetter(item, 'away'),
+            start: item.date_start,
+            end: item.date_end,
+            className: ["event", "football"],
+          }
+        })
       },
     ),
       builder.addMatcher(
@@ -134,7 +146,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
       query: (data: any) => ({
         body: gql`
           query get_matches_by_date($dateFrom: timestamp!, $dateEnd: timestamp!) {
-            matches(where: {date_start: {_gte: $dateFrom}, date_end: {_lte: $dateEnd}}) {
+            matches(where: {date_start: {_gte: $dateFrom}, date_end: {_lte: $dateEnd}, analyses: {tips: {customer_tips: {customer_id: {_is_null: false}}}}}) {
               id
               date_start
               date_end
@@ -161,6 +173,13 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
                 last_name
                 image
               }
+              analyses {
+              tips {
+                customer_tips {
+                  id
+                }
+              }
+            }
             }
           }
         `,
@@ -321,6 +340,11 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
                 odds
                 rating
                 tet
+                customer_tips {
+                  id
+                  odds
+                  tet
+                }
               }
             }
             match_datas {
@@ -374,6 +398,27 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
         }
       },
     }),
+    addTipForCustomer: builder.mutation<any, any>({
+      query: (arg) => ({
+        body: gql`
+        mutation InsertTipsMutation ($customerId: uuid!, $tipId: uuid!, $odds: float8, $bet: float8) {
+          insert_customer_tips(objects: {customer_id: $customerId, tip_id: $tipId, odds: $odds, tet: $bet}) {
+            returning {
+              id
+            }
+          }
+        }
+        `,
+        variables: {
+          customerId: arg.customerId,
+          tipId: arg.tipId,
+          odds: arg.odds,
+          bet: arg.bet,
+        },
+        token: store.getState().auth.accessToken,
+      }),
+      transformResponse: (response) => response.insert_customer_tips,
+    }),
   }),
 })
 
@@ -382,6 +427,7 @@ export const {
   useGetActiveMatchesQuery,
   useLazyGetTipsByDateRangeQuery,
   useGetMatchQuery,
+  useAddTipForCustomerMutation,
 } = matchApiSlice
 
 export const { setActiveMatches } = matchSlice.actions

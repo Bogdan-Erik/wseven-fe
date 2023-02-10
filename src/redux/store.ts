@@ -14,6 +14,8 @@ import { hasuraApiSlice } from './hasuraApiSlice'
 import { fetchApiSlice } from './fetchApiSlice'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import matchSlice, { matchApiSlice } from './MatchSlice';
+import customerSlice, { customerApiSlice } from './CustomerSlice';
+import notificationSlice, { notificationApiSlice } from './NotificationSlice';
 /* -- reduxSliceImport: insert above here -- */
 
 
@@ -32,11 +34,15 @@ const requirementPersistConfig = {
 const rootReducer = combineReducers({
   auth: authSlice,
   match: matchSlice,
+  customer: customerSlice,
+  notification: notificationSlice,
   /* -- reduxSlice: insert above here -- */
   [fetchApiSlice.reducerPath]: fetchApiSlice.reducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
   [hasuraApiSlice.reducerPath]: hasuraApiSlice.reducer,
   [matchApiSlice.reducerPath]: matchApiSlice.reducer,
+  [customerApiSlice.reducerPath]: customerApiSlice.reducer,
+  [notificationApiSlice.reducerPath]: notificationApiSlice.reducer,
 
   /* -- reduxApiSliceReducerPath: insert above here -- */
 })
@@ -50,7 +56,9 @@ const store = configureStore({
       fetchApiSlice.middleware,
       apiSlice.middleware,
       hasuraApiSlice.middleware,
-      matchApiSlice.middleware
+      matchApiSlice.middleware,
+      customerApiSlice.middleware,
+      notificationApiSlice.middleware,
       /* -- reduxApiSliceMiddleware: insert above here -- */
     ]),
   preloadedState: {

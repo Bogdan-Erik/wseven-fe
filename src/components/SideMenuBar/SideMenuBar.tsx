@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './SideMenuBar.css';
 import logo from './../../assets/images/logo.svg';
 import { Icon } from '../Icon';
 import { twMerge } from 'tailwind-merge';
 import { Button } from '../Button';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu } from './Menu';
+import { useLazyGetMyselfQuery } from '../../redux/CustomerSlice';
 export interface SideMenuBarProps {
 
 }
 
 export const SideMenuBar = ({ }: SideMenuBarProps): JSX.Element => {
+  const location = useLocation();
+
+  const [trigger] = useLazyGetMyselfQuery();
+  useEffect(() => {
+    console.log('változott')
+    trigger();
+  }, [location])
   return (
     <div className="side-menubar">
       <div className="flex justify-center mt-[25px]">

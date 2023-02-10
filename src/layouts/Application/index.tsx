@@ -1,21 +1,85 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { Button, Footer, MobileMenuBar, SideMenuBar } from '../../components';
+import { useGetNotificationsQuery } from '../../redux/NotificationSlice';
 import { Header } from './../../components/Header';
 import './index.scss';
+import { ApolloClient, InMemoryCache, ApolloProvider, gql, useSubscription } from '@apollo/client';
+import { WebSocketLink } from "@apollo/client/link/ws";
+import store from '../../redux/store';
+import { useNotification } from '../../hooks/useNotification';
+import _ from 'lodash';
 
 export interface LayoutProps {
   children: JSX.Element[] | JSX.Element | string
 }
 
-export default ({ children }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
   const [showMenu, setShowMenu] = useState();
+  const [currentNotifications, setCurrentNotifications] = useState([]);
+  const [initNotifications, setInitNotifications] = useState(false);
   const location = useLocation();
+  const { newPushToast } = useNotification({
+    theme: 'colored',
+  })
+  const { loading, error, data } = useSubscription(
+    gql`
+      subscription getNotifications {
+        notifications(order_by: {created_at: desc}) {
+              id
+              type
+              title
+              content
+              action
+              read
+              read_at
+              created_at
+              updated_at
+            }
+      }
+    `
+  );
 
+
+  useEffect(() => {
+    if (data) {
+      if (initNotifications === false) {
+        setCurrentNotifications(data?.notifications);
+        setInitNotifications(true);
+      }
+
+
+
+      if (initNotifications) {
+        /*let difference = data?.notifications?.filter((item: any) => !currentNotifications.includes(item)).map((item: any) => {
+          newPushToast(item.title, item.content)
+        });
+        console.log(difference)
+        setCurrentNotifications(data.notifications);
+        console.log(currentNotifications)
+  */
+        _.differenceBy(data?.notifications, currentNotifications, 'id').map((item: any) => {
+          newPushToast(item.title, item.content)
+        });
+        console.log(currentNotifications)
+        console.log(data?.notifications)
+        console.log(_.differenceBy(data?.notifications, currentNotifications, 'id'))
+
+        setCurrentNotifications(data?.notifications)
+      }
+    }
+
+  }, [data])
+  /*const { isLoading, data, refetch } = useGetNotificationsQuery({}, {
+    pollingInterval: 5000,
+  });
+*/
   useEffect(() => {
     // 👇 add class to body element
     document.body.classList.add('app-body');
   }, [])
+
+
   return (
     <>
       <div className="text-white flex bg app-body">
@@ -23,8 +87,8 @@ export default ({ children }: LayoutProps) => {
           <SideMenuBar />
         </div>
         <main className="relative sm:flex-2 pb-footerHeight flex flex-col sm:w-[300px] sm:px-0 w-full">
-          <Header variant={'secondary'} />
-          <MobileMenuBar visible={showMenu}  />
+          <Header variant={'secondary'} notifications={currentNotifications} />
+          <MobileMenuBar visible={showMenu} />
           <div>
             {children}
           </div>
@@ -32,5 +96,36 @@ export default ({ children }: LayoutProps) => {
       </div>
       <></>
     </>
+  )
+}
+export default ({ children }: LayoutProps) => {
+  const token = store.getState().auth.accessToken
+
+  const client = new ApolloClient({
+    link: new WebSocketLink({
+      uri: 'ws://localhost:8080/v1/graphql',
+      options: {
+        reconnect: true,
+        connectionParams: {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      }
+    }),
+    cache: new InMemoryCache({
+      typePolicies: {
+        Notifications: {
+          keyFields: ["id"],
+        },
+      },
+    }),
+  });
+
+  return (
+    <ApolloProvider client={client}>
+      <Layout>{children}</Layout>
+    </ApolloProvider>
+
   )
 }

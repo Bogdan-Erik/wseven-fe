@@ -25,10 +25,9 @@ export interface ModalProps {
   isShowing: boolean,
   hide: any,
   hasBg?: boolean,
-  title?: JSX.Element
 }
 
-export const Modal = ({ children, title, modalClasses, isShowing, hide, hasBg = true }: ModalProps): JSX.Element => {
+export const Modal = ({ children, modalClasses, isShowing, hide, hasBg = true }: ModalProps): JSX.Element => {
   const [isVisible, setIsVisible] = useState(true);
   const modalClass = twMerge(
     `  bg-[#000012] ${hasBg ? 'modal-bg' : ''} rounded-md relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-[100%]  ${modalClasses}`,
@@ -36,25 +35,14 @@ export const Modal = ({ children, title, modalClasses, isShowing, hide, hasBg = 
 
   return (
     <Backdrop onClick={hide}>
-      <motion.div
+      <div
         onClick={(e) => e.stopPropagation()}
         className={modalClass}
-        variants={dropIn}
-        transition={{ duration: 0.1 }}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
 
       >
-        <div className='px-[24px] py-[25px] '>
-          {title && (
-            <div className='pb-[18px] border-b-[1px] border-rgba-grey-02'>{title}</div>
-          )}
-          <div className="absolute top-0 right-0 text-white p-[24px] cursor-pointer" onClick={hide}><Icon icon={'cross'} size={'text-lg'} /></div>
-          <div className="py-[24px]">{children}</div>
-        </div>
-
-      </motion.div>
+        <div className="absolute top-0 right-0 text-white p-[24px] cursor-pointer" onClick={hide}><Icon icon={'cross'} size={'text-lg'} /></div>
+        <div>{children}</div>
+      </div>
     </Backdrop>
   )
   return isShowing ? ReactDOM.createPortal(
