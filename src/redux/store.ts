@@ -15,6 +15,7 @@ import { fetchApiSlice } from './fetchApiSlice'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import matchSlice, { matchApiSlice } from './MatchSlice';
 import customerSlice, { customerApiSlice } from './CustomerSlice';
+import ticketSlice, { ticketApiSlice } from './TicketSlice';
 import notificationSlice, { notificationApiSlice } from './NotificationSlice';
 /* -- reduxSliceImport: insert above here -- */
 
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   auth: authSlice,
   match: matchSlice,
   customer: customerSlice,
+  ticket: ticketSlice,
   notification: notificationSlice,
   /* -- reduxSlice: insert above here -- */
   [fetchApiSlice.reducerPath]: fetchApiSlice.reducer,
@@ -42,6 +44,7 @@ const rootReducer = combineReducers({
   [hasuraApiSlice.reducerPath]: hasuraApiSlice.reducer,
   [matchApiSlice.reducerPath]: matchApiSlice.reducer,
   [customerApiSlice.reducerPath]: customerApiSlice.reducer,
+  [ticketApiSlice.reducerPath]: ticketApiSlice.reducer,
   [notificationApiSlice.reducerPath]: notificationApiSlice.reducer,
 
   /* -- reduxApiSliceReducerPath: insert above here -- */
@@ -58,6 +61,7 @@ const store = configureStore({
       hasuraApiSlice.middleware,
       matchApiSlice.middleware,
       customerApiSlice.middleware,
+      ticketApiSlice.middleware,
       notificationApiSlice.middleware,
       /* -- reduxApiSliceMiddleware: insert above here -- */
     ]),

@@ -16,6 +16,7 @@ import Statistics from './pages/Statistics';
 import Live from './pages/Live';
 import Challenge from './pages/Challenge';
 import Bank from './pages/Bank';
+import Tickets from './pages/Tickets';
 import Marketplace from './pages/Marketplace';
 import Informations from './pages/Informations';
 import Settings from './pages/Settings';
@@ -166,6 +167,7 @@ const App = () => {
                   <Route path="/statistics" element={<Statistics />} />
                   <Route path="/live" element={<Live />} />
                   <Route path="/bank" element={<Bank />} />
+                  <Route path="/tickets" element={<Tickets />} />
                   <Route path="/marketplace" element={<Marketplace />} />
                   <Route path="/informations" element={<Informations />} />
                   <Route path="/settings" element={<Settings />} />

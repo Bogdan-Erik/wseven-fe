@@ -41,4 +41,5 @@ export { LastMatch } from './MatchComponents/LastMatch/LastMatch';
 export { LeaguePosition } from './MatchComponents/LeaguePosition/LeaguePosition';
 export { Missings } from './MatchComponents/Missings/Missings';
 export { NotificationItem } from './NotificationItem/NotificationItem';
+export { Ticket } from './Ticket';
 /* -- component: insert above here -- */
