@@ -11,7 +11,7 @@ export interface TitleProps {
   item: {
     id: string
     is_premium: boolean
-    name: string
+    number: number
     type: string
     suggested_bet: number
     result: number
@@ -40,7 +40,7 @@ export const Ticket = ({item, setShowTipModal}: TitleProps): JSX.Element => {
     <div className="max-w-[350px]">
       <div className="bg-[url('/src/assets/images/szelveny_topbottom.svg')] w-full h-[14px]"></div>
       <div className="bg-rgba-grey-015 w-full px-[20px]">
-        <div className="text-[24px] text-white text-center font-[600] pt-[20px]">{item.name}</div>
+        <div className="text-[24px] text-white text-center font-[600] pt-[20px]">Szelvény #{item.number}</div>
         <div className='text-rgba-grey-08 text-[14px] text-center font-[500] mb-[30px]'>{moment(item.start_date).locale('hu').format('YYYY. MMMM DD.')}</div>
         <div>
           <div className="flex border-b-[1px] border-rgba-grey-01">

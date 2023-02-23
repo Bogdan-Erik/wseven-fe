@@ -26,9 +26,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-tiktok:before {
+.icon-disturb:before {
+  content: "\e933";
+}
+.icon-ticket-new:before {
   content: "\e932";
 }
+/*.icon-tiktok:before {
+  content: "\e932";
+}*/
 .icon-NBA:before {
   content: "\e925";
 }

@@ -47,7 +47,6 @@ const BetModal = ({ selectedBet, showTipModal, setShowTipModal, confirmAction }:
                 odds,
                 bet
               }).then(data => {
-                console.log(data);
                 confirmAction();
                 setShowTipModal(false);
                 newSuccessToast('Sikeres rögzítés', `A ${selectedBet.name} fogadás rögzítése sikeres volt!`)

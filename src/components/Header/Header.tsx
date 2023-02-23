@@ -116,8 +116,8 @@ export const Header = ({ variant = 'primary', user, notifications }: HeaderProps
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="absolute right-0 top-[50px] bg-dark-bg p-[20px] w-[346px] max-h-[743px] overflow-y-auto scrollable-noti rounded-[6px]">
-                            {loadedNotifications.length > 0 && (<div className="text-white text-[12px] font-[500] text-right cursor-pointer" onClick={() => {
+                            className="font-poppins absolute right-0 top-[50px] bg-dark-bg p-[20px] w-[346px] max-h-[743px] overflow-y-auto scrollable-noti rounded-[6px]">
+                            {loadedNotifications.length > 0 && (<div className="font-[poppins] text-white text-[12px] font-[500] text-right cursor-pointer" onClick={() => {
                               removeAllNotification();
                             }}>Összes értesítés törlése</div>)}
                             <div className="mt-[10px]">

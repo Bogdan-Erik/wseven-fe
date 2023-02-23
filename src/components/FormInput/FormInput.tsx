@@ -57,7 +57,7 @@ export const FormInput = ({
 
   return (
     <div className={classes}>
-      <Label required={required}>{label}</Label>
+      {label && (<Label required={required}>{label}</Label>)}
       <div className="relative">
         {isLoading ? (
           <div className="absolute right-[.625rem] top-[0.5rem]">

@@ -42,4 +42,5 @@ export { LeaguePosition } from './MatchComponents/LeaguePosition/LeaguePosition'
 export { Missings } from './MatchComponents/Missings/Missings';
 export { NotificationItem } from './NotificationItem/NotificationItem';
 export { Ticket } from './Ticket';
+export { TicketItem } from './TicketItem';
 /* -- component: insert above here -- */

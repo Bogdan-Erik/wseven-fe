@@ -44,17 +44,21 @@ export const DataPaginator = ({ datas, Component, NoResultComponent, additionalC
     filteringDatas();
   }, [page, rowsPerPage])
 
+  useEffect(() => {
+    console.log(filteredDatas);
+  }, [filteredDatas])
+
   return (
     <>
       <div>
-        {filteredDatas?.map((item: any, key: number) => {
+        {datas.length > 0 && filteredDatas?.map((item: any, key: number) => {
           return (
             <div className="mb-[10px] xl:mb-0">
               <Component isSecondary={key % 2 ? true : false} {...item} {...additionalComponentProps} />
             </div>
           )
         })}
-        {filteredDatas.length === 0 && (<NoResultComponent />)}
+        {datas.length === 0 && (<NoResultComponent />)}
       </div>
       {filteredDatas.length > 0 && (
         <div>

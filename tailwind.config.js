@@ -60,6 +60,7 @@ module.exports = {
       'whitesmoke': '#d9d9d9',
       'gradient-1': 'rgba(16, 51, 89, 0.95)',
       'gradient-2': 'rgba(56, 14, 94, 0.95)',
+      'neon': '#CCFF02',
       stone: colors.warmGray,
       sky: colors.lightBlue,
       neutral: colors.trueGray,
@@ -69,7 +70,7 @@ module.exports = {
 
     },
     fontFamily: {
-      'poppins': ['Poppins'],
+      'poppins': ['Poppins', 'sans-serif'],
       'body': ['"Poppins"'],
       'icomoon': ['icomoon']
     },
