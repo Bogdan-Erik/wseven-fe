@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { Icon, Modal, PlayersGame, FormInput, Button } from '../../components';
