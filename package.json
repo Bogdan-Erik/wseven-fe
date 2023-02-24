@@ -48,7 +48,6 @@
     "chart.js": "^3.9.1",
     "chart.js-plugin-labels-dv": "^3.3.0",
     "date-fns": "^2.29.3",
-    "dayjs": "^1.11.7",
     "faker": "^6.6.6",
     "formik": "^2.2.9",
     "framer-motion": "^7.3.5",
