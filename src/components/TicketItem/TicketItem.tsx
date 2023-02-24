@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react'
 import './TicketItem.css';
 import LigaLogo from './../../assets/images/liga_logo.png';

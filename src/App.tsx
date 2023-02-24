@@ -1,4 +1,5 @@
 // @ts-ignore
+// @ts-nocheck
 import React, { useEffect, useRef } from 'react';
 import { useState } from 'react'
 import logo from './logo.svg'

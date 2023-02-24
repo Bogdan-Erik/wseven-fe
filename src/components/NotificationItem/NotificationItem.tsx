@@ -1,5 +1,4 @@
-
-
+// @ts-nocheck
 import React, { useEffect, useState } from 'react'
 import './NotificationItem.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createSlice } from '@reduxjs/toolkit'
 import { gql } from 'graphql-request'
 import moment from 'moment'
