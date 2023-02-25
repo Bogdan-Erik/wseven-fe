@@ -60,11 +60,11 @@ const BetModal = ({
               if (selectedFunction.type !== "upload") {
                 await triggerBalance().then((data) => {
                   console.log(data.data);
-                  if (data?.data?.current_balance < amount) {
+                  if ((data?.data?.current_balance ?? 0) < amount) {
                     setShowTipModal(false);
                     newErrorToast(
                       "Sikertelen rögzítés",
-                      `A kifizetett osszeg magasabb mint a bankod. Ismételd meg megfelelő összeggel`
+                      `A kifizetett osszeg magasabb mint a bankod. Ismételd meg megfelelő összeggel!`
                     );
                     return;
                   } else {

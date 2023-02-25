@@ -10,6 +10,7 @@ import { RootState } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { useAddTipForCustomerMutation } from '../../redux/MatchSlice';
 import { useNotification } from '../../hooks/useNotification'
+import { useLazyGetBalanceQuery } from '../../redux/BankSlice';
 
 export interface BetModalProps {
   showTipModal: boolean
@@ -25,6 +26,7 @@ const BetModal = ({ selectedBet, showTipModal, setShowTipModal, confirmAction }:
   const { newSuccessToast, newErrorToast } = useNotification({
     theme: 'colored',
   })
+  const [triggerBalance] = useLazyGetBalanceQuery();
 
 
   return (
@@ -41,21 +43,34 @@ const BetModal = ({ selectedBet, showTipModal, setShowTipModal, confirmAction }:
             }}
             validationSchema={BetSchema}
             onSubmit={async ({ odds, bet }) => {
-              addTipForCustomer({
-                customerId: auth.userId,
-                tipId: selectedBet.id,
-                description: selectedBet.name + ' fogadás rögzítése',
-                sourceType: "App\\Models\\Tip",
-                odds,
-                bet
-              }).then(data => {
-                confirmAction();
-                setShowTipModal(false);
-                newSuccessToast('Sikeres rögzítés', `A ${selectedBet.name} fogadás rögzítése sikeres volt!`)
-              }).catch(err => {
-                setShowTipModal(false);
-                newErrorToast('Sikertelen rögzítés', `A ${selectedBet.name} fogadás rögzítése sikertelen volt!`)
+              await triggerBalance().then((data) => {
+                console.log(data.data);
+                if ((data?.data?.current_balance ?? 0) < bet) {
+                  setShowTipModal(false);
+                  newErrorToast(
+                    "Sikertelen rögzítés",
+                    `A megjátszani kívánt tét magasabb mint a bankod! Ismételd meg megfelelő összeggel!`
+                  );
+                  return;
+                } else {
+                  addTipForCustomer({
+                    customerId: auth.userId,
+                    tipId: selectedBet.id,
+                    description: selectedBet.name + ' fogadás rögzítése',
+                    sourceType: "App\\Models\\Tip",
+                    odds,
+                    bet
+                  }).then(data => {
+                    confirmAction();
+                    setShowTipModal(false);
+                    newSuccessToast('Sikeres rögzítés', `A ${selectedBet.name} fogadás rögzítése sikeres volt!`)
+                  }).catch(err => {
+                    setShowTipModal(false);
+                    newErrorToast('Sikertelen rögzítés', `A ${selectedBet.name} fogadás rögzítése sikertelen volt!`)
+                  })
+                }
               })
+
             }}
           >
             {(formik) => {

@@ -23,6 +23,7 @@ import _ from "lodash";
 import { useAddTicketForCostumerMutation } from "../../redux/TicketSlice";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useLazyGetBalanceQuery } from "../../redux/BankSlice";
 export interface BetModalProps {
   showTipModal: boolean;
   setShowTipModal: any;
@@ -43,6 +44,8 @@ const BetModal = ({
   const { newSuccessToast, newErrorToast } = useNotification({
     theme: "colored",
   });
+
+  const [triggerBalance] = useLazyGetBalanceQuery();
 
   const [editBet, setEditBet] = useState(true);
   const tip_types = [
@@ -77,37 +80,48 @@ const BetModal = ({
         }}
         validationSchema={TicketSchema}
         onSubmit={async ({ bet, tips }) => {
-          console.log(tips);
-          addTicketForCostumer({
-            customer_id: auth.userId,
-            ticket_id: selectedTicket.id,
-            bet: bet,
-            sourceType: "App\\Models\\CustomerTicket",
-            description: 'Szelvény #' + selectedTicket.number + ' rögzítése',
-            customer_ticket_tips: tips.map((item: any) => {
-              return {
-                customer_id: auth.userId,
-                ticket_tip_id: item.id,
-                odds: item.odds?.toString(),
-              };
-            }),
-          })
-            .then((data) => {
-              confirmAction();
-              setShowTipModal(false);
-              newSuccessToast(
-                "Sikeres rögzítés",
-                `A ${selectedTicket.name} szelvény rögzítése sikeres volt!`
-              );
-            })
-            .catch((err) => {
-              confirmAction();
+          await triggerBalance().then((data) => {
+            if ((data?.data?.current_balance ?? 0) < bet) {
               setShowTipModal(false);
               newErrorToast(
                 "Sikertelen rögzítés",
-                `A ${selectedTicket.name} szelvény rögzítése sikertelen volt!`
+                `A megjátszani kívánt tét magasabb mint a bankod! Ismételd meg megfelelő összeggel!`
               );
-            });
+              return;
+            } else {
+              addTicketForCostumer({
+                customer_id: auth.userId,
+                ticket_id: selectedTicket.id,
+                bet: bet,
+                sourceType: "App\\Models\\CustomerTicket",
+                description:
+                  "Szelvény #" + selectedTicket.number + " rögzítése",
+                customer_ticket_tips: tips.map((item: any) => {
+                  return {
+                    customer_id: auth.userId,
+                    ticket_tip_id: item.id,
+                    odds: item.odds?.toString(),
+                  };
+                }),
+              })
+                .then((data) => {
+                  confirmAction();
+                  setShowTipModal(false);
+                  newSuccessToast(
+                    "Sikeres rögzítés",
+                    `A ${selectedTicket.name} szelvény rögzítése sikeres volt!`
+                  );
+                })
+                .catch((err) => {
+                  confirmAction();
+                  setShowTipModal(false);
+                  newErrorToast(
+                    "Sikertelen rögzítés",
+                    `A ${selectedTicket.name} szelvény rögzítése sikertelen volt!`
+                  );
+                });
+            }
+          });
         }}
       >
         {(formik) => {
@@ -269,7 +283,7 @@ const BetModal = ({
                 </div>
                 <div className="mt-[10px]">
                   <Button
-                    type="submit"
+                    type="button"
                     customClasses="w-full text-white border-none shadow-none	"
                     onClick={() => {
                       setShowTipModal(false);
@@ -287,7 +301,9 @@ const BetModal = ({
   };
 
   const TicketView = () => {
-    const ticketSource = selectedTicket?.customer_tickets[0]?.customer_ticket_tips ?? selectedTicket.tips;
+    const ticketSource =
+      selectedTicket?.customer_tickets[0]?.customer_ticket_tips ??
+      selectedTicket.tips;
     return (
       <div>
         <div>
@@ -301,47 +317,47 @@ const BetModal = ({
           </div>
         </div>
         <div className="min-h-[300px]">
-          {ticketSource?.map(
-            (tip: any, key: number) => {
-              const tipObject = tip?.ticket_tip ?? tip;
-              return (
-                <div
-                  className={`py-[20px] flex ${
-                    key + 1 < selectedTicket.tips.length
-                      ? " border-b-[1px] border-rgba-grey-01"
-                      : ""
-                  }`}
-                  key={key}
-                >
-                  <div>
-                    <div className="text-[16px] font-[600] text-white mb-[8px]">
-                      {tipObject.title}
-                    </div>
-                    <div className="flex">
-                      <div className="flex">
-                        <OddsItem odds={parseFloat(tip.odds).toFixed(2)} />
-                      </div>
-
-                      <div className="ml-[10px] text-[16px] font-[400]">
-                        Tipp: {tipObject.description}
-                      </div>
-                    </div>
+          {ticketSource?.map((tip: any, key: number) => {
+            const tipObject = tip?.ticket_tip ?? tip;
+            return (
+              <div
+                className={`py-[20px] flex ${
+                  key + 1 < selectedTicket.tips.length
+                    ? " border-b-[1px] border-rgba-grey-01"
+                    : ""
+                }`}
+                key={key}
+              >
+                <div>
+                  <div className="text-[16px] font-[600] text-white mb-[8px]">
+                    {tipObject.title}
                   </div>
-                  <div className="ml-auto">
-                    <span
-                      className={`font-icomoon justify-center text-xl  ${
-                        tipObject.result === null
-                          ? "icon-schedule text-white"
-                          : tipObject.result === "win"
-                          ? "icon-success text-green"
-                          : (tipObject.result === "push" ? "icon-disturb text-neon" : "icon-error text-red")
-                      } text-sm mr-2`}
-                    ></span>
+                  <div className="flex">
+                    <div className="flex">
+                      <OddsItem odds={parseFloat(tip.odds).toFixed(2)} />
+                    </div>
+
+                    <div className="ml-[10px] text-[16px] font-[400]">
+                      Tipp: {tipObject.description}
+                    </div>
                   </div>
                 </div>
-              );
-            }
-          )}
+                <div className="ml-auto">
+                  <span
+                    className={`font-icomoon justify-center text-xl  ${
+                      tipObject.result === null
+                        ? "icon-schedule text-white"
+                        : tipObject.result === "win"
+                        ? "icon-success text-green"
+                        : tipObject.result === "push"
+                        ? "icon-disturb text-neon"
+                        : "icon-error text-red"
+                    } text-sm mr-2`}
+                  ></span>
+                </div>
+              </div>
+            );
+          })}
         </div>
         <div className="flex mt-[30px]">
           <div className="mr-auto">
@@ -356,15 +372,17 @@ const BetModal = ({
           </div>
           <div className="ml-auto mr-auto">
             <div className="text-[14px] text-rgba-grey-02' font-[500] mb-[9px]">
-              {!selectedTicket?.customer_tickets[0]?.bet ? 'Ajánlott tét': 'Megjátszott tét'}
+              {!selectedTicket?.customer_tickets[0]?.bet
+                ? "Ajánlott tét"
+                : "Megjátszott tét"}
             </div>
             <div className="text-[24px] uppercase font-[600] min-w-[100px]">
               <div>
-                {!selectedTicket?.customer_tickets[0]?.bet ? selectedTicket.suggested_bet + ' egység' : (selectedTicket?.customer_tickets[0]?.bet)
-                  .toString()
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' Ft'}
-               
-                
+                {!selectedTicket?.customer_tickets[0]?.bet
+                  ? selectedTicket.suggested_bet + " egység"
+                  : (selectedTicket?.customer_tickets[0]?.bet)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " Ft"}
               </div>
             </div>
           </div>
@@ -407,7 +425,10 @@ const BetModal = ({
           }}
           modalClasses="  w-[800px]  h-auto"
         >
-          {selectedTicket.customer_tickets?.length === 0 && (moment().isBefore(moment(selectedTicket?.start_date).format('YYYY-MM-DD'))) ? (
+          {selectedTicket.customer_tickets?.length === 0 &&
+          moment().isBefore(
+            moment(selectedTicket?.start_date).format("YYYY-MM-DD")
+          ) ? (
             <TicketForm />
           ) : (
             <TicketView />

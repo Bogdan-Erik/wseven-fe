@@ -28,8 +28,7 @@ export const bankSlice = createSlice({
         (state, action) => {
           /*state.name = action.payload[0]?.name;
         state.defaultUnit = action.payload[0]?.default_unit ?? 1000;*/
-        console.log(action.payload.current_balance);
-          state.balance = action.payload.current_balance
+          state.balance = action.payload?.current_balance ?? 0
         }
       );
   },
