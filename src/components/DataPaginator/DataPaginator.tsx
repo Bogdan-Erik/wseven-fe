@@ -44,10 +44,6 @@ export const DataPaginator = ({ datas, Component, NoResultComponent, additionalC
     filteringDatas();
   }, [page, rowsPerPage])
 
-  useEffect(() => {
-    console.log(filteredDatas);
-  }, [filteredDatas])
-
   return (
     <>
       <div>

@@ -82,7 +82,7 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <>
-      <div className="text-white flex bg app-body">
+      <div className="text-white flex bg app-body min-h-[100vh]">
         <div className="hidden md:block w-[200px] lg:w-[320px]">
           <SideMenuBar />
         </div>

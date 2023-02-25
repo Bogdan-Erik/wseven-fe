@@ -1,4 +1,5 @@
 import React from 'react'
+import { twMerge } from 'tailwind-merge';
 import { Icon } from '../Icon';
 import './BankItem.scss';
 
@@ -12,12 +13,14 @@ export interface BankItemProps {
   icon: string,
   title: string,
   amount: string,
+  extraClass?: any
   actions: BankItemAction[]
 }
 
-export const BankItem = ({ icon, title, amount, actions }: BankItemProps): JSX.Element => {
+export const BankItem = ({ extraClass, icon, title, amount, actions }: BankItemProps): JSX.Element => {
+  const extra = twMerge(`${extraClass} bank-item rounded-[6px] p-[27px] h-full`)
   return (
-    <div className="bank-item rounded-[6px] p-[27px] h-full">
+    <div className={extra}>
       <div className="head flex flex-row">
         <div className=" flex flex-row flex-3">
           <div className="mr-[16px] flex flex-col justify-center"><Icon icon={icon} size={'text-2xl'} isGradient /></div>
@@ -36,7 +39,7 @@ export const BankItem = ({ icon, title, amount, actions }: BankItemProps): JSX.E
         <div className="actions mt-[15px]  flex flex-col md:flex-row">
           {actions.map((item: BankItemAction) => {
             return (
-              <div className="cursor-pointer mr-[20px] xl:mr-[40px] mt-[20px] md:mt-[0px]"><Icon icon={'arrow_up'} size={'text-2xl'} iconClasses="mr-[5px] relative top-[3px]" /> Virtuális egyenleg feltöltése</div>
+              <div className="cursor-pointer mr-[20px] xl:mr-[40px] mt-[20px] md:mt-[0px]" onClick={() => item.onClick()}><Icon icon={'arrow_up'} size={'text-2xl'} iconClasses="mr-[5px] relative top-[3px]" /> {item.title}</div>
             )
           })}
           <div></div>

@@ -18,6 +18,7 @@ import matchSlice, { matchApiSlice } from './MatchSlice';
 import customerSlice, { customerApiSlice } from './CustomerSlice';
 import ticketSlice, { ticketApiSlice } from './TicketSlice';
 import notificationSlice, { notificationApiSlice } from './NotificationSlice';
+import bankSlice, { bankApiSlice } from './BankSlice';
 /* -- reduxSliceImport: insert above here -- */
 
 
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   customer: customerSlice,
   ticket: ticketSlice,
   notification: notificationSlice,
+  bank: bankSlice,
   /* -- reduxSlice: insert above here -- */
   [fetchApiSlice.reducerPath]: fetchApiSlice.reducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
@@ -47,6 +49,7 @@ const rootReducer = combineReducers({
   [customerApiSlice.reducerPath]: customerApiSlice.reducer,
   [ticketApiSlice.reducerPath]: ticketApiSlice.reducer,
   [notificationApiSlice.reducerPath]: notificationApiSlice.reducer,
+  [bankApiSlice.reducerPath]: bankApiSlice.reducer,
 
   /* -- reduxApiSliceReducerPath: insert above here -- */
 })
@@ -64,6 +67,7 @@ const store = configureStore({
       customerApiSlice.middleware,
       ticketApiSlice.middleware,
       notificationApiSlice.middleware,
+      bankApiSlice.middleware,
       /* -- reduxApiSliceMiddleware: insert above here -- */
     ]),
   preloadedState: {

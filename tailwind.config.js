@@ -60,6 +60,8 @@ module.exports = {
       'whitesmoke': '#d9d9d9',
       'gradient-1': 'rgba(16, 51, 89, 0.95)',
       'gradient-2': 'rgba(56, 14, 94, 0.95)',
+      'dark-overlay-01': 'rgba(0, 0, 18, 0.5)',
+      'dark-overlay': 'rgba(0, 0, 18, 0.7)',
       'neon': '#CCFF02',
       stone: colors.warmGray,
       sky: colors.lightBlue,

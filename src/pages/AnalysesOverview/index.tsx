@@ -46,6 +46,7 @@ export default ({ }: PageProps) => {
   }
   return (
     <Container className="dark container 2xl:mx-auto px-[20px] pt-[30px] max-w-[100%] 2xl:max-w-screen-2xl 3xl:max-w-screen-3xl mx-auto" padding={false}>
+      <PageTitle title="Elemzések" icon="stat-bordered" />
       {isLoading ? ('Loading') : (
         <div className="analyses mt-[50px]">
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-[40px]">

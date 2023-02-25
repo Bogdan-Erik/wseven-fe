@@ -402,10 +402,20 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
     addTipForCustomer: builder.mutation<any, any>({
       query: (arg) => ({
         body: gql`
-        mutation InsertTipsMutation ($customerId: uuid!, $tipId: uuid!, $odds: float8, $bet: float8) {
-          insert_customer_tips(objects: {customer_id: $customerId, tip_id: $tipId, odds: $odds, tet: $bet}) {
+        mutation InsertTipsMutation ($customerId: uuid!, $tipId: uuid!, $odds: float8, $bet: float8, $betMinus: float8, $sourceType: String!, $description: String!, $createdAt: timestamp!) {
+          insert_customer_tips(objects: {customer_id: $customerId, tip_id: $tipId, odds: $odds, tet: $bet, created_at: $createdAt}) {
             returning {
               id
+            }
+          }
+          insert_customer_transactions(objects: {amount: $betMinus, customer_id: $customerId, source_id: $tipId, source_type: $sourceType, description: $description, created_at: $createdAt}) {
+            returning {
+              description
+              source_type
+              amount
+              customer_id
+              source_id
+              created_at
             }
           }
         }
@@ -415,6 +425,10 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
           tipId: arg.tipId,
           odds: arg.odds,
           bet: arg.bet,
+          betMinus: -arg.bet,
+          sourceType: arg.sourceType,
+          description: arg.description,
+          createdAt: moment().utcOffset(0, true).format()
         },
         token: store.getState().auth.accessToken,
       }),

@@ -82,6 +82,8 @@ const BetModal = ({
             customer_id: auth.userId,
             ticket_id: selectedTicket.id,
             bet: bet,
+            sourceType: "App\\Models\\CustomerTicket",
+            description: 'Szelvény #' + selectedTicket.number + ' rögzítése',
             customer_ticket_tips: tips.map((item: any) => {
               return {
                 customer_id: auth.userId,

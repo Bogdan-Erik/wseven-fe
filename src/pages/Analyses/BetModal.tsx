@@ -41,10 +41,11 @@ const BetModal = ({ selectedBet, showTipModal, setShowTipModal, confirmAction }:
             }}
             validationSchema={BetSchema}
             onSubmit={async ({ odds, bet }) => {
-              console.log(odds);
               addTipForCustomer({
                 customerId: auth.userId,
                 tipId: selectedBet.id,
+                description: selectedBet.name + ' fogadás rögzítése',
+                sourceType: "App\\Models\\Tip",
                 odds,
                 bet
               }).then(data => {

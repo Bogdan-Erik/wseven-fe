@@ -3,7 +3,7 @@
 }
 
 .side-menubar .token-block {
-  @apply h-[66px] w-full py-[22px] text-center mt-[15px] text-lg;
+  @apply w-full py-[15px] flex items-center text-center mt-[15px] text-lg;
   background: linear-gradient(92.47deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
 }
 
@@ -11,8 +11,12 @@
   @apply font-bold;
 }
 
-.menu-item {
+.menu-item{
   @apply rounded-md flex flex-row justify-center items-center cursor-pointer flex flex-col text-rgba-grey;
+}
+
+.menu-item-disabled {
+  @apply rounded-md flex flex-row justify-center items-center flex flex-col text-rgba-grey-003;
 }
 
 .menu-item:hover, .menu-item.active {
@@ -20,6 +24,7 @@
   background: linear-gradient(123.16deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
   backdrop-filter: blur(9.8px);
 }
+
 
 .gradient-icon {
   background: -webkit-linear-gradient(309deg, #22C2CC 19.79%, #C900FF 100%);
