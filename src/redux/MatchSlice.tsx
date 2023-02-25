@@ -130,8 +130,8 @@ export const matchSlice = createSlice({
               isDaily: item.is_daily,
               location: item.location,
               image: (!item?.image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.image : item.image),
-              homeImage: (!item?.home_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.home_image : item.home_image),
-              awayImage: (!item?.away_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.away_image : item.away_image),
+              homeImage: item.home_image !== null ? (!item?.home_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.home_image : item.home_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
+              awayImage: item.away_image !== null ? (!item?.away_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.away_image : item.away_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
             }
           })
 
@@ -393,8 +393,8 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
           weather: item.weather,
           analyses: item.analyses.length > 0 ? item.analyses?.[0] : [],
           image: (!item?.image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.match_cover : item.match_cover),
-          homeImage: (!item?.home_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.home_image : item.home_image),
-          awayImage: (!item?.away_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.away_image : item.away_image),
+          homeImage: item.home_image !== null ? (!item?.home_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.home_image : item.home_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
+          awayImage: item.away_image !== null ? (!item?.away_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.away_image : item.away_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
           matchDatas: item.match_datas,
         }
       },
