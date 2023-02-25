@@ -427,7 +427,7 @@ const BetModal = ({
         >
           {selectedTicket.customer_tickets?.length === 0 &&
           moment().isBefore(
-            moment(selectedTicket?.start_date).format("YYYY-MM-DD")
+            moment(selectedTicket?.start_date).format("YYYY-MM-DD HH:mm")
           ) ? (
             <TicketForm />
           ) : (
