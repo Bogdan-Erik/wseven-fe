@@ -14,6 +14,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useRemoveAllNotificationMutation, useRemoveNotificationMutation, useSetSeenNotificationMutation } from '../../redux/NotificationSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBellSlash } from '@fortawesome/free-regular-svg-icons'
+import moment from 'moment';
 type User = {
   name: string;
 };
@@ -102,7 +103,7 @@ export const Header = ({ variant = 'primary', user, notifications }: HeaderProps
                     <div><span className="font-icomoon icon icon-tennis"></span>Tenisz</div>
                   </div>
                   <div className="text-white flex action-menu-bar mr-[20px] lg:mr-[40px]">
-                    <div className="text-rgba-grey-08 hidden lg:block">2022. július 7. 12:58</div>
+                    <div className="text-rgba-grey-08 hidden lg:block">{moment().format('YYYY. MMMM. DD HH:mm')}</div>
                     <div>
                       <span className="relative inline-block ml-8  top-[3px] md:top-0 cursor-pointer " onClick={() => setNotificationOpen(!notificationOpen)}>
                         <span className="font-icomoon icon icon-bell text-xl text-rgba-grey-08"></span>
