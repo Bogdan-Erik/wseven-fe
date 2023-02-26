@@ -10,6 +10,8 @@ import { useLazyGetMyselfQuery } from "../../redux/CustomerSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { useLazyGetBalanceQuery } from "../../redux/BankSlice";
+import ReactLoading from 'react-loading';
+
 export interface SideMenuBarProps {}
 
 export const SideMenuBar = ({}: SideMenuBarProps): JSX.Element => {
@@ -31,10 +33,13 @@ export const SideMenuBar = ({}: SideMenuBarProps): JSX.Element => {
       </div>
 
       <div className="flex flex-col items-center justify-center mt-[40px]">
-        <div>
+        <div className="relative">
+        {!customer?.image && (<div className="w-[95px] h-[99px] rounded-full bg-black opacity-[.8] absolute flex justify-center items-center">
+                <ReactLoading type={'spin'} color={'#ffffff'} height={40} width={40} />
+                </div>)}
           <img
             src={
-              "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png"
+              customer.image
             }
             className="rounded-full w-[95px] h-[99px]"
           />

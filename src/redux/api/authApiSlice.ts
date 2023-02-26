@@ -9,33 +9,25 @@ export const authApiSlice = fetchApiSlice.injectEndpoints({
         body: { ...credentials },
       }),
     }),
-    forgottenPassword: builder.mutation({
-      query: (email) => ({
-        url: '/v1-auth-password',
-        method: 'POST',
-        body: { email },
-      }),
-    }),
     newPassword: builder.mutation({
-      query: ({ claimToken, password }) => ({
-        url: '/v1-auth-setpassword',
+      query: ({ accessToken, password, passwordRepeat }) => ({
+        url: '/change-password',
         method: 'POST',
-        body: { claimToken, password },
+        body: { accessToken, password, passwordRepeat },
       }),
     }),
-    activateUser: builder.mutation({
-      query: ({ claimToken, password, firstName, lastName }) => ({
-        url: '/v1-auth-activate',
+    pictureUpload: builder.mutation<{}, FormData>({
+      query: (data) => ({
+        url: '/upload-picture',
         method: 'POST',
-        body: { claimToken, password, firstName, lastName },
+        body: data,
       }),
     }),
   }),
 })
 
 export const {
+  usePictureUploadMutation,
   useLoginMutation,
-  useForgottenPasswordMutation,
   useNewPasswordMutation,
-  useActivateUserMutation,
 } = authApiSlice

@@ -23,6 +23,6 @@ export const hasuraApiSlice = createApi({
   baseQuery: graphqlBaseQuery({
     baseUrl: `${import.meta.env.VITE_HASURA_URL}`,
   }),
-
+  tagTypes: ['Customer'],
   endpoints: () => ({}),
 })

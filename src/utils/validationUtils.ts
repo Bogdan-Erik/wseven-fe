@@ -57,3 +57,15 @@ export const TicketSchema = Yup.object().shape({
   tips: Yup.array().required(EMPTY_ERROR),
   bet: Yup.number().required(EMPTY_ERROR)
 })
+
+
+export const userSettingsSchema = Yup.object().shape({
+  fullname: Yup.string().required(EMPTY_ERROR),
+  username: Yup.string().required(EMPTY_ERROR),
+  email: Yup.string().required(EMPTY_ERROR),
+})
+
+export const userPasswordChangeSchema = Yup.object().shape({
+  password: Yup.string().required(EMPTY_ERROR),
+  passwordRepeat: Yup.string().required(EMPTY_ERROR).oneOf([Yup.ref('password'), null], 'Egyeznie kell a két jelszónak!')
+})
