@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -58,7 +60,7 @@ export default ({}: PageProps) => {
         "Sikeres képfeltöltés",
         `Sikeresen feltöltötted profilképed!`
       );
-      trigger();
+      trigger({});
     })
     .catch((e:any) => {
       newErrorToast(

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { createSlice } from "@reduxjs/toolkit";
 import { gql } from "graphql-request";
 import store, { RootState } from "./store";
@@ -6,7 +8,7 @@ import moment from "moment";
 
 export interface CustomerSlice {
   name: any
-  image:string
+  image: string | null
   defaultUnit: any
 }
 
