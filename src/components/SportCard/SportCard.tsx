@@ -23,7 +23,8 @@ export interface SportCardProps {
   images: string[]
   colorScheme?: 'blue' | 'orange' | 'green' | 'yellow' | 'red' | 'purple',
   onClick?: () => void;
-  date?: string
+  date?: string,
+  leagueLogo?: string,
 }
 
 const LargeTeamsBar = (type: any, hazai: any, vendeg: any) => {
@@ -143,6 +144,7 @@ export const SportCard = ({
   daily = false,
   colorScheme,
   date = '2022-06-01 20:00',
+  leagueLogo = 'https://w7tips.fra1.digitaloceanspaces.com/ll.png',
   ...props
 }: SportCardProps) => {
   console.log(sportType);
@@ -174,7 +176,7 @@ export const SportCard = ({
             {daily && (<div className="hidden md:block absolute right-[15px] top-[15px] daily-match-large">A nap tippje</div>)}
             {/* Info block */}
             <div className={twMerge(`info-block flex ${size === 'large' ? 'flex-col md:flex-row' : ''} mt-[25px]`)}>
-              <div className={twMerge(`mr-[11px] ${size === 'large' ? 'self-center md:self-start md:mr-[11px]' : ''}`)}><img src="https://w7tips.fra1.digitaloceanspaces.com/ll.png" /></div>
+              <div className={twMerge(`mr-[5px] ${size === 'large' ? 'self-center md:self-start' : ''}  md:w-[80px]`)}><img src={leagueLogo ? (import.meta.env.VITE_DO_IMAGE_HOST + leagueLogo) : leagueLogo} height="52" /></div>
               <div className="date-holder self-center">
                 <div className='text-white text-[16px] font-[600]'>{format(parseISO(date), 'yyyy. MMMM dd.', { locale: hu })}</div>
                 <div className={twMerge(`text-[20px] text-rgba-grey-08 ${size === 'large' ? 'text-center md:text-left' : ''}`)}>{format(parseISO(date), 'HH:mm', { locale: hu })}</div>

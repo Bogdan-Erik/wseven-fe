@@ -25,7 +25,16 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.icon-back-arrow:before {
+  content: "\e936";
+}
 
+.icon-subscription-settings:before {
+  content: "\e934";
+}
+.icon-user-settings:before {
+  content: "\e935";
+}
 .icon-disturb:before {
   content: "\e933";
 }

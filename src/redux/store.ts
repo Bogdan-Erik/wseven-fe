@@ -7,6 +7,7 @@ import {
 } from '@reduxjs/toolkit'
 import { persistReducer, persistStore } from 'redux-persist'
 import authSlice from './authSlice'
+import globalSlice from './globalSlice'
 import storage from 'redux-persist/lib/storage'
 import storageSession from 'reduxjs-toolkit-persist/lib/storage/session'
 import { useDispatch } from 'react-redux'
@@ -36,6 +37,7 @@ const requirementPersistConfig = {
 
 const rootReducer = combineReducers({
   auth: authSlice,
+  global: globalSlice,
   match: matchSlice,
   customer: customerSlice,
   ticket: ticketSlice,

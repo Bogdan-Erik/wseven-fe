@@ -64,7 +64,7 @@ export default ({ }: PageProps) => {
     <Container className="analyses-container container 2xl:mx-auto max-w-[100%] 2xl:max-w-screen-2xl 3xl:max-w-screen-3xl mx-auto" padding={false}>
       {isLoading && !data ? ('Loading') : (
         <div className="analyses">
-          <AnalysesHeader showDatas={data?.analyses.length === 0 ? false : true} sport={data.sport} isDaily={data.isDaily} type={''} background={data.image} homeObject={homeObject} awayObject={awayObject} matchLogo={"https://w7tips.fra1.digitaloceanspaces.com/images/leagues/cl.png"} matchDate={{ date: data.dateStart }} locationDatas={{
+          <AnalysesHeader isClosed={data.isClosed} showDatas={data?.analyses.length === 0 ? false : true} sport={data.sport} isDaily={data.isDaily} type={''} background={data.image} homeObject={homeObject} awayObject={awayObject} matchLogo={data.league.image ? (import.meta.env.VITE_DO_IMAGE_HOST + data?.league?.image) : "https://w7tips.fra1.digitaloceanspaces.com/images/leagues/cl.png"} matchDate={{ date: data.dateStart }} locationDatas={{
             weather: data.weather?.name,
             location: data.location
           }}
@@ -127,7 +127,7 @@ export default ({ }: PageProps) => {
                 {data?.analyses.length !== 0 && data?.analyses?.tips.map((item: any) => {
                   return (
                     <div className="mb-[15px]">
-                      <BetRow played={item.customer_tips?.length > 0 ? true : false} disabled={item.customer_tips?.length > 0 || isLoading ? true : false} action={() => { setSelectedBet(item); setShowTipModal(true) }} odds={item.odds} title={item.name} strength={item.rating} suggestedBet={(item.tet * customer.defaultUnit + ' Ft').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} players={[]} />
+                      <BetRow dateStart={data.dateStart} result={item.result} isClosed={data.isClosed} playersNumber={item?.customer_tips_aggregate?.aggregate?.count ?? 0} played={item.customer_tips?.length > 0 ? true : false} disabled={(item.customer_tips?.length > 0 || isLoading || data.isClosed) ? true : false} action={() => { setSelectedBet(item); setShowTipModal(true) }} odds={item.odds} title={item.name} strength={item.rating} suggestedBet={(item.tet * customer.defaultUnit + ' Ft').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} players={['','', '', '', '']} />
                     </div>
                   )
                 })}

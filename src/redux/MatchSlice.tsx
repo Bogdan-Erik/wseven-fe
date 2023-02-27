@@ -79,11 +79,13 @@ export const matchSlice = createSlice({
       builder.addMatcher(
         matchApiSlice.endpoints.getTipsByDateRange.matchFulfilled,
         (state, action) => {
-          console.log(action.payload)
 
 
           const tips = action.payload.map((item: any) => {
+          console.log(item.result)
+
             return {
+              matchId: item.analyasis.match.id,
               date: moment(item.analyasis.match.date_start).format('YYYY. MMMM DD'),
               time: moment(item.analyasis.match.date_start).format('HH:mm'),
               home: item.analyasis.match.homePlayer ? item.analyasis.match.homePlayer.first_name + ' ' + item.analyasis.match.homePlayer.last_name : item.analyasis.match.homeTeam.name,
@@ -91,7 +93,9 @@ export const matchSlice = createSlice({
               winner: 'home',
               odds: item.odds,
               tippString: item.name,
-              isWinner: true,
+              isWinner: item.result !== 'loose' ? true : false,
+              winningPrice: item.result !== 'loose' ? `+${item.tet} egység` : `-${item.tet} egység` ,
+              logo: import.meta.env.VITE_DO_IMAGE_HOST + item.analyasis.match.league.image,
             }
           })
 
@@ -132,6 +136,9 @@ export const matchSlice = createSlice({
               image: (!item?.image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.image : item.image),
               homeImage: item.home_image !== null ? (!item?.home_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.home_image : item.home_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
               awayImage: item.away_image !== null ? (!item?.away_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.away_image : item.away_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
+              league: {
+                image: item?.league?.image ?? null
+              }
             }
           })
 
@@ -193,56 +200,119 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
       transformResponse: (response) => response,
     }),
     getActiveMatches: builder.query<any, any>({
+      query: (args) => ({
+        body: (args?.sportId !== null && args?.sportId !== undefined )? gql`
+        query($sportId: uuid) {
+          matches(order_by: {is_daily: desc, date_start: asc}, where: {is_closed: {_eq:true}, sport: {id: {_eq: $sportId}}}) {
+            id
+            date_start
+            date_end
+            type
+            match_cover
+            home_image
+            is_daily
+            away_image
+            sport {
+              id
+              color
+              name
+            }
+            homeTeam {
+              id
+              name
+              logo
+            }
+            awayTeam {
+              id
+              name
+              logo
+            }
+            homePlayer {
+              id
+              first_name
+              last_name
+              image
+            }
+            awayPlayer {
+              id
+              first_name
+              last_name
+              image
+            }
+            league {
+              id
+              image
+              name
+            }
+          }
+        }
+      
+      `: `query {
+        matches(order_by: {is_daily: desc, date_start: asc} where: {is_closed: {_eq:false}}) {
+          id
+          date_start
+          date_end
+          type
+          match_cover
+          home_image
+          is_daily
+          away_image
+          sport {
+            id
+            color
+            name
+          }
+          homeTeam {
+            id
+            name
+            logo
+          }
+          awayTeam {
+            id
+            name
+            logo
+          }
+          homePlayer {
+            id
+            first_name
+            last_name
+            image
+          }
+          awayPlayer {
+            id
+            first_name
+            last_name
+            image
+          }
+          league {
+            id
+            image
+            name
+            image
+          }
+        }
+      }
+      `,
+        token: store.getState().auth.accessToken,
+        variables: args.sportId ? {
+          sportId: args.sportId,
+        }:null
+      }),
+      transformResponse: (response) => response.matches,
+    }),
+    getSportCategories: builder.query<any, any>({
       query: () => ({
         body: gql`
-          query {
-            matches(order_by: {is_daily: desc, date_start: asc}) {
-              id
-              date_start
-              date_end
-              type
-              match_cover
-              home_image
-              is_daily
-              away_image
-              sport {
+            query GetSports {
+              sports {
                 id
-                color
-                name
-              }
-              homeTeam {
-                id
-                name
-                logo
-              }
-              awayTeam {
-                id
-                name
-                logo
-              }
-              homePlayer {
-                id
-                first_name
-                last_name
-                image
-              }
-              awayPlayer {
-                id
-                first_name
-                last_name
-                image
-              }
-              league {
-                id
-                image
                 name
               }
             }
-          }
         `,
         token: store.getState().auth.accessToken,
       }),
-      transformResponse: (response) => response.matches,
+      transformResponse: (response) => response.sports,
     }),
     getTipsByDateRange: builder.query<any, any>({
       query: (arg) => ({
@@ -253,8 +323,11 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
             name
             odds
             rating
+            tet
+            result
             analyasis {
               match {
+                id
                 date_start
                 homePlayer {
                   first_name
@@ -269,6 +342,9 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
                 }
                 awayTeam {
                   name
+                }
+                league {
+                  image
                 }
               }
             }
@@ -295,6 +371,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
             match_cover
             home_image
             is_daily
+            is_closed
             away_image
             location
             weather {
@@ -341,10 +418,16 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
                 odds
                 rating
                 tet
+                result
                 customer_tips {
                   id
                   odds
                   tet
+                }
+                customer_tips_aggregate {
+                  aggregate {
+                    count
+                  }
                 }
               }
             }
@@ -389,6 +472,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
           sportType: 'football',
           sport: item.sport,
           isDaily: item.is_daily,
+          isClosed: item.is_closed,
           location: item.location,
           weather: item.weather,
           analyses: item.analyses.length > 0 ? item.analyses?.[0] : [],
@@ -396,6 +480,9 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
           homeImage: item.home_image !== null ? (!item?.home_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.home_image : item.home_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
           awayImage: item.away_image !== null ? (!item?.away_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.away_image : item.away_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
           matchDatas: item.match_datas,
+          league: {
+            image: item.league?.image ?? null
+          }
         }
       },
     }),
@@ -443,6 +530,7 @@ export const {
   useLazyGetTipsByDateRangeQuery,
   useGetMatchQuery,
   useAddTipForCustomerMutation,
+  useLazyGetSportCategoriesQuery,
 } = matchApiSlice
 
 export const { setActiveMatches } = matchSlice.actions

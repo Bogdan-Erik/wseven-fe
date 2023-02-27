@@ -79,6 +79,7 @@ export interface AnalysesHeaderProps {
   locationDatas: LocationDatasProps
   tennisFieldType?: TennisFieldType,
   isDaily?: boolean
+  isClosed?: boolean
   sport?: any
   showDatas: boolean
 }
@@ -94,6 +95,7 @@ export const AnalysesHeader = ({
   locationDatas,
   tennisFieldType,
   isDaily,
+  isClosed,
   sport,
   showDatas
 }: AnalysesHeaderProps): JSX.Element => {
@@ -102,6 +104,7 @@ export const AnalysesHeader = ({
   const dateTimeAfterThreeDays = THREE_DAYS_IN_MS;
 
   const colorScheme = sport.color;
+  console.log(isClosed)
   return (
     <div>
       <div className="header-bg relative min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]" style={{ background: `url(${background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
@@ -151,11 +154,11 @@ export const AnalysesHeader = ({
         </div>
         <div className="absolute center-content">
           <motion.div animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="left-side">
-            <img src={homeObject.playerImage} className="player-image" />
+            <img src={homeObject.playerImage}  className={`player-image ${isClosed ? 'grayscale' : ''}`} />
           </motion.div>
           <motion.div animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="center-side  opacity-0">
             <div className="flex-1 justify-center flex self-center flex-col">
-              <img src={matchLogo} className={"event-logo"} />
+              <img src={matchLogo} className={"event-logo h-[150px]"} />
             </div>
             <div className="flex-1 justify-center flex self-center flex-col items-center">
               <div className="text-sm mb-[10px]">{format(Date.parse(matchDate.date), 'yyyy. LLLL dd.')} <strong>{format(Date.parse(matchDate.date), 'HH:mm')}</strong></div>
@@ -169,7 +172,7 @@ export const AnalysesHeader = ({
             </div>
           </motion.div>
           <motion.div animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="right-side">
-            <img src={awayObject.playerImage} className="player-image" />
+            <img src={awayObject.playerImage} className={`player-image ${isClosed ? 'grayscale' : ''}`} />
           </motion.div>
         </div>
 
@@ -191,10 +194,10 @@ export const AnalysesHeader = ({
           </div>
           <div className="flex h-[100%]">
             <motion.div animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="left-side">
-              <img src={homeObject.playerImage} className="player-image" />
+              <img src={homeObject.playerImage}  className={`player-image ${isClosed ? 'grayscale' : ''}`} />
             </motion.div>
             <motion.div animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="right-side">
-              <img src={awayObject.playerImage} className="player-image" />
+              <img src={awayObject.playerImage}  className={`player-image ${isClosed ? 'grayscale' : ''}`} />
             </motion.div>
           </div>
         </div>

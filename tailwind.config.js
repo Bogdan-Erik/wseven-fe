@@ -63,6 +63,7 @@ module.exports = {
       'dark-overlay-01': 'rgba(0, 0, 18, 0.5)',
       'dark-overlay': 'rgba(0, 0, 18, 0.7)',
       'neon': '#CCFF02',
+      'light-white-second': 'rgba(255, 255, 255, 0.2)',
       stone: colors.warmGray,
       sky: colors.lightBlue,
       neutral: colors.trueGray,

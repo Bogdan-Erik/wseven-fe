@@ -161,6 +161,7 @@ const App = () => {
                 <Route element={<ProtectedRoute><ApplicationLayout><Outlet /></ApplicationLayout></ProtectedRoute>}>
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/developing" element={<Developing />} />
+                  <Route path="/analyses-overview/:id" element={<AnalysesOverview />} />
                   <Route path="/analyses-overview" element={<AnalysesOverview />} />
                   <Route path="/analyses/:id" element={<Analyses />} />
                   <Route path="/challenges" element={<Challenge />} />
@@ -172,6 +173,7 @@ const App = () => {
                   <Route path="/marketplace" element={<Marketplace />} />
                   <Route path="/informations" element={<Informations />} />
                   <Route path="/settings" element={<Settings />} />
+                  <Route path="/settings/:id" element={<Settings />} />
                 </Route>
               </Routes >
           </Provider>
