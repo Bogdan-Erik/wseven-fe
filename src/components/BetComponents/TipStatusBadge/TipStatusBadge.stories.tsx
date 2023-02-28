@@ -1,6 +1,6 @@
 import React from 'react'
 import { Story, Meta } from '@storybook/react/types-6-0'
-import { TipStatusBadge, TipStatusBadgeProps } from './TipStatusBadge'
+import { TipStatusBadge, TipStatusProps } from './TipStatusBadge'
 import docs from './TipStatusBadge.docs.mdx'
 
 export default {
@@ -15,11 +15,11 @@ export default {
   },
 } as Meta
 
-const Template: Story<TipStatusBadgeProps> = (args) => <TipStatusBadge {...args} />
+const Template: Story<TipStatusProps> = (args) => <TipStatusBadge {...args} />
 
 export const Standard = Template.bind({})
 Standard.args = {
-  odds: '1.68'
+ // odds: '1.68'
 }
 
 /* Standard.decorators = [

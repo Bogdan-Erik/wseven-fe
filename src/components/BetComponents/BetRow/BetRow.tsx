@@ -21,7 +21,7 @@ export interface BetRowProps {
   strength: number
   suggestedBet: string
   players: any[]
-  playersNumber: any,
+  playersNumber?: any,
   contentText?: string
   matchDatas?: MatchData
   action?: any
