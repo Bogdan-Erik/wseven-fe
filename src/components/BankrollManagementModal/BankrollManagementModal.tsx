@@ -109,7 +109,7 @@ export const BankrollManagementModal = ({
           hide={() => {
             setShowModal(false);
           }}
-          modalClasses=" w-[800px]  h-auto"
+          modalClasses=" max-w-[800px]  h-auto overflow-y-auto"
           title={<>Bankroll management</>}
         >
           <Formik
@@ -148,11 +148,11 @@ export const BankrollManagementModal = ({
 
               return (
                 <form onSubmit={handleSubmit}>
-                  <div>
+                  <div className="">
                     <div className="text-[16px] font-[500] text-center">
                       Válaszd ki a neked megfelelő bankroll stratégiát!
                     </div>
-                    <div className="grid grid-cols-2 gap-[24px] my-[24px]">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px] my-[24px]">
                       <Box
                         selected={selected === "fisher"}
                         setFieldValue={setFieldValue}
