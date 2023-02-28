@@ -45,7 +45,7 @@ export const MatchItem = ({
   return (
     <>
       <div className={contClass} onClick={() => onClick(matchId)}>
-        <div className="pr-4 flex justify-center flex-col"><img src={logo ?? LigaLogo} style={{ maxHeight: '42px' }} /></div>
+        <div className="pr-4 flex justify-center flex-col"><img src={logo ?? LigaLogo} style={{ maxHeight: '42px', maxWidth: '60px' }} /></div>
         <div className=" flex flex-col justify-center w-32 md:w-32 ">
           <div className="text-xs  text-white font-semibold">{date}</div>
           <div className="text-xs font-normal">{time}</div>
@@ -78,7 +78,7 @@ export const MatchItem = ({
         <div className="w-full grey-linear-gradient rounded-t-md text-white p-2.5 flex flex-col">
           <div className="flex flex-row w-full">
             <div className="flex flex-row w-2/4">
-              <div className="pr-4 flex justify-center flex-col"><img src={LigaLogo} style={{ maxHeight: '42px' }} /></div>
+              <div className="pr-4 flex justify-center flex-col"><img src={logo ?? LigaLogo} style={{ maxHeight: '42px', maxWidth: '60px' }} /></div>
               <div className="flex flex-col justify-center">
                 <div className="text-xs  text-white font-semibold">{date}</div>
                 <div className="text-xs font-normal">{time}</div>

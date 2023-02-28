@@ -83,6 +83,8 @@ export interface AnalysesHeaderProps {
   isClosed?: boolean
   sport?: any
   showDatas: boolean
+  tv?: any
+  fieldType?: any
 }
 
 export const AnalysesHeader = ({
@@ -98,7 +100,9 @@ export const AnalysesHeader = ({
   isDaily,
   isClosed,
   sport,
-  showDatas
+  showDatas,
+  tv,
+  fieldType
 }: AnalysesHeaderProps): JSX.Element => {
   const THREE_DAYS_IN_MS = new Date(matchDate.date).getTime();
 
@@ -158,7 +162,7 @@ export const AnalysesHeader = ({
           </motion.div>
           <motion.div animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="center-side  opacity-0">
             <div className="flex-1 justify-center flex self-center flex-col">
-              <img src={matchLogo} className={"event-logo h-[150px]"} />
+              <img src={matchLogo} className={"event-logo h-[150px] max-w-[250px]"} />
             </div>
             <div className="flex-1 justify-center flex self-center flex-col items-center">
               <div className="text-sm mb-[10px]">{format(Date.parse(matchDate.date), 'yyyy. LLLL dd.')} <strong>{format(Date.parse(matchDate.date), 'HH:mm')}</strong></div>
@@ -167,9 +171,32 @@ export const AnalysesHeader = ({
               </div>
             </div>
             <div className="flex-1 flex flex-col items-center justify-end">
-              <div className="text-[20px] font-[500]">{locationDatas.weather}</div>
-              <div className="text-sm font-semibold mb-[50px]">{locationDatas.location}</div>
+              <div className="text-[20px] font-[500]"><img src={locationDatas.weather} className="max-w-[150px] max-h-[80px]" /></div>
+              {tv && (<div className="text-sm font-semibold mb-[20px]">
+                {/*<div className='mb-[10px]'>TV Csatorna</div>*/}
+                <div className='flex justify-center'><img src={tv.logo} className="max-w-[150px] max-h-[80px]" /></div>
+                </div>)}
+              <div className="text-sm font-semibold mb-[10px]">{locationDatas.location}</div>
+              {fieldType && (<div className="text-sm font-semibold mb-[30px] flex justify-center"><img src={fieldType} /></div>)}
+          
             </div>
+            {/* 
+            <div className="flex-1 grid grid-cols-3 auto-rows-auto	grid-flow-row  items-center justify-end">
+                <div>
+                  <div className='mb-[10px]'>Helyszín</div>
+                  <div className="text-sm font-semibold mb-[10px]">{locationDatas.location}</div>
+                </div>
+                <div>
+                  <div className='mb-[10px]'>TV Csatorna</div>
+                  <div className='flex justify-center'><img src={tv.logo} className="max-w-[150px] max-h-[80px]" /></div>
+                </div>
+                <div>
+                  <div className='mb-[10px]'>Időjárás</div>
+                  <div className="text-[20px] font-[500]"><img src={locationDatas.weather} className="max-w-[150px] max-h-[80px]" /></div>
+                </div>
+            </div>
+            */}
+
           </motion.div>
           <motion.div animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="right-side">
             <img src={awayObject.playerImage} className={`player-image ${isClosed ? 'grayscale' : ''}`} />
@@ -278,7 +305,10 @@ export const AnalysesHeader = ({
       <div className="flex xl:hidden ">
         <div className="flex-1 flex flex-col items-center justify-end">
           <div className="text-[20px] font-[500]">{locationDatas.weather}</div>
-          <div className="text-sm font-semibold mb-[50px]">{locationDatas.location}</div>
+          {tv && (<div className="text-sm font-semibold mb-[50px]"><img src={tv.logo} className="max-w-[150px] max-h-[80px]" /></div>)}
+          <div className="text-sm font-semibold mb-[20px]">{locationDatas.location}</div>
+          {fieldType && (<div className="text-sm font-semibold mb-[30px] flex justify-center"><img src={fieldType} /></div>)}
+
         </div>
       </div>
     </div>

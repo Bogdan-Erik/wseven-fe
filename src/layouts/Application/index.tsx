@@ -51,27 +51,18 @@ const Layout = ({ children }: LayoutProps) => {
 
 
       if (initNotifications) {
-        /*let difference = data?.notifications?.filter((item: any) => !currentNotifications.includes(item)).map((item: any) => {
-          newPushToast(item.title, item.content)
-        });
-        console.log(difference)
-        setCurrentNotifications(data.notifications);
-        console.log(currentNotifications)
-  */
         _.differenceBy(data?.notifications, currentNotifications, 'id').map((item: any) => {
           newPushToast(item.title, item.content)
         });
-       //console.log(_.differenceBy(data?.notifications, currentNotifications, 'id'))
+        
 
         setCurrentNotifications(data?.notifications)
       }
     }
 
   }, [data])
-  /*const { isLoading, data, refetch } = useGetNotificationsQuery({}, {
-    pollingInterval: 5000,
-  });
-*/
+  const { isLoading, data: ASD, refetch } = useGetNotificationsQuery({});
+
   useEffect(() => {
     // 👇 add class to body element
     document.body.classList.add('app-body');
@@ -101,7 +92,7 @@ export default ({ children }: LayoutProps) => {
 
   const client = new ApolloClient({
     link: new WebSocketLink({
-      uri: 'ws://localhost:8080/v1/graphql',
+      uri: import.meta.env.VITE_HASURA_URL_WS,
       options: {
         reconnect: true,
         connectionParams: {

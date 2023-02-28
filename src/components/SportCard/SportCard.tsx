@@ -99,10 +99,10 @@ const smallTeamsBar = (type: any, hazai: any, vendeg: any) => {
       <div className="flex mt-[30px] absolute z-[11] w-full px-[16px] bottom-[16px]">
         <div className="home-team flex flex-col md:flex-row self-center mr-auto">
           <div className="mr-[10px]"><img src={hazai.logo} className="w-[42px]" /></div>
-          <div className="text-[12px] md:text-[16px] font-[500] self-center">{hazai.name}</div>
+          <div className="text-[12px] text-[16px] font-[500] self-center">{hazai.name}</div>
         </div>
         <div className="away-team flex flex-col md:flex-row self-center gap-[5px] md:gap-0 ">
-          <div className="text-[12px] md:text-[16px] font-[500] self-center order-2 md:order-1">{vendeg.name}</div>
+          <div className="text-[12px] text-[16px] font-[500] self-center order-2 md:order-1">{vendeg.name}</div>
           <div className='ml-[10px] order-1 md:order-2'><img src={vendeg.logo} className="w-[42px]" /></div>
         </div>
       </div>

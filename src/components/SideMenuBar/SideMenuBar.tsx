@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./SideMenuBar.css";
 import logo from "./../../assets/images/logo.svg";
+import logoDev from "./../../assets/images/logo_dev.svg";
+import logoBeta from "./../../assets/images/logo_beta.svg";
 import { Icon } from "../Icon";
 import { twMerge } from "tailwind-merge";
 import { Button } from "../Button";

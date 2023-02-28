@@ -84,12 +84,34 @@ export default ({ }: PageProps) => {
 
         <div>
           <div className="font-[600] text-[20px] mt-[60px] mb-[17px]">Korábbi tranzakciók</div>
-          <DataPaginator NoResultComponent={NoResult} Component={TransactionRow} datas={data?.transactions.map((item:any, key: number) => { return {
+          <DataPaginator NoResultComponent={NoResult} Component={TransactionRow} datas={data?.transactions.map((item:any, key: number) => { 
+            const transactionType = () => {
+              if (["App\\Models\\Upload", "App\\Models\\Out"].includes(item.source_type)) {
+                return (<><span className='font-[700]'>Virtuális bank</span> tranzakció</>);
+              } else if (item.source_type === "App\\Models\\Tip") {
+                return (<><span className='font-[700]'>Tipp: </span> {item.description}</>);
+              }else if (item.source_type === "App\\Models\\CustomerTicket") {
+                return (<><span className='font-[700]'>Szelvény: </span> {item.description}</>);
+              }
+            }
+
+            const itemLabel = () => {
+              if (item.source_type === "App\\Models\\Upload") {
+                return 'Virtuális egyenleg feltöltés';
+              }else if (item.source_type === "App\\Models\\Out") {
+                return 'Virtuális egyenleg kifizetés';
+              }else if (item.source_type === "App\\Models\\Tip") {
+                return 'Tipp művelet';
+              } else if (item.source_type === "App\\Models\\CustomerTicket") {
+                return 'Szelvény művelet';
+              }
+            }
+            return {
             isSecondary: key % 2 ? true : false,
-            isUpload: item.source_type === "App\\Models\\Upload" ? true : false,
-            icon: 'money',
-            title: <><span className='font-[700]'>Virtuális bank</span> tranzakció</>,
-            label: item.source_type === "App\\Models\\Upload" ? 'Virtuális egyenleg feltöltés' : 'Virtuális egyenleg kifizetés',
+            isUpload: (item.source_type === "App\\Models\\Upload" || item.amount > 0) ? true : false,
+            icon: ["App\\Models\\Upload", "App\\Models\\Out"].includes(item.source_type) ? 'money' : 'coin',
+            title: transactionType(),
+            label: itemLabel(),
             amount: item.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' Ft',
             date: moment(item.created_at).format('YYYY. MMMM DD. HH:mm')
           }})} additionalComponentProps={{ turnOffMore: true }}></DataPaginator>

@@ -70,6 +70,12 @@ export const matchSlice = createSlice({
             title: NameGetter(item, 'home') + ' - ' + NameGetter(item, 'away'),
             start: item.date_start,
             end: item.date_end,
+            extendedProps: {
+              tv: {
+                name: item?.tv_channel?.name,
+                logo: item?.tv_channel?.logo ? import.meta.env.VITE_DO_IMAGE_HOST + item.tv_channel?.logo : null
+              }
+            },
             className: ["event", item.sport?.value ?? 'football'],
           }
         })
@@ -178,6 +184,10 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
                 first_name
                 last_name
                 image
+              }
+              tv_channel {
+                logo
+                name
               }
               awayPlayer {
                 id
@@ -325,7 +335,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
       query: (arg) => ({
         body: gql`
         query getTipsByDateRange($dateFrom: timestamp!, $dateTo: timestamp!) {
-          tips(where: {analyasis: {match: {_and: {date_start: {_gte: $dateFrom}, date_end: {_lte: $dateTo}}}}}) {
+          tips(where: {analyasis: {match: {_and: {date_start: {_gte: $dateFrom}, date_end: {_lte: $dateTo}, is_closed: {_eq: true}}}}}) {
             id
             name
             odds
@@ -381,8 +391,10 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
             is_closed
             away_image
             location
+            field_type
             weather {
               name
+              icon
             }
             sport {
               id
@@ -416,6 +428,10 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
               id
               image
               name
+            }
+            tv_channel {
+              name
+              logo
             }
             analyses {
               id
@@ -482,14 +498,22 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
           isDaily: item.is_daily,
           isClosed: item.is_closed,
           location: item.location,
-          weather: item.weather,
+          weather: {
+            name: item.weather?.name,
+            icon: item.weather?.icon ? (import.meta.env.VITE_DO_IMAGE_HOST + item.weather.icon) : '',
+          },
           analyses: item.analyses.length > 0 ? item.analyses?.[0] : [],
           image: (import.meta.env.VITE_DO_IMAGE_HOST + item.match_cover),
           homeImage: item.home_image !== null ? (import.meta.env.VITE_DO_IMAGE_HOST + item.home_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
           awayImage: item.away_image !== null ? (import.meta.env.VITE_DO_IMAGE_HOST + item.away_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
           matchDatas: item.match_datas,
+          fieldType: item?.field_type ? (import.meta.env.VITE_DO_IMAGE_HOST + item.field_type) : null,
           league: {
             image: item.league?.image ?? null
+          },
+          tv: {
+            name: item?.tv_channel?.name,
+            logo: item?.tv_channel?.logo ? import.meta.env.VITE_DO_IMAGE_HOST + item.tv_channel?.logo : null
           }
         }
       },

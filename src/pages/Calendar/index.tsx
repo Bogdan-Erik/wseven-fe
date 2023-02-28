@@ -51,10 +51,10 @@ export default ({ }: PageProps) => {
 
   const renderEventContent = (eventInfo: any) => {
     return (
-      <div className="p-[6px]">
+      <div className="p-[6px] relative">
         <div className="flex">
           <div className="text-[12px] font-[700] flex-[1]">{eventInfo.timeText}</div>
-          <div>{eventInfo.event?.extendedProps?.tv}</div>
+          <div className='flex items-right absolute right-[5px] top-[5px]'><img src={eventInfo.event?.extendedProps?.tv?.logo ?? eventInfo.event?.extendedProps?.tv?.name} className="max-h-[30px] max-w-[100px]" /></div>
         </div>
         <div className="text-[12px] font-[600] whitespace-nowrap	overflow-hidden	">{eventInfo.event.title}</div>
       </div>

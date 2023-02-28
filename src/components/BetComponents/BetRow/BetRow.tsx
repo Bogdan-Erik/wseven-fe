@@ -37,7 +37,7 @@ export const BetRow = ({ odds, dateStart, playersNumber = 0, result = undefined,
     <div className="bet-row">
        {matchDatas && (
           <div className="flex xl:hidden mb-[20px] xl:mb-0">
-            <div className="pr-4 flex justify-center flex-col"><img src={matchDatas.liga} style={{ maxHeight: '42px' }} /></div>
+            <div className="pr-4 flex justify-center flex-col"><img src={matchDatas.liga} style={{ maxHeight: '42px', maxWidth: '60px' }} /></div>
             <div className=" flex flex-col justify-center w-32 md:w-32 ">
               <div className="text-xs  text-white font-semibold">{matchDatas.date}</div>
               <div className="text-xs font-normal">{matchDatas.time}</div>
@@ -51,7 +51,7 @@ export const BetRow = ({ odds, dateStart, playersNumber = 0, result = undefined,
       <div className="bet-row__title">
         {matchDatas && (
           <div className="hidden xl:flex">
-            <div className="pr-4 flex justify-center flex-col"><img src={matchDatas.liga} style={{ maxHeight: '42px' }} /></div>
+            <div className="pr-4 flex justify-center flex-col"><img src={matchDatas.liga} style={{ maxHeight: '42px', maxWidth: '60px'  }} /></div>
             <div className=" flex flex-col justify-center w-32 md:w-32 ">
               <div className="text-xs  text-white font-semibold">{matchDatas.date}</div>
               <div className="text-xs font-normal">{matchDatas.time}</div>

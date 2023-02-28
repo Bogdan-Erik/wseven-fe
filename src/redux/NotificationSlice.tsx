@@ -44,7 +44,6 @@ export const notificationApiSlice = hasuraApiSlice.injectEndpoints({
               read
               read_at
               created_at
-              updated_at
             }
           }
         `,

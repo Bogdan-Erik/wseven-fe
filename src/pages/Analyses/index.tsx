@@ -69,9 +69,11 @@ export default ({ }: PageProps) => {
       {isLoading && !data ? ('Loading') : (
         <div className="analyses">
           <AnalysesHeader isClosed={data.isClosed} showDatas={data?.analyses.length === 0 ? false : true} sport={data.sport} isDaily={data.isDaily} type={''} background={data.image} homeObject={homeObject} awayObject={awayObject} matchLogo={data.league.image ? (import.meta.env.VITE_DO_IMAGE_HOST + data?.league?.image) : "https://w7tips.fra1.digitaloceanspaces.com/images/leagues/cl.png"} matchDate={{ date: data.dateStart }} locationDatas={{
-            weather: data.weather?.name,
+            weather: data.weather?.icon,
             location: data.location
           }}
+          fieldType={data?.fieldType}
+          tv={data.tv}
           />
 
 
