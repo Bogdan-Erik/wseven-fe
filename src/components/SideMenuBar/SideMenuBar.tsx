@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./SideMenuBar.css";
 import logo from "./../../assets/images/logo.svg";
 import { Icon } from "../Icon";
@@ -13,6 +13,7 @@ import { useLazyGetBalanceQuery } from "../../redux/BankSlice";
 import ReactLoading from "react-loading";
 import { setMenu } from "../../redux/globalSlice";
 import { useLazyGetSportCategoriesQuery } from "../../redux/MatchSlice";
+import { BankrollManagementModal } from "../BankrollManagementModal";
 
 export interface SideMenuBarProps {}
 
@@ -25,12 +26,19 @@ export const SideMenuBar = ({}: SideMenuBarProps): JSX.Element => {
   const [trigger] = useLazyGetMyselfQuery();
   const [triggerBalance] = useLazyGetBalanceQuery();
   const [triggerSportCategories] = useLazyGetSportCategoriesQuery();
+  const [showBankrollModal, setShowBankrollModal] = useState(false);
 
   useEffect(() => {
     triggerBalance({});
     trigger({});
     setLocalMenu();
   }, [location]);
+
+  useEffect(() => {
+    if (customer.name && customer.playingType === null) {
+      setShowBankrollModal(true);
+    }
+  }, [customer, location])
 
   const setLocalMenu = async () => {
     let menus: any[] = [];
@@ -170,6 +178,7 @@ export const SideMenuBar = ({}: SideMenuBarProps): JSX.Element => {
       </div>
 
       <Menu />
+      <BankrollManagementModal showModal={showBankrollModal} setShowModal={setShowBankrollModal} confirmAction={undefined} isClosable={false} />
     </div>
   );
 };

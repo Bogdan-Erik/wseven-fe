@@ -29,7 +29,7 @@ export interface SportCardProps {
 
 const LargeTeamsBar = (type: any, hazai: any, vendeg: any) => {
   const convertType = (['football', 'nfl', 'basketball'].includes(type)) ? 'teamSport' : ((type === 'f1') ? 'other' : 'individualSport')
-
+ 
   const variants = {
     teamSport: () => (
       <>
@@ -93,6 +93,7 @@ const LargeTeamsBar = (type: any, hazai: any, vendeg: any) => {
 const smallTeamsBar = (type: any, hazai: any, vendeg: any) => {
 
   const convertType = (['football', 'nfl', 'basketball'].includes(type)) ? 'teamSport' : ((type === 'f1') ? 'other' : 'individualSport')
+  console.log(type)
   const variants = {
     teamSport: () => (
       <div className="flex mt-[30px] absolute z-[11] w-full px-[16px] bottom-[16px]">
@@ -147,7 +148,6 @@ export const SportCard = ({
   leagueLogo = 'https://w7tips.fra1.digitaloceanspaces.com/ll.png',
   ...props
 }: SportCardProps) => {
-  console.log(sportType);
   const players = [{ image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }, { image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }, { image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }, { image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }, { image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }];
 
   const mode = primary ? 'w7-sportcard--primary' : 'w7-sportcard--secondary';

@@ -24,6 +24,7 @@ import { useAddTicketForCostumerMutation } from "../../redux/TicketSlice";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLazyGetBalanceQuery } from "../../redux/BankSlice";
+import BetHelper from "../../utils/BetHelper";
 export interface BetModalProps {
   showTipModal: boolean;
   setShowTipModal: any;
@@ -39,6 +40,7 @@ const BetModal = ({
 }: BetModalProps) => {
   const customer = useSelector((state: RootState) => state.customer);
   const auth = useSelector((state: RootState) => state.auth);
+  const bank = useSelector((state: RootState) => state.bank);
   const [addTicketForCostumer, { isLoading }] =
     useAddTicketForCostumerMutation();
   const { newSuccessToast, newErrorToast } = useNotification({
@@ -76,7 +78,7 @@ const BetModal = ({
               editing: false,
             };
           }),
-          bet: customer.defaultUnit * selectedTicket.suggested_bet,
+          bet: BetHelper(customer?.playingType ?? '', bank?.balance ?? 0, selectedTicket.suggested_bet ?? 0),
         }}
         validationSchema={TicketSchema}
         onSubmit={async ({ bet, tips }) => {
@@ -109,7 +111,7 @@ const BetModal = ({
                   setShowTipModal(false);
                   newSuccessToast(
                     "Sikeres rögzítés",
-                    `A ${selectedTicket.name} szelvény rögzítése sikeres volt!`
+                    `A #1${selectedTicket.number} szelvény rögzítése sikeres volt!`
                   );
                 })
                 .catch((err) => {
@@ -117,7 +119,7 @@ const BetModal = ({
                   setShowTipModal(false);
                   newErrorToast(
                     "Sikertelen rögzítés",
-                    `A ${selectedTicket.name} szelvény rögzítése sikertelen volt!`
+                    `A #${selectedTicket.number} szelvény rögzítése sikertelen volt!`
                   );
                 });
             }
@@ -176,7 +178,7 @@ const BetModal = ({
                                   type="number"
                                   placeholder=""
                                   className="w-[82px] bg-light-green rounded-md px-[13px] py-[5px] h-[28px] grow text-xs "
-                                  min={"0"}
+                                  min={"1"}
                                   step={"0.01"}
                                 />
                               </div>
@@ -240,7 +242,7 @@ const BetModal = ({
                           type="number"
                           placeholder=""
                           className="w-[90px] bg-light-green rounded-md px-[13px] py-[5px] h-[40px] grow text-xl "
-                          min={"0"}
+                          min={"1"}
                           step={"0.01"}
                         />{" "}
                         Ft

@@ -64,14 +64,13 @@ export const matchSlice = createSlice({
     builder.addMatcher(
       matchApiSlice.endpoints.getMatchesByDate.matchFulfilled,
       (state, action) => {
-        console.log(action.payload.matches)
         state.calendar = action.payload?.matches.map((item: any) => {
           
           return {
             title: NameGetter(item, 'home') + ' - ' + NameGetter(item, 'away'),
             start: item.date_start,
             end: item.date_end,
-            className: ["event", "football"],
+            className: ["event", item.sport?.value ?? 'football'],
           }
         })
       },
@@ -82,7 +81,6 @@ export const matchSlice = createSlice({
 
 
           const tips = action.payload.map((item: any) => {
-          console.log(item.result)
 
             return {
               matchId: item.analyasis.match.id,
@@ -111,7 +109,7 @@ export const matchSlice = createSlice({
               home: item.homeTeam ?
                 {
                   name: item.homeTeam.name,
-                  logo: item.homeTeam.logo ?? 'https://w7tips.fra1.digitaloceanspaces.com/images/teams/real.png'
+                  logo: item.homeTeam.logo ? ( import.meta.env.VITE_DO_IMAGE_HOST + item.homeTeam.logo) : 'https://w7tips.fra1.digitaloceanspaces.com/images/teams/real.png'
                 }
                 : {
                   first_name: item.homePlayer.first_name,
@@ -120,22 +118,22 @@ export const matchSlice = createSlice({
                 },
               away: item.awayTeam ? {
                 name: item.awayTeam.name,
-                logo: item.awayTeam.logo ?? 'https://w7tips.fra1.digitaloceanspaces.com/images/teams/liverpool.png'
+                logo: item.awayTeam.logo ? ( import.meta.env.VITE_DO_IMAGE_HOST + item.awayTeam.logo) : 'https://w7tips.fra1.digitaloceanspaces.com/images/teams/liverpool.png'
               } : {
                 first_name: item.awayPlayer.first_name,
                 last_name: item.awayPlayer.last_name,
-                image: item.awayPlayer.image,
+                image: import.meta.env.VITE_DO_IMAGE_HOST + item.awayPlayer.image,
               },
               dateStart: item.date_start,
-              colorScheme: 'blue',
+              colorScheme: item.sport?.color,
               size: item.is_daily ? 'large' : 'small', //Ha daily
-              sportType: 'football',
+              sportType: item.sport?.value,
               sport: item.sport,
               isDaily: item.is_daily,
               location: item.location,
-              image: (!item?.image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.image : item.image),
-              homeImage: item.home_image !== null ? (!item?.home_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.home_image : item.home_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
-              awayImage: item.away_image !== null ? (!item?.away_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.away_image : item.away_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
+              image: (import.meta.env.VITE_DO_IMAGE_HOST + item.image),
+              homeImage: item.home_image !== null ? (import.meta.env.VITE_DO_IMAGE_HOST + item.home_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
+              awayImage: item.away_image !== null ? (import.meta.env.VITE_DO_IMAGE_HOST + item.away_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
               league: {
                 image: item?.league?.image ?? null
               }
@@ -159,6 +157,12 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
               date_start
               date_end
               is_daily
+              sport {
+                id
+                color
+                name
+                value
+              }
               homeTeam {
                 id
                 name
@@ -203,7 +207,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
       query: (args) => ({
         body: (args?.sportId !== null && args?.sportId !== undefined )? gql`
         query($sportId: uuid) {
-          matches(order_by: {is_daily: desc, date_start: asc}, where: {is_closed: {_eq:true}, sport: {id: {_eq: $sportId}}}) {
+          matches(order_by: {is_daily: desc, date_start: asc}, where: {is_closed: {_eq:false}, sport: {id: {_eq: $sportId}}}) {
             id
             date_start
             date_end
@@ -216,6 +220,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
               id
               color
               name
+              value
             }
             homeTeam {
               id
@@ -261,6 +266,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
             id
             color
             name
+            value
           }
           homeTeam {
             id
@@ -307,6 +313,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
               sports {
                 id
                 name
+                value
               }
             }
         `,
@@ -381,6 +388,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
               id
               color
               name
+              value
             }
             homeTeam {
               id
@@ -451,34 +459,34 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
           home: item.homeTeam ?
             {
               name: item.homeTeam.name,
-              logo: item.homeTeam.logo ?? 'https://w7tips.fra1.digitaloceanspaces.com/images/teams/real.png'
+              logo: item.homeTeam.logo ? (import.meta.env.VITE_DO_IMAGE_HOST + item.homeTeam.logo) : 'https://w7tips.fra1.digitaloceanspaces.com/images/teams/real.png'
             }
             : {
               first_name: item.homePlayer.first_name,
               last_name: item.homePlayer.last_name,
-              image: item.homePlayer.image,
+              image: import.meta.env.VITE_DO_IMAGE_HOST + item.homePlayer.image,
             },
           away: item.awayTeam ? {
             name: item.awayTeam.name,
-            logo: item.awayTeam.logo ?? 'https://w7tips.fra1.digitaloceanspaces.com/images/teams/liverpool.png'
+            logo: item.awayTeam.logo ? (import.meta.env.VITE_DO_IMAGE_HOST + item.awayTeam.logo) : 'https://w7tips.fra1.digitaloceanspaces.com/images/teams/liverpool.png'
           } : {
             first_name: item.awayPlayer.first_name,
             last_name: item.awayPlayer.last_name,
-            image: item.awayPlayer.image,
+            image: import.meta.env.VITE_DO_IMAGE_HOST + item.awayPlayer.image,
           },
           dateStart: item.date_start,
-          colorScheme: 'blue',
+          colorScheme: item.sport?.color ?? 'blue',
           size: item.is_daily ? 'large' : 'small', //Ha daily
-          sportType: 'football',
+          sportType: item.sport.type,
           sport: item.sport,
           isDaily: item.is_daily,
           isClosed: item.is_closed,
           location: item.location,
           weather: item.weather,
           analyses: item.analyses.length > 0 ? item.analyses?.[0] : [],
-          image: (!item?.image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.match_cover : item.match_cover),
-          homeImage: item.home_image !== null ? (!item?.home_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.home_image : item.home_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
-          awayImage: item.away_image !== null ? (!item?.away_image?.includes('http') ? import.meta.env.VITE_BACKEND_URL + 'storage/' + item.away_image : item.away_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
+          image: (import.meta.env.VITE_DO_IMAGE_HOST + item.match_cover),
+          homeImage: item.home_image !== null ? (import.meta.env.VITE_DO_IMAGE_HOST + item.home_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
+          awayImage: item.away_image !== null ? (import.meta.env.VITE_DO_IMAGE_HOST + item.away_image) : 'https://w7tips.fra1.digitaloceanspaces.com/images%2Fmock-images%2Ffootball-siluett.png',
           matchDatas: item.match_datas,
           league: {
             image: item.league?.image ?? null

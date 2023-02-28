@@ -22,7 +22,6 @@ export default ({ }: PageProps) => {
   const { height, width } = useWindowDimensions();
 
   const [trigger, result] = useLazyGetMatchesByDateQuery()
-  console.log(result.isLoading)
   const {calendar} = useSelector((state: RootState) => state.match)
 
   //const { isLoading } = useGetMatchesQuery();
@@ -83,8 +82,6 @@ export default ({ }: PageProps) => {
          
           datesSet={(dateInfo) => {
             trigger({ dateFrom: moment(dateInfo.start).format('YYYY-MM-DD hh:mm:SS'), dateEnd: moment(dateInfo.end).format('YYYY-MM-DD hh:mm:SS') })
-            console.log(dateInfo.start) //start of the range the calendar date
-            console.log(dateInfo.end) //end of the range the calendar date
         }}
           initialView="timeGridFourDay"
           headerToolbar={{

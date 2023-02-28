@@ -38,13 +38,11 @@ export default ({}: PageProps) => {
     endDate: moment().format("YYYY-MM-DD"),
   });
 
-  console.log(id);
   useEffect(() => {
     refetch();
   }, [location]);
 
   const handleValueChange = (newValue: any) => {
-    console.log("newValue:", newValue);
     setValue(newValue);
   };
 
@@ -83,7 +81,6 @@ export default ({}: PageProps) => {
              </div>*/}
 
             {activeMatches?.map((item: any) => {
-              console.log(item.league);
               if (item.isDaily) {
                 return (
                   <div className="col-span-1 lg:col-span-2 2xl:col-span-2 ">
@@ -98,13 +95,14 @@ export default ({}: PageProps) => {
                         date={item.dateStart}
                         colorScheme={item.sport.color ?? "blue"}
                         sportType={
-                          item?.sport?.name.toLowerCase() ?? "football"
+                          item?.sport?.value?.toLowerCase() ?? "football"
                         }
                       />
                     </Link>
                   </div>
                 );
               }
+              console.log(item.home)
               return (
                 <div>
                   <Link to={`/analyses/${item.id}`}>
@@ -117,7 +115,7 @@ export default ({}: PageProps) => {
                       date={item.dateStart}
                       daily={false}
                       colorScheme={item.sport.color ?? "blue"}
-                      sportType={item?.sport?.name.toLowerCase() ?? "football"}
+                      sportType={item?.sport?.value?.toLowerCase() ?? "football"}
                     />
                   </Link>
                 </div>

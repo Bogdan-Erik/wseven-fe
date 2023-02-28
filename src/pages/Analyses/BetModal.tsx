@@ -5,12 +5,13 @@ import { Icon, Modal, PlayersGame, FormInput, Button } from '../../components';
 import './index.scss';
 import { AnimatePresence, motion } from 'framer-motion';
 import { BetSchema } from '../../utils/validationUtils';
-import { Formik, getIn, useFormik } from 'formik';
+import { ErrorMessage, Formik, getIn, useFormik } from 'formik';
 import { RootState } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { useAddTipForCustomerMutation } from '../../redux/MatchSlice';
 import { useNotification } from '../../hooks/useNotification'
 import { useLazyGetBalanceQuery } from '../../redux/BankSlice';
+import BetHelper from '../../utils/BetHelper';
 
 export interface BetModalProps {
   showTipModal: boolean
@@ -22,6 +23,7 @@ export interface BetModalProps {
 const BetModal = ({ selectedBet, showTipModal, setShowTipModal, confirmAction }: BetModalProps) => {
   const customer = useSelector((state: RootState) => state.customer)
   const auth = useSelector((state: RootState) => state.auth)
+  const bank = useSelector((state: RootState) => state.bank)
   const [addTipForCustomer, { isLoading }] = useAddTipForCustomerMutation();
   const { newSuccessToast, newErrorToast } = useNotification({
     theme: 'colored',
@@ -39,12 +41,11 @@ const BetModal = ({ selectedBet, showTipModal, setShowTipModal, confirmAction }:
           <Formik
             initialValues={{
               odds: selectedBet.odds ?? 0,
-              bet: selectedBet.tet * customer.defaultUnit,
+              bet: BetHelper(customer?.playingType ?? '', bank?.balance ?? 0, selectedBet.tet ?? 0),
             }}
             validationSchema={BetSchema}
             onSubmit={async ({ odds, bet }) => {
               await triggerBalance().then((data) => {
-                console.log(data.data);
                 if ((data?.data?.current_balance ?? 0) < bet) {
                   setShowTipModal(false);
                   newErrorToast(
@@ -106,7 +107,7 @@ const BetModal = ({ selectedBet, showTipModal, setShowTipModal, confirmAction }:
 
                             </div>
                           </div>
-                          <div className="text-[14px]  text-rgba-grey-06">Ajánlott tét: <strong className="text-white">{(selectedBet.tet * customer.defaultUnit + ' Ft').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</strong></div>
+                          <div className="text-[14px]  text-rgba-grey-06">Ajánlott tét: <strong className="text-white">{(BetHelper(customer?.playingType ?? '', bank?.balance ?? 0, selectedBet.tet ?? 0) + ' Ft').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</strong></div>
                         </div>
                         <div className='flex gap-[24px] flex-1 items-center'>
                           <div className='flex-1'>
@@ -118,12 +119,9 @@ const BetModal = ({ selectedBet, showTipModal, setShowTipModal, confirmAction }:
                               className=" grow"
                               onChange={handleChange}
                               value={values.odds}
-                              min={"0"}
+                              min={1}
                               step={"0.01"}
-                              error={
-                                getIn(touched, 'odds') &&
-                                getIn(errors, 'odds')
-                              }
+                              
                             />
                           </div>
                           <div className='flex-1'>
@@ -135,16 +133,15 @@ const BetModal = ({ selectedBet, showTipModal, setShowTipModal, confirmAction }:
                               className=" grow"
                               onChange={handleChange}
                               value={values.bet}
-                              min={0}
-                              error={
-                                getIn(touched, 'bet') &&
-                                getIn(errors, 'bet')
-                              }
+                              min={1}
+                             
                             />
                           </div>
                         </div>
                       </div>
                       <div className='flex-1 flex flex-col justify-end'>
+                        <ErrorMessage className="text-red" name="tet" component="div"/>
+                        <ErrorMessage className="text-red" name="odds" component="div"/>
                         <Button isLoading={isLoading} disabled={isLoading} type="submit" primary size='small' customClasses='w-full' >Megjátszottam</Button>
                       </div>
                     </div>

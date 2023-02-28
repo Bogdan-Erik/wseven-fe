@@ -43,7 +43,6 @@ export const BaseDatasForm = () => {
           nickname: username,
         })
           .then((data: any) => {
-            console.log(data)
             if (
               error?.data?.response?.errors[0]?.extensions?.code ===
               "constraint-violation"

@@ -11,6 +11,7 @@ const graphqlBaseQuery =
       })
       return { data: result }
     } catch (error) {
+      console.log(error)
       if (error instanceof ClientError) {
         return { error: { status: error.response.status, data: error } }
       }

@@ -57,7 +57,6 @@ export const ticketSlice = createSlice({
         (state, action) => {
           /*state.name = action.payload[0]?.name;
         state.defaultUnit = action.payload[0]?.default_unit ?? 1000;*/
-          console.log(action.payload);
         }
       );
   },
@@ -215,7 +214,7 @@ export const ticketApiSlice = hasuraApiSlice.injectEndpoints({
         `,
         variables: {
           customer_id: arg.customer_id,
-          bet: JSON.stringify(arg.bet),
+          bet: arg.bet,
           betMinus: JSON.stringify(-arg.bet),
           ticket_id: arg.ticket_id,
           customer_ticket_tips: arg.customer_ticket_tips,

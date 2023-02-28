@@ -20,7 +20,6 @@ const ProtectedRoute = (props: any) => {
   
   const checkUserToken = () => {
     const accessToken = store.getState().auth.accessToken
-    console.log(accessToken);
 
     if (!accessToken) {
       store.dispatch(reset());

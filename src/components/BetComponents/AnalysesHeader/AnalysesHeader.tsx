@@ -59,6 +59,7 @@ export interface ParticipantObjectProps {
   logo: string
   isFullImageLogo?: boolean
   playerImage: string
+  isIndividual: boolean
   shape: ShapeProps[]
   lastMatch: LastMatchProps
   ranking: RankingProps
@@ -104,7 +105,6 @@ export const AnalysesHeader = ({
   const dateTimeAfterThreeDays = THREE_DAYS_IN_MS;
 
   const colorScheme = sport.color;
-  console.log(isClosed)
   return (
     <div>
       <div className="header-bg relative min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]" style={{ background: `url(${background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
@@ -208,7 +208,7 @@ export const AnalysesHeader = ({
         <div className="flex-1 text-center">
           <div className="flex ">
             <div className="bg-rgba-grey-08 backdrop-blur-[5px] h-[59px] w-[59px] rounded-full flex justify-center">
-              <img src={homeObject.logo} className="w-[42px] self-center justify-center" />
+              <img src={homeObject.logo} className={`${homeObject.isIndividual ? 'w-full h-full rounded-full' :  ' w-[42px]'} self-center justify-center`} />
             </div>
           </div>
           <div className="text-xl md:text-2xl mt-[15px] text-left">{homeObject.participantName}</div>
@@ -222,7 +222,7 @@ export const AnalysesHeader = ({
         <div className="flex-1 text-center">
           <div className="flex justify-end">
             <div className="bg-rgba-grey-08 backdrop-blur-[5px] h-[59px] w-[59px] rounded-full flex justify-center">
-              <img src={awayObject.logo} className="w-[42px] self-center justify-center" />
+              <img src={awayObject.logo} className={`${homeObject.isIndividual ? 'w-full  h-full rounded-full' :  ' w-[42px]'} self-center justify-center`} />
             </div>
           </div>
           <div className="text-xl md:text-2xl mt-[15px] text-right">{awayObject.participantName}</div>

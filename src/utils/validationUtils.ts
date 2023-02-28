@@ -43,8 +43,8 @@ export const LoginDataSchema = Yup.object().shape({
 })
 
 export const BetSchema = Yup.object().shape({
-  odds: Yup.number().required(EMPTY_ERROR),
-  bet: Yup.number().required(EMPTY_ERROR)
+  odds: Yup.number().required(EMPTY_ERROR).min(1, 'A megadott odds nem lehet 1-nél kisebb!'),
+  bet: Yup.number().required(EMPTY_ERROR).min(1, 'A megadott tét nem lehet 1-nél kisebb!')
 })
 
 
@@ -55,7 +55,7 @@ export const UploadSchema = Yup.object().shape({
 
 export const TicketSchema = Yup.object().shape({
   tips: Yup.array().required(EMPTY_ERROR),
-  bet: Yup.number().required(EMPTY_ERROR)
+  bet: Yup.number().required(EMPTY_ERROR).min(1, 'A megadott tét nem lehet 1-nél kisebb!')
 })
 
 
@@ -69,3 +69,8 @@ export const userPasswordChangeSchema = Yup.object().shape({
   password: Yup.string().required(EMPTY_ERROR),
   passwordRepeat: Yup.string().required(EMPTY_ERROR).oneOf([Yup.ref('password'), null], 'Egyeznie kell a két jelszónak!')
 })
+
+export const PlayingTypeSchema = Yup.object().shape({
+  selectedInput: Yup.string().required('A stratégia kiválasztása kötelező!'),
+})
+

@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { useNotification } from '../../hooks/useNotification'
 import { toast } from 'react-toastify';
+import BetHelper from '../../utils/BetHelper';
 
 export interface PageProps {
 
@@ -20,6 +21,7 @@ export default ({ }: PageProps) => {
   let { id } = useParams();
   const { isLoading, data, refetch } = useGetMatchQuery({ id });
   const customer = useSelector((state: RootState) => state.customer)
+  const bank = useSelector((state: RootState) => state.bank)
   const { newSuccessToast, newErrorToast } = useNotification({
     theme: 'colored',
   })
@@ -40,6 +42,7 @@ export default ({ }: PageProps) => {
 
   const homeObject = {
     participantName: data.home?.name ?? `${data.home?.first_name} ${data.home?.last_name}`,
+    isIndividual: data.home?.first_name ? true : false,
     logo: data.home?.logo ?? data.home?.image,
     isFullImageLogo: false,
     playerImage: data.homeImage,
@@ -52,6 +55,7 @@ export default ({ }: PageProps) => {
   const awayObject = {
     participantName: data.away?.name ?? `${data.away?.first_name} ${data.away?.last_name}`,
     logo: data.away?.logo ?? data.away?.image,
+    isIndividual: data.away?.first_name ? true : false,
     isFullImageLogo: false,
     playerImage: data.awayImage,
     shape: MatchDataGetter(data.matchDatas, 'form', 'away'),
@@ -127,7 +131,7 @@ export default ({ }: PageProps) => {
                 {data?.analyses.length !== 0 && data?.analyses?.tips.map((item: any) => {
                   return (
                     <div className="mb-[15px]">
-                      <BetRow dateStart={data.dateStart} result={item.result} isClosed={data.isClosed} playersNumber={item?.customer_tips_aggregate?.aggregate?.count ?? 0} played={item.customer_tips?.length > 0 ? true : false} disabled={(item.customer_tips?.length > 0 || isLoading || data.isClosed) ? true : false} action={() => { setSelectedBet(item); setShowTipModal(true) }} odds={item.odds} title={item.name} strength={item.rating} suggestedBet={(item.tet * customer.defaultUnit + ' Ft').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} players={['','', '', '', '']} />
+                      <BetRow dateStart={data.dateStart} result={item.result} isClosed={data.isClosed} playersNumber={item?.customer_tips_aggregate?.aggregate?.count ?? 0} played={item.customer_tips?.length > 0 ? true : false} disabled={(item.customer_tips?.length > 0 || isLoading || data.isClosed) ? true : false} action={() => { setSelectedBet(item); setShowTipModal(true) }} odds={item.odds} title={item.name} strength={item.rating} suggestedBet={(BetHelper(customer?.playingType ?? '', bank?.balance ?? 0, item.tet ?? 0) + ' Ft').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} players={['','', '', '', '']} />
                     </div>
                   )
                 })}

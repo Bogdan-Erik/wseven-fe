@@ -61,9 +61,7 @@ const Layout = ({ children }: LayoutProps) => {
         _.differenceBy(data?.notifications, currentNotifications, 'id').map((item: any) => {
           newPushToast(item.title, item.content)
         });
-        console.log(currentNotifications)
-        console.log(data?.notifications)
-        console.log(_.differenceBy(data?.notifications, currentNotifications, 'id'))
+       //console.log(_.differenceBy(data?.notifications, currentNotifications, 'id'))
 
         setCurrentNotifications(data?.notifications)
       }

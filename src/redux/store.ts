@@ -70,6 +70,7 @@ const store = configureStore({
       ticketApiSlice.middleware,
       notificationApiSlice.middleware,
       bankApiSlice.middleware,
+      
       /* -- reduxApiSliceMiddleware: insert above here -- */
     ]),
   preloadedState: {
