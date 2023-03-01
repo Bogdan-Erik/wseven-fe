@@ -180,7 +180,7 @@ export const AnalysesHeader = ({
             <div className="flex-1 flex flex-col items-center justify-end">
               <div className="text-[20px] mb-[5px] font-[500]"><img src={locationDatas.weather} className="max-w-[150px] max-h-[80px]" /></div>
               <div className="mb-[30px]">
-                <div className="text-sm font-semibold mb-[10px]">{locationDatas.location}</div>
+                <div className="text-sm font-semibold mb-[10px] text-center">{locationDatas.location}</div>
                 {fieldType && (<div className="text-sm font-semibold  flex justify-center"><img src={fieldType} /></div>)}
             
               </div>

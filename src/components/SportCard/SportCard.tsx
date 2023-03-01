@@ -161,13 +161,13 @@ export const SportCard = ({
             {
               size === 'large' ? (
                 <>
-                  <div className='flex-1 flex justify-center relative z-[10]'><img src={images[0]} className=" w-[199px]" /></div>
-                  <div className='flex-1 flex justify-start  z-[10]' ><img src={images[1]} className=" w-[199px]" /></div>
+                  <div className='flex-1 flex justify-center relative z-[10]'><img src={images[0]} className=" w-[199px]  object-contain h-[310px] object-bottom" /></div>
+                  <div className='flex-1 flex justify-start  z-[10]' ><img src={images[1]} className=" w-[199px]  object-contain h-[310px] object-bottom" /></div>
                 </>
               ) : (
                 <>
-                  <div className='self-end relative z-[10] md:z-[2]'><img src={images[0]} className="w-[195px]" /></div>
-                </>
+                  <div className='self-end relative z-[10] md:z-[2]'><img src={images[0]} className="w-[195px] object-contain h-[310px] object-bottom" /></div>
+                </> 
               )
             }
           </div>
