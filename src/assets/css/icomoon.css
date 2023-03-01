@@ -25,6 +25,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.icon-tiktok:before {
+  content: "\e93a";
+}
 .icon-pencil:before {
   content: "\e939";
 }

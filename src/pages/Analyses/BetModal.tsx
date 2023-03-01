@@ -65,6 +65,7 @@ const BetModal = ({ selectedBet, showTipModal, setShowTipModal, confirmAction }:
                     confirmAction();
                     setShowTipModal(false);
                     newSuccessToast('Sikeres rögzítés', `A ${selectedBet.name} fogadás rögzítése sikeres volt!`)
+                    triggerBalance();
                   }).catch(err => {
                     setShowTipModal(false);
                     newErrorToast('Sikertelen rögzítés', `A ${selectedBet.name} fogadás rögzítése sikertelen volt!`)
@@ -120,8 +121,8 @@ const BetModal = ({ selectedBet, showTipModal, setShowTipModal, confirmAction }:
                               onChange={handleChange}
                               value={values.odds}
                               min={1}
-                              step={"0.01"}
-                              
+                              step="any"
+                              subStep={0.1}
                             />
                           </div>
                           <div className='flex-1'>
@@ -133,8 +134,10 @@ const BetModal = ({ selectedBet, showTipModal, setShowTipModal, confirmAction }:
                               className=" grow"
                               onChange={handleChange}
                               value={values.bet}
+                              step="any"
+                              subStep={100}
                               min={1}
-                             
+                              pattern="([0-9]+.{0,1}[0-9]*,{0,1})*[0-9]"
                             />
                           </div>
                         </div>

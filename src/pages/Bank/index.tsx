@@ -32,7 +32,7 @@ export default ({ }: PageProps) => {
       <Container className="container 2xl:mx-auto px-[20px] pt-[30px] max-w-[100%] 2xl:max-w-screen-2xl 3xl:max-w-screen-3xl mx-auto mb-[100px]" padding={false}>
         <div className="flex flex-col lg:flex-row gap-[40px]">
           <div className="flex-1">
-            <BankItem icon={'money'} title={'Virtuális bank'} amount={data.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' Ft'} actions={[
+            <BankItem icon={'money'} title={'Virtuális bank'} amount={Math.round(data.balance).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' Ft'} actions={[
               {
                 icon: 'money',
                 title: 'Virtuális egyenleg feltöltés',
@@ -90,7 +90,7 @@ export default ({ }: PageProps) => {
                 return (<><span className='font-[700]'>Virtuális bank</span> tranzakció</>);
               } else if (item.source_type === "App\\Models\\Tip") {
                 return (<><span className='font-[700]'>Tipp: </span> {item.description}</>);
-              }else if (item.source_type === "App\\Models\\CustomerTicket") {
+              } else if (["App\\Models\\CustomerTicket", "App\\Models\\Ticket"].includes(item.source_type)) {
                 return (<><span className='font-[700]'>Szelvény: </span> {item.description}</>);
               }
             }
@@ -102,7 +102,7 @@ export default ({ }: PageProps) => {
                 return 'Virtuális egyenleg kifizetés';
               }else if (item.source_type === "App\\Models\\Tip") {
                 return 'Tipp művelet';
-              } else if (item.source_type === "App\\Models\\CustomerTicket") {
+              } else if (["App\\Models\\CustomerTicket", "App\\Models\\Ticket"].includes(item.source_type)) {
                 return 'Szelvény művelet';
               }
             }
@@ -112,7 +112,7 @@ export default ({ }: PageProps) => {
             icon: ["App\\Models\\Upload", "App\\Models\\Out"].includes(item.source_type) ? 'money' : 'coin',
             title: transactionType(),
             label: itemLabel(),
-            amount: item.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' Ft',
+            amount: (Math.round(item.amount)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' Ft',
             date: moment(item.created_at).format('YYYY. MMMM DD. HH:mm')
           }})} additionalComponentProps={{ turnOffMore: true }}></DataPaginator>
 

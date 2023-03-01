@@ -57,7 +57,7 @@ export default ({ }: PageProps) => {
             <div>
               <div className="text-[32px] font-[700] flex"><img src={Hand} /> <span className="flex self-center ml-[20px]">Üdv újra nálunk!</span></div>
               <div className="text-[16px] text-rgba-grey-08 font-[500] mt-[20px]">Jelentkezz be a legfrissebb elemzések és tippek megtekintéséhez! Még nincs fiókod? </div>
-              <div className="py-[40px] border-b-[1px] border-b-rgba-grey-02">Social </div>
+              {/*<div className="py-[40px] border-b-[1px] border-b-rgba-grey-02">Social </div>*/}
               <div>
                 <Formik
                   initialValues={

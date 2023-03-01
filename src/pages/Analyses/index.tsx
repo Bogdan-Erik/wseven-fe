@@ -101,7 +101,7 @@ export default ({ }: PageProps) => {
             <div>
               <div className="analyses-block mb-[15px]">
                 <SmallTitle>Elemzés</SmallTitle>
-                <div className="content text-[16px]" dangerouslySetInnerHTML={{ __html: data?.analyses?.analyses }}>
+                <div className="content analyze-content text-[16px]" dangerouslySetInnerHTML={{ __html: data?.analyses?.analyses }}>
                 </div>
               </div>
 

@@ -104,9 +104,12 @@ export default ({}: PageProps) => {
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-8 md:gap-[20px] xl:gap-[170px]	">
               <div className="col-span-1  xl:col-span-3">
                 <div><BaseDatasForm /></div>
-                <div className="mt-[80px]">
+                {customer.isPremium && (
+                  <div className="mt-[80px]">
                   <BankrollForm />
                 </div>
+                )}
+                
                 {/*<div className="justify-center flex mt-[30px]">
                   <Button customClasses="text-white">Jelszó módosítása</Button>
   </div>*/}

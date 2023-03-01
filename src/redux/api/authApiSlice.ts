@@ -9,6 +9,13 @@ export const authApiSlice = fetchApiSlice.injectEndpoints({
         body: { ...credentials },
       }),
     }),
+    renewToken: builder.mutation({
+      query: ({ accessToken, refreshToken }) => ({
+        url: '/auth-token',
+        method: 'POST',
+        body: { accessToken, refreshToken },
+      }),
+    }),
     newPassword: builder.mutation({
       query: ({ accessToken, password, passwordRepeat }) => ({
         url: '/change-password',
@@ -30,4 +37,5 @@ export const {
   usePictureUploadMutation,
   useLoginMutation,
   useNewPasswordMutation,
+  useRenewTokenMutation,
 } = authApiSlice

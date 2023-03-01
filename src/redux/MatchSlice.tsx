@@ -87,6 +87,7 @@ export const matchSlice = createSlice({
 
 
           const tips = action.payload.map((item: any) => {
+            const winningPrice = (item.tet * item.odds) - item.tet;
 
             return {
               matchId: item.analyasis.match.id,
@@ -98,7 +99,7 @@ export const matchSlice = createSlice({
               odds: item.odds,
               tippString: item.name,
               isWinner: item.result !== 'loose' ? true : false,
-              winningPrice: item.result !== 'loose' ? `+${item.tet} egység` : `-${item.tet} egység` ,
+              winningPrice: item.result !== 'loose' ? `+${winningPrice} egység` : `-${winningPrice} egység` ,
               logo: import.meta.env.VITE_DO_IMAGE_HOST + item.analyasis.match.league.image,
             }
           })
@@ -335,7 +336,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
       query: (arg) => ({
         body: gql`
         query getTipsByDateRange($dateFrom: timestamp!, $dateTo: timestamp!) {
-          tips(where: {analyasis: {match: {_and: {date_start: {_gte: $dateFrom}, date_end: {_lte: $dateTo}, is_closed: {_eq: true}}}}}) {
+          tips(where: {analyasis: {match: {_and: {date_start: {_gte: $dateFrom}, date_end: {_lte: $dateTo}, is_closed: {_eq: true}}}}}, order_by: {analyasis: {match: {date_start: desc}}}) {
             id
             name
             odds

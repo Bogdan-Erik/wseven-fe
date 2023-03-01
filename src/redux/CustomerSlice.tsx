@@ -10,6 +10,7 @@ export interface CustomerSlice {
   playingType: string | any,
   image: string | null
   defaultUnit: any
+  isPremium: boolean | null
 }
 
 const internalInitialState: CustomerSlice = {
@@ -17,6 +18,7 @@ const internalInitialState: CustomerSlice = {
   image: null,
   playingType: null,
   defaultUnit: null,
+  isPremium: null,
 };
 
 export const customerSlice = createSlice({
@@ -29,8 +31,9 @@ export const customerSlice = createSlice({
       (state, action) => {
         state.name = action.payload[0]?.name;
         state.playingType = action.payload[0]?.playing_type;
-        state.image = action.payload[0]?.image ?? "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png";
+        state.image = action.payload[0]?.image ? (import.meta.env.VITE_DO_IMAGE_HOST + action.payload[0]?.image) : (import.meta.env.VITE_DO_IMAGE_HOST + "placeholders/stock_sample.png");
         state.defaultUnit = action.payload[0]?.default_unit ?? 1000;
+        state.isPremium = action.payload[0]?.subscriptions?.length > 0 ? true : false
       }
     );
     builder.addMatcher(
@@ -48,7 +51,7 @@ export const customerApiSlice = hasuraApiSlice.injectEndpoints({
     getMyself: builder.query<any, any>({
       query: () => ({
         body: gql`
-          query {
+          query($today: timestamp) {
             customers {
               name
               email
@@ -56,9 +59,16 @@ export const customerApiSlice = hasuraApiSlice.injectEndpoints({
               nickname
               playing_type
               default_unit
+              subscriptions(where: {_and: {subscription_start: {_lte: $today}}, subscription_end: {_gte: $today}}) {
+                subscription_start
+                subscription_end
+              }
             }
           }
         `,
+        variables: {
+          today: moment().format('YYYY-MM-DD HH:mm:ss')
+        },
         token: store.getState().auth.accessToken,
       }),
       transformResponse: (response) => response.customers,

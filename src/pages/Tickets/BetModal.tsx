@@ -113,6 +113,7 @@ const BetModal = ({
                     "Sikeres rögzítés",
                     `A #1${selectedTicket.number} szelvény rögzítése sikeres volt!`
                   );
+                  triggerBalance();
                 })
                 .catch((err) => {
                   confirmAction();
@@ -382,7 +383,7 @@ const BetModal = ({
               <div>
                 {!selectedTicket?.customer_tickets[0]?.bet
                   ? selectedTicket.suggested_bet + " egység"
-                  : (selectedTicket?.customer_tickets[0]?.bet)
+                  : (Math.round(selectedTicket?.customer_tickets[0]?.bet))
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " Ft"}
               </div>

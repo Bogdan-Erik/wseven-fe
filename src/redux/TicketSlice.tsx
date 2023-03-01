@@ -36,6 +36,8 @@ export const ticketSlice = createSlice({
               item.customer_tickets[0]?.customer_ticket_tips ?? item.tips;
             const odds = calcOdds(oddsSource);
 
+            const winningPrice = item.customer_tickets[0]?.customer_ticket_tips ? ((item.customer_tickets[0]?.bet* parseFloat(odds))-item.customer_tickets[0]?.bet)  : ((item.suggested_bet * parseFloat(odds)) - item.suggested_bet);
+
             return {
               number: item.number,
               date: moment(item.start_date)
@@ -45,8 +47,9 @@ export const ticketSlice = createSlice({
               isWinner: item.result === 1 ? true : false,
               isSeconday: true,
               matchesNumber: item.matchesNumber?.aggregate?.count ?? 0,
+              isUserPlacedBet: item.customer_tickets[0] ? true : false,
               winningPrice:
-                (item.result === 1 ? "+" : "-") + item.suggested_bet,
+                (item.result === 1 ? "+" : "-") + winningPrice,
               item: item,
             };
           }) ?? [];
@@ -112,15 +115,7 @@ export const ticketApiSlice = hasuraApiSlice.injectEndpoints({
             $dateFrom: timestamp!
             $dateTo: timestamp!
           ) {
-            tickets(
-              where: {
-                _and: {
-                  _and: { start_date: { _gte: $dateFrom } }
-                  start_date: { _lte: $dateTo }
-                }
-                status: { _neq: 0 }
-              }
-            ) {
+            tickets(where: {_and: {_and: {start_date: {_gte: $dateFrom}}, start_date: {_lte: $dateTo}}, status: {_neq: 0}}, order_by: {start_date: desc}) {
               id
               is_premium
               number
@@ -214,7 +209,7 @@ export const ticketApiSlice = hasuraApiSlice.injectEndpoints({
         `,
         variables: {
           customer_id: arg.customer_id,
-          bet: arg.bet,
+          bet: JSON.stringify(arg.bet),
           betMinus: JSON.stringify(-arg.bet),
           ticket_id: arg.ticket_id,
           customer_ticket_tips: arg.customer_ticket_tips,

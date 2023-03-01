@@ -80,8 +80,8 @@ export const PasswordChangeForm = () => {
               <div>
                 <FormInput
                   name="password"
-                  label="Jelszó"
-                  placeholder="Jelszó"
+                  label="Új jelszó"
+                  placeholder="Új jelszó"
                   className="my-5 grow"
                   required
                   type="password"
@@ -97,8 +97,8 @@ export const PasswordChangeForm = () => {
               <div className="mt-[30px]">
                 <FormInput
                   name="passwordRepeat"
-                  label="Jelszó mégegyszer"
-                  placeholder="Jelszó mégegyszer"
+                  label="Új jelszó mégegyszer"
+                  placeholder="Új jelszó mégegyszer"
                   className="my-5 grow"
                   required
                   onChange={handleChange}

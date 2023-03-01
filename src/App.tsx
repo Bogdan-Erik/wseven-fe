@@ -42,8 +42,7 @@ import '@fontsource/roboto/700.css';
 
 import moment from 'moment';
 
-import 'moment/locale/hu'  // without this line it didn't work
-
+import 'moment/dist/locale/hu';
 
 const App = () => {
   moment.locale('hu') // can pass in 'en', 'fr', or 'es'
@@ -136,7 +135,6 @@ const App = () => {
             )}
 
           </Helmet>
-          {import.meta.env.VITE_ENV === 'dev' && (<div className="absolute right-[-50px] z-[1000] top-[40px] bg-yellow px-[50px] py-[5px] font-[600] rotate-45">DEVELOPMENT</div>)}
           <Provider store={store}>
             
               <ToastContainer

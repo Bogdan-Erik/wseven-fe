@@ -34,8 +34,9 @@ export default ({}: PageProps) => {
   );
 
   const [value, setValue] = useState({
-    startDate: moment().subtract(7, "days").format("YYYY-MM-DD"),
-    endDate: moment().format("YYYY-MM-DD"),
+  //  startDate: moment().subtract(7, "days").format("YYYY-MM-DD"),
+    startDate: null,
+    endDate:null,
   });
 
   useEffect(() => {
@@ -49,11 +50,11 @@ export default ({}: PageProps) => {
   const [trigger] = useLazyGetTipsByDateRangeQuery();
 
   useEffect(() => {
-    trigger({ dateFrom: value.startDate, dateTo: value.endDate });
+    trigger({ dateFrom: value.startDate ?? moment().startOf('year').format("YYYY-MM-DD"), dateTo: value.endDate ? moment(value.endDate).add(1, 'day').format('YYYY-MM-DD') :  moment().add(1, 'day').format("YYYY-MM-DD")});
   }, []);
 
   useEffect(() => {
-    trigger({ dateFrom: value.startDate, dateTo: value.endDate });
+    trigger({ dateFrom: value.startDate ?? moment().startOf('year').format("YYYY-MM-DD"), dateTo: value.endDate ? moment(value.endDate).add(1, 'day').format('YYYY-MM-DD') :  moment().add(1, 'day').format("YYYY-MM-DD")});
   }, [value]);
 
   const NoResult = () => {
@@ -129,13 +130,15 @@ export default ({}: PageProps) => {
               </div>
               <div className="mb-[20px] md:mb-0 min-w-[279px] ">
                 <Datepicker
-                  readOnly
+                  i18n={"hu"} 
                   inputClassName="dark:bg-transparent outline-none border-none"
                   value={value}
+                  separator={"-"} 
+                  displayFormat={"YYYY. MM DD."} 
                   primaryColor={"violet"}
                   containerClassName={"z-[1000]"}
                   onChange={handleValueChange}
-                  placeholder="Dátum szűrő tól-ig"
+                  placeholder="Szűrés dátum alapján"
                 />
               </div>
             </div>

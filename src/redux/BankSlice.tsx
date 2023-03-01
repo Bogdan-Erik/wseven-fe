@@ -55,7 +55,7 @@ export const bankApiSlice = hasuraApiSlice.injectEndpoints({
           }
         `,
         variables: {
-          between: ["App\\Models\\Upload", "App\\Models\\Out", "App\\Models\\CustomerTicket", "App\\Models\\Tip"],
+          between: ["App\\Models\\Upload", "App\\Models\\Out", "App\\Models\\CustomerTicket", "App\\Models\\Tip", "App\\Models\\Ticket"],
         },
         token: store.getState().auth.accessToken,
       }),

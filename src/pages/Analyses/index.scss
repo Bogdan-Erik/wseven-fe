@@ -47,6 +47,19 @@
 
   }
 
+  .analyze-content {
+    ul{
+      list-style-type: initial !important;
+      padding: revert !important;
+      margin: revert !important;
+    }
+
+    ol {
+      list-style-type: auto !important;
+      padding: revert !important;
+      margin: revert !important;
+    }
+  }
   .missing {
     .missing-item {
       @apply flex flex-row mb-[10px];

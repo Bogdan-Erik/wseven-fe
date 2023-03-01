@@ -172,6 +172,7 @@ const BetModal = ({
                           onChange={handleChange}
                           value={values.amount}
                           min={"0"}
+                          subStep={100}
                           step={"0.1"}
                           error={
                             getIn(touched, "amount") &&

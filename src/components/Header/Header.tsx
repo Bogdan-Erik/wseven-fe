@@ -2,6 +2,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Header.css";
 import logo from "./../../assets/images/logo.svg";
+import LogoProd from "./../../assets/images/logo-prod.svg";
+import logoDev from "./../../assets/images/logo_dev.svg";
+import logoBeta from "./../../assets/images/logo_beta.svg";
 import { Button } from "../Button";
 import autoAnimate from "@formkit/auto-animate";
 import { twMerge } from "tailwind-merge";
@@ -130,7 +133,7 @@ export const Header = ({
                 : "")
             }
           >
-            <img src={logo} style={{ height: "30px" }} />
+            <img src={import.meta.env.VITE_ENV_FLAG === 'prod' ? LogoProd : (import.meta.env.VITE_ENV_FLAG === 'dev' ? logoDev : logoBeta )} style={{ height: import.meta.env.VITE_ENV_FLAG === 'prod' ? "30px" : "44px"}} />
           </div>
           {variant === "secondary" && (
             <div className="w-full md:border-b-2 flex h-full md:border-b-[1px] md:border-b-rgba-grey-01 pl-[40px] bg-rgba-grey-dark-03 ">
@@ -139,7 +142,11 @@ export const Header = ({
                   <div className="text-white  menu-bar">
                     {global.menus?.map((item: any) => {
                       return (
-                        <div className={`${item?.isDisabled && "opacity-[.5]"} ${item.location === location.pathname && ('active')}`}>
+                        <div
+                          className={`${item?.isDisabled && "opacity-[.5]"} ${
+                            item.location === location.pathname && "active"
+                          }`}
+                        >
                           <Tippy
                             disabled={!item.isDisabled}
                             content={
@@ -152,7 +159,11 @@ export const Header = ({
                               to={
                                 item?.isDisabled ? "#" : item?.location ?? "#"
                               }
-                              className={`d-block py-[20px] ${item?.isDisabled ? 'cursor-default' : 'cursor-pointer'}`}
+                              className={`d-block py-[20px] ${
+                                item?.isDisabled
+                                  ? "cursor-default"
+                                  : "cursor-pointer"
+                              }`}
                             >
                               {item?.icon && (
                                 <span
@@ -295,14 +306,22 @@ export const Header = ({
                     }
                   >
                     <div className="px-5">
-                      <a href="#" className="item">
+                      <Link to={"/"} className="item ">
                         Főoldal
-                      </a>
+                      </Link>
                     </div>
                     <div className="px-5 text-light-grey font-medium hover:text-white">
-                      <Link to={"/register"} className="item">
-                        Regisztráció
-                      </Link>
+                      <Tippy
+                        content={
+                          <span className="text-[12px] font-[600]">
+                            Hamarosan
+                          </span>
+                        }
+                      >
+                        <Link to={"#"} className="cursor-default item opacity-[.5]">
+                          Regisztráció
+                        </Link>
+                      </Tippy>
                     </div>
                     <div className="px-5 text-light-grey font-medium hover:text-white">
                       <Link to={"/login"} className="item">

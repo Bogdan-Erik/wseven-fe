@@ -8,6 +8,7 @@ import { BetRow, Container, CountdownTimer, SmallTitle, StatisticsChart, Statist
 import { motion } from 'framer-motion';
 import { url } from 'inspector';
 import { format } from 'date-fns';
+import moment from 'moment';
 
 export interface ShapeProps {
   type: string
@@ -111,8 +112,11 @@ export const AnalysesHeader = ({
   const colorScheme = sport.color;
   return (
     <div>
-      <div className="header-bg relative min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]" style={{ background: `url(${background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
-        <div className={`${colorScheme}-scheme bg-opacity-75 relative min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]`}>
+      <div className="header-bg overflow-hidden relative min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]">
+        <div className="header-bg absolute min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]" style={{background: `url(${background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', filter: 'blur(5px)'}}></div>
+        <div className="header-bg absolute min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]" ></div>
+        <div className={`${colorScheme}-scheme bg-opacity-75 r header-bg absolute min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px] bg-black opacity-[.9]`}></div>
+        <div className={`elative min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]`}>
           <div className="smoke relative flex px-[30px] py-[30px] min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]">
             <video src="https://w7tips.fra1.digitaloceanspaces.com/videos/smokebg.mp4" playsInline loop autoPlay muted></video>
             <motion.div animate={{ opacity: 1 }} transition={{ delay: 1 }} className="sidebar left-side z-[10]  left-[30px] top-0 opacity-0" >
@@ -165,20 +169,22 @@ export const AnalysesHeader = ({
               <img src={matchLogo} className={"event-logo h-[150px] max-w-[250px]"} />
             </div>
             <div className="flex-1 justify-center flex self-center flex-col items-center">
-              <div className="text-sm mb-[10px]">{format(Date.parse(matchDate.date), 'yyyy. LLLL dd.')} <strong>{format(Date.parse(matchDate.date), 'HH:mm')}</strong></div>
+              <div className="text-sm">{moment(matchDate.date).format('YYYY. MMMM DD.')} <strong>{format(Date.parse(matchDate.date), 'HH:mm')}</strong></div>
               <div className="w-[340px]">
                 <CountdownTimer targetDate={dateTimeAfterThreeDays} />
               </div>
+              <div>
+              <span className='text-rgba-grey-08 font-[500]'>TV adó:</span> <span className='font-[700] text-[14px]'>{tv.name}</span>
+              </div>
             </div>
             <div className="flex-1 flex flex-col items-center justify-end">
-              <div className="text-[20px] font-[500]"><img src={locationDatas.weather} className="max-w-[150px] max-h-[80px]" /></div>
-              {tv && (<div className="text-sm font-semibold mb-[20px]">
-                {/*<div className='mb-[10px]'>TV Csatorna</div>*/}
-                <div className='flex justify-center'><img src={tv.logo} className="max-w-[150px] max-h-[80px]" /></div>
-                </div>)}
-              <div className="text-sm font-semibold mb-[10px]">{locationDatas.location}</div>
-              {fieldType && (<div className="text-sm font-semibold mb-[30px] flex justify-center"><img src={fieldType} /></div>)}
-          
+              <div className="text-[20px] mb-[5px] font-[500]"><img src={locationDatas.weather} className="max-w-[150px] max-h-[80px]" /></div>
+              <div className="mb-[30px]">
+                <div className="text-sm font-semibold mb-[10px]">{locationDatas.location}</div>
+                {fieldType && (<div className="text-sm font-semibold  flex justify-center"><img src={fieldType} /></div>)}
+            
+              </div>
+              
             </div>
             {/* 
             <div className="flex-1 grid grid-cols-3 auto-rows-auto	grid-flow-row  items-center justify-end">
@@ -304,8 +310,8 @@ export const AnalysesHeader = ({
       </div>
       <div className="flex xl:hidden ">
         <div className="flex-1 flex flex-col items-center justify-end">
-          <div className="text-[20px] font-[500]">{locationDatas.weather}</div>
-          {tv && (<div className="text-sm font-semibold mb-[50px]"><img src={tv.logo} className="max-w-[150px] max-h-[80px]" /></div>)}
+          <div className="text-[20px] mb-[10px] font-[500]"><img src={locationDatas.weather} className="max-w-[150px] max-h-[80px]" /></div>
+          {tv && (<div className="text-sm font-semibold mb-[10px]">TV adó: <span className='font-[700] text-[14px]'>{tv.name}</span></div>)}
           <div className="text-sm font-semibold mb-[20px]">{locationDatas.location}</div>
           {fieldType && (<div className="text-sm font-semibold mb-[30px] flex justify-center"><img src={fieldType} /></div>)}
 
