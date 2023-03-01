@@ -81,7 +81,7 @@ export default ({ }: PageProps) => {
           plugins={[timeGridPlugin]}
          
           datesSet={(dateInfo) => {
-            trigger({ dateFrom: moment(dateInfo.start).format('YYYY-MM-DD hh:mm:SS'), dateEnd: moment(dateInfo.end).format('YYYY-MM-DD hh:mm:SS') })
+            trigger({ dateFrom: moment(dateInfo.start).subtract(1, 'week').format('YYYY-MM-DD hh:mm:SS'), dateEnd: moment(dateInfo.end).add(1, 'week').format('YYYY-MM-DD hh:mm:SS') })
         }}
           initialView="timeGridFourDay"
           headerToolbar={{
