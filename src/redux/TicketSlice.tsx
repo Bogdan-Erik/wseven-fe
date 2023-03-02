@@ -28,7 +28,6 @@ export const ticketSlice = createSlice({
     builder.addMatcher(
       ticketApiSlice.endpoints.getTicketsByDateRange.matchFulfilled,
       (state, action) => {
-        console.log(action.payload);
 
         state.filteredTickets =
           action.payload.map((item: any) => {

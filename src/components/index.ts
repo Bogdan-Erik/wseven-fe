@@ -43,4 +43,6 @@ export { Missings } from './MatchComponents/Missings/Missings';
 export { NotificationItem } from './NotificationItem/NotificationItem';
 export { Ticket } from './Ticket';
 export { TicketItem } from './TicketItem';
+export { NextMatches } from './NextMatches'
+export { EmptyTicket } from './EmptyTicket'
 /* -- component: insert above here -- */

@@ -25,6 +25,7 @@ export interface SportCardProps {
   onClick?: () => void;
   date?: string,
   leagueLogo?: string,
+  hoverEffectEnabled?: boolean
 }
 
 const LargeTeamsBar = (type: any, hazai: any, vendeg: any) => {
@@ -93,16 +94,15 @@ const LargeTeamsBar = (type: any, hazai: any, vendeg: any) => {
 const smallTeamsBar = (type: any, hazai: any, vendeg: any) => {
 
   const convertType = (['football', 'nfl', 'basketball'].includes(type)) ? 'teamSport' : ((type === 'f1') ? 'other' : 'individualSport')
-  console.log(type)
   const variants = {
     teamSport: () => (
       <div className="flex mt-[30px] absolute z-[11] w-full px-[16px] bottom-[16px]">
         <div className="home-team flex flex-col md:flex-row self-center mr-auto">
           <div className="mr-[10px]"><img src={hazai.logo} className="w-[42px]" /></div>
-          <div className="text-[12px] text-[16px] font-[500] self-center">{hazai.name}</div>
+          <div className="text-[12px] md:text-[16px] font-[500] self-center">{hazai.name}</div>
         </div>
         <div className="away-team flex flex-col md:flex-row self-center gap-[5px] md:gap-0 ">
-          <div className="text-[12px] text-[16px] font-[500] self-center order-2 md:order-1">{vendeg.name}</div>
+          <div className="text-[12px] md:text-[16px] font-[500] self-center order-2 md:order-1">{vendeg.name}</div>
           <div className='ml-[10px] order-1 md:order-2'><img src={vendeg.logo} className="w-[42px]" /></div>
         </div>
       </div>
@@ -146,6 +146,7 @@ export const SportCard = ({
   colorScheme,
   date = '2022-06-01 20:00',
   leagueLogo = 'https://w7tips.fra1.digitaloceanspaces.com/ll.png',
+  hoverEffectEnabled = true,
   ...props
 }: SportCardProps) => {
   const players = [{ image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }, { image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }, { image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }, { image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }, { image: "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png" }];
@@ -153,11 +154,11 @@ export const SportCard = ({
   const mode = primary ? 'w7-sportcard--primary' : 'w7-sportcard--secondary';
   return (
     <motion.div whileHover={{
-      scale: 1.05,
-    }}  whileTap={{ scale: 0.95 }} className={twMerge(`sportcard sportcard-${size} relative overflow-hidden ${size === 'small' ? 'h-[426px]' : 'h-full'} md:h-[296px]`)}>
+      scale: 0.95,
+    }}  whileTap={{ scale: 0.96 }} className={twMerge(`sportcard sportcard-${size} relative overflow-hidden ${size === 'small' ? 'h-[426px]' : 'h-full'} md:h-[296px]`)}>
       <div className={twMerge(`${size === 'small' ? 'sportcard-background' : 'sportcard-background-large'} ${colorScheme}-scheme md:mt-[16px]`)}>
-        <div className={twMerge(`flex relative flex-col md:flex-row ${size === 'small' ? ' md:h-full' : ''}`)}>
-          <div className="flex-1 relative overflow-hidden flex md:top-[-16px] md:mb-[-16px] order-2 md:order-1">
+        <div className={twMerge(`flex relative flex-col md:flex-row ${size === 'small' ? 'h-full' : ''}`)}>
+          <div className="flex-[5] md:flex-1 relative overflow-hidden md:pb-[0px] flex md:top-[-16px] md:mb-[-16px] order-2 md:order-1">
             {
               size === 'large' ? (
                 <>
@@ -166,7 +167,7 @@ export const SportCard = ({
                 </>
               ) : (
                 <>
-                  <div className='self-end relative z-[10] md:z-[2]'><img src={images[0]} className="object-contain h-[310px] object-bottom" /></div>
+                  <div className='self-end relative z-[10] md:z-[2]'><img src={images[0]} className="object-contain h-[300px] object-bottom" /></div>
                 </> 
               )
             }
@@ -176,7 +177,7 @@ export const SportCard = ({
             {daily && (<div className="hidden md:block absolute right-[15px] top-[15px] daily-match-large">A nap tippje</div>)}
             {/* Info block */}
             <div className={twMerge(`info-block flex ${size === 'large' ? 'flex-col md:flex-row' : ''} mt-[25px]`)}>
-              <div className={twMerge(`mr-[5px] ${size === 'large' ? 'self-center md:self-start' : ''}  md:w-[80px]`)}><img src={leagueLogo ? (import.meta.env.VITE_DO_IMAGE_HOST + leagueLogo) : leagueLogo} height="52" /></div>
+              <div className={twMerge(`mr-[10px] ${size === 'large' ? 'self-center md:self-start' : ''} w-[45px] flex md:w-[45px]`)}><img src={leagueLogo ? (import.meta.env.VITE_DO_IMAGE_HOST + leagueLogo) : leagueLogo} height="52" /></div>
               <div className="date-holder self-center">
                 <div className='text-white text-[16px] font-[600]'>{format(parseISO(date), 'yyyy. MMMM dd.', { locale: hu })}</div>
                 <div className={twMerge(`text-[20px] text-rgba-grey-08 ${size === 'large' ? 'text-center md:text-left' : ''}`)}>{format(parseISO(date), 'HH:mm', { locale: hu })}</div>
@@ -184,7 +185,7 @@ export const SportCard = ({
             </div>
             {/* Info block */}
             {/* Played */}
-            <div className="mt-[39px]">
+            {/*<div className="mt-[39px]">
               <div className={twMerge(`flex min-w-[130px] order-1 xl:order-2 ${size === 'large' ? 'place-content-center md:place-content-start' : 'place-content-start'} mb-[10px] xl:mb-0`)}>
                 <>
                   {_.sampleSize(players, 4).map((item, key) => {
@@ -196,7 +197,7 @@ export const SportCard = ({
                 </>
               </div>
               <div className={twMerge(`text-[12px] text-rgba-grey-08 font-[500] mt-[10px] ${size === 'large' ? 'text-center md:text-left' : ''}`)}>{players.length} tagunk fogadott a meccsre</div>
-            </div>
+                  </div>*/}
             {/* Played */}
 
             {/* match teams */}

@@ -27,12 +27,14 @@ export interface BetRowProps {
   action?: any
   disabled?: boolean
   played?: boolean
+  playedAmount?: any
   isClosed?:boolean
   result?: string
   dateStart?: string
 }
 
-export const BetRow = ({ odds, dateStart, playersNumber = 0, result = undefined, isClosed = false, title, strength, suggestedBet, players, contentText, matchDatas, action, disabled = false, played = false}: BetRowProps): JSX.Element => {
+export const BetRow = ({ odds, dateStart, playersNumber = 0, result = undefined, isClosed = false, title, strength, suggestedBet, players, contentText, matchDatas, action, disabled = false, played = false, playedAmount = null}: BetRowProps): JSX.Element => {
+  console.log(playedAmount)
   return (
     <div className="bet-row">
        {matchDatas && (
@@ -83,7 +85,7 @@ export const BetRow = ({ odds, dateStart, playersNumber = 0, result = undefined,
 
             </div>
           </div>
-          <div>Ajánlott tét: <strong className="text-white">{suggestedBet}</strong></div>
+          {!playedAmount ? (<div>Ajánlott tét: <strong className="text-white">{suggestedBet}</strong></div>) : (<div>Megjátszva: <strong className="text-white">{playedAmount?.tet?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' Ft'}</strong></div>)}
         </div>
         <div className="right-side xl:ml-auto items-center  flex-col xl:flex-row">
           <div className="flex  flex-col xl:flex-row">

@@ -59,7 +59,6 @@ const BetModal = ({
             onSubmit={async ({ amount }) => {
               if (selectedFunction.type !== "upload") {
                 await triggerBalance().then((data) => {
-                  console.log(data.data);
                   if ((data?.data?.current_balance ?? 0) < amount) {
                     setShowTipModal(false);
                     newErrorToast(

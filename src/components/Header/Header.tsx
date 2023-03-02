@@ -45,6 +45,7 @@ export const Header = ({
   const ref = useRef(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const customer = useSelector((state: RootState) => state.customer);
 
   const global = useSelector((state: RootState) => state.global);
 
@@ -112,6 +113,18 @@ export const Header = ({
     removeAllTrigger({});
     setLocalNotifications([]);
   };
+
+
+  const [date, setDate] = useState(moment())
+  const updateTime = () => {
+    let clock = moment().add(1, 'second');
+    setDate(clock);
+  }
+
+  useEffect(() => {
+    setInterval(updateTime, 1000)
+
+  },[]);
   return (
     <header className={headerclass}>
       <div
@@ -133,7 +146,19 @@ export const Header = ({
                 : "")
             }
           >
-            <img src={import.meta.env.VITE_ENV_FLAG === 'prod' ? LogoProd : (import.meta.env.VITE_ENV_FLAG === 'dev' ? logoDev : logoBeta )} style={{ height: import.meta.env.VITE_ENV_FLAG === 'prod' ? "30px" : "44px"}} />
+            <img
+              src={
+                import.meta.env.VITE_ENV_FLAG === "prod"
+                  ? LogoProd
+                  : import.meta.env.VITE_ENV_FLAG === "dev"
+                  ? logoDev
+                  : logoBeta
+              }
+              style={{
+                height:
+                  import.meta.env.VITE_ENV_FLAG === "prod" ? "30px" : "44px",
+              }}
+            />
           </div>
           {variant === "secondary" && (
             <div className="w-full md:border-b-2 flex h-full md:border-b-[1px] md:border-b-rgba-grey-01 pl-[40px] bg-rgba-grey-dark-03 ">
@@ -181,7 +206,7 @@ export const Header = ({
                   </div>
                   <div className="text-white flex action-menu-bar mr-[20px] lg:mr-[40px]">
                     <div className="text-rgba-grey-08 hidden lg:block">
-                      {moment().format("YYYY. MMMM. DD HH:mm")}
+                      {moment(date).format("YYYY. MMMM. D. HH:mm")}
                     </div>
                     <div>
                       <span
@@ -276,10 +301,8 @@ export const Header = ({
                       </div>
                       <div className="block md:hidden">
                         <img
-                          src={
-                            "https://fra1.digitaloceanspaces.com/w7tips/placeholders/stock_sample.png"
-                          }
-                          className="rounded-full w-[40px] h-[42px]"
+                          src={customer.image}
+                          className="object-cover rounded-full w-[42px] h-[42px] cursor-pointer object-center "
                         />
                       </div>
                     </div>
@@ -318,7 +341,10 @@ export const Header = ({
                           </span>
                         }
                       >
-                        <Link to={"#"} className="cursor-default item opacity-[.5]">
+                        <Link
+                          to={"#"}
+                          className="cursor-default item opacity-[.5]"
+                        >
                           Regisztráció
                         </Link>
                       </Tippy>

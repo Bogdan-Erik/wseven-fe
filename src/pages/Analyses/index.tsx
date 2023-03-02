@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { AnalysesHeader, BetRow, Container, CountdownTimer, IconBadge, Icon, SmallTitle, StatisticsChart, Button, Modal, PlayersGame, Input } from '../../components';
+import { AnalysesHeader, BetRow, Container, CountdownTimer, IconBadge, Icon, SmallTitle, StatisticsChart, Button, Modal, PlayersGame, Input, Loader } from '../../components';
 import './index.scss';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useParams } from 'react-router-dom';
@@ -25,6 +25,7 @@ export default ({ }: PageProps) => {
   const { newSuccessToast, newErrorToast } = useNotification({
     theme: 'colored',
   })
+  const [show, setShow] = useState(false);
 
   const [showTipModal, setShowTipModal] = useState(false);
   const [selectedBet, setSelectedBet] = useState(null);
@@ -66,7 +67,9 @@ export default ({ }: PageProps) => {
 
   return (
     <Container className="analyses-container container 2xl:mx-auto max-w-[100%] 2xl:max-w-screen-2xl 3xl:max-w-screen-3xl mx-auto" padding={false}>
-      {isLoading && !data ? ('Loading') : (
+      {isLoading ? (
+        <div className="text-center text-[26px] text-rgba-grey-08 flex justify-center"><div className="flex items-center mr-[10px]"><Loader size={"30"} /></div><div>Betöltés...</div></div>
+      ) : (
         <div className="analyses">
           <AnalysesHeader isClosed={data.isClosed} showDatas={data?.analyses.length === 0 ? false : true} sport={data.sport} isDaily={data.isDaily} type={''} background={data.image} homeObject={homeObject} awayObject={awayObject} matchLogo={data.league.image ? (import.meta.env.VITE_DO_IMAGE_HOST + data?.league?.image) : "https://w7tips.fra1.digitaloceanspaces.com/images/leagues/cl.png"} matchDate={{ date: data.dateStart }} locationDatas={{
             weather: data.weather?.icon,
@@ -133,7 +136,7 @@ export default ({ }: PageProps) => {
                 {data?.analyses.length !== 0 && data?.analyses?.tips.map((item: any) => {
                   return (
                     <div className="mb-[15px]">
-                      <BetRow dateStart={data.dateStart} result={item.result} isClosed={data.isClosed} playersNumber={item?.customer_tips_aggregate?.aggregate?.count ?? 0} played={item.customer_tips?.length > 0 ? true : false} disabled={(item.customer_tips?.length > 0 || isLoading || data.isClosed) ? true : false} action={() => { setSelectedBet(item); setShowTipModal(true) }} odds={item.odds} title={item.name} strength={item.rating} suggestedBet={(BetHelper(customer?.playingType ?? '', bank?.balance ?? 0, item.tet ?? 0) + ' Ft').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} players={['','', '', '', '']} />
+                      <BetRow dateStart={data.dateStart} result={item.result} isClosed={data.isClosed} playersNumber={item?.customer_tips_aggregate?.aggregate?.count ?? 0} played={item.customer_tips?.length > 0 ? true : false} playedAmount={item.customer_tips[0]} disabled={(item.customer_tips?.length > 0 || isLoading || data.isClosed) ? true : false} action={() => { setSelectedBet(item); setShowTipModal(true) }} odds={item.odds} title={item.name} strength={item.rating} suggestedBet={(BetHelper(customer?.playingType ?? '', bank?.balance ?? 0, item.tet ?? 0) + ' Ft').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} players={['','', '', '', '']} />
                     </div>
                   )
                 })}

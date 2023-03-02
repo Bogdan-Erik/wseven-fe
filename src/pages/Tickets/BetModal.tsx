@@ -78,7 +78,7 @@ const BetModal = ({
               editing: false,
             };
           }),
-          bet: BetHelper(customer?.playingType ?? '', bank?.balance ?? 0, selectedTicket.suggested_bet ?? 0),
+          bet: parseFloat(BetHelper(customer?.playingType ?? '', bank?.balance ?? 0, selectedTicket.suggested_bet ?? 0)),
         }}
         validationSchema={TicketSchema}
         onSubmit={async ({ bet, tips }) => {

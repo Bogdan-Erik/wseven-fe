@@ -43,7 +43,6 @@ export const SideMenuBar = ({}: SideMenuBarProps): JSX.Element => {
       .unwrap()
       .then((data) => {
         const {data:resData} = data;
-        console.log(resData);
         dispatch(setAuthToken(resData?.accessToken));
       })
       .catch((e) => console.log(e));
@@ -169,7 +168,7 @@ export const SideMenuBar = ({}: SideMenuBarProps): JSX.Element => {
           )}
           <img
             src={customer.image}
-            className="object-cover rounded-full w-[95px] h-[99px] cursor-pointer object-center "
+            className="object-cover rounded-full w-[95px] h-[95px] cursor-pointer object-center "
           />
         </div>
         <div className="mt-[20px] font-semibold text-lg">{customer.name}</div>

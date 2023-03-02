@@ -559,6 +559,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
 
 export const {
   useLazyGetMatchesByDateQuery,
+  useGetMatchesByDateQuery,
   useGetActiveMatchesQuery,
   useLazyGetTipsByDateRangeQuery,
   useGetMatchQuery,

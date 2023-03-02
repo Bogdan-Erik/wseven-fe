@@ -49,7 +49,7 @@ export const DataPaginator = ({ datas, Component, NoResultComponent, additionalC
       <div>
         {datas.length > 0 && filteredDatas?.map((item: any, key: number) => {
           return (
-            <div className="mb-[10px] xl:mb-0">
+            <div className="mb-[10px] xl:mb-0" key={key}>
               <Component isSecondary={key % 2 ? true : false} {...item} {...additionalComponentProps} />
             </div>
           )

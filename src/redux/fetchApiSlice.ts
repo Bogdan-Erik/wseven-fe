@@ -70,6 +70,8 @@ const baseQueryWithReauth: BaseQueryFn<
     } else {
       api.dispatch(reset())
     }
+  } else if (result?.error?.status === 401) {
+    api.dispatch(reset())
   }
 
   return result

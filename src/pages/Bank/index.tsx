@@ -32,9 +32,9 @@ export default ({ }: PageProps) => {
       <Container className="container 2xl:mx-auto px-[20px] pt-[30px] max-w-[100%] 2xl:max-w-screen-2xl 3xl:max-w-screen-3xl mx-auto mb-[100px]" padding={false}>
         <div className="flex flex-col lg:flex-row gap-[40px]">
           <div className="flex-1">
-            <BankItem icon={'money'} title={'Virtuális bank'} amount={Math.round(data.balance).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' Ft'} actions={[
+            <BankItem icon={'money'} title={'Virtuális bank'} amount={data.balance} actions={[
               {
-                icon: 'money',
+                icon: 'arrow_up',
                 title: 'Virtuális egyenleg feltöltés',
                 onClick: () => {
                   setSelectedFunction({
@@ -50,7 +50,7 @@ export default ({ }: PageProps) => {
               }
               },
               {
-                icon: 'money',
+                icon: 'arrow_down',
                 title: 'Virtuális egyenleg kifizetés',
                 onClick: () => {
                   setSelectedFunction({
@@ -70,9 +70,9 @@ export default ({ }: PageProps) => {
           </div>
           <div className="flex-1 relative">
             <div className='w-full h-full absolute flex justify-center items-center z-[2] text-rgba-grey-06 text-[24px]'>Hamarosan...</div>
-            <BankItem icon={'coin'} title={'W7 tokenek'} amount={'0 token'} actions={[
+            <BankItem icon={'coin'} title={'W7 tokenek'} amount={0} isToken actions={[
               {
-                icon: 'money',
+                icon: 'arrow_up',
                 title: 'Token vásárlása',
                 onClick: () => console.log('clicked')
               },
@@ -89,7 +89,7 @@ export default ({ }: PageProps) => {
               if (["App\\Models\\Upload", "App\\Models\\Out"].includes(item.source_type)) {
                 return (<><span className='font-[700]'>Virtuális bank</span> tranzakció</>);
               } else if (item.source_type === "App\\Models\\Tip") {
-                return (<><span className='font-[700]'>Tipp: </span> {item.description}</>);
+                return (<><span className='font-[700]'>Fogadás: </span> {item.description}</>);
               } else if (["App\\Models\\CustomerTicket", "App\\Models\\Ticket"].includes(item.source_type)) {
                 return (<><span className='font-[700]'>Szelvény: </span> {item.description}</>);
               }
@@ -106,14 +106,27 @@ export default ({ }: PageProps) => {
                 return 'Szelvény művelet';
               }
             }
+
+            const itemIcon = () => {
+              if (["App\\Models\\Upload", "App\\Models\\Out"].includes(item.source_type)) {
+                return 'money';
+              } else if (["App\\Models\\Tip"].includes(item.source_type)) {
+                return 'stat-bordered';
+              } else if (["App\\Models\\Ticket", "App\\Models\\CustomerTicket"].includes(item.source_type)) {
+                return 'ticket-new';
+              } else {
+                return 'coin';
+              }
+            }
+
             return {
             isSecondary: key % 2 ? true : false,
             isUpload: (item.source_type === "App\\Models\\Upload" || item.amount > 0) ? true : false,
-            icon: ["App\\Models\\Upload", "App\\Models\\Out"].includes(item.source_type) ? 'money' : 'coin',
+            icon: itemIcon(),
             title: transactionType(),
             label: itemLabel(),
             amount: (Math.round(item.amount)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' Ft',
-            date: moment(item.created_at).format('YYYY. MMMM DD. HH:mm')
+            date: moment(item.created_at).format('YYYY. MMMM D. HH:mm')
           }})} additionalComponentProps={{ turnOffMore: true }}></DataPaginator>
 
 

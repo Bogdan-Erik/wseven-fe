@@ -31,7 +31,6 @@ export const TicketItem = ({
   isUserPlacedBet = false
 }: TicketItemProps): JSX.Element => {
   const contClass = twMerge(`${isSecondary ? 'bg-rgba-grey-dark-02' : ' bg-eerie-black'} w-full cursor-pointer  text-white p-2.5 hidden xl:flex`)
-  console.log('item', item)
   return (
     <>
       <div className={contClass} onClick={() => onClick(item)}>

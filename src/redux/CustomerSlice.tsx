@@ -39,7 +39,6 @@ export const customerSlice = createSlice({
     builder.addMatcher(
       customerApiSlice.endpoints.updateBankroll.matchFulfilled,
       (state, action) => {
-        console.log(action.payload)
         state.playingType = action.payload[0]?.playing_type;
       }
     );

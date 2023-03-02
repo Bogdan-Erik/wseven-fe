@@ -37,7 +37,7 @@ export const Ticket = ({item, setShowTipModal}: TitleProps): JSX.Element => {
   const [hours, minutes, seconds, isFinished] = useCountdown(item.start_date);
 
   return (
-    <div className="max-w-[350px]">
+    <div>
       <div className="bg-[url('/src/assets/images/szelveny_topbottom.svg')] w-full h-[14px]"></div>
       <div className="bg-rgba-grey-015 w-full px-[20px]">
         <div className="text-[24px] text-white text-center font-[600] pt-[20px]">Szelvény #{item.number}</div>

@@ -166,7 +166,7 @@ export const AnalysesHeader = ({
           </motion.div>
           <motion.div animate={{ opacity: 1 }} transition={{ delay: 1.5 }} className="center-side  opacity-0">
             <div className="flex-1 justify-center flex self-center flex-col">
-              <img src={matchLogo} className={"event-logo h-[150px] max-w-[250px]"} />
+              <img src={matchLogo} className={"event-logo h-[120px] max-w-[250px]"} />
             </div>
             <div className="flex-1 justify-center flex self-center flex-col items-center">
               <div className="text-sm">{moment(matchDate.date).format('YYYY. MMMM DD.')} <strong>{format(Date.parse(matchDate.date), 'HH:mm')}</strong></div>

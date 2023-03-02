@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import {
   Container,
   DataPaginator,
+  Loader,
   MatchItem,
   PageTitle,
   SportCard,
@@ -18,6 +19,7 @@ import { useSelector } from "react-redux";
 import Datepicker from "react-tailwindcss-datepicker";
 import moment from "moment";
 import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
+import NoAnalyse from "./../../assets/images/no-analyse.svg";
 
 export interface PageProps {}
 
@@ -33,10 +35,11 @@ export default ({}: PageProps) => {
     (state: RootState) => state.match
   );
 
+  const [show, setShow] = useState(false);
   const [value, setValue] = useState({
-  //  startDate: moment().subtract(7, "days").format("YYYY-MM-DD"),
+    //  startDate: moment().subtract(7, "days").format("YYYY-MM-DD"),
     startDate: null,
-    endDate:null,
+    endDate: null,
   });
 
   useEffect(() => {
@@ -50,11 +53,23 @@ export default ({}: PageProps) => {
   const [trigger] = useLazyGetTipsByDateRangeQuery();
 
   useEffect(() => {
-    trigger({ dateFrom: value.startDate ?? moment().startOf('year').format("YYYY-MM-DD"), dateTo: value.endDate ? moment(value.endDate).add(1, 'day').format('YYYY-MM-DD') :  moment().add(1, 'day').format("YYYY-MM-DD")});
+    trigger({
+      dateFrom:
+        value.startDate ?? moment().startOf("year").format("YYYY-MM-DD"),
+      dateTo: value.endDate
+        ? moment(value.endDate).add(1, "day").format("YYYY-MM-DD")
+        : moment().add(1, "day").format("YYYY-MM-DD"),
+    });
   }, []);
 
   useEffect(() => {
-    trigger({ dateFrom: value.startDate ?? moment().startOf('year').format("YYYY-MM-DD"), dateTo: value.endDate ? moment(value.endDate).add(1, 'day').format('YYYY-MM-DD') :  moment().add(1, 'day').format("YYYY-MM-DD")});
+    trigger({
+      dateFrom:
+        value.startDate ?? moment().startOf("year").format("YYYY-MM-DD"),
+      dateTo: value.endDate
+        ? moment(value.endDate).add(1, "day").format("YYYY-MM-DD")
+        : moment().add(1, "day").format("YYYY-MM-DD"),
+    });
   }, [value]);
 
   const NoResult = () => {
@@ -65,15 +80,19 @@ export default ({}: PageProps) => {
       className="dark container 2xl:mx-auto px-[20px] pt-[30px] max-w-[100%] 2xl:max-w-screen-2xl 3xl:max-w-screen-3xl mx-auto"
       padding={false}
     >
-      <PageTitle title="Elemzések" icon="stat-bordered" />
       {isLoading ? (
-        "Loading"
+        <div className="text-center text-[26px] text-rgba-grey-08 flex justify-center"><div className="flex items-center mr-[10px]"><Loader size={"30"} /></div><div>Betöltés...</div></div>
       ) : (
-        <div className="analyses mt-[50px]">
+        <div className="analyses ">
           {activeMatches.length === 0 && (
-            <div className="text-[20px] font-[500] flex justify-center mt-[20px] max-w-[610px] ml-auto mr-auto text-center px-[40px]">
-              Jelenleg nincs következő elemzés, de hamarosan jelentkezünk egy
-              újabbal. Értesíteni fogunk róla!
+            <div>
+              <div className="flex justify-center">
+                <img src={NoAnalyse} className="w-[216px] h-[216px]" />
+              </div>
+              <div className="text-[20px] font-[500] flex justify-center mt-[20px] max-w-[610px] ml-auto mr-auto text-center px-[40px]">
+                Jelenleg nincs elérhető elemzés, de hamarosan jelentkezünk egy
+                újabbal. Értesíteni fogunk róla!
+              </div>
             </div>
           )}
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-[40px]">
@@ -81,10 +100,10 @@ export default ({}: PageProps) => {
             <SportCard daily={true} colorScheme={"blue"} size={"large"} images={['https://w7tips.fra1.digitaloceanspaces.com/images/players/salah.png', 'https://w7tips.fra1.digitaloceanspaces.com/images/players/benzema.png']} sportType={'football'} />
              </div>*/}
 
-            {activeMatches?.map((item: any) => {
+            {activeMatches?.map((item: any, key: number) => {
               if (item.isDaily) {
                 return (
-                  <div className="col-span-1 lg:col-span-2 2xl:col-span-2 ">
+                  <div className="col-span-1 lg:col-span-2 2xl:col-span-2 " key={key}>
                     <Link to={`/analyses/${item.id}`}>
                       <SportCard
                         leagueLogo={item.league?.image}
@@ -103,9 +122,8 @@ export default ({}: PageProps) => {
                   </div>
                 );
               }
-              console.log(item.home)
               return (
-                <div>
+                <div key={key}>
                   <Link to={`/analyses/${item.id}`}>
                     <SportCard
                       leagueLogo={item.league?.image}
@@ -116,7 +134,9 @@ export default ({}: PageProps) => {
                       date={item.dateStart}
                       daily={false}
                       colorScheme={item.sport.color ?? "blue"}
-                      sportType={item?.sport?.value?.toLowerCase() ?? "football"}
+                      sportType={
+                        item?.sport?.value?.toLowerCase() ?? "football"
+                      }
                     />
                   </Link>
                 </div>
@@ -130,11 +150,11 @@ export default ({}: PageProps) => {
               </div>
               <div className="mb-[20px] md:mb-0 min-w-[279px] ">
                 <Datepicker
-                  i18n={"hu"} 
+                  i18n={"hu"}
                   inputClassName="dark:bg-transparent outline-none border-none"
                   value={value}
-                  separator={"-"} 
-                  displayFormat={"YYYY. MM DD."} 
+                  separator={"-"}
+                  displayFormat={"YYYY. MM DD."}
                   primaryColor={"violet"}
                   containerClassName={"z-[1000]"}
                   onChange={handleValueChange}
