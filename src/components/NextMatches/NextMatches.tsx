@@ -22,7 +22,7 @@ export const NextMatches = ({
                   "text-rgba-grey-08" 
                 }/></div>
             <div className="text-[16px] font-[500] text-rgba-grey-08 text-center">
-            v  A megjátszott meccseid bekerülnek a naptáradba, így mindig tudni
+             A megjátszott meccseid bekerülnek a naptáradba, így mindig tudni
               fogod, hogy mi mikor következik.
             </div>
           </div>
