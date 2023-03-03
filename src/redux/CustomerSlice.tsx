@@ -7,6 +7,7 @@ import moment from "moment";
 
 export interface CustomerSlice {
   name: any
+  nickname: any
   playingType: string | any,
   image: string | null
   defaultUnit: any
@@ -15,6 +16,7 @@ export interface CustomerSlice {
 
 const internalInitialState: CustomerSlice = {
   name: "",
+  nickname: null,
   image: null,
   playingType: null,
   defaultUnit: null,
@@ -30,6 +32,7 @@ export const customerSlice = createSlice({
       customerApiSlice.endpoints.getMyself.matchFulfilled,
       (state, action) => {
         state.name = action.payload[0]?.name;
+        state.nickname = action.payload[0]?.nickname;
         state.playingType = action.payload[0]?.playing_type;
         state.image = action.payload[0]?.image ? (import.meta.env.VITE_DO_IMAGE_HOST + action.payload[0]?.image) : (import.meta.env.VITE_DO_IMAGE_HOST + "placeholders/stock_sample.png");
         state.defaultUnit = action.payload[0]?.default_unit ?? 1000;

@@ -91,15 +91,15 @@ export const matchSlice = createSlice({
 
             return {
               matchId: item.analyasis.match.id,
-              date: moment(item.analyasis.match.date_start).format('YYYY. MMMM DD'),
+              date: moment(item.analyasis.match.date_start).format('YYYY. MMMM D.'),
               time: moment(item.analyasis.match.date_start).format('HH:mm'),
               home: item.analyasis.match.homePlayer ? item.analyasis.match.homePlayer.first_name + ' ' + item.analyasis.match.homePlayer.last_name : item.analyasis.match.homeTeam.name,
               away: item.analyasis.match.awayPlayer ? item.analyasis.match.awayPlayer.first_name + ' ' + item.analyasis.match.awayPlayer.last_name : item.analyasis.match.awayTeam.name,
               winner: 'home',
               odds: item.odds,
               tippString: item.name,
-              isWinner: item.result !== 'loose' ? true : false,
-              winningPrice: item.result !== 'loose' ? `+${winningPrice} egység` : `-${winningPrice} egység` ,
+              isWinner: item.result,
+              winningPrice: item.result !== 'loose' ? `+${winningPrice} egység` : `-${item.tet} egység` ,
               logo: import.meta.env.VITE_DO_IMAGE_HOST + item.analyasis.match.league.image,
             }
           })

@@ -9,6 +9,7 @@ import { WebSocketLink } from "@apollo/client/link/ws";
 import store from '../../redux/store';
 import { useNotification } from '../../hooks/useNotification';
 import _ from 'lodash';
+import { useGetBankQuery } from '../../redux/BankSlice';
 
 export interface LayoutProps {
   children: JSX.Element[] | JSX.Element | string
@@ -19,6 +20,8 @@ const Layout = ({ children }: LayoutProps) => {
   const [currentNotifications, setCurrentNotifications] = useState([]);
   const [initNotifications, setInitNotifications] = useState(false);
   const location = useLocation();
+
+
   const { newPushToast } = useNotification({
     theme: 'colored',
   })

@@ -25,6 +25,7 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css"; // optional
+import { useGetBalanceQuery, useGetBankQuery } from "../../redux/BankSlice";
 type User = {
   name: string;
 };
@@ -45,6 +46,21 @@ export const Header = ({
   const ref = useRef(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+
+  const {
+    isLoading: isLoadingBank,
+    data: bankData,
+    refetch: bankRefetch,
+  } = useGetBankQuery({});
+
+  const {
+    isLoading: isBalanceLoading,
+    data: balanceData,
+    refetch: balanceRefetch,
+  } = useGetBalanceQuery({});
+
+
   const customer = useSelector((state: RootState) => state.customer);
 
   const global = useSelector((state: RootState) => state.global);
@@ -75,6 +91,11 @@ export const Header = ({
       []
     );
   };
+
+  useEffect(() => {
+    bankRefetch();
+    balanceRefetch();
+  }, [localNotifications])
 
   const [trigger] = useSetSeenNotificationMutation();
   const [removeTigger] = useRemoveNotificationMutation();

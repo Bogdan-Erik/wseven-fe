@@ -5,9 +5,9 @@ import { faPencil } from '@fortawesome/free-solid-svg-icons'
 import { twMerge } from 'tailwind-merge';
 
 export interface TipStatusProps {
-  text: string
-  icon: string
-  color: string
+  text?: string
+  icon?: string
+  color?: string
 }
 
 export const TipStatusBadge = ({ text, color, icon }: TipStatusProps): JSX.Element => {

@@ -34,7 +34,43 @@ export interface BetRowProps {
 }
 
 export const BetRow = ({ odds, dateStart, playersNumber = 0, result = undefined, isClosed = false, title, strength, suggestedBet, players, contentText, matchDatas, action, disabled = false, played = false, playedAmount = null}: BetRowProps): JSX.Element => {
-  console.log(playedAmount)
+
+  const resultLabel = () => {
+    if (result === undefined) {
+      if (moment(dateStart).isBefore(moment())) {
+        return {
+          text: 'Folyamatban',
+          icon: 'schedule',
+          color: 'white',
+        };
+      } else {
+        return null;
+      }
+    } else {
+      if (result === 'win') {
+        return {
+          text: 'Nyertes tipp',
+          icon: 'success',
+          color: 'green',
+        };
+      } else if (result === 'loose') {
+        return {
+          text: 'Vesztes tipp',
+          icon: 'error',
+          color: 'red',
+        };
+      } else if (result === 'push') {
+        return {
+          text: 'Érvénytelenítve',
+          icon: 'disturb',
+          color: 'neon',
+        };
+      } else {
+        return null;
+      }
+    }
+    return null;
+  }
   return (
     <div className="bet-row">
        {matchDatas && (
@@ -66,10 +102,10 @@ export const BetRow = ({ odds, dateStart, playersNumber = 0, result = undefined,
         )}
         <div className="self-center"><OddsItem odds={odds} /></div>
         <div className="ml-[15px] flex justify-center flex-col font-[500]">{title}</div>
-        {(result !== undefined && moment(dateStart).isBefore(moment()) ) && (<div className="ml-auto flex justify-center flex-col font-[500]"><TipStatusBadge text={result === null ? 'Folyamatban' : (result === 'win' ? 'Nyertes tipp' : 'Vesztes tipp')} color={result === null ? 'white' : (result === 'win' ? 'green' : 'red')} icon={result === null ? 'schedule' : (result === 'win' ? 'success' : 'error')} /></div>)}
+        {resultLabel() && (<div className="ml-auto flex justify-center flex-col font-[500]">{resultLabel() !== null && (<TipStatusBadge text={resultLabel()?.text} color={resultLabel()?.color} icon={resultLabel()?.icon} />)}</div>)}
       </div>
       {contentText && (<div className="py-[15px] text-[14px]">{contentText}</div>)}
-      <div className="my-[15px]"><hr className="text-rgba-grey-02" /></div>
+      <div className="my-[15px]"><hr className="border-rgba-grey-02" /></div>
       <div className="bet-row__content">
         <div className="left-side  flex-col xl:flex-row   items-center">
           <div className="flex mr-[30px] mt-[20px] xl:mt-0 ">

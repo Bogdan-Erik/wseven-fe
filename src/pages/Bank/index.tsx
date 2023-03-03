@@ -1,6 +1,7 @@
 // @ts-nocheck
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { BankItem, Container, DataPaginator, TransactionRow } from '../../components';
 import { TransactionRowProps } from '../../components/TransactionRow/TransactionRow';
 import { useGetBankQuery, useLazyGetBalanceQuery } from '../../redux/BankSlice';
@@ -15,6 +16,7 @@ export default ({ }: PageProps) => {
   
   const [showTipModal, setShowTipModal] = useState(false);
   const [selectedFunction, setSelectedFunction] = useState(null);
+  const bank = useSelector((state: RootState) => state.bank);
 
   const { isLoading, data, refetch } = useGetBankQuery({});
   const [triggerBalance] = useLazyGetBalanceQuery();
@@ -32,7 +34,7 @@ export default ({ }: PageProps) => {
       <Container className="container 2xl:mx-auto px-[20px] pt-[30px] max-w-[100%] 2xl:max-w-screen-2xl 3xl:max-w-screen-3xl mx-auto mb-[100px]" padding={false}>
         <div className="flex flex-col lg:flex-row gap-[40px]">
           <div className="flex-1">
-            <BankItem icon={'money'} title={'Virtuális bank'} amount={data.balance} actions={[
+            <BankItem icon={'money'} title={'Virtuális bank'} amount={bank?.balance} actions={[
               {
                 icon: 'arrow_up',
                 title: 'Virtuális egyenleg feltöltés',

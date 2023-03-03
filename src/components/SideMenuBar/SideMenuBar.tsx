@@ -171,7 +171,7 @@ export const SideMenuBar = ({}: SideMenuBarProps): JSX.Element => {
             className="object-cover rounded-full w-[95px] h-[95px] cursor-pointer object-center "
           />
         </div>
-        <div className="mt-[20px] font-semibold text-lg">{customer.name}</div>
+        <div className="mt-[20px] font-semibold text-lg">{customer?.nickname ?? customer.name}</div>
         <div className="text-rgba-white-05 text-xs">
           {customer.isPremium !== null &&
             (customer.isPremium ? "Prémium csomag" : "Ingyenes csomag")}

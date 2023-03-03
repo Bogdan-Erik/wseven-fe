@@ -30,6 +30,7 @@ export interface PageProps {}
 
 export default ({}: PageProps) => {
   const [showBankrollModal, setShowBankrollModal] = useState(false);
+  const bank = useSelector((state: RootState) => state.bank);
   const { isLoading, data, refetch } = useGetActiveMatchesQuery({
     sportId: null,
   });
@@ -244,7 +245,7 @@ export default ({}: PageProps) => {
                 isDashboard
                 icon={"money"}
                 title={"Virtuális bank"}
-                amount={bankData?.balance}
+                amount={bank?.balance}
                 actions={[]}
               />
             </div>

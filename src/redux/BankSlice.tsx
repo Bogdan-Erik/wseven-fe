@@ -190,7 +190,8 @@ export const bankApiSlice = hasuraApiSlice.injectEndpoints({
 export const {
   useLazyGetBalanceQuery,
   useGetBankQuery,
-  useUploadBankMutation
+  useUploadBankMutation,
+  useGetBalanceQuery,
   // useAddTicketForCostumerMutation,
   // useLazyGetTicketsByDateRangeQuery,
 } = bankApiSlice;

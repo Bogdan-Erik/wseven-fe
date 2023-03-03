@@ -53,7 +53,7 @@ export const TicketItem = ({
         </div>
         <div className=" flex flex-col justify-center mx-4">
           <div className={`${isWinner ? 'bg-light-green' : 'bg-light-red'} rounded-md px-5 py-[3px] text-xs flex flex-row justify-start items-center`}>
-            <span className={`font-icomoon text-lg ${isWinner ? 'text-green icon-success' : 'text-red icon-error text-lg'} text-sm mr-2`}> </span>{isWinner ? 'Nyertes tipp' : 'Vesztes tipp'}<span className="ml-2 font-semibold">{isUserPlacedBet ? Math.round(winningPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") : winningPrice} {isUserPlacedBet ? 'Ft' : 'egység'}</span>
+            <span className={`font-icomoon text-lg ${isWinner ? 'text-green icon-success' : 'text-red icon-error text-lg'} text-sm mr-2`}> </span>{isWinner ? 'Nyertes tipp' : 'Vesztes tipp'}<span className="ml-2 font-semibold">{winningPrice} egység</span>
           </div>
         </div>
         
