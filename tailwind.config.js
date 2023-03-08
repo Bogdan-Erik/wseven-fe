@@ -1,8 +1,12 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors')
+
 module.exports = {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
+    "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
   ],
   theme: {
     extend: {
@@ -38,7 +42,9 @@ module.exports = {
       'transparent': 'transparent',
       'rgba-grey': 'rgba(255, 255, 255, 0.6)',
       'rgba-grey-01': 'rgba(255, 255, 255, 0.1)',
+      'rgba-grey-015': 'rgba(255, 255, 255, 0.15)',
       'rgba-grey-02': 'rgba(255, 255, 255, 0.2)',
+      'rgba-grey-003': 'rgba(255, 255, 255, 0.3)',
       'rgba-grey-06': 'rgba(255, 255, 255, 0.6)',
       'rgba-grey-007': 'rgba(255, 255, 255, 0.07)',
       'rgba-grey-08': 'rgba(255, 255, 255, 0.8)',
@@ -50,11 +56,26 @@ module.exports = {
       'rgba-transparent-02': 'rgba(0, 0, 0, 0.1)',
       'gradient-blue-start': '#22C2CC',
       'gradient-purple-end': '#C900FF',
-      'whitesmoke': '#d9d9d9'
+      'dark-blue': "rgba(0, 0, 18, 0.7);",
+      'whitesmoke': '#d9d9d9',
+      'gradient-1': 'rgba(16, 51, 89, 0.95)',
+      'gradient-2': 'rgba(56, 14, 94, 0.95)',
+      'dark-overlay-01': 'rgba(0, 0, 18, 0.5)',
+      'dark-overlay': 'rgba(0, 0, 18, 0.7)',
+      'neon': '#CCFF02',
+      'light-white-second': 'rgba(255, 255, 255, 0.2)',
+      'light-yellow': '#CCFF0233',
+      'light-neon': '#CCFF0233',
+      stone: colors.warmGray,
+      sky: colors.lightBlue,
+      neutral: colors.trueGray,
+      gray: colors.coolGray,
+      slate: colors.blueGray,
+      violet: colors.violet
 
     },
     fontFamily: {
-      'poppins': ['Poppins'],
+      'poppins': ['Poppins', 'sans-serif'],
       'body': ['"Poppins"'],
       'icomoon': ['icomoon']
     },
@@ -74,6 +95,19 @@ module.exports = {
       '6xl': '4rem',
       '7xl': '15rem',
     },
+    fontWeight: {
+      thin: '100',
+      hairline: '100',
+      extralight: '200',
+      light: '300',
+      normal: '400',
+      medium: '500',
+      semibold: '600',
+      bold: '700',
+      extrabold: '800',
+      'extra-bold': '800',
+      black: '900',
+    },
     container: {
 
       // default breakpoints but with 40px removed
@@ -86,5 +120,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }

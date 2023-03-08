@@ -10,7 +10,7 @@ export interface IconProps {
   iconClasses?: string,
 }
 
-export const Icon = ({ icon, size = 'text-sm', color = '#ffffff', isGradient, iconClasses }: IconProps): JSX.Element => {
+export const Icon = ({ icon, size = 'text-sm', color = '#ffffffcc', isGradient, iconClasses }: IconProps): JSX.Element => {
 
   const iconClass = twMerge(
     `font-icomoon icon icon-${icon} ${size} text-[${color}] ${isGradient ? ' gradient-icon' : ''}  ${iconClasses}`,

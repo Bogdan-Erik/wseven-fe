@@ -51,7 +51,7 @@
 
 .mobile-shadow {
   @apply h-[200px] w-full absolute bottom-[0px] left-[0px] z-[10] md:z-[2];
-  background: linear-gradient(180deg, rgba(0, 0, 18, 0) 0%, rgba(0, 0, 18, 0.8) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 18, 0) 0%, rgb(0 0 18 / 21%) 100%);
   border-radius: 6px;
 }
 

@@ -1,0 +1,1 @@
+export { TipStatusBadge } from './TipStatusBadge'

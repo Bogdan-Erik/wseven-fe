@@ -1,0 +1,19 @@
+.next-matches {
+  background: linear-gradient(123.16deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+}
+
+.event.football {
+  background: linear-gradient(135deg, #22C2CC 19.79%, #C900FF 100%);
+  border-radius: 6px;
+  border: none !important;
+}
+
+.event.tennis {
+  background: linear-gradient(135deg, #CCFF02 5.2%, #00FFE0 100%);
+  border-radius: 6px;
+  border: none !important;
+}
+
+.event {
+  @apply p-[12px] bg-opacity-75;
+}

@@ -8,8 +8,8 @@ export interface CountdownTimerProps {
 
 const ExpiredNotice = () => {
   return (
-    <div className="expired-notice">
-      <span>Vége a mérkőzésnek!</span>
+    <div className="text-[36px] font-[700] text-center">
+      <span>Lejárt elemzés</span>
     </div>
   );
 };
@@ -45,7 +45,7 @@ const DateTimeDisplay = ({ value, type, isDanger } : {value: string, type: strin
 export const CountdownTimer = ({ targetDate }: {targetDate: any}) => {
   const [days, hours, minutes, seconds] = useCountdown(targetDate);
 // @ts-ignore 
-  if (days + hours + minutes + seconds <= 0) {
+  if ((parseInt(days) + parseInt(hours) + parseInt(minutes) + parseInt(seconds)) <= 0) {
     return <ExpiredNotice />;
   } else {
     return (

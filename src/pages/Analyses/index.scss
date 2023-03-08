@@ -7,7 +7,6 @@
   .header-bg {
     background-size: cover;
     background-repeat: no-repeat;
-    height: auto;
     @apply w-full bg-center;
 
     .smoke {
@@ -47,6 +46,19 @@
 
   }
 
+  .analyze-content {
+    ul{
+      list-style-type: initial !important;
+      padding: revert !important;
+      margin: revert !important;
+    }
+
+    ol {
+      list-style-type: auto !important;
+      padding: revert !important;
+      margin: revert !important;
+    }
+  }
   .missing {
     .missing-item {
       @apply flex flex-row mb-[10px];
@@ -93,11 +105,11 @@
   }
 
   .holder-space {
-    @apply mb-[50px];
+    @apply mb-[30px];
   }
 
   .holder-space-top {
-    @apply mt-[30px];
+    //@apply mt-[30px];
   }
 
   @media only screen and (max-width: 1750px) and (min-width: 1520px) {

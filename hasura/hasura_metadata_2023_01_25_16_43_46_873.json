@@ -1,0 +1,1242 @@
+{
+  "resource_version": 129,
+  "metadata": {
+    "version": 3,
+    "sources": [
+      {
+        "name": "W7Tips",
+        "kind": "postgres",
+        "tables": [
+          {
+            "table": {
+              "name": "analyse_transactions",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "analyasis",
+                "using": {
+                  "foreign_key_constraint_on": "analyse_id"
+                }
+              },
+              {
+                "name": "customer",
+                "using": {
+                  "foreign_key_constraint_on": "customer_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "premium",
+                "permission": {
+                  "columns": [
+                    "analyse_id",
+                    "customer_id"
+                  ],
+                  "filter": {
+                    "customer_id": {
+                      "_eq": "X-Hasura-User-Id"
+                    }
+                  }
+                }
+              },
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "analyse_id",
+                    "customer_id"
+                  ],
+                  "filter": {
+                    "customer_id": {
+                      "_eq": "X-Hasura-User-Id"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "analyses",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "match",
+                "using": {
+                  "foreign_key_constraint_on": "match_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "analyse_transactions",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "analyse_id",
+                    "table": {
+                      "name": "analyse_transactions",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "tips",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "analyses_id",
+                    "table": {
+                      "name": "tips",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "premium",
+                "permission": {
+                  "columns": [
+                    "analyses",
+                    "id",
+                    "is_premium",
+                    "match_id"
+                  ],
+                  "filter": {}
+                }
+              },
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "analyses",
+                    "id",
+                    "is_premium",
+                    "match_id"
+                  ],
+                  "filter": {
+                    "_or": [
+                      {
+                        "is_premium": {
+                          "_eq": false
+                        }
+                      },
+                      {
+                        "analyse_transactions": {
+                          "customer_id": {
+                            "_eq": "X-Hasura-User-Id"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "challenge_participants",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "challenge",
+                "using": {
+                  "foreign_key_constraint_on": "challenge_id"
+                }
+              },
+              {
+                "name": "user",
+                "using": {
+                  "foreign_key_constraint_on": "user_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "challenges",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "package",
+                "using": {
+                  "foreign_key_constraint_on": "package_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "challenge_participants",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "challenge_id",
+                    "table": {
+                      "name": "challenge_participants",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "customer_tips",
+              "schema": "public"
+            }
+          },
+          {
+            "table": {
+              "name": "customers",
+              "schema": "public"
+            },
+            "array_relationships": [
+              {
+                "name": "analyse_transactions",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "customer_id",
+                    "table": {
+                      "name": "analyse_transactions",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "subscriptions",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "customer_id",
+                    "table": {
+                      "name": "subscriptions",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "tokens",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "customer_id",
+                    "table": {
+                      "name": "tokens",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "failed_jobs",
+              "schema": "public"
+            }
+          },
+          {
+            "table": {
+              "name": "league_player",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "league",
+                "using": {
+                  "foreign_key_constraint_on": "league_id"
+                }
+              },
+              {
+                "name": "player",
+                "using": {
+                  "foreign_key_constraint_on": "player_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "league_team",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "league",
+                "using": {
+                  "foreign_key_constraint_on": "league_id"
+                }
+              },
+              {
+                "name": "team",
+                "using": {
+                  "foreign_key_constraint_on": "team_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "leagues",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "sport",
+                "using": {
+                  "foreign_key_constraint_on": "sport_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "league_players",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "league_id",
+                    "table": {
+                      "name": "league_player",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "league_teams",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "league_id",
+                    "table": {
+                      "name": "league_team",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "matches",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "league_id",
+                    "table": {
+                      "name": "matches",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "premium",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "image",
+                    "name",
+                    "sport_id"
+                  ],
+                  "filter": {}
+                }
+              },
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "image",
+                    "name",
+                    "sport_id"
+                  ],
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "marketplace_items",
+              "schema": "public"
+            }
+          },
+          {
+            "table": {
+              "name": "match_datas",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "match",
+                "using": {
+                  "foreign_key_constraint_on": "match_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "premium",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "key",
+                    "match_id",
+                    "side",
+                    "value"
+                  ],
+                  "filter": {}
+                }
+              },
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "key",
+                    "match_id",
+                    "side",
+                    "value"
+                  ],
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "match_missings",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "match",
+                "using": {
+                  "foreign_key_constraint_on": "match_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "matches",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "awayPlayer",
+                "using": {
+                  "foreign_key_constraint_on": "away_player_id"
+                }
+              },
+              {
+                "name": "awayTeam",
+                "using": {
+                  "foreign_key_constraint_on": "away_team_id"
+                }
+              },
+              {
+                "name": "homePlayer",
+                "using": {
+                  "foreign_key_constraint_on": "home_player_id"
+                }
+              },
+              {
+                "name": "homeTeam",
+                "using": {
+                  "foreign_key_constraint_on": "home_team_id"
+                }
+              },
+              {
+                "name": "league",
+                "using": {
+                  "foreign_key_constraint_on": "league_id"
+                }
+              },
+              {
+                "name": "sport",
+                "using": {
+                  "foreign_key_constraint_on": "sport_id"
+                }
+              },
+              {
+                "name": "tv_channel",
+                "using": {
+                  "foreign_key_constraint_on": "tv_channel_id"
+                }
+              },
+              {
+                "name": "weather",
+                "using": {
+                  "foreign_key_constraint_on": "weather_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "analyses",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "match_id",
+                    "table": {
+                      "name": "analyses",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "match_datas",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "match_id",
+                    "table": {
+                      "name": "match_datas",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "match_missings",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "match_id",
+                    "table": {
+                      "name": "match_missings",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "premium",
+                "permission": {
+                  "columns": [
+                    "analysis",
+                    "away_image",
+                    "away_player_id",
+                    "away_score",
+                    "away_team_id",
+                    "date_end",
+                    "date_start",
+                    "display",
+                    "field_type",
+                    "home_image",
+                    "home_player_id",
+                    "home_score",
+                    "home_team_id",
+                    "id",
+                    "is_after_penalties",
+                    "is_analysis_premium",
+                    "is_closed",
+                    "is_daily",
+                    "is_ot",
+                    "league_id",
+                    "location",
+                    "match_cover",
+                    "sport_id",
+                    "tv_channel_id",
+                    "type",
+                    "weather_id"
+                  ],
+                  "filter": {
+                    "display": {
+                      "_eq": true
+                    }
+                  }
+                }
+              },
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "analysis",
+                    "away_image",
+                    "away_player_id",
+                    "away_team_id",
+                    "date_end",
+                    "date_start",
+                    "display",
+                    "field_type",
+                    "home_image",
+                    "home_player_id",
+                    "home_team_id",
+                    "id",
+                    "is_after_penalties",
+                    "is_analysis_premium",
+                    "is_closed",
+                    "is_daily",
+                    "league_id",
+                    "location",
+                    "match_cover",
+                    "sport_id",
+                    "tv_channel_id",
+                    "type",
+                    "weather_id"
+                  ],
+                  "filter": {
+                    "display": {
+                      "_eq": true
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "media",
+              "schema": "public"
+            }
+          },
+          {
+            "table": {
+              "name": "migrations",
+              "schema": "public"
+            }
+          },
+          {
+            "table": {
+              "name": "orders",
+              "schema": "public"
+            },
+            "array_relationships": [
+              {
+                "name": "transactions",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "order_id",
+                    "table": {
+                      "name": "transactions",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "packages",
+              "schema": "public"
+            },
+            "array_relationships": [
+              {
+                "name": "challenges",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "package_id",
+                    "table": {
+                      "name": "challenges",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "posts",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "package_id",
+                    "table": {
+                      "name": "posts",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "password_resets",
+              "schema": "public"
+            }
+          },
+          {
+            "table": {
+              "name": "personal_access_tokens",
+              "schema": "public"
+            }
+          },
+          {
+            "table": {
+              "name": "player_datas",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "player",
+                "using": {
+                  "foreign_key_constraint_on": "player_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "players",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "sport",
+                "using": {
+                  "foreign_key_constraint_on": "sport_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "league_players",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "player_id",
+                    "table": {
+                      "name": "league_player",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "matches",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "away_player_id",
+                    "table": {
+                      "name": "matches",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "matchesByHomePlayerId",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "home_player_id",
+                    "table": {
+                      "name": "matches",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "player_datas",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "player_id",
+                    "table": {
+                      "name": "player_datas",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "premium",
+                "permission": {
+                  "columns": [
+                    "first_name",
+                    "id",
+                    "image",
+                    "last_name",
+                    "sport_id",
+                    "type"
+                  ],
+                  "filter": {}
+                }
+              },
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "first_name",
+                    "id",
+                    "image",
+                    "last_name",
+                    "sport_id",
+                    "type"
+                  ],
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "posts",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "package",
+                "using": {
+                  "foreign_key_constraint_on": "package_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "sessions",
+              "schema": "public"
+            }
+          },
+          {
+            "table": {
+              "name": "settings",
+              "schema": "public"
+            }
+          },
+          {
+            "table": {
+              "name": "sports",
+              "schema": "public"
+            },
+            "array_relationships": [
+              {
+                "name": "leagues",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "sport_id",
+                    "table": {
+                      "name": "leagues",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "matches",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "sport_id",
+                    "table": {
+                      "name": "matches",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "players",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "sport_id",
+                    "table": {
+                      "name": "players",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "teams",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "sport_id",
+                    "table": {
+                      "name": "teams",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "premium",
+                "permission": {
+                  "columns": [
+                    "color",
+                    "id",
+                    "name",
+                    "type"
+                  ],
+                  "filter": {}
+                }
+              },
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "color",
+                    "id",
+                    "name",
+                    "type"
+                  ],
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "start_subscriptions",
+              "schema": "public"
+            }
+          },
+          {
+            "table": {
+              "name": "subscription_prices",
+              "schema": "public"
+            },
+            "array_relationships": [
+              {
+                "name": "subscriptions",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "subscription_price_id",
+                    "table": {
+                      "name": "subscriptions",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "subscriptions",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "customer",
+                "using": {
+                  "foreign_key_constraint_on": "customer_id"
+                }
+              },
+              {
+                "name": "subscription_price",
+                "using": {
+                  "foreign_key_constraint_on": "subscription_price_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "team_datas",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "team",
+                "using": {
+                  "foreign_key_constraint_on": "team_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "teams",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "sport",
+                "using": {
+                  "foreign_key_constraint_on": "sport_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "league_teams",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "team_id",
+                    "table": {
+                      "name": "league_team",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "matches",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "away_team_id",
+                    "table": {
+                      "name": "matches",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "matchesByHomeTeamId",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "home_team_id",
+                    "table": {
+                      "name": "matches",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "team_datas",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "team_id",
+                    "table": {
+                      "name": "team_datas",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "premium",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "logo",
+                    "name",
+                    "sport_id"
+                  ],
+                  "filter": {}
+                }
+              },
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "logo",
+                    "name",
+                    "sport_id"
+                  ],
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "telescope_entries",
+              "schema": "public"
+            },
+            "array_relationships": [
+              {
+                "name": "telescope_entries_tags",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "entry_uuid",
+                    "table": {
+                      "name": "telescope_entries_tags",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "telescope_entries_tags",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "telescope_entry",
+                "using": {
+                  "foreign_key_constraint_on": "entry_uuid"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "telescope_monitoring",
+              "schema": "public"
+            }
+          },
+          {
+            "table": {
+              "name": "tips",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "analyasis",
+                "using": {
+                  "foreign_key_constraint_on": "analyses_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "premium",
+                "permission": {
+                  "columns": [
+                    "analyses_id",
+                    "id",
+                    "name",
+                    "odds",
+                    "rating",
+                    "tet"
+                  ],
+                  "filter": {}
+                }
+              },
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "analyses_id",
+                    "id",
+                    "name",
+                    "odds",
+                    "rating",
+                    "tet"
+                  ],
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "tokens",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "customer",
+                "using": {
+                  "foreign_key_constraint_on": "customer_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "transactions",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "order",
+                "using": {
+                  "foreign_key_constraint_on": "order_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "tv_channels",
+              "schema": "public"
+            },
+            "array_relationships": [
+              {
+                "name": "matches",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "tv_channel_id",
+                    "table": {
+                      "name": "matches",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "users",
+              "schema": "public"
+            },
+            "array_relationships": [
+              {
+                "name": "challenge_participants",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "user_id",
+                    "table": {
+                      "name": "challenge_participants",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "weathers",
+              "schema": "public"
+            },
+            "array_relationships": [
+              {
+                "name": "matches",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "weather_id",
+                    "table": {
+                      "name": "matches",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "premium",
+                "permission": {
+                  "columns": [
+                    "name"
+                  ],
+                  "filter": {}
+                }
+              },
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "name"
+                  ],
+                  "filter": {}
+                }
+              }
+            ]
+          }
+        ],
+        "configuration": {
+          "connection_info": {
+            "database_url": "postgres://postgres:postgrespassword@postgres:5432/postgres",
+            "isolation_level": "read-committed",
+            "use_prepared_statements": false
+          }
+        },
+        "customization": {
+          "naming_convention": "hasura-default"
+        }
+      }
+    ]
+  }
+}

@@ -16,7 +16,6 @@ export const BillDatasForm = () => {
     onSubmit: async (values) => {
       //const { password, firstName, lastName } = values
 
-      console.log('posted');
     },
   })
   const { errors, touched } = formik

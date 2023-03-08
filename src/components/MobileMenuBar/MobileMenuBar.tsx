@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from "framer-motion"
 export interface MobileMenuBarProps {
   visible?: boolean
 }
-const MenuItem = ({ isActive, icon, link, onClick }: { isActive?: boolean, icon: string, link?: string, onClick?: () => void; }) => {
+const MenuItem = ({ isActive, icon, link, onClick, iconSize }: { isActive?: boolean, icon: string, link?: string, iconSize?:string, onClick?: () => void;  }) => {
   const menuItemClass = twMerge(`
   w-[60px] h-[60px] flex justify-center items-center cursor-pointer ${isActive ? 'active' : ''}
   `)
@@ -18,12 +18,12 @@ const MenuItem = ({ isActive, icon, link, onClick }: { isActive?: boolean, icon:
       {link ? (
         <Link to={link ?? '/'}>
           <div className={menuItemClass} onClick={onClick}>
-            <Icon icon={icon} size={'text-2xl'} color={"#ffffff"} iconClasses="text-rgba-grey-08" isGradient={false} />
+            <Icon icon={icon} size={'text-2xl'} color={"#ffffff"} iconClasses={`text-rgba-grey-08 ${iconSize ?? ''}`} isGradient={false} />
           </div>
         </Link>
       ) : (
         <div className={menuItemClass} onClick={onClick}>
-          <Icon icon={icon} size={'text-2xl'} color={"#ffffff"} iconClasses="text-rgba-grey-08" isGradient={false} />
+          <Icon icon={icon} size={'text-2xl'} color={"#ffffff"} iconClasses={`text-rgba-grey-08 ${iconSize ?? ''}`}  isGradient={false} />
         </div>
       )}
     </div>
@@ -78,9 +78,9 @@ export const MobileMenuBar = ({ visible }: MobileMenuBarProps): JSX.Element => {
       <div className="mobile-bottom-menu-bar">
         <div className="grid grid-cols-5 gap-2">
           <MenuItem icon='house' link={'/dashboard'} isActive={location.pathname === '/dashboard'} />
-          <MenuItem icon='stat-bordered' link={'/statistics'} isActive={location.pathname === '/statistics'} />
-          <MenuItem icon='calendar' link={'/calendar'} isActive={location.pathname === '/calendar'} />
-          <MenuItem icon='sign' link={'/challenges'} isActive={location.pathname === '/challenges'} />
+          <MenuItem icon='stat-bordered' link={'/analyses-overview'} isActive={location.pathname === '/analyses-overview'} />
+          <MenuItem icon='calendar' link={'/calendar'} isActive={location.pathname === '/calendar'} iconSize="text-[28px]" />
+          <MenuItem icon='ticket-new' link={'/tickets'} isActive={location.pathname === '/tickets'} />
           <MenuItem icon='hamburger' onClick={() => setShowMenu(true)} isActive={false} />
         </div>
       </div>
