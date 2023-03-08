@@ -30,8 +30,7 @@ import { CookiesProvider } from 'react-cookie';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import ProtectedRoute from './utils/ProtectedRoute';
 import { ToastContainer } from 'react-toastify'
-import * as Sentry from "@sentry/react";
-import { BrowserTracing } from "@sentry/tracing";
+
 //Auth
 import LoginPage from './pages/Auth/Login';
 import { setAuthToken } from './redux/authSlice';
@@ -45,21 +44,16 @@ import moment from 'moment';
 
 import 'moment/dist/locale/hu';
 
-Sentry.init({
-  dsn: "https://58e5c9225d8b438490c27163a678d0f7@o4504804691738624.ingest.sentry.io/4504804694032384",
-  integrations: [new BrowserTracing()],
-  tracesSampleRate: 1.0,
-});
 
 const App = () => {
   moment.locale('hu') // can pass in 'en', 'fr', or 'es'
 
   const token = store.getState().auth.accessToken
-  const workerRef = useRef<SharedWorker>()
+ // const workerRef = useRef<SharedWorker>()
   const navigate = useNavigate();
 
 
-  useEffect(() => {
+  /*useEffect(() => {
     const accessToken = store.getState().auth.accessToken
     const refreshToken = store.getState().auth.refreshToken
 
@@ -122,7 +116,7 @@ const App = () => {
         workerRef.current?.port.postMessage({ mutation: 'CLOSE' })
       })
     }
-  }, [token])
+  }, [token])*/
 
   if (typeof window === 'undefined') {
     return <></>
