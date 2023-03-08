@@ -22,7 +22,7 @@ export const Missings = ({
 
   const variants = {
     red_card: 3,
-    yellow_card: 2,
+    easy_injury: 2,
     injury: 1,
 
   }
