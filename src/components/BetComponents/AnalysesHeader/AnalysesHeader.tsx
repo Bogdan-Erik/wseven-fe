@@ -9,6 +9,9 @@ import { motion } from 'framer-motion';
 import { url } from 'inspector';
 import { format } from 'date-fns';
 import moment from 'moment';
+import { Age } from '../../MatchComponents/Age/Age';
+import { Hand } from '../../MatchComponents/Hand/Hand';
+import { Prize } from '../../MatchComponents/Prize/Prize';
 
 export interface ShapeProps {
   type: string
@@ -65,8 +68,8 @@ export interface ParticipantObjectProps {
   lastMatch: LastMatchProps
   ranking: RankingProps
   missings?: MissingsProps[]
-  ageProps?: AgeProps
-  handProps?: HandProps
+  age?: AgeProps
+  hand?: HandProps
   careerPrizes?: CareerPrizesProps
 }
 
@@ -108,18 +111,18 @@ export const AnalysesHeader = ({
   const THREE_DAYS_IN_MS = new Date(matchDate.date).getTime();
 
   const dateTimeAfterThreeDays = THREE_DAYS_IN_MS;
-
+console.log(sport.value)
   const colorScheme = sport.color;
   return (
     <div>
-      <div className="header-bg overflow-hidden relative min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]">
-        <div className="header-bg absolute min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]" style={{background: `url(${background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', filter: 'blur(5px)'}}></div>
-        <div className="header-bg absolute min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]" ></div>
-        <div className={`${colorScheme}-scheme bg-opacity-75 r header-bg absolute min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px] bg-black opacity-[.9]`}></div>
+      <div className="header-bg overflow-hidden relative min-h-[593px] h-full lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]">
+        <div className="header-bg absolute min-h-[593px] h-full lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]" style={{background: `url(${background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', filter: 'blur(5px)'}}></div>
+        <div className="header-bg absolute min-h-[593px] h-full lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]" ></div>
+        <div className={`${colorScheme}-scheme h-full bg-opacity-75 r header-bg absolute min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px] bg-black opacity-[.9]`}></div>
         <div className={`elative min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]`}>
           <div className="smoke relative flex px-[30px] py-[30px] min-h-[593px] lg:min-h-[405px] 2xl:min-h-[650px] 3xl:min-h-[650px]">
             <video src="https://w7tips.fra1.digitaloceanspaces.com/videos/smokebg.mp4" playsInline loop autoPlay muted></video>
-            <motion.div animate={{ opacity: 1 }} transition={{ delay: 1 }} className="sidebar left-side z-[10]  left-[30px] top-0 opacity-0" >
+            <motion.div animate={{ opacity: 1 }} transition={{ delay: 1 }} className="sidebar left-side z-[10] left-[30px] top-0 opacity-0" >
 
               {(homeObject?.shape && showDatas) && (
                 <Statistics datas={homeObject.shape} position={'left'} />
@@ -133,6 +136,20 @@ export const AnalysesHeader = ({
               {(homeObject?.ranking && showDatas) && (
                 <LeaguePosition data={homeObject.ranking} position={'left'} />
               )}
+
+
+              {(homeObject?.age && showDatas) && (
+                <Age data={homeObject.age} position={'left'} />
+              )}
+
+              {(homeObject?.hand && showDatas) && (
+                <Hand data={homeObject.hand} position={'left'} />
+              )}
+              
+              {(homeObject?.careerPrizes && showDatas) && (
+                <Prize data={homeObject.careerPrizes} position={'left'} />
+              )}
+              
 
               {(homeObject?.missings && showDatas) && (
                 <Missings data={homeObject.missings} position={'left'} />
@@ -151,6 +168,19 @@ export const AnalysesHeader = ({
 
               {(awayObject?.ranking && showDatas) && (
                 <LeaguePosition data={awayObject.ranking} position={'right'} />
+              )}
+
+              
+              {(awayObject?.age && showDatas) && (
+                <Age data={awayObject.age} position={'right'} />
+              )}
+
+              {(awayObject?.hand && showDatas) && (
+                <Hand data={awayObject.hand} position={'right'} />
+              )}
+
+              {(awayObject?.careerPrizes && showDatas) && (
+                <Prize data={awayObject.careerPrizes} position={'right'} />
               )}
 
               {(awayObject?.missings && showDatas) && (
@@ -280,6 +310,19 @@ export const AnalysesHeader = ({
                 <LeaguePosition data={homeObject.ranking} position={'left'} />
               )}
 
+              {(homeObject?.age && showDatas) && (
+                <Age data={homeObject.age} position={'left'} />
+              )}
+
+              {(homeObject?.hand && showDatas) && (
+                <Hand data={homeObject.hand} position={'left'} />
+              )}
+
+               
+              {(homeObject?.careerPrizes && showDatas) && (
+                <Prize data={homeObject.careerPrizes} position={'left'} />
+              )}
+              
 
               {homeObject?.missings && (
                 <Missings data={homeObject.missings} position={'left'} />
@@ -297,6 +340,19 @@ export const AnalysesHeader = ({
 
               {awayObject.ranking && (
                 <LeaguePosition data={awayObject.ranking} position={'right'} />
+              )}
+
+              {(awayObject?.age && showDatas) && (
+                <Age data={awayObject.age} position={'right'} />
+              )}
+
+              {(awayObject?.hand && showDatas) && (
+                <Hand data={awayObject.hand} position={'right'} />
+              )}
+
+              
+              {(awayObject?.careerPrizes && showDatas) && (
+                <Prize data={awayObject.careerPrizes} position={'right'} />
               )}
 
               {awayObject?.missings && (

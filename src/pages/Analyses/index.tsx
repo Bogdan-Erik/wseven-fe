@@ -51,6 +51,9 @@ export default ({ }: PageProps) => {
     lastMatch: MatchDataGetter(data.matchDatas, 'last_result', 'home'),
     ranking: MatchDataGetter(data.matchDatas, 'ranking', 'home'),
     missings: MatchDataGetter(data.matchDatas, 'missings', 'home'),
+    age: MatchDataGetter(data.matchDatas, 'age', 'home'),
+    hand: MatchDataGetter(data.matchDatas, 'hand', 'home'),
+    careerPrizes: MatchDataGetter(data.matchDatas, 'career_prize', 'home'),
   }
 
   const awayObject = {
@@ -63,6 +66,9 @@ export default ({ }: PageProps) => {
     lastMatch: MatchDataGetter(data.matchDatas, 'last_result', 'away'),
     ranking: MatchDataGetter(data.matchDatas, 'ranking', 'away'),
     missings: MatchDataGetter(data.matchDatas, 'missings', 'away'),
+    age: MatchDataGetter(data.matchDatas, 'age', 'away'),
+    hand: MatchDataGetter(data.matchDatas, 'hand', 'away'),
+    careerPrizes: MatchDataGetter(data.matchDatas, 'career_prize', 'away'),
   }
 
   return (

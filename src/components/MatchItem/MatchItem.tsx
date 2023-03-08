@@ -85,7 +85,7 @@ export const MatchItem = ({
               <span className="font-icomoon icon-stat text-green"> </span>{parseFloat(odds).toFixed(2)}
             </div>
           </div>
-          <div className="flex flex-4  flex-col justify-center text-sm">{'tippString'}</div>
+          <div className="flex flex-4  flex-col justify-center text-sm">{tippString}</div>
           {/*<div className="flex flex-col justify-center">A nap tippje</div>*/}
         </div>
         <div className=" flex flex-col justify-center mx-4">

@@ -7,7 +7,6 @@
   .header-bg {
     background-size: cover;
     background-repeat: no-repeat;
-    height: auto;
     @apply w-full bg-center;
 
     .smoke {
@@ -93,11 +92,11 @@
   }
 
   .holder-space {
-    @apply mb-[50px];
+    @apply mb-[30px];
   }
 
   .holder-space-top {
-    @apply mt-[30px];
+   // @apply mt-[30px];
   }
 
   @media only screen and (max-width: 1750px) and (min-width: 1520px) {
