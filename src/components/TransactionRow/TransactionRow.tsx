@@ -23,7 +23,7 @@ export const TransactionRow = ({
   date,
   isSecondary = false
 }: TransactionRowProps): JSX.Element => {
-  const mainClass = twMerge(`hidden xl:flex cursor-pointer md:cursor-initial w-full text-white px-[15px] py-[20px] ${isSecondary ? 'bg-rgba-transparent-02' : 'bg-rgba-grey-007'}`)
+  const mainClass = twMerge(`hidden xl:flex  md:cursor-initial w-full text-white px-[15px] py-[20px] ${isSecondary ? 'bg-rgba-transparent-02' : 'bg-rgba-grey-007'}`)
   return (
     <>
       <div className={mainClass}>

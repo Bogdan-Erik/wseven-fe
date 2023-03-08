@@ -80,11 +80,11 @@
   @apply mr-[6px] text-2xl;
 }
 
-.secondary-wrapper .menu-bar > div:hover {
+.secondary-wrapper .menu-bar > div:hover, .secondary-wrapper .menu-bar > div.active {
   @apply text-white;
 }
 
-.secondary-wrapper .menu-bar > div:hover:after {
+.secondary-wrapper .menu-bar > div:hover:after,  .secondary-wrapper .menu-bar > div.active:after{
   @apply h-[3px] w-full absolute left-0 bottom-0;
   content: " ";
   background: linear-gradient(135deg, #22C2CC 19.79%, #C900FF 100%);
@@ -97,4 +97,18 @@
   to {
     transform: rotate(180deg);
   }
+}
+
+.scrollable-noti::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-noti::-webkit-scrollbar-track {
+  background-color:  rgba(255, 255, 255, 0.2) !important;
+  border-radius: 100px;
+}
+
+.scrollable-noti::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  border-radius: 100px;
 }

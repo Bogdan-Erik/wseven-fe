@@ -10,6 +10,9 @@ export interface InputProps {
   placeholder?: string
   value?: string,
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  min?: any,
+  max?:any
+  step?:any
 }
 
 export const Input = ({
@@ -19,6 +22,9 @@ export const Input = ({
   disabled = false,
   placeholder,
   value = '',
+  min,
+  max,
+  step,
   ...props
 
 }: InputProps): JSX.Element => {
@@ -38,8 +44,11 @@ export const Input = ({
           ${error ? ' border-red' : ''}
           ${disabled ? ' opacity-50' : ''}
         `)}
+        min={min}
+        max={max}
         disabled={disabled}
         value={value}
+        step={step}
         {...props}
 
       />

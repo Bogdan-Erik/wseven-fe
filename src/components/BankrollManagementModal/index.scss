@@ -1,0 +1,14 @@
+.color-gradient {
+    @apply relative;
+    background: linear-gradient(123.16deg, #353544, #1C1C2C 100%);
+}
+
+.inactive {
+    border-radius: 6px;
+    padding: 2px;
+}
+.active-border {
+    background: linear-gradient(123.16deg, #22C2CC 0%, #C900FF 100%);
+    border-radius: 6px;
+    padding: 2px;
+}

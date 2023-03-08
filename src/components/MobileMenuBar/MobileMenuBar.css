@@ -5,7 +5,7 @@
 
 .mobile-bottom-menu-bar {
 
-  @apply  md:hidden bg-rgba-grey-dark-08 border-[1px] border-rgba-grey-01 fixed border-l-0 border-r-0 bottom-[0px] left-0 h-[60px] w-full z-[10];
+  @apply  md:hidden bg-rgba-grey-dark-08 border-[1px] border-rgba-grey-01 fixed border-l-0 border-r-0 bottom-[0px] left-0 h-[60px] w-full z-[12];
   backdrop-filter: blur(3px);
 }
 

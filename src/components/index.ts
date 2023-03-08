@@ -10,6 +10,7 @@ export { Icon } from './Icon'
 export { Title } from './Title'
 export { FunctionBox } from './FunctionBox'
 export { Modal } from './Modal'
+export { Modal as ActionModal } from './ActionModal'
 export { CookieConsent } from './CookieConsent'
 export { Container } from './Container'
 export { SideMenuBar } from './SideMenuBar'
@@ -20,6 +21,7 @@ export { SmallTitle } from './SmallTitle'
 export { BetRow } from './BetComponents/BetRow'
 export { OddsItem } from './BetComponents/OddsItem'
 export { AnalysesHeader} from './BetComponents/AnalysesHeader'
+export { PlayersGame } from './BetComponents/PlayersGame'
 export { BankItem } from './BankItem'
 export { TransactionRow } from './TransactionRow'
 export { BlackBox } from './BlackBox'
@@ -33,4 +35,14 @@ export { Loader } from './Loader'
 export { ToggleSwitch } from './ToggleSwitch'
 export { InformationItem } from './InformationItem'
 export { NewsItem } from './NewsItem'
+export { DataPaginator } from './DataPaginator'
+export { Statistics } from './MatchComponents/Statistics/Statistics';
+export { LastMatch } from './MatchComponents/LastMatch/LastMatch';
+export { LeaguePosition } from './MatchComponents/LeaguePosition/LeaguePosition';
+export { Missings } from './MatchComponents/Missings/Missings';
+export { NotificationItem } from './NotificationItem/NotificationItem';
+export { Ticket } from './Ticket';
+export { TicketItem } from './TicketItem';
+export { NextMatches } from './NextMatches'
+export { EmptyTicket } from './EmptyTicket'
 /* -- component: insert above here -- */

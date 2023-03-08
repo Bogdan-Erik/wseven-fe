@@ -37,7 +37,7 @@ export const StatisticsChart = ({ datas = [], customHolderClass }: StatisticsCha
   return (
     <div className={customClass}>
       <div className="holder h-[28px] flex flex-row justify-center items-center relative border-b-[1px] border-rgba-grey">
-        {datas.map((item: StatisticsChartDatas, key: number) => {
+        {datas?.map((item: StatisticsChartDatas, key: number) => {
           return <Element type={item.type} score={item.score} isLast={key === (datas.length - 1)} />
         })}
       </div>

@@ -25,10 +25,36 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 .icon-tiktok:before {
+  content: "\e93a";
+}
+.icon-pencil:before {
+  content: "\e939";
+}
+.icon-baller:before {
+  content: "\e937";
+}
+.icon-fisher:before {
+  content: "\e938";
+}
+.icon-back-arrow:before {
+  content: "\e936";
+}
+.icon-subscription-settings:before {
+  content: "\e934";
+}
+.icon-user-settings:before {
+  content: "\e935";
+}
+.icon-disturb:before {
+  content: "\e933";
+}
+.icon-ticket-new:before {
   content: "\e932";
 }
+/*.icon-tiktok:before {
+  content: "\e932";
+}*/
 .icon-NBA:before {
   content: "\e925";
 }

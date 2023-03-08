@@ -9,6 +9,11 @@ const directives = {
 };
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    proxy: {
+      '/api-v1' : 'http://localhost:8084'
+    }
+  },
   plugins: [react(), imagetools({
     include: '**/*.{heic,heif,avif,jpeg,jpg,png,tiff,webp,gif}*',
     defaultDirectives: (id) => {

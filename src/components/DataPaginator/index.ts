@@ -1,0 +1,1 @@
+export { DataPaginator } from './DataPaginator'
