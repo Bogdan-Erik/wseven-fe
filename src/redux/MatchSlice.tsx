@@ -87,7 +87,7 @@ export const matchSlice = createSlice({
 
 
           const tips = action.payload.map((item: any) => {
-            const winningPrice = (item.tet * item.odds) - item.tet;
+            const winningPrice = ((item.tet * item.odds) - item.tet).toFixed(2);
 
             return {
               matchId: item.analyasis.match.id,

@@ -36,7 +36,7 @@ export const ticketSlice = createSlice({
             const odds = calcOdds(oddsSource);
 
             //const winningPrice = item.customer_tickets[0]?.customer_ticket_tips ? ((item.customer_tickets[0]?.bet* parseFloat(odds))-item.customer_tickets[0]?.bet)  : ((item.suggested_bet * parseFloat(odds)) - item.suggested_bet);
-            const winningPrice = item.result === 1 ? ((item.suggested_bet * parseFloat(odds)) - item.suggested_bet) : item.suggested_bet;
+            const winningPrice = (item.result === 1 ? ((item.suggested_bet * parseFloat(odds)) - item.suggested_bet) : item.suggested_bet).toFixed(2);
 
             return {
               number: item.number,
