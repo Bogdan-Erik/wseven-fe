@@ -5,7 +5,14 @@ import { twMerge } from 'tailwind-merge';
 import { Icon } from '../Icon';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from "framer-motion"
-
+import { BankrollManagementModal } from '../BankrollManagementModal';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { useLazyGetSportCategoriesQuery } from "../../redux/MatchSlice";
+import { useRenewTokenMutation } from "../../redux/api/authApiSlice";
+import { setAuthToken } from "../../redux/authSlice";
+import { useLazyGetBalanceQuery } from '../../redux/BankSlice';
+import { useLazyGetMyselfQuery } from '../../redux/CustomerSlice';
 export interface MobileMenuBarProps {
   visible?: boolean
 }
@@ -46,7 +53,17 @@ const dropIn = {
 export const MobileMenuBar = ({ visible }: MobileMenuBarProps): JSX.Element => {
   const [showMenu, setShowMenu] = useState(false);
   const location = useLocation();
+  const [showBankrollModal, setShowBankrollModal] = useState(false);
+  const customer = useSelector((state: RootState) => state.customer);
+  const [trigger] = useLazyGetMyselfQuery();
+  const [triggerBalance] = useLazyGetBalanceQuery();
+  const [triggerSportCategories] = useLazyGetSportCategoriesQuery();
+  const [renewToken, { isLoading: updateIsLoading }] = useRenewTokenMutation();
 
+  useEffect(() => {
+    triggerBalance({});
+    trigger({});
+  }, [location]);
   useEffect(() => {
     // 👇 add class to body element
     if (showMenu) {
@@ -57,6 +74,16 @@ export const MobileMenuBar = ({ visible }: MobileMenuBarProps): JSX.Element => {
 
     }
   }, [showMenu])
+
+  useEffect(() => {
+    if (
+      customer.name &&
+      customer.playingType === null &&
+      customer.isPremium === true
+    ) {
+      setShowBankrollModal(true);
+    }
+  }, [customer, location]);
 
   const classNames = twMerge(`
   fixed h-full z-[20] top-[0px] pt-[50px] left-0 w-full px-[30px] md:hidden mobile-menu-b bg-rgba-grey-dark-09 overflow-auto pb-[50px]  ${showMenu ? '' : 'opacity-0'}
@@ -84,6 +111,12 @@ export const MobileMenuBar = ({ visible }: MobileMenuBarProps): JSX.Element => {
           <MenuItem icon='hamburger' onClick={() => setShowMenu(true)} isActive={false} />
         </div>
       </div>
+      <BankrollManagementModal
+        showModal={showBankrollModal}
+        setShowModal={setShowBankrollModal}
+        confirmAction={undefined}
+        isClosable={false}
+      />
     </div>
   )
 }

@@ -477,7 +477,7 @@ export const CustomModal = ({
       hasBg
         ? "bg-[url('/src/assets/images/ticket-modal/bg-secondary.png')] bg-cover	"
         : ""
-    } pt-[45px] relative rounded-md relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-[100%]  ${modalClasses}`
+    } pt-[45px] relative rounded-md max-h-full relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-[100%]  ${modalClasses}`
   );
 
   return (
