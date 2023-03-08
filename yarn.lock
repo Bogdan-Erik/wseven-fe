@@ -7047,6 +7047,11 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "2.1.1"
 
+feeder-react-feedback@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/feeder-react-feedback/-/feeder-react-feedback-0.0.6.tgz#78a2044da24da217f5fa760cdbf841474ebb8546"
+  integrity sha512-BdilgLncuOdoFFC0Da3wYMIYODSxZaH3vUS4662QUTzKOGrGrc63yDywRFw2x4b30Kie3kwD4z3rXcaTznq7Mg==
+
 fetch-retry@^5.0.2:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/fetch-retry/-/fetch-retry-5.0.3.tgz#edfa3641892995f9afee94f25b168827aa97fe3d"

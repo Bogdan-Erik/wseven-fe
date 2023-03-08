@@ -23,7 +23,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+    "paths": {
+      "*": ["./@types/*"]
+    }
   },
   "include": [
     "src/**/*",
@@ -33,5 +36,5 @@
     "**/*.test.*",
     "**/*.comptest.*",
     "src/components/**/*.docs.mdx"
-  ]
+  ],
 }

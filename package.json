@@ -53,6 +53,7 @@
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
     "faker": "^6.6.6",
+    "feeder-react-feedback": "^0.0.6",
     "formik": "^2.2.9",
     "framer-motion": "^7.3.5",
     "graphql": "^16.6.0",
