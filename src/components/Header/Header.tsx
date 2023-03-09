@@ -113,13 +113,19 @@ export const Header = ({
   };
 
   const wrapperRef = useRef(null);
+  const wrapperRefSecond = useRef(null);
   useEffect(() => {
     /**
      * Alert if clicked on outside of element
      */
-    function handleClickOutside(event: any) {
+    function handleClickOutside(event: any) 
+    {
       if (wrapperRef.current && !wrapperRef.current?.contains(event.target)) {
-        setNotificationOpen(false);
+        if (wrapperRefSecond.current && !wrapperRefSecond.current?.contains(event.target)) {
+          setNotificationOpen(false);
+        } else {
+
+        }
       }
     }
     // Bind the event listener
@@ -231,6 +237,7 @@ export const Header = ({
                     </div>
                     <div>
                       <span
+                      ref={wrapperRefSecond}
                         className="relative inline-block ml-8  top-[3px] md:top-0 cursor-pointer "
                         onClick={() => setNotificationOpen(!notificationOpen)}
                       >
@@ -243,7 +250,7 @@ export const Header = ({
                       <AnimatePresence>
                         {notificationOpen && (
                           <motion.div
-                            ref={wrapperRef}
+                          ref={wrapperRef}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
@@ -281,6 +288,7 @@ export const Header = ({
                                             ? navigate(item.action)
                                             : null;
                                           trigger({ id: item.id });
+                                          setNotificationOpen(false);
                                         }}
                                         removeAction={() => {
                                           removeNotification(item.id);
