@@ -98,12 +98,17 @@ export default ({}: PageProps) => {
             <div className="relative">
               <div>
                 <Swiper
+                className="h-[420px]"
                   // install Swiper modules
                   modules={[Navigation, Pagination, A11y, Autoplay]}
                   slidesPerView={3}
                   spaceBetween={20}
                   loop={false}
                   grabCursor={true}
+                  pagination={{
+                    bulletActiveClass: "w-active-bullet",
+                    bulletClass: "w-bullet",
+                  }}
                   breakpoints={{
                     0: {
                       slidesPerView: 1,

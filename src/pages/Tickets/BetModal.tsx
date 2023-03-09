@@ -426,7 +426,7 @@ const BetModal = ({
           hide={() => {
             setShowTipModal(false);
           }}
-          modalClasses="  w-[800px]  h-auto"
+          modalClasses="  w-[800px]  h-auto max-h-full overflow-auto"
         >
           {selectedTicket.customer_tickets?.length === 0 &&
           moment().isBefore(
@@ -491,7 +491,7 @@ export const CustomModal = ({
         animate="visible"
         exit="exit"
       >
-        <div className="bg-[url('/src/assets/images/ticket-modal/bg.png')] absolute top-[-40px] left-0 w-full h-full bg-no-repeat bg-contain"></div>
+        <div className="md:bg-[url('/src/assets/images/ticket-modal/bg.png')] absolute top-[-40px] left-0 w-full h-full bg-no-repeat bg-contain"></div>
 
         <div className="max-w-[588px] ml-auto mr-auto">
           <div className="bg-[url('/src/assets/images/ticket-modal/szelveny_modal_top2.svg')] w-full relative h-[13px]"></div>
