@@ -74,3 +74,8 @@ export const PlayingTypeSchema = Yup.object().shape({
   selectedInput: Yup.string().required('A stratégia kiválasztása kötelező!'),
 })
 
+
+export const BugReportSchema = Yup.object().shape({
+  title: Yup.string().required('A cím kitöltése kötelező!'),
+  text: Yup.string().required('A leírás kitöltése kötelező!'),
+})

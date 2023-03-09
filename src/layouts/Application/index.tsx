@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
-import { Button, Footer, MobileMenuBar, SideMenuBar } from '../../components';
+import { BugTracker, Button, Footer, MobileMenuBar, SideMenuBar } from '../../components';
 import { useGetNotificationsQuery } from '../../redux/NotificationSlice';
 import { Header } from './../../components/Header';
 import './index.scss';
@@ -10,8 +10,6 @@ import store from '../../redux/store';
 import { useNotification } from '../../hooks/useNotification';
 import _ from 'lodash';
 import { useGetBankQuery } from '../../redux/BankSlice';
-//import Feedback from "feeder-react-feedback"; // import Feedback component
-//import "feeder-react-feedback/dist/feeder-react-feedback.css"; // import stylesheet
 
 export interface LayoutProps {
   children: JSX.Element[] | JSX.Element | string
@@ -77,6 +75,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
      {/*<Feedback projectId="6408f12a484f830002a68f5d" primaryColor={'#9E43EE'} hoverBorderColor={'#9E43EE'} postSubmitButtonMsg={"Köszönjük!"} submitButtonMsg={"Visszajelzés beküldése"} feedbackTypes={['Hiba', 'Ötlet', 'Általános']} />*/}
+     <BugTracker  />
 
       <div className="text-white flex bg app-body min-h-[100vh]">
         <div className="hidden md:block w-[200px] lg:w-[320px]">

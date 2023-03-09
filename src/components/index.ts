@@ -45,4 +45,5 @@ export { Ticket } from './Ticket';
 export { TicketItem } from './TicketItem';
 export { NextMatches } from './NextMatches'
 export { EmptyTicket } from './EmptyTicket'
+export { BugTracker } from './BugTracker'
 /* -- component: insert above here -- */
