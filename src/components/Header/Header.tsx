@@ -328,12 +328,25 @@ export const Header = ({
                           className="font-icomoon icon icon-exit text-xl text-rgba-grey-08 cursor-pointer"
                         ></span>
                       </div>
-                      <div className="block md:hidden">
+                      <div className="flex gap-[20px] md:hidden">
+                        {/*<div className="w-[30px]">
                         <img
                           src={customer.image}
-                          className="object-cover rounded-full w-[42px] h-[42px] cursor-pointer object-center "
+                          className="object-cover rounded-full w-[30px] h-[30px] cursor-pointer object-center "
                         />
+                        </div>*/}
+                        <div className="flex flex-col justify-center">
+                        <span
+                          onClick={() => {
+                            dispatch(reset());
+                            navigate("/login");
+                          }}
+                          className="font-icomoon icon icon-exit text-xl text-rgba-grey-08 cursor-pointer"
+                        ></span>
+                        </div>
+                       
                       </div>
+                      
                     </div>
                   </div>
                 </div>

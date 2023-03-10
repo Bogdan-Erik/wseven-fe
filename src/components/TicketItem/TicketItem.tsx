@@ -53,28 +53,27 @@ export const TicketItem = ({
         </div>
         <div className=" flex flex-col justify-center mx-4">
           <div className={`${isWinner ? 'bg-light-green' : 'bg-light-red'} rounded-md px-5 py-[3px] text-xs flex flex-row justify-start items-center`}>
-            <span className={`font-icomoon text-lg ${isWinner ? 'text-green icon-success' : 'text-red icon-error text-lg'} text-sm mr-2`}> </span>{isWinner ? 'Nyertes tipp' : 'Vesztes tipp'}<span className="ml-2 font-semibold">{winningPrice} egység</span>
+            <span className={`font-icomoon text-lg ${isWinner ? 'text-green icon-success' : 'text-red icon-error text-lg'} text-sm mr-2`}> </span>{isWinner ? 'Nyertes' : 'Vesztes'}<span className="ml-2 font-semibold">{winningPrice} egység</span>
           </div>
         </div>
         
       </div >
 
-{/*
-      <div className="xl:hidden">
+
+      <div className="xl:hidden cursor-pointer"  onClick={() => onClick(item)}>
         <div className="w-full grey-linear-gradient rounded-t-md text-white p-2.5 flex flex-col">
           <div className="flex flex-row w-full">
             <div className="flex flex-row w-2/4">
-              <div className="pr-4 flex justify-center flex-col"><img src={LigaLogo} style={{ maxHeight: '42px' }} /></div>
+              <div className="pr-4 flex justify-center flex-col"><span className="font-icomoon icon icon-ticket-new text-2xl text-white"></span></div>
               <div className="flex flex-col justify-center">
-                <div className="text-xs  text-white font-semibold">{date}</div>
-                <div className="text-xs font-normal">{time}</div>
+                <div className="text-xs  text-white font-semibold">Szelvény #{number}</div>
+
               </div>
             </div>
             <div className="flex flex-row justify-end flex-1 w-2/4">
 
               <div className="flex flex-col justify-center">
-                <div className={"text-xs text-white text-right" + (winner === 'home' ? ' font-semibold' : ' font-normal')}>{home}</div>
-                <div className={"text-xs text-white text-right" + (winner === 'away' ? ' font-semibold' : ' font-normal')}>{away}</div>
+                <div className={"text-xs text-white text-right font-semibold"}>{date}</div>
               </div>
             </div>
           </div>
@@ -84,19 +83,18 @@ export const TicketItem = ({
                 <span className="font-icomoon icon-stat text-green"> </span>{odds}
               </div>
             </div>
-            {isDailyTipp && (<div className="blue-linear-gradient text-white text-xs rounded-md py-2 px-4">A nap tippje</div>)}
           </div>
-          <div className="flex flex-4 mt-5 flex-col justify-center text-sm mb-2">{tippString}</div>
+          <div className="flex flex-4 mt-5 flex-col justify-center text-sm mb-2">Meccsek száma: {matchesNumber}db</div>
 
         </div>
         <div className="flex flex-col justify-center">
-          <div className={"rounded-b-md text-xs flex flex-row justify-center items-center text-white py-1" + (isWinner ? ' bg-light-green' : ' bg-light-red')}>
-            <span className={"font-icomoon justify-center text-lg icon-success text-sm mr-2" + (isWinner ? ' text-green' : ' text-red')}> </span>{isWinner ? 'Nyertes tipp' : 'Vesztes tipp'}: <span className="ml-2 font-semibold">{balance ?? winningPrice}</span>
+        <div className={`${isWinner ? 'bg-light-green' : 'bg-light-red'} rounded-b-md  px-5 py-[3px] text-xs flex flex-row justify-center items-center`}>
+          <span className={`font-icomoon text-lg ${isWinner ? 'text-green icon-success' : 'text-red icon-error text-lg'} text-sm mr-2`}> </span>{isWinner ? 'Nyertes' : 'Vesztes'}<span className="ml-2 font-semibold">{winningPrice} egység</span>
           </div>
         </div>
       </div>
 
-*/}
+
     </>
   )
 }

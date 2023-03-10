@@ -95,7 +95,7 @@ export const BugTracker = ({}: BugTrackerProps): JSX.Element => {
                       <div className='flex-1'>
                             <FormInput
                               name="title"
-                              label="Cím"
+                              label="Hiba megnevezése"
                               type="text"
                               placeholder=""
                               onChange={handleChange}
@@ -104,7 +104,7 @@ export const BugTracker = ({}: BugTrackerProps): JSX.Element => {
                             />
                           </div>
                           <div className='flex-1'>
-                          <div className="mb-[5px]"><Label required={true}>Leírás</Label></div>
+                          <div className="mb-[5px]"><Label required={true}>Hiba leírása</Label></div>
                           <textarea
                               name="text"
                               placeholder=""
