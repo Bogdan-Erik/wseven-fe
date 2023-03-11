@@ -72,7 +72,7 @@ export default ({}: PageProps) => {
           {/* START LEFT */}
           <div className="col-span-1 xl:col-span-2">
             {activeMatches?.length === 0 ? (
-              <div>
+              <div className="mb-[20px]">
                 <div className="flex justify-center">
                   <img src={NoAnalyse} className="w-[216px] h-[216px]" />
                 </div>
@@ -115,7 +115,7 @@ export default ({}: PageProps) => {
                 
                 {/* Daily */}
                 {/* Others */}
-                <div className="matches">
+                <div className="matches mb-[20px]">
                   <Swiper
                     // install Swiper modules
                     modules={[Navigation, Pagination, A11y, Autoplay]}
