@@ -97,7 +97,7 @@ export const MatchItem = ({
       </div >
 
 
-      <div className="xl:hidden">
+      <div className="xl:hidden" onClick={() => onClick(matchId)}>
         <div className="w-full grey-linear-gradient rounded-t-md text-white p-2.5 flex flex-col">
           <div className="flex flex-row w-full">
             <div className="flex flex-row w-2/4">
