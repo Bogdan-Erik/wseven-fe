@@ -5,6 +5,7 @@ import moment from 'moment'
 import { hasuraApiSlice } from './hasuraApiSlice'
 import store, { RootState } from './store'
 import NameGetter from './../utils/NameGetter';
+import _ from 'lodash'
 
 export interface Datas {
   id: string
@@ -64,9 +65,50 @@ export const matchSlice = createSlice({
     builder.addMatcher(
       matchApiSlice.endpoints.getMatchesByDate.matchFulfilled,
       (state, action) => {
-        state.calendar = action.payload?.matches.map((item: any) => {
+        const payload = action.payload;
+        let matchList = [];
+        let ticketMatchList =  [];
+
+        payload.tickets.map((item: any) => {
+          item?.ticket_tips?.map((ticketItem: any) => {
+            if (ticketItem.match) {
+              //Meccshez van kötve
+              const matchItem = ticketItem.match;
+              ticketMatchList.push({
+                id: matchItem.id,
+                title: NameGetter(matchItem, 'home') + ' - ' + NameGetter(matchItem, 'away'),
+                start: matchItem.date_start,
+                end: matchItem.date_end,
+                extendedProps: {
+                  tv: {
+                    name: matchItem?.tv_channel?.name,
+                    logo: matchItem?.tv_channel?.logo ? import.meta.env.VITE_DO_IMAGE_HOST + matchItem.tv_channel?.logo : null
+                  }
+                },
+                className: ["event", matchItem.sport?.value ?? 'football'],
+              })
+            } else {
+              //Nem meccshez van kötve
+              ticketMatchList.push({
+               title: ticketItem.title,
+
+                start: ticketItem.date_start,
+                end: ticketItem.date_end,
+                extendedProps: {
+                  tv: {
+                    name: ticketItem?.tv_channel?.name,
+                    logo: ticketItem?.tv_channel?.logo ? import.meta.env.VITE_DO_IMAGE_HOST + ticketItem.tv_channel?.logo : null
+                  }
+                },
+                className: ["event", ticketItem?.league?.sport?.value ?? 'football'],
+              })
+            }
+          })
+        })
+        matchList = payload?.matches.map((item: any) => {
           
           return {
+            id: item.id,
             title: NameGetter(item, 'home') + ' - ' + NameGetter(item, 'away'),
             start: item.date_start,
             end: item.date_end,
@@ -79,6 +121,15 @@ export const matchSlice = createSlice({
             className: ["event", item.sport?.value ?? 'football'],
           }
         })
+
+        var merge = (obj1, obj2) => ({...obj1, ...obj2});
+      const sum = _.zipWith(matchList, ticketMatchList, merge) //TODO: NEM MŰKÖDIK A MERGE ID ALAPJÁN
+
+       // const sum = [...matchList, ...ticketMatchList];
+        //var mergedList = _.zipWith(...matchList, ticketMatchList)
+
+        console.log(sum);
+        state.calendar = sum;
       },
     ),
       builder.addMatcher(
@@ -158,7 +209,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
     getMatchesByDate: builder.query<any, any>({
       query: (data: any) => ({
         body: gql`
-          query get_matches_by_date($dateFrom: timestamp!, $dateEnd: timestamp!) {
+          query get_matches_by_date($dateFrom: timestamp!, $dateEnd: timestamp!, $customerId: uuid) {
             matches(where: {date_start: {_gte: $dateFrom}, date_end: {_lte: $dateEnd}, analyses: {tips: {customer_tips: {customer_id: {_is_null: false}}}}}) {
               id
               date_start
@@ -203,12 +254,74 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
                 }
               }
             }
+            },
+            tickets(where: {start_date: {_gte: $dateFrom}, customer_tickets: {customer_id: {_eq: $customerId}}}) {
+              id
+              is_premium
+              number
+              start_date
+              ticket_tips {
+                title
+                date_start
+                date_end
+                league {
+                  image
+                  name
+                  sport {
+                    color
+                    name
+                    value
+                  }
+                }
+                tv_channel {
+                  logo
+                  name
+                }
+                match {
+                  date_start
+                  date_end
+                  id
+                  sport {
+                    id
+                    color
+                    name
+                    value
+                  }
+                  homeTeam {
+                    id
+                    name
+                    logo
+                  }
+                  awayTeam {
+                    id
+                    name
+                    logo
+                  }
+                  homePlayer {
+                    id
+                    first_name
+                    last_name
+                    image
+                  }
+                  tv_channel {
+                    logo
+                    name
+                  }
+                  awayPlayer {
+                    id
+                    first_name
+                    last_name
+                    image
+                  }
+                }
+              }
             }
           }
         `,
         variables: {
           dateFrom: `${data.dateFrom}`,
           dateEnd: `${data.dateEnd}`,
+          customerId: `${data.customerId}`
         },
         token: store.getState().auth.accessToken,
       }),

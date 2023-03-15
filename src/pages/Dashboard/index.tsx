@@ -31,6 +31,7 @@ export interface PageProps {}
 export default ({}: PageProps) => {
   const [showBankrollModal, setShowBankrollModal] = useState(false);
   const bank = useSelector((state: RootState) => state.bank);
+  const auth = useSelector((state: RootState) => state.auth);
   const { isLoading, data, refetch } = useGetActiveMatchesQuery({
     sportId: null,
   });
@@ -54,7 +55,10 @@ export default ({}: PageProps) => {
       .endOf("day")
       .add(3, "hours")
       .format("YYYY-MM-DD HH:mm:ss"),
+    customerId: auth.userId
   });
+
+ 
 
   const { activeMatches } = useSelector((state: RootState) => state.match);
   const { calendar } = useSelector((state: RootState) => state.match);
