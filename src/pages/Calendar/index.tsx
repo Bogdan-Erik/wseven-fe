@@ -23,51 +23,29 @@ export default ({ }: PageProps) => {
 
   const [trigger, result] = useLazyGetMatchesByDateQuery()
   const {calendar} = useSelector((state: RootState) => state.match)
+  const auth = useSelector((state: RootState) => state.auth);
 
-  //const { isLoading } = useGetMatchesQuery();
-
-  const dataSet = [
-    {
-      title: 'Liverpool - Real Madrid', start: '2022-11-09 08:00:00', end: '2022-11-09 09:30:00', className: ["event", "football"], extendedProps: {
-        tv: 'M4'
-      }
-    },
-    {
-      title: 'Rafael Nadal - Novak Djokovic', start: '2022-11-09 12:00:00', end: '2022-11-09 13:30:00', className: ["event", "tennis"], extendedProps: {
-        tv: 'Spiler'
-      }
-    },
-    { title: 'Liverpool - Real Madrid', start: '2022-11-10 10:00:00', end: '2022-11-10 11:30:00', className: ["event", "football"] },
-    { title: 'Rafael Nadal - Novak Djokovic', start: '2022-11-10 10:00:00', end: '2022-11-10 12:00:00', className: ["event", "tennis"] },
-    { title: 'Liverpool - Real Madrid', start: '2022-11-11 08:00:00', end: '2022-11-11 09:30:00', className: ["event", "football"] },
-    { title: 'Rafael Nadal - Novak Djokovic', start: '2022-11-11 12:00:00', end: '2022-11-11 13:30:00', className: ["event", "tennis"] },
-    { title: 'Liverpool - Real Madrid', start: '2022-11-12 13:00:00', end: '2022-11-12 14:30:00', className: ["event", "football"] },
-
-  ];
-
-  const convertDataset = () => {
-    
-  }
 
   const renderEventContent = (eventInfo: any) => {
+    console.log(eventInfo)
     return (
       <div className="p-[6px] relative">
         <div className="flex">
           <div className="text-[12px] font-[700] flex-[1]">{eventInfo.timeText}</div>
           <div className='flex items-right absolute right-[5px] top-[5px]'><img src={eventInfo.event?.extendedProps?.tv?.logo ?? eventInfo.event?.extendedProps?.tv?.name} className="max-h-[30px] max-w-[100px]" /></div>
         </div>
-        <div className="text-[12px] font-[600] whitespace-nowrap	overflow-hidden	">{eventInfo.event.title}</div>
+        <div className="text-[12px] font-[600] whitespace	overflow-hidden	">{eventInfo.event.title}</div>
       </div>
     )
   }
 
   const daysNumber = () => {
     if (width > 1360) {
-      return 4;
-    } else if (width < 1360 && width > 1023) {
-      return 3;
-    } else if (width < 1023 && width > 768) {
       return 2;
+    } else if (width < 1360 && width > 1023) {
+      return 2;
+    } else if (width < 1023 && width > 768) {
+      return 1;
     } else {
       return 1;
     }
@@ -81,7 +59,7 @@ export default ({ }: PageProps) => {
           plugins={[timeGridPlugin]}
          
           datesSet={(dateInfo) => {
-            trigger({ dateFrom: moment(dateInfo.start).subtract(1, 'week').format('YYYY-MM-DD hh:mm:SS'), dateEnd: moment(dateInfo.end).add(1, 'week').format('YYYY-MM-DD hh:mm:SS') })
+            trigger({ dateFrom: moment(dateInfo.start).subtract(3, 'day').format('YYYY-MM-DD hh:mm:SS'), dateEnd: moment(dateInfo.end).add(3, 'day').format('YYYY-MM-DD hh:mm:SS'), customerId: auth.userId})
         }}
           initialView="timeGridFourDay"
           headerToolbar={{

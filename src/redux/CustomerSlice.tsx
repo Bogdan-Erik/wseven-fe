@@ -12,6 +12,7 @@ export interface CustomerSlice {
   image: string | null
   defaultUnit: any
   isPremium: boolean | null
+  settings: any
 }
 
 const internalInitialState: CustomerSlice = {
@@ -21,6 +22,7 @@ const internalInitialState: CustomerSlice = {
   playingType: null,
   defaultUnit: null,
   isPremium: null,
+  settings: {}
 };
 
 export const customerSlice = createSlice({
@@ -32,6 +34,7 @@ export const customerSlice = createSlice({
       customerApiSlice.endpoints.getMyself.matchFulfilled,
       (state, action) => {
         state.name = action.payload[0]?.name;
+        state.settings = action.payload[0]?.settings;
         state.nickname = action.payload[0]?.nickname;
         state.playingType = action.payload[0]?.playing_type;
         state.image = action.payload[0]?.image ? (import.meta.env.VITE_DO_IMAGE_HOST + action.payload[0]?.image) : (import.meta.env.VITE_DO_IMAGE_HOST + "placeholders/stock_sample.png");
@@ -61,6 +64,7 @@ export const customerApiSlice = hasuraApiSlice.injectEndpoints({
               nickname
               playing_type
               default_unit
+              settings
               subscriptions(where: {_and: {subscription_start: {_lte: $today}}, subscription_end: {_gte: $today}}) {
                 subscription_start
                 subscription_end
@@ -103,6 +107,29 @@ export const customerApiSlice = hasuraApiSlice.injectEndpoints({
       invalidatesTags: ['Customer'],
       transformResponse: (response) => response,
     }),
+      updateNotifications: builder.mutation<any, any>({
+      query: (arg) => ({
+        body: gql`
+          mutation UpdateNotifications(
+            $customer_id: uuid
+            $settings: json
+          ){
+            update_customers(where: {id: {_eq: $customer_id}}, _set: {settings: $settings}) {
+              returning {
+                settings
+              }
+            }
+          }
+        `,
+        variables: {
+          customer_id: arg.customer_id,
+          settings: arg.settings,
+        },
+        token: store.getState().auth.accessToken,
+      }),
+      invalidatesTags: ['Customer'],
+      transformResponse: (response) => response,
+    }),
     updateBankroll: builder.mutation<any, any>({
       query: (arg) => ({
         body: gql`
@@ -131,7 +158,7 @@ export const customerApiSlice = hasuraApiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetMyselfQuery, useLazyGetMyselfQuery, useUpdateBaseDatasMutation, useUpdateBankrollMutation } = customerApiSlice;
+export const { useGetMyselfQuery, useLazyGetMyselfQuery, useUpdateBaseDatasMutation, useUpdateBankrollMutation, useUpdateNotificationsMutation } = customerApiSlice;
 
 
 export default customerSlice.reducer;
