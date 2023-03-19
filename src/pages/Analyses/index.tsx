@@ -43,6 +43,7 @@ export default ({ }: PageProps) => {
 
   const homeObject = {
     participantName: data.home?.name ?? `${data.home?.first_name} ${data.home?.last_name}`,
+    nameExtension: data.home?.nameExtension,
     isIndividual: data.home?.first_name ? true : false,
     logo: data.home?.logo ?? data.home?.image,
     isFullImageLogo: false,
@@ -58,6 +59,7 @@ export default ({ }: PageProps) => {
 
   const awayObject = {
     participantName: data.away?.name ?? `${data.away?.first_name} ${data.away?.last_name}`,
+    nameExtension: data.away?.nameExtension,
     logo: data.away?.logo ?? data.away?.image,
     isIndividual: data.away?.first_name ? true : false,
     isFullImageLogo: false,

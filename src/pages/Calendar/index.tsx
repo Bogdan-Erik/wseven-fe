@@ -27,7 +27,6 @@ export default ({ }: PageProps) => {
 
 
   const renderEventContent = (eventInfo: any) => {
-    console.log(eventInfo)
     return (
       <div className="p-[6px] relative">
         <div className="flex">

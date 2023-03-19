@@ -10,6 +10,8 @@ export interface MatchItemProps {
   time: string,
   home: string,
   away: string,
+  homeNameExtension?: string,
+  awayNameExtension?: string,
   winner: string | null,
   isDailyTipp?: boolean | null,
   odds: string,
@@ -29,6 +31,8 @@ export const MatchItem = ({
   time = '20:30',
   home = 'Real Madrid',
   away = 'Barcelona',
+  homeNameExtension = null,
+  awayNameExtension = null,
   winner = 'home',
   isDailyTipp = false,
   odds = '1.68',
@@ -76,8 +80,8 @@ export const MatchItem = ({
           <div className="text-xs font-normal">{time}</div>
         </div>
         <div className="flex flex-col justify-center  w-32 md:w-32">
-          <div className={"text-xs text-white" + (winner === 'home' ? ' font-semibold' : ' font-normal')}>{home}</div>
-          <div className={"text-xs text-white " + (winner === 'away' ? ' font-semibold' : ' font-normal')}>{away}</div>
+          <div className={"text-xs text-white" + (winner === 'home' ? ' font-semibold' : ' font-normal')}>{home + (homeNameExtension ? ' ' + homeNameExtension : '')}</div>
+          <div className={"text-xs text-white " + (winner === 'away' ? ' font-semibold' : ' font-normal')}>{away + (awayNameExtension ? ' ' + awayNameExtension : '')}</div>
         </div>
         <div className="flex-3 flex flex-row justify-center">
           <div className="mr-5 flex flex-col justify-center">
@@ -110,8 +114,8 @@ export const MatchItem = ({
             <div className="flex flex-row justify-end flex-1 w-2/4">
 
               <div className="flex flex-col justify-center">
-                <div className={"text-xs text-white text-right" + (winner === 'home' ? ' font-semibold' : ' font-normal')}>{home}</div>
-                <div className={"text-xs text-white text-right" + (winner === 'away' ? ' font-semibold' : ' font-normal')}>{away}</div>
+                <div className={"text-xs text-white text-right" + (winner === 'home' ? ' font-semibold' : ' font-normal')}>{home + (homeNameExtension ? ' ' + homeNameExtension : '')}</div>
+                <div className={"text-xs text-white text-right" + (winner === 'away' ? ' font-semibold' : ' font-normal')}>{away + (awayNameExtension ? ' ' + awayNameExtension : '')}</div>
               </div>
             </div>
           </div>
