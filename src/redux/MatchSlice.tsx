@@ -162,11 +162,13 @@ export const matchSlice = createSlice({
                   " " +
                   item.analyasis.match.homePlayer.last_name
                 : item.analyasis.match.homeTeam.name,
+              homeNameExtension: item.analyasis.match?.homeTeam?.name_extension,
               away: item.analyasis.match.awayPlayer
                 ? item.analyasis.match.awayPlayer.first_name +
                   " " +
                   item.analyasis.match.awayPlayer.last_name
                 : item.analyasis.match.awayTeam.name,
+              awayNameExtension: item.analyasis.match?.awayTeam?.name_extension,
               winner: "home",
               odds: item.odds,
               tippString: item.name,
@@ -193,6 +195,7 @@ export const matchSlice = createSlice({
               home: item.homeTeam
                 ? {
                     name: item.homeTeam.name,
+                    nameExtension: item.homeTeam?.name_extension,
                     logo: item.homeTeam.logo
                       ? import.meta.env.VITE_DO_IMAGE_HOST + item.homeTeam.logo
                       : "https://w7tips.fra1.digitaloceanspaces.com/images/teams/real.png",
@@ -205,6 +208,7 @@ export const matchSlice = createSlice({
               away: item.awayTeam
                 ? {
                     name: item.awayTeam.name,
+                    nameExtension: item.awayTeam?.name_extension,
                     logo: item.awayTeam.logo
                       ? import.meta.env.VITE_DO_IMAGE_HOST + item.awayTeam.logo
                       : "https://w7tips.fra1.digitaloceanspaces.com/images/teams/liverpool.png",
@@ -276,11 +280,13 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
               homeTeam {
                 id
                 name
+                name_extension
                 logo
               }
               awayTeam {
                 id
                 name
+                name_extension
                 logo
               }
               homePlayer {
@@ -347,11 +353,13 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
                   homeTeam {
                     id
                     name
+                    name_extension
                     logo
                   }
                   awayTeam {
                     id
                     name
+                    name_extension
                     logo
                   }
                   homePlayer {
@@ -414,11 +422,13 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
                     homeTeam {
                       id
                       name
+                      name_extension
                       logo
                     }
                     awayTeam {
                       id
                       name
+                      name_extension
                       logo
                     }
                     homePlayer {
@@ -460,11 +470,13 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
           homeTeam {
             id
             name
+            name_extension
             logo
           }
           awayTeam {
             id
             name
+            name_extension
             logo
           }
           homePlayer {
@@ -546,6 +558,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
                   }
                   homeTeam {
                     name
+                    name_extension
                   }
                   awayPlayer {
                     first_name
@@ -553,6 +566,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
                   }
                   awayTeam {
                     name
+                    name_extension
                   }
                   league {
                     image
@@ -599,11 +613,13 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
               homeTeam {
                 id
                 name
+                name_extension
                 logo
               }
               awayTeam {
                 id
                 name
+                name_extension
                 logo
               }
               homePlayer {
@@ -669,6 +685,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
           home: item.homeTeam
             ? {
                 name: item.homeTeam.name,
+                nameExtension: item.homeTeam?.name_extension,
                 logo: item.homeTeam.logo
                   ? import.meta.env.VITE_DO_IMAGE_HOST + item.homeTeam.logo
                   : "https://w7tips.fra1.digitaloceanspaces.com/images/teams/real.png",
@@ -682,6 +699,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
           away: item.awayTeam
             ? {
                 name: item.awayTeam.name,
+                nameExtension: item.awayTeam?.name_extension,
                 logo: item.awayTeam.logo
                   ? import.meta.env.VITE_DO_IMAGE_HOST + item.awayTeam.logo
                   : "https://w7tips.fra1.digitaloceanspaces.com/images/teams/liverpool.png",

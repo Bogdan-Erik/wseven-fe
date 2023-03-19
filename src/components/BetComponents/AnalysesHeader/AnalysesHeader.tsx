@@ -60,6 +60,7 @@ export interface TennisFieldType {
 
 export interface ParticipantObjectProps {
   participantName: string
+  nameExtension: string
   logo: string
   isFullImageLogo?: boolean
   playerImage: string
@@ -275,6 +276,7 @@ console.log(sport.value)
             </div>
           </div>
           <div className="text-xl md:text-2xl mt-[15px] text-left">{homeObject.participantName}</div>
+          {homeObject?.nameExtension && (<div className="text-xl md:text-2xl text-left">{homeObject.nameExtension}</div>)}
         </div>
         {isDaily && (
           <div className="hidden text-center md:flex flex-col justify-end">
@@ -289,6 +291,7 @@ console.log(sport.value)
             </div>
           </div>
           <div className="text-xl md:text-2xl mt-[15px] text-right">{awayObject.participantName}</div>
+          {awayObject?.nameExtension && (<div className="text-xl md:text-2xl text-right">{awayObject.nameExtension}</div>)}
         </div>
       </div>
 
