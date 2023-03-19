@@ -291,7 +291,7 @@ console.log(sport.value)
             </div>
           </div>
           <div className="text-xl md:text-2xl mt-[15px] text-right">{awayObject.participantName}</div>
-          {homeObject?.nameExtension && (<div className="text-xl md:text-2xl text-right">{awayObject.nameExtension}</div>)}
+          {awayObject?.nameExtension && (<div className="text-xl md:text-2xl text-right">{awayObject.nameExtension}</div>)}
         </div>
       </div>
 
