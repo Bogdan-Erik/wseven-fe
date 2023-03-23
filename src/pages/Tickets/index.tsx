@@ -96,7 +96,7 @@ export default ({}: PageProps) => {
           <>
             <PageTitle title="Szelvények" icon="ticket" />
             <div className="relative">
-              {data?.length === 0 && (
+              {data?.length === 0 ? (
                 <div>
                   <div className="flex justify-center">
                     <img src={NoTicket} className="w-[216px] h-[216px]" />
@@ -106,7 +106,7 @@ export default ({}: PageProps) => {
                     egy újabbal. Értesíteni fogunk róla!
                   </div>
                 </div>
-              )}
+              ) : (
               <div>
                 <Swiper
                   className="h-[420px]"
@@ -151,7 +151,7 @@ export default ({}: PageProps) => {
                     );
                   })}
                 </Swiper>
-              </div>
+              </div>)}
 
               <div className="mt-[80px] mb-[80px]">
                 <div className="flex flex-col md:flex-row">
