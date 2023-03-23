@@ -126,7 +126,7 @@ export default ({}: PageProps) => {
                     },
                   }}
                 >
-                  {data.length === 0 && (
+                  {data?.tickets?.length === 0 && (
                     <div>
                       <div className="flex justify-center">
                         <img src={NoTicket} className="w-[216px] h-[216px]" />
