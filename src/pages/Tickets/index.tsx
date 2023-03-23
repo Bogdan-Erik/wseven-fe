@@ -78,7 +78,6 @@ export default ({}: PageProps) => {
     return <></>;
   }
 
-  console.log(data?.length);
   return (
     <>
       <Container
