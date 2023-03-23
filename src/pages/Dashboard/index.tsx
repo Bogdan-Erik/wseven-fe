@@ -1,15 +1,17 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { Navigation, Pagination, Autoplay, A11y } from "swiper";
-
+import { Link, useNavigate } from "react-router-dom";
+import { Navigation, Pagination, Autoplay, A11y, Scrollbar } from "swiper";
+import { AnimatePresence, motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   BankItem,
   Container,
   EmptyTicket,
+  NewsItem,
   NextMatches,
+  PageTitle,
   SportCard,
   Ticket,
 } from "../../components";
@@ -25,6 +27,7 @@ import { useGetTicketsQuery } from "../../redux/TicketSlice";
 import BetModal from "../Tickets/BetModal";
 import "./index.scss";
 import NoAnalyse from "./../../assets/images/no-analyse.svg";
+import { useGetNewsQuery } from "../../redux/NewsSlice";
 
 export interface PageProps {}
 
@@ -32,6 +35,7 @@ export default ({}: PageProps) => {
   const [showBankrollModal, setShowBankrollModal] = useState(false);
   const bank = useSelector((state: RootState) => state.bank);
   const auth = useSelector((state: RootState) => state.auth);
+  const news = useSelector((state: RootState) => state.news);
   const { isLoading, data, refetch } = useGetActiveMatchesQuery({
     sportId: null,
   });
@@ -55,17 +59,23 @@ export default ({}: PageProps) => {
       .endOf("day")
       .add(3, "hours")
       .format("YYYY-MM-DD HH:mm:ss"),
-    customerId: auth.userId
+    customerId: auth.userId,
   });
-
- 
+  const {
+    isLoading: isLoadingNews,
+    data: newsData,
+    refetch: newsReretch,
+  } = useGetNewsQuery({});
 
   const { activeMatches } = useSelector((state: RootState) => state.match);
   const { calendar } = useSelector((state: RootState) => state.match);
 
   const [showTipModal, setShowTipModal] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState(null);
+  const [showRightShadowNew, setShowRightShadowNew] = useState(true);
+  const [showLeftShadowNew, setShowLeftShadowNew] = useState(false);
 
+  const navigate = useNavigate();
   return (
     <>
       <Container
@@ -88,35 +98,37 @@ export default ({}: PageProps) => {
             ) : (
               <>
                 {/* Daily */}
-                {activeMatches?.filter((item: any) => item.isDaily).length > 0 && (
+                {activeMatches?.filter((item: any) => item.isDaily).length >
+                  0 && (
                   <div className="mb-[40px]">
-                  {activeMatches?.map((item: any) => {
-                    if (item.isDaily) {
-                      return (
-                        <div className="col-span-1 lg:col-span-2 2xl:col-span-2 ">
-                          <Link to={`/analyses/${item.id}`}>
-                            <SportCard
-                              leagueLogo={item.league?.image}
-                              daily={true}
-                              size={"large"}
-                              hazai={item.home}
-                              vendeg={item.away}
-                              images={[item.homeImage, item.awayImage]}
-                              date={item.dateStart}
-                              colorScheme={item.sport.color ?? "blue"}
-                              sportType={
-                                item?.sport?.value?.toLowerCase() ?? "football"
-                              }
-                              hoverEffectEnabled={false}
-                            />
-                          </Link>
-                        </div>
-                      );
-                    }
-                  })}
-                </div>
+                    {activeMatches?.map((item: any) => {
+                      if (item.isDaily) {
+                        return (
+                          <div className="col-span-1 lg:col-span-2 2xl:col-span-2 ">
+                            <Link to={`/analyses/${item.id}`}>
+                              <SportCard
+                                leagueLogo={item.league?.image}
+                                daily={true}
+                                size={"large"}
+                                hazai={item.home}
+                                vendeg={item.away}
+                                images={[item.homeImage, item.awayImage]}
+                                date={item.dateStart}
+                                colorScheme={item.sport.color ?? "blue"}
+                                sportType={
+                                  item?.sport?.value?.toLowerCase() ??
+                                  "football"
+                                }
+                                hoverEffectEnabled={false}
+                              />
+                            </Link>
+                          </div>
+                        );
+                      }
+                    })}
+                  </div>
                 )}
-                
+
                 {/* Daily */}
                 {/* Others */}
                 <div className="matches mb-[20px]">
@@ -179,6 +191,101 @@ export default ({}: PageProps) => {
                   </Swiper>
                 </div>
                 {/* Others */}
+
+                <div>
+                  <PageTitle title="Hírek, újdonságok" />
+
+                  <div className="mb-[60px] md:mb-[80px] relative">
+                    {news?.news?.length === 0 && (<span>Jelenleg nincs friss hírünk! Nézz vissza később!</span>)}
+                    <Swiper
+                      observer
+                      observeParents
+                      modules={[Navigation, Pagination, Scrollbar, A11y]}
+                      spaceBetween={0}
+                      slidesPerView={1}
+                      onSlideChange={() => console.log("slide change")}
+                      onSwiper={(swiper) => console.log(swiper)}
+                      pagination={{
+                        bulletActiveClass: "w-active-bullet",
+                        bulletClass: "w-bullet",
+                      }}
+                      onInit={() => {
+                        setShowRightShadowNew(true);
+                        setShowLeftShadowNew(false);
+                      }}
+                      onReachEnd={() => {
+                        setShowRightShadowNew(false);
+                        setShowLeftShadowNew(true);
+                      }}
+                      onReachBeginning={() => {
+                        setShowRightShadowNew(true);
+                        setShowLeftShadowNew(false);
+                      }}
+                      breakpoints={{
+                        // when window width is >= 320px
+                        600: {
+                          slidesPerView: 2,
+                          spaceBetween: 10,
+                        },
+                        // when window width is >= 480px
+                        720: {
+                          slidesPerView: 2,
+                          spaceBetween: 30,
+                        },
+                        768: {
+                          slidesPerView: 2,
+                          spaceBetween: 30,
+                        },
+                        // when window width is >= 640px
+                        984: {
+                          slidesPerView: 3,
+                          spaceBetween: 30,
+                        },
+                        // when window width is >= 640px
+                        1240: {
+                          slidesPerView: 2.5,
+                          spaceBetween: 40,
+                        },
+                      }}
+                    >
+                      {news?.news?.map((item: any) => {
+                        return (
+                          <SwiperSlide className="max-w-auto md:max-w-[370px]">
+                            <NewsItem
+                              link={`/news/${item.id}`}
+                              extraClass="mx-auto max-w-[370px] h-[350px] cursor-pointer"
+                              image={item.cover}
+                              badge={item.badge ?? null}
+                            >
+                              {item.lead}
+                            </NewsItem>
+                          </SwiperSlide>
+                        );
+                      })}
+                    </Swiper>
+                    <AnimatePresence>
+                      {showRightShadowNew && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          className="absolute right-0 top-0 bg-gradient-to-l from-fade-dark to-transparent w-[50px] h-full z-[100]"
+                        ></motion.div>
+                      )}
+                    </AnimatePresence>
+                    <AnimatePresence>
+
+                      {showLeftShadowNew && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          className="absolute left-0 top-0 bg-gradient-to-r from-fade-dark to-transparent w-[50px] h-full z-[100]"
+                        ></motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
               </>
             )}
             <div></div>

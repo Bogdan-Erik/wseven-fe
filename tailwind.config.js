@@ -66,6 +66,7 @@ module.exports = {
       'light-white-second': 'rgba(255, 255, 255, 0.2)',
       'light-yellow': '#CCFF0233',
       'light-neon': '#CCFF0233',
+      'fade-dark':'#220C36',
       stone: colors.warmGray,
       sky: colors.lightBlue,
       neutral: colors.trueGray,

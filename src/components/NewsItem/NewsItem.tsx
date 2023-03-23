@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { Badge } from '../Badge';
 import { BadgeType } from '../Badge/Badge';
 import './NewsItem.css';
@@ -8,13 +9,15 @@ export interface NewsItemProps {
   children: string,
   badge?: string,
   extraClass?: string,
+  link?: any
 }
 
-export const NewsItem = ({ image, children, badge, extraClass }: NewsItemProps): JSX.Element => {
+export const NewsItem = ({ link, image, children, badge, extraClass }: NewsItemProps): JSX.Element => {
   return (
+    <Link to={link}>
     <div className={extraClass}>
       <div>
-        <img src={image} className="rounded-md" />
+        <img src={image} className="rounded-md w-full h-[219px]" />
       </div>
       {badge && (
         <div className="mt-[10px]">
@@ -25,5 +28,6 @@ export const NewsItem = ({ image, children, badge, extraClass }: NewsItemProps):
         {children}
       </div>
     </div>
+    </Link>
   )
 }
