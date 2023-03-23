@@ -5,7 +5,7 @@ import { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
 import { SportCard } from './components/SportCard';
-import { Routes, Route, Link, Outlet, useNavigate } from "react-router-dom";
+import { Routes, Route, Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import Landing from './pages/Landing';
 import LandingSuccess from './pages/LandingSuccess';
 import Dashboard from './pages/Dashboard';
@@ -30,7 +30,6 @@ import { CookiesProvider } from 'react-cookie';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import ProtectedRoute from './utils/ProtectedRoute';
 import { ToastContainer } from 'react-toastify'
-
 //Auth
 import LoginPage from './pages/Auth/Login';
 import { setAuthToken } from './redux/authSlice';
@@ -43,11 +42,12 @@ import '@fontsource/roboto/700.css';
 import moment from 'moment';
 
 import 'moment/dist/locale/hu';
+import NewsDetail from './pages/NewsDetail';
+import PageNotFound from './pages/PageNotFound';
 
 
 const App = () => {
   moment.locale('hu') // can pass in 'en', 'fr', or 'es'
-
   const token = store.getState().auth.accessToken
  // const workerRef = useRef<SharedWorker>()
   const navigate = useNavigate();
@@ -121,6 +121,8 @@ const App = () => {
   if (typeof window === 'undefined') {
     return <></>
   } else {
+  const location = useLocation();
+
     return (
       <HelmetProvider>
         <CookiesProvider>
@@ -163,6 +165,7 @@ const App = () => {
                   <Route path="/analyses-overview/:id" element={<AnalysesOverview />} />
                   <Route path="/analyses-overview" element={<AnalysesOverview />} />
                   <Route path="/analyses/:id" element={<Analyses />} />
+                  <Route path="/news/:id" element={<NewsDetail />} />
                   <Route path="/challenges" element={<Challenge />} />
                   <Route path="/calendar" element={<Calendar />} />
                   <Route path="/statistics" element={<Statistics />} />
@@ -173,6 +176,7 @@ const App = () => {
                   <Route path="/informations" element={<Informations />} />
                   <Route path="/settings" element={<Settings />} />
                   <Route path="/settings/:id" element={<Settings />} />
+                  <Route path="*" element={<PageNotFound />} />
                 </Route>
               </Routes >
           </Provider>
