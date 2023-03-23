@@ -18,7 +18,9 @@
 }
 
 .new-content {
-    
+    iframe {
+      max-width: 100%;
+    }
     ul{
       list-style-type: initial !important;
       padding: revert !important;
