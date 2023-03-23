@@ -20,6 +20,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import WriteComment from "../../components/CommentSection/WriteComment";
 import CommentItem from "../../components/CommentSection/CommentItem";
+import moment from "moment";
 
 export interface PageProps {}
 
@@ -68,7 +69,7 @@ export default ({}: PageProps) => {
               <div className="hidden lg:block absolute px-[20px] py-[12px] bottom-[24px] left-[24px] w-[631px] max-w-full h-auto bg-black">
                 <div className="text-[28px] font-[600]">{data[0]?.title}</div>
                 <div className="text-[12px] text-rgba-grey-08 font-[500]">
-                  {data[0]?.created_at}
+                  {moment(data[0]?.created_at).format('YYYY. MMMM D. HH:mm')}
                 </div>
               </div>
             </div>
