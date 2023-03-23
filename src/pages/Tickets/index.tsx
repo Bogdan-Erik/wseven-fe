@@ -78,7 +78,7 @@ export default ({}: PageProps) => {
     return <></>;
   }
 
-
+  console.log(data?.length);
   return (
     <>
       <Container
@@ -96,9 +96,20 @@ export default ({}: PageProps) => {
           <>
             <PageTitle title="Szelvények" icon="ticket" />
             <div className="relative">
+              {data?.length === 0 && (
+                <div>
+                  <div className="flex justify-center">
+                    <img src={NoTicket} className="w-[216px] h-[216px]" />
+                  </div>
+                  <div className="text-[20px] font-[500] flex justify-center mt-[20px] max-w-[610px] ml-auto mr-auto text-center px-[40px]">
+                    Jelenleg nincs aktív szelvényünk, de hamarosan jelentkezünk
+                    egy újabbal. Értesíteni fogunk róla!
+                  </div>
+                </div>
+              )}
               <div>
                 <Swiper
-                className="h-[420px]"
+                  className="h-[420px]"
                   // install Swiper modules
                   modules={[Navigation, Pagination, A11y, Autoplay]}
                   slidesPerView={3}
@@ -126,17 +137,6 @@ export default ({}: PageProps) => {
                     },
                   }}
                 >
-                  {data?.tickets?.length === 0 && (
-                    <div>
-                      <div className="flex justify-center">
-                        <img src={NoTicket} className="w-[216px] h-[216px]" />
-                      </div>
-                      <div className="text-[20px] font-[500] flex justify-center mt-[20px] max-w-[610px] ml-auto mr-auto text-center px-[40px]">
-                        Jelenleg nincs aktív szelvényünk, de hamarosan
-                        jelentkezünk egy újabbal. Értesíteni fogunk róla!
-                      </div>
-                    </div>
-                  )}
                   {data?.map((item: any, key: number) => {
                     return (
                       <SwiperSlide key={key}>
