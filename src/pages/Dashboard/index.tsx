@@ -241,11 +241,15 @@ export default ({}: PageProps) => {
                         },
                         // when window width is >= 640px
                         984: {
-                          slidesPerView: 3,
+                          slidesPerView: 2.5,
                           spaceBetween: 30,
                         },
                         // when window width is >= 640px
                         1240: {
+                          slidesPerView: 2,
+                          spaceBetween: 40,
+                        },
+                        1600: {
                           slidesPerView: 2.5,
                           spaceBetween: 40,
                         },

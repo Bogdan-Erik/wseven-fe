@@ -17,7 +17,7 @@ export const NewsItem = ({ link, image, children, badge, extraClass }: NewsItemP
     <Link to={link}>
     <div className={extraClass}>
       <div>
-        <img src={image} className="rounded-md w-full h-[219px]" />
+        <img src={image} className="rounded-md w-full h-[219px] object-cover	" />
       </div>
       {badge && (
         <div className="mt-[10px]">
