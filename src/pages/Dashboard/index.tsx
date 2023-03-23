@@ -192,7 +192,10 @@ export default ({}: PageProps) => {
                 </div>
                 {/* Others */}
 
-                <div>
+              </>
+            )}
+            
+            <div>
                   <PageTitle title="Hírek, újdonságok" />
 
                   <div className="mb-[60px] md:mb-[80px] relative">
@@ -286,8 +289,6 @@ export default ({}: PageProps) => {
                     </AnimatePresence>
                   </div>
                 </div>
-              </>
-            )}
             <div></div>
           </div>
           {/* END LEFT */}
