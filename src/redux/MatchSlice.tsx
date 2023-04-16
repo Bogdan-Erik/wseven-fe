@@ -316,7 +316,6 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
             tickets(
               where: {
                 start_date: { _gte: $dateFrom }
-                ticket_tips: {show_calendar: {_eq: 1}}
                 customer_tickets: { customer_id: { _eq: $customerId } }
               }
             ) {
@@ -324,7 +323,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
               is_premium
               number
               start_date
-              ticket_tips {
+              ticket_tips(where: {show_calendar: {_eq: 1}}) {
                 title
                 date_start
                 date_end
