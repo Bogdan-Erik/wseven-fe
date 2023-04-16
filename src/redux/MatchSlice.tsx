@@ -316,6 +316,7 @@ export const matchApiSlice = hasuraApiSlice.injectEndpoints({
             tickets(
               where: {
                 start_date: { _gte: $dateFrom }
+                ticket_tips: {show_calendar: {_eq: 1}}
                 customer_tickets: { customer_id: { _eq: $customerId } }
               }
             ) {
